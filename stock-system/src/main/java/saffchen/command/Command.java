@@ -1,5 +1,0 @@
-package saffchen.command;
-
-public enum Command {
-    EXIT, MODIFY_PRODUCT, DELETE_PRODUCT, SHOW_ALL, IMPORT_CSV, IMPORT_EXCEL, IMPORT_GSHEET, GENERATE_REPORT
-}
