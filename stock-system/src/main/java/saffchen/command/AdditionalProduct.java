@@ -9,6 +9,7 @@ public class AdditionalProduct {
     String title;
 
     @NotEmpty
+    @Size(max = 1024)
     String description;
 
     @NotEmpty
@@ -19,6 +20,7 @@ public class AdditionalProduct {
     String tags;
 
     @NotEmpty
+    @Size(max = 50)
     String category;
 
     @NotEmpty
