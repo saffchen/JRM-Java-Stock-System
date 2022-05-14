@@ -1,6 +1,5 @@
 The authors of the stock system
 
 denis.savchenko98@yandex.ru - saffchen
-kokushev@yandex.ru - avk1987
 rusokolov4@gmail.com - rusokolov1987
-thiend.weisman@gmail.com - Bove
+thiend.weisman@gmail.com - ReyBove
