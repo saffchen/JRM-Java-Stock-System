@@ -17,6 +17,7 @@ public class AdditionalProduct {
     int price;
 
     @NotEmpty
+    @Max(20)
     String tags;
 
     @NotEmpty
@@ -28,6 +29,5 @@ public class AdditionalProduct {
     int count;
 
     @NotEmpty
-    @City
     String satellite;
 }
