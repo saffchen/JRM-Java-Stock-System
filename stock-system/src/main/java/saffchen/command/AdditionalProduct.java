@@ -69,4 +69,17 @@ public class AdditionalProduct {
     public String getSatellite() {
         return satellite;
     }
+
+    @Override
+    public String toString() {
+        return "AdditionalProduct{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", tags='" + tags + '\'' +
+                ", category='" + category + '\'' +
+                ", count=" + count +
+                ", satellite='" + satellite + '\'' +
+                '}';
+    }
 }

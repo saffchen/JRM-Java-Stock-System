@@ -9,5 +9,10 @@ public class CheckingValidationField {
     ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
     Validator validator = validatorFactory.getValidator();
 
-    Set<ConstraintViolation<AdditionalProduct>> violations = validator.validate(new AdditionalProduct());
+    public Set<ConstraintViolation<AdditionalProduct>> constraintViolations() {
+        Set<ConstraintViolation<AdditionalProduct>> violations = validator.validate(new AdditionalProduct("Iphone 12 Pro Max 512",
+                "Iphone with big display and lidar camera", 1024,
+                "Phone, Camera", "Phone", 15, "Moscow"));
+        return violations;
+}
 }
