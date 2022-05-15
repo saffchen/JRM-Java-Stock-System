@@ -1,4 +1,6 @@
-package www;
+package saffchen.database;
+
+import saffchen.product.Product;
 
 public class Database {
 
@@ -6,15 +8,15 @@ public class Database {
         System.out.println("Adding the product...");
     };
 
-    void modify_product(){
-        System.out.println("Modifieng the product...");
+    public void modify_product(){
+        System.out.println("Modified the product...");
     };
 
     void delete_product(){
         System.out.println("Deleting the product...");
     };
 
-    void show_all(){
+    public void show_all(){
         System.out.println("Selecting the product...");
     };
 

@@ -1,4 +1,4 @@
-package www;
+package saffchen.product;
 
 import java.util.ArrayList;
 import java.util.List;

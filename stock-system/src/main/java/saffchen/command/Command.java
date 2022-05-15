@@ -1,5 +1,5 @@
 package saffchen.command;
 
-public enum Command {
-    EXIT, MODIFY_PRODUCT, DELETE_PRODUCT, SHOW_ALL, IMPORT_CSV, IMPORT_GSHEET, IMPORT_EXCEL, GENERATE_REPORT
+public interface Command {
+    public void doCommand();
 }

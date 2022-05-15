@@ -1,4 +1,9 @@
-package www;
+package saffchen;
+
+import saffchen.command.*;
+import saffchen.database.Database;
+import saffchen.greeting_message.GreetingMessage;
+import saffchen.product.Product;
 
 import java.util.Map;
 import java.util.Scanner;

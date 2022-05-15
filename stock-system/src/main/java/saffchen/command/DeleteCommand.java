@@ -1,4 +1,6 @@
-package www;
+package saffchen.command;
+
+import saffchen.database.Database;
 
 public class DeleteCommand implements Command{
     private Database database;

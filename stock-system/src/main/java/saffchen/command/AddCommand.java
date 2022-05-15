@@ -1,4 +1,7 @@
-package www;
+package saffchen.command;
+
+import saffchen.database.Database;
+import saffchen.product.Product;
 
 public class AddCommand implements Command{
     private Database database;

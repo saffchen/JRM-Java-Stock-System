@@ -1,4 +1,4 @@
-package www;
+package saffchen.command;
 
 public class ExitCommand implements Command{
     @Override

@@ -1,4 +1,4 @@
-package www;
+package saffchen.command;
 
 import java.util.HashMap;
 import java.util.Map;
