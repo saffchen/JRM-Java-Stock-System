@@ -1,6 +1,8 @@
 package saffchen.command;
 
 import javax.validation.constraints.*;
+import java.util.Collections;
+import java.util.List;
 
 public class AdditionalProduct {
 
@@ -18,7 +20,7 @@ public class AdditionalProduct {
 
     @NotEmpty
     @Max(20)
-    String tags;
+    List<String> tags;
 
     @NotEmpty
     @Size(max = 50)
@@ -36,7 +38,7 @@ public class AdditionalProduct {
         this.title = title;
         this.description = description;
         this.price = price;
-        this.tags = tags;
+        this.tags = Collections.singletonList(tags);
         this.category = category;
         this.count = count;
         this.satellite = satellite;
@@ -54,7 +56,7 @@ public class AdditionalProduct {
         return price;
     }
 
-    public String getTags() {
+    public @NotEmpty @Max(20) List<String> getTags() {
         return tags;
     }
 

@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface City {
-    String enterCity() default "{satellite}";
+    String enterCity() default "satellite";
     Class<?> [] groups() default {};
     Class <? extends Payload>[] payload() default {};
 }

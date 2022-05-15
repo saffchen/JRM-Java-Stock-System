@@ -1,10 +1,10 @@
 package saffchen;
 
-import saffchen.core.CoreStockSystem;
+import saffchen.checkvalidation.CheckingValidationField;
 
 public class RunApp {
     public static void main(String[] args) {
-        CoreStockSystem coreStockSystem = new CoreStockSystem();
-        coreStockSystem.onEnteringCommand();
+        CheckingValidationField checkingValidationField = new CheckingValidationField();
+        checkingValidationField.constraintViolations();
     }
 }
