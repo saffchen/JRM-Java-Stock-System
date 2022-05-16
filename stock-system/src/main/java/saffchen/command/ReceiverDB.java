@@ -1,6 +1,8 @@
 package saffchen.command;
 
 import saffchen.product.Product;
+import saffchen.reports.PdfGenerator;
+import saffchen.reports.ReportGenerator;
 
 public class ReceiverDB {
 
@@ -18,6 +20,11 @@ public class ReceiverDB {
 
     public void show_all(){
         System.out.println("Selecting the product...");
+    }
+
+    public void create_report(){
+        PdfGenerator pdfReport = new PdfGenerator();
+        pdfReport.createPDFDocument();
     }
 
 }
