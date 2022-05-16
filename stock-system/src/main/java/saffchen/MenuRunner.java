@@ -24,7 +24,7 @@ public class MenuRunner {
 
         FileUtils utils = new FileUtils();
         System.out.println(utils.getBanner());
-        System.out.println(utils.getParticipant());
+        System.out.println(utils.getParticipants());
 
         message.printGreetingMessages();
 
