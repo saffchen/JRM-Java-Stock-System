@@ -1,18 +1,17 @@
 package saffchen.command;
 
-import saffchen.database.Database;
 import saffchen.product.Product;
 
 public class AddCommand implements Command{
-    private Database database;
+    private ReceiverDB receiverDB;
     private Product product;
-    public AddCommand(Database database, Product product) {
-        this.database = database;
+    public AddCommand(ReceiverDB receiverDB, Product product) {
+        this.receiverDB = receiverDB;
         this.product = product;
     }
 
     @Override
     public void doCommand() {
-        database.add_product(product);
+        receiverDB.add_product(product);
     }
 }

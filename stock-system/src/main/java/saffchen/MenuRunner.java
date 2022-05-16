@@ -1,9 +1,10 @@
 package saffchen;
 
 import saffchen.command.*;
-import saffchen.database.Database;
+import saffchen.command.ReceiverDB;
 import saffchen.greeting_message.GreetingMessage;
 import saffchen.product.Product;
+import saffchen.utils.FileUtils;
 
 import java.util.Map;
 import java.util.Scanner;
@@ -11,14 +12,19 @@ import java.util.Scanner;
 public class MenuRunner {
     public static void main(String[] args) {
         CommandHolder holder = new CommandHolder();
-        Database database = new Database();
+        ReceiverDB receiverDB = new ReceiverDB();
         GreetingMessage message = new GreetingMessage();
 
-        holder.addCommand("ADD_PRODUCT", new AddCommand(database,new Product()));
-        holder.addCommand("DELETE_PRODUCT", new DeleteCommand(database));
-        holder.addCommand("MODIFY_PRODUCT", new ModifyCommand(database));
-        holder.addCommand("SHOW_ALL", new ShowAllCommand(database));
+        holder.addCommand("ADD_PRODUCT", new AddCommand(receiverDB,new Product()));
+        holder.addCommand("DELETE_PRODUCT", new DeleteCommand(receiverDB));
+        holder.addCommand("MODIFY_PRODUCT", new ModifyCommand(receiverDB));
+        holder.addCommand("SHOW_ALL", new ShowAllCommand(receiverDB));
+        holder.addCommand("GENERATE_REPORT", new GenerateReportCommand(receiverDB));
         holder.addCommand("EXIT", new ExitCommand());
+
+        FileUtils utils = new FileUtils();
+        System.out.println(utils.getBanner());
+        System.out.println(utils.getParticipant());
 
         message.printGreetingMessages();
 

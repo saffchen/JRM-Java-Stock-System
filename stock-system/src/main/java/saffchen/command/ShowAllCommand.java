@@ -1,16 +1,14 @@
 package saffchen.command;
 
-import saffchen.database.Database;
-
 public class ShowAllCommand implements Command{
-    private Database database;
+    private ReceiverDB receiverDB;
 
-    public ShowAllCommand(Database database) {
-        this.database = database;
+    public ShowAllCommand(ReceiverDB receiverDB) {
+        this.receiverDB = receiverDB;
     }
 
     @Override
     public void doCommand() {
-        database.show_all();
+        receiverDB.show_all();
     }
 }

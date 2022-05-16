@@ -1,16 +1,14 @@
 package saffchen.command;
 
-import saffchen.database.Database;
-
 public class DeleteCommand implements Command{
-    private Database database;
+    private ReceiverDB receiverDB;
 
-    public DeleteCommand(Database database) {
-        this.database = database;
+    public DeleteCommand(ReceiverDB receiverDB) {
+        this.receiverDB = receiverDB;
     }
 
     @Override
     public void doCommand() {
-        database.delete_product();
+        receiverDB.delete_product();
     }
 }
