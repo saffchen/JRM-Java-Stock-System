@@ -1,6 +1,6 @@
 package saffchen.command;
 
-public class ModifyCommand implements Command{
+public class ModifyCommand implements Command {
     private ReceiverDB receiverDB;
 
     public ModifyCommand(ReceiverDB receiverDB) {
@@ -9,6 +9,6 @@ public class ModifyCommand implements Command{
 
     @Override
     public void doCommand() {
-        receiverDB.modify_product();
+        receiverDB.modifyProduct();
     }
 }

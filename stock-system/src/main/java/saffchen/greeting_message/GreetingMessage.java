@@ -23,7 +23,7 @@ public class GreetingMessage {
     }
 
     public void printGreetingMessages() {
-        for (String message:this.listOfMessages) {
+        for (String message : this.listOfMessages) {
             System.out.println(message);
         }
     }

@@ -1,6 +1,6 @@
 package saffchen.command;
 
-public class DeleteCommand implements Command{
+public class DeleteCommand implements Command {
     private ReceiverDB receiverDB;
 
     public DeleteCommand(ReceiverDB receiverDB) {
@@ -9,6 +9,6 @@ public class DeleteCommand implements Command{
 
     @Override
     public void doCommand() {
-        receiverDB.delete_product();
+        receiverDB.deleteProduct();
     }
 }
