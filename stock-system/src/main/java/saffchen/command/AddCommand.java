@@ -12,6 +12,6 @@ public class AddCommand implements Command{
 
     @Override
     public void doCommand() {
-        receiverDB.add_product(product);
+        receiverDB.addProduct(product);
     }
 }

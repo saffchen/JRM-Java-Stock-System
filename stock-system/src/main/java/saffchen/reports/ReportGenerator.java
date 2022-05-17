@@ -1,5 +1,5 @@
 package saffchen.reports;
 
-public interface ReportGenerator {
-    public void generateReport();
+interface ReportGenerator {
+    void generateReport();
 }

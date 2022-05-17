@@ -9,6 +9,6 @@ public class DeleteCommand implements Command{
 
     @Override
     public void doCommand() {
-        receiverDB.delete_product();
+        receiverDB.deleteProduct();
     }
 }

@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PdfGenerator implements ReportGenerator{
-
+    public String getDataForReport(){
+        return "";
+    }
     public PDDocument createPDFDocument(){
         PDDocument pdfDocument = null;
         List<PDPage> pages = new ArrayList<>();
@@ -57,6 +59,6 @@ public class PdfGenerator implements ReportGenerator{
 
     @Override
     public void generateReport() {
-
+        createPDFDocument();
     }
 }

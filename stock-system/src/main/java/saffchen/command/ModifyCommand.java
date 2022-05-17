@@ -9,6 +9,6 @@ public class ModifyCommand implements Command{
 
     @Override
     public void doCommand() {
-        receiverDB.modify_product();
+        receiverDB.modifyProduct();
     }
 }

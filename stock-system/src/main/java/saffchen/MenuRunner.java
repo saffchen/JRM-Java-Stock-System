@@ -4,7 +4,8 @@ import saffchen.command.*;
 import saffchen.command.ReceiverDB;
 import saffchen.greeting_message.GreetingMessage;
 import saffchen.product.Product;
-import saffchen.utils.FileUtils;
+import saffchen.utils.*;
+
 
 import java.util.Map;
 import java.util.Scanner;
@@ -12,33 +13,26 @@ import java.util.Scanner;
 public class MenuRunner {
     public static void main(String[] args) {
         CommandHolder holder = new CommandHolder();
-        ReceiverDB receiverDB = new ReceiverDB();
         GreetingMessage message = new GreetingMessage();
+        Scanner scanner = new Scanner(System.in);
 
-        holder.addCommand("ADD_PRODUCT", new AddCommand(receiverDB,new Product()));
-        holder.addCommand("DELETE_PRODUCT", new DeleteCommand(receiverDB));
-        holder.addCommand("MODIFY_PRODUCT", new ModifyCommand(receiverDB));
-        holder.addCommand("SHOW_ALL", new ShowAllCommand(receiverDB));
-        holder.addCommand("GENERATE_REPORT", new GenerateReportCommand(receiverDB));
-        holder.addCommand("EXIT", new ExitCommand());
-
-        FileUtils utils = new FileUtils();
-        System.out.println(utils.getBanner());
-        System.out.println(utils.getParticipants());
+        System.out.println(FileUtils.getBanner());
+        System.out.println(FileUtils.getParticipants());
 
         message.printGreetingMessages();
 
+        String inputCommand = "";
         while(true) {
             try {
                 System.out.print("Enter the command: ");
-                String inputCommand = new Scanner(System.in).next().trim().toUpperCase();
-                for (Map.Entry<String, Command> entry : holder.getCommandHolder().entrySet()) {
+                inputCommand = scanner.next().trim().toUpperCase();
+                for (Map.Entry<String, Command> entry : holder.getPreparedCommandHolder().entrySet()) {
                     if (inputCommand.equals(entry.getKey())) {
                         entry.getValue().doCommand();
                     }
                 }
             }catch(Exception e){
-                System.out.println("Unsupported operation. Try again.");
+                System.out.println("Unsupported operation \"" + inputCommand +"\". Try again.");
             }
         }
     }

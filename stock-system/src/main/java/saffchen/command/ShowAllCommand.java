@@ -9,6 +9,6 @@ public class ShowAllCommand implements Command{
 
     @Override
     public void doCommand() {
-        receiverDB.show_all();
+        receiverDB.showAll();
     }
 }
