@@ -1,7 +1,5 @@
 package saffchen.checkvalidation;
 
-import saffchen.command.City;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 

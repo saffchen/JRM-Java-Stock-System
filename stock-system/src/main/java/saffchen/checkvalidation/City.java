@@ -1,4 +1,4 @@
-package saffchen.command;
+package saffchen.checkvalidation;
 
 import saffchen.checkvalidation.SatelliteConstraintValidator;
 

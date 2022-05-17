@@ -1,7 +1,5 @@
 package saffchen.checkvalidation;
 
-import saffchen.command.AdditionalProduct;
-
 import javax.validation.*;
 import java.util.Set;
 

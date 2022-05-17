@@ -1,4 +1,4 @@
-package saffchen.command;
+package saffchen.checkvalidation;
 
 import javax.validation.constraints.*;
 import java.util.Collections;
