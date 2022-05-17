@@ -4,13 +4,24 @@ import javax.validation.*;
 import java.util.Set;
 
 public class CheckingValidationField {
-    ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-    Validator validator = validatorFactory.getValidator();
+    public static void main(String[] args) {
+        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+        Validator validator = validatorFactory.getValidator();
 
-    public Set<ConstraintViolation<AdditionalProduct>> constraintViolations() {
-        Set<ConstraintViolation<AdditionalProduct>> violations = validator.validate(new AdditionalProduct("Iphone 12 Pro Max 512",
-                "Iphone with big display and lidar camera", 1024,
-                "Phone, Camera", "Phone", 15, "Moscow"));
-        return violations;
-}
+        AdditionalProduct additionalProduct = new AdditionalProduct();
+
+        Set<ConstraintViolation<AdditionalProduct>> violations = validator.validate(additionalProduct);
+
+        for (ConstraintViolation<AdditionalProduct> constr: violations){
+
+            StringBuilder stringBuilder = new StringBuilder("Property: ");
+            stringBuilder.append(constr.getPropertyPath());
+            stringBuilder.append("Value");
+            stringBuilder.append(constr.getInvalidValue());
+            stringBuilder.append("Message");
+            stringBuilder.append(constr.getMessage());
+
+            System.out.println(stringBuilder.toString());
+        }
+    }
 }

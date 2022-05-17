@@ -1,48 +1,36 @@
 package saffchen.checkvalidation;
 
 import javax.validation.constraints.*;
-import java.util.Collections;
 import java.util.List;
 
 public class AdditionalProduct {
-
-    @NotEmpty
+    @NotEmpty(message = "Название не может быть пустым!")
     @Size(max = 255)
-    String title;
+    private String title;
 
-    @NotEmpty
+    @NotEmpty(message = "Описание не может быть пустым!")
     @Size(max = 1024)
-    String description;
+    private String description;
 
-    @NotEmpty
+    @NotNull(message = "Цена не может отсутствовать!")
     @Positive
-    int price;
+    private int price;
 
-    @NotEmpty
+    @NotBlank(message = "Тег не может быть пустым!")
     @Max(20)
-    List<String> tags;
+    private List<String> tags;
 
-    @NotEmpty
+    @NotEmpty(message = "Категории не могут быть пустым!")
     @Size(max = 50)
-    String category;
+    private String category;
 
-    @NotEmpty
+    @NotNull(message = "Количество не может быть пустым!")
     @Positive
-    int count;
+    private int count;
 
-    @NotEmpty
-    @City
-    String satellite;
-
-    public AdditionalProduct(String title, String description, int price, String tags, String category, int count, String satellite) {
-        this.title = title;
-        this.description = description;
-        this.price = price;
-        this.tags = Collections.singletonList(tags);
-        this.category = category;
-        this.count = count;
-        this.satellite = satellite;
-    }
+    @NotEmpty(message = "Название города не может быть пустым!")
+    //@City
+    private String satellite;
 
     public String getTitle() {
         return title;
@@ -56,7 +44,7 @@ public class AdditionalProduct {
         return price;
     }
 
-    public @NotEmpty @Max(20) List<String> getTags() {
+    public List<String> getTags() {
         return tags;
     }
 
@@ -70,6 +58,34 @@ public class AdditionalProduct {
 
     public String getSatellite() {
         return satellite;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public void setSatellite(String satellite) {
+        this.satellite = satellite;
     }
 
     @Override
