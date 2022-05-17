@@ -12,7 +12,7 @@ public class Product {
     private Integer count;
     private String satellite;
 
-    public Product(){
+    public Product() {
 
     }
 
@@ -27,12 +27,15 @@ public class Product {
         this.satellite = satellite;
     }
 
-    public void setTitle(String title){
+    public void setTitle(String title) {
         this.title = title;
-    };
-    public void setDescription(String description){
+    }
+
+
+    public void setDescription(String description) {
         this.description = description;
-    };
+    }
+
 
     public void setCategory(String category) {
         this.category = category;

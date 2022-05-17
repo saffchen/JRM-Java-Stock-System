@@ -1,6 +1,6 @@
 package saffchen.command;
 
-public class DeleteCommand implements Command{
+public class DeleteCommand implements Command {
     private ReceiverDB receiverDB;
 
     public DeleteCommand(ReceiverDB receiverDB) {

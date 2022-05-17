@@ -22,7 +22,7 @@ public class MenuRunner {
         message.printGreetingMessages();
 
         String inputCommand = "";
-        while(true) {
+        while (true) {
             try {
                 System.out.print("Enter the command: ");
                 inputCommand = scanner.next().trim().toUpperCase();
@@ -31,8 +31,8 @@ public class MenuRunner {
                         entry.getValue().doCommand();
                     }
                 }
-            }catch(Exception e){
-                System.out.println("Unsupported operation \"" + inputCommand +"\". Try again.");
+            } catch (Exception e) {
+                System.out.println("Unsupported operation \"" + inputCommand + "\". Try again.");
             }
         }
     }

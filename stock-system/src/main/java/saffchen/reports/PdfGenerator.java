@@ -8,17 +8,18 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PdfGenerator implements ReportGenerator{
-    public String getDataForReport(){
+public class PdfGenerator implements ReportGenerator {
+    public String getDataForReport() {
         return "";
     }
-    public PDDocument createPDFDocument(){
+
+    public PDDocument createPDFDocument() {
         PDDocument pdfDocument = null;
         List<PDPage> pages = new ArrayList<>();
         try {
             pdfDocument = new PDDocument();
             pages.add(new PDPage());
-            for (PDPage page:pages) {
+            for (PDPage page : pages) {
                 pdfDocument.addPage(page);
             }
             PDPage page = pdfDocument.getPage(0);
@@ -50,7 +51,7 @@ public class PdfGenerator implements ReportGenerator{
 
             System.out.println("Report was created successfully!");
 
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Error: Can't create PDF document");
         }
 

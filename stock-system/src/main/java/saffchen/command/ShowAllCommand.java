@@ -1,6 +1,6 @@
 package saffchen.command;
 
-public class ShowAllCommand implements Command{
+public class ShowAllCommand implements Command {
     private ReceiverDB receiverDB;
 
     public ShowAllCommand(ReceiverDB receiverDB) {
