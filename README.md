@@ -1,1 +1,2 @@
-# JRM-Java-Stock-System
+# JRM Java Stock System
+
