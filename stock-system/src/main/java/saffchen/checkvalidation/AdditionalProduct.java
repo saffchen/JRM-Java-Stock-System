@@ -1,27 +1,31 @@
 package saffchen.checkvalidation;
 
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
+import org.hibernate.validator.constraints.Length;
+
+import javax.persistence.CascadeType;
+import javax.persistence.OneToOne;
 import java.util.List;
 
 public class AdditionalProduct {
     @NotEmpty(message = "Название не может быть пустым!")
-    @Size(max = 255)
+    @Length(max = 255)
     private String title;
 
     @NotEmpty(message = "Описание не может быть пустым!")
-    @Size(max = 1024)
+    @Length(max = 1024)
     private String description;
 
     @NotNull(message = "Цена не может отсутствовать!")
     @Positive
     private int price;
 
-    @NotBlank(message = "Тег не может быть пустым!")
-    @Max(20)
+    @NotEmpty(message = "Тег не может быть пустым!")
+    @Size(max = 20)
     private List<String> tags;
 
     @NotEmpty(message = "Категории не могут быть пустым!")
-    @Size(max = 50)
+    @Length(max = 50)
     private String category;
 
     @NotNull(message = "Количество не может быть пустым!")
@@ -29,7 +33,8 @@ public class AdditionalProduct {
     private int count;
 
     @NotEmpty(message = "Название города не может быть пустым!")
-    //@City
+    @City
+//    @OneToOne(mappedBy = "satellite", cascade = CascadeType.ALL)
     private String satellite;
 
     public String getTitle() {

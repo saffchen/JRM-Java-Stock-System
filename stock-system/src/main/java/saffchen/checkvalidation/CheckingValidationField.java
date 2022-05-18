@@ -1,6 +1,10 @@
 package saffchen.checkvalidation;
 
-import javax.validation.*;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
+
 import java.util.Set;
 
 public class CheckingValidationField {

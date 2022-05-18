@@ -1,11 +1,9 @@
 package saffchen.checkvalidation;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
-import java.util.ArrayList;
-import java.util.Scanner;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
-public class SatelliteConstraintValidator implements ConstraintValidator<City, String> {
+public class SatelliteConstraintValidator implements ConstraintValidator<City, SatelliteCity> {
 
     @Override
     public void initialize(City constraintAnnotation) {
@@ -13,21 +11,7 @@ public class SatelliteConstraintValidator implements ConstraintValidator<City, S
     }
 
     @Override
-    public boolean isValid(String value, ConstraintValidatorContext context) {
-        return false;
+    public boolean isValid(SatelliteCity satelliteCity, ConstraintValidatorContext constraintValidatorContext) {
+        return satelliteCity.getSatellite().equals("Moscow") || satelliteCity.getSatellite().equals("Saint-Petersburg");
     }
 }
-    /*@Override
-    public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
-        ArrayList<String> cityList = new ArrayList<>();
-        cityList.add("Moscow");
-        cityList.add("Saint-Petersburg");
-        s = new Scanner(System.in).nextLine().trim();
-        for (String s1 : cityList) {
-            if (s.equals(s1.get)) {
-                return true;
-            } else return false;
-        }
-    }*/
-    //Доделать валидацию по значению
-    //Разобраться с ошибкой
