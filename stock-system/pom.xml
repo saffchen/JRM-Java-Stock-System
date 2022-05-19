@@ -22,26 +22,28 @@
         </plugins>
     </build>
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api -->
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+        <!-- Hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>7.0.4.Final</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.glassfish/jakarta.el -->
         <dependency>
             <groupId>org.glassfish</groupId>
-            <artifactId>jakarta.el</artifactId>
-            <version>4.0.2</version>
-            <scope>test</scope>
+            <artifactId>javax.el</artifactId>
+            <version>3.0.1-b12</version>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator-annotation-processor -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator-annotation-processor</artifactId>
             <version>7.0.4.Final</version>
         </dependency>
-
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>

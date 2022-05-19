@@ -7,7 +7,7 @@ public class SatelliteConstraintValidator implements ConstraintValidator<City, S
 
     @Override
     public void initialize(City constraintAnnotation) {
-        ConstraintValidator.super.initialize(constraintAnnotation);
+
     }
 
     @Override

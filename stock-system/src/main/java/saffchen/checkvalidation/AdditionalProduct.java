@@ -32,10 +32,10 @@ public class AdditionalProduct {
     @Positive
     private int count;
 
-    @NotEmpty(message = "Название города не может быть пустым!")
+    @NotNull(message = "Название города не может быть пустым!")
     @City
-//    @OneToOne(mappedBy = "satellite", cascade = CascadeType.ALL)
-    private String satellite;
+    @OneToOne(mappedBy = "satellite", cascade = CascadeType.ALL)
+    private SatelliteCity satellite;
 
     public String getTitle() {
         return title;
@@ -61,7 +61,7 @@ public class AdditionalProduct {
         return count;
     }
 
-    public String getSatellite() {
+    public SatelliteCity getSatellite() {
         return satellite;
     }
 
@@ -89,7 +89,7 @@ public class AdditionalProduct {
         this.count = count;
     }
 
-    public void setSatellite(String satellite) {
+    public void setSatellite(SatelliteCity satellite) {
         this.satellite = satellite;
     }
 
