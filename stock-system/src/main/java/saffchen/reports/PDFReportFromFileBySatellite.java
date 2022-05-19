@@ -2,10 +2,13 @@ package saffchen.reports;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
+import org.apache.commons.collections.list.SetUniqueList;
 import saffchen.database.FileConnection;
+import saffchen.product.Product;
 import saffchen.utils.FileStorageUtils;
 
 import java.io.FileOutputStream;
+import java.util.*;
 import java.util.List;
 
 public class PDFReportFromFileBySatellite implements IReport {
@@ -56,14 +59,10 @@ public class PDFReportFromFileBySatellite implements IReport {
 
     @Override
     public void generateReport() throws Exception {
-        //String criteries = "Saint PETERSBURG".trim().toUpperCase();
-        List<String[]> tableData = fileStorageUtils.getDataForReportFromCSV(criteries);
+        List<Product> tableData = fileStorageUtils.getDataForReportBySatelliteFromCSV(criteries);
         Document document = new Document();
         try {
             boolean isLight = true; //if background is light
-
-            String[] headers = tableData.get(0);
-            tableData.remove(0);
 
             PdfWriter writer = PdfWriter.getInstance(document,
                     new FileOutputStream("reportBySatellite.pdf"));
@@ -72,17 +71,27 @@ public class PDFReportFromFileBySatellite implements IReport {
 
             PdfPTable table = drawTable(7);
 
+            List<String> headers = Arrays.asList("TITLE", "DESCRIPTION", "PRICE", "TAGS", "CATEGORY", "COUNT", "SATELLITE");
+
             for (String cell : headers) {
                 table.addCell(drawCell(cell, BaseColor.LIGHT_GRAY, tableHeader));
             }
 
-            for (String[] row : tableData) {
-                for (String cell : row) {
-                    if (isLight)
-                        table.addCell(drawCell(cell, BaseColor.LIGHT_GRAY, cellHeader));
-                    else
-                        table.addCell(drawCell(cell, BaseColor.GRAY, cellHeader));
-                }
+            BaseColor color;
+            for (Product product : tableData) {
+                if (isLight)
+                    color = BaseColor.LIGHT_GRAY;
+                else
+                    color = BaseColor.GRAY;
+
+                table.addCell(drawCell(product.getTitle(), color, cellHeader));
+                table.addCell(drawCell(product.getDescription(), color, cellHeader));
+                table.addCell(drawCell(product.getPrice().toString(), color, cellHeader));
+                table.addCell(drawCell(product.getTags().toString(), color, cellHeader));
+                table.addCell(drawCell(product.getCategory(), color, cellHeader));
+                table.addCell(drawCell(product.getCount().toString(), color, cellHeader));
+                table.addCell(drawCell(product.getSatellite(), color, cellHeader));
+
                 isLight = !isLight;
                 table.completeRow();
             }
