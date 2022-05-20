@@ -2,7 +2,6 @@ package saffchen.checkvalidation;
 
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.Length;
-
 import javax.persistence.CascadeType;
 import javax.persistence.OneToOne;
 import java.util.List;
@@ -34,7 +33,7 @@ public class AdditionalProduct {
 
     @NotNull(message = "Название города не может быть пустым!")
     @City
-    @OneToOne(mappedBy = "satellite", cascade = CascadeType.ALL)
+    //@OneToOne(mappedBy = "satellite", cascade = CascadeType.ALL)
     private SatelliteCity satellite;
 
     public String getTitle() {

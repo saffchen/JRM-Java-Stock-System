@@ -2,14 +2,7 @@ package saffchen.checkvalidation;
 
 import java.io.Serial;
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "satellite_city")
@@ -24,7 +17,7 @@ public class SatelliteCity implements Serializable {
     private Long satellite_id;
     private String satellite;
 
-    @OneToOne
+    //@OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private AdditionalProduct Additionalproduct;
 

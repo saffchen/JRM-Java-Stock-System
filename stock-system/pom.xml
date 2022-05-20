@@ -23,26 +23,20 @@
     </build>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api -->
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa -->
+
         <dependency>
-            <groupId>jakarta.validation</groupId>
-            <artifactId>jakarta.validation-api</artifactId>
-            <version>3.0.1</version>
-        </dependency>
-        <!-- Hibernate -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>7.0.4.Final</version>
+            <version>7.0.2.Final</version>
         </dependency>
+
         <dependency>
             <groupId>org.glassfish</groupId>
-            <artifactId>javax.el</artifactId>
-            <version>3.0.1-b12</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator-annotation-processor</artifactId>
-            <version>7.0.4.Final</version>
+            <artifactId>jakarta.el</artifactId>
+            <version>4.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
