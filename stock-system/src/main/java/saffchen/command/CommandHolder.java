@@ -15,7 +15,7 @@ public class CommandHolder {
         addCommand("MODIFY_PRODUCT", new ModifyCommand(receiverDB));
         addCommand("EXPORT_EXCEL", new CreateXlsFileCommand());
         addCommand("SHOW_ALL", new ShowAllCommand(receiverDB));
-        addCommand("GENERATE_REPORT", new GenerateReportCommand(receiverDB));
+        addCommand("GENERATE_REPORT", new GenerateReportCommand());
         addCommand("EXIT", new ExitCommand());
 
         return this.commandHolder;
