@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class FileStorageUtils implements IStorageUtils {
+public class FileStorageUtils implements StorageUtils {
     private FileConnection fileConnection;
 
     public FileStorageUtils(FileConnection fileConnection) {
@@ -25,7 +25,7 @@ public class FileStorageUtils implements IStorageUtils {
     public void addProduct(Product product) {
         try {
             //NOP
-        } catch (Exception e) {
+        } catch (UnsupportedOperationException e) {
             e.printStackTrace();
         }
     }
