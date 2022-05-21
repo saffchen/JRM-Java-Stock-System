@@ -31,11 +31,9 @@ public class Product {
         this.title = title;
     }
 
-
     public void setDescription(String description) {
         this.description = description;
     }
-
 
     public void setCategory(String category) {
         this.category = category;
@@ -84,4 +82,5 @@ public class Product {
     public String getSatellite() {
         return satellite;
     }
+
 }

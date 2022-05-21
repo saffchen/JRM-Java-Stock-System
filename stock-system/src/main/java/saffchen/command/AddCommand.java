@@ -15,4 +15,5 @@ public class AddCommand implements Command {
     public void doCommand() {
         receiverDB.addProduct(product);
     }
+
 }
