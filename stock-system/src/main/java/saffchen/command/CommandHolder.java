@@ -13,6 +13,7 @@ public class CommandHolder {
         addCommand("ADD_PRODUCT", new AddCommand(receiverDB, new Product()));
         addCommand("DELETE_PRODUCT", new DeleteCommand(receiverDB));
         addCommand("MODIFY_PRODUCT", new ModifyCommand(receiverDB));
+        addCommand("EXPORT_EXCEL", new CreateXlsFileCommand(receiverDB));
         addCommand("SHOW_ALL", new ShowAllCommand(receiverDB));
         addCommand("GENERATE_REPORT", new GenerateReportCommand(receiverDB));
         addCommand("EXIT", new ExitCommand());
