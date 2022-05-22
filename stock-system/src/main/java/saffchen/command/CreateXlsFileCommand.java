@@ -20,6 +20,8 @@ import static saffchen.export_excel.Create_Excel.getSheetsService;
 public class CreateXlsFileCommand implements Command {
 
     public void createXLS() throws GeneralSecurityException, IOException {
+        System.out.println("Укажите путь, где будет храниться файл");
+        String filePath = new Scanner(System.in).nextLine();
         System.out.println("Укажите название файла");
         System.out.println("Имя файла не должно содержать символы: /, |, ?, *, :, <>");
         String name = new Scanner(System.in).nextLine();
@@ -29,7 +31,7 @@ public class CreateXlsFileCommand implements Command {
             System.out.println("Введите имя");
             name = new Scanner(System.in).nextLine();
         }
-        String path = System.getProperty("user.home") + "\\Desktop\\" + name + ".xls";
+        String path = filePath + "." + name + ".xls";
         Sheets sheetsService = getSheetsService();
         String range = "Sheet1!A1:Z1000";
         ValueRange response = sheetsService.spreadsheets().values().get(SPEADSHEET_ID, range).execute();
@@ -52,5 +54,5 @@ public class CreateXlsFileCommand implements Command {
     @Override
     public void doCommand() throws GeneralSecurityException, IOException {
         createXLS();
+        }
     }
-}
