@@ -14,7 +14,7 @@ public class CheckingValidationField {
                 .configure()
                 .buildValidatorFactory();
         Validator validator = validatorFactory.getValidator();
-        Product additionalProduct = new Product("Iphone 12", "best camera", 1200, Collections.singletonList("phone"), "phone",
+        Product additionalProduct = new Product("Iphone 12", "best camera", -1200, Collections.singletonList("phone"), "phone",
                 20, "Moscow");
 
         Set<ConstraintViolation<Product>> violations = validator.validate(additionalProduct);

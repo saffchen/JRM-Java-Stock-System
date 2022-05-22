@@ -3,7 +3,7 @@ package saffchen.checkvalidation;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class SatelliteConstraintValidator implements ConstraintValidator<City, SatelliteCity> {
+public class SatelliteConstraintValidator implements ConstraintValidator<City, String> {
 
     @Override
     public void initialize(City constraintAnnotation) {
@@ -11,7 +11,7 @@ public class SatelliteConstraintValidator implements ConstraintValidator<City, S
     }
 
     @Override
-    public boolean isValid(SatelliteCity satelliteCity, ConstraintValidatorContext constraintValidatorContext) {
-        return satelliteCity.getSatellite().equals("Moscow") || satelliteCity.getSatellite().equals("Saint-Petersburg");
+    public boolean isValid(String satelliteCity, ConstraintValidatorContext constraintValidatorContext) {
+        return satelliteCity.equals("Moscow") || satelliteCity.equals("Saint-Petersburg");
     }
 }

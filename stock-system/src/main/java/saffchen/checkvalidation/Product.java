@@ -31,9 +31,9 @@ public class Product {
 
     @NotNull(message = "Название города не может быть пустым!")
     @City
-    private SatelliteCity satellite;
+    private String satellite;
 
-    public Product(String title, String description, int price, List<String> tags, String category, int count, SatelliteCity satellite) {
+    public Product(String title, String description, int price, List<String> tags, String category, int count, String satellite) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -91,11 +91,11 @@ public class Product {
         this.count = count;
     }
 
-    public SatelliteCity getSatellite() {
+    public String getSatellite() {
         return satellite;
     }
 
-    public void setSatellite(SatelliteCity satellite) {
+    public void setSatellite(String satellite) {
         this.satellite = satellite;
     }
 
