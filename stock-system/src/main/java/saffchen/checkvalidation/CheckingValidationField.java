@@ -5,7 +5,7 @@ import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import org.hibernate.validator.HibernateValidator;
-
+import java.util.Collections;
 import java.util.Set;
 
 public class CheckingValidationField {
@@ -14,9 +14,10 @@ public class CheckingValidationField {
                 .configure()
                 .buildValidatorFactory();
         Validator validator = validatorFactory.getValidator();
-        AdditionalProduct additionalProduct = new AdditionalProduct();
+        Product additionalProduct = new Product("Iphone 12", "best camera", 1200, Collections.singletonList("phone"), "phone",
+                20, "Moscow");
 
-        Set<ConstraintViolation<AdditionalProduct>> violations = validator.validate(additionalProduct);
+        Set<ConstraintViolation<Product>> violations = validator.validate(additionalProduct);
         System.out.println(violations);
     }
 }

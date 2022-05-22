@@ -2,11 +2,9 @@ package saffchen.checkvalidation;
 
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.Length;
-import javax.persistence.CascadeType;
-import javax.persistence.OneToOne;
 import java.util.List;
 
-public class AdditionalProduct {
+public class Product {
     @NotEmpty(message = "Название не может быть пустым!")
     @Length(max = 255)
     private String title;
@@ -33,59 +31,68 @@ public class AdditionalProduct {
 
     @NotNull(message = "Название города не может быть пустым!")
     @City
-    //@OneToOne(mappedBy = "satellite", cascade = CascadeType.ALL)
     private SatelliteCity satellite;
+
+    public Product(String title, String description, int price, List<String> tags, String category, int count, SatelliteCity satellite) {
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.tags = tags;
+        this.category = category;
+        this.count = count;
+        this.satellite = satellite;
+    }
 
     public String getTitle() {
         return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public List<String> getTags() {
-        return tags;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public SatelliteCity getSatellite() {
-        return satellite;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getPrice() {
+        return price;
     }
 
     public void setPrice(int price) {
         this.price = price;
     }
 
+    public List<String> getTags() {
+        return tags;
+    }
+
     public void setTags(List<String> tags) {
         this.tags = tags;
+    }
+
+    public String getCategory() {
+        return category;
     }
 
     public void setCategory(String category) {
         this.category = category;
     }
 
+    public int getCount() {
+        return count;
+    }
+
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public SatelliteCity getSatellite() {
+        return satellite;
     }
 
     public void setSatellite(SatelliteCity satellite) {

@@ -7,12 +7,24 @@
     <groupId>org.example</groupId>
     <artifactId>stock-system</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <properties>
+        <opencsv.version>5.6</opencsv.version>
+        <googleapi.version>1.23.0</googleapi.version>
+        <apachepdfbox.version>2.0.0</apachepdfbox.version>
+        <apachepoi.version>3.12</apachepoi.version>
+        <itextpdf.version>5.5.13.3</itextpdf.version>
+        <apache.maven.plugins.version>3.1</apache.maven.plugins.version>
+        <hibernate.validator.version>7.0.2.Final</hibernate.validator.version>
+        <glassfish.version>4.0.1</glassfish.version>
+        <junit.jupiter.version>5.8.2</junit.jupiter.version>
+        <maven-clean.version>2.6.1</maven-clean.version>
+    </properties>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>${apache.maven.plugins.version}</version>
                 <configuration>
                     <source>14</source>
                     <target>14</target>
@@ -22,26 +34,20 @@
         </plugins>
     </build>
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api -->
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
-
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa -->
-
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>7.0.2.Final</version>
+            <version>${hibernate.validator.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>jakarta.el</artifactId>
-            <version>4.0.1</version>
+            <version>${glassfish.version}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.8.2</version>
+            <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
