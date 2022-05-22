@@ -18,7 +18,7 @@ import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
 import java.util.List;
 
-public class Create_Excel {
+public class CreateExcel {
     private static final String APPLICATION_NAME = "STOCK_VALUES";
     public static final String SPEADSHEET_ID = "1Rdg7aHSejhaAtuHG9MDv_ktBL8cYFxlvBQJrcUBOBPk";
 

@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static saffchen.export_excel.Create_Excel.SPEADSHEET_ID;
-import static saffchen.export_excel.Create_Excel.getSheetsService;
+import static saffchen.export_excel.CreateExcel.SPEADSHEET_ID;
+import static saffchen.export_excel.CreateExcel.getSheetsService;
 
 public class CreateXlsFileCommand implements Command {
 
@@ -31,7 +31,7 @@ public class CreateXlsFileCommand implements Command {
             System.out.println("Введите имя");
             name = new Scanner(System.in).nextLine();
         }
-        String path = filePath + "." + name + ".xls";
+        String path = filePath + name + ".xls";
         Sheets sheetsService = getSheetsService();
         String range = "Sheet1!A1:Z1000";
         ValueRange response = sheetsService.spreadsheets().values().get(SPEADSHEET_ID, range).execute();
