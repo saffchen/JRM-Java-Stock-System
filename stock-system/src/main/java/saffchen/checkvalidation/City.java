@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
 public @
 interface City {
-    String message() default "{the satellite is specified incorrectly}";
+    String message() default "Укажите название склада Москва или Санкт-Петербург";
     Class<?> [] groups() default {};
     Class <? extends Payload>[] payload() default {};
 }

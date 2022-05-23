@@ -6,18 +6,35 @@ import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import org.hibernate.validator.HibernateValidator;
 import java.util.Collections;
+import java.util.Scanner;
 import java.util.Set;
 
 public class CheckingValidationField {
     public static void main(String[] args) {
-        ValidatorFactory validatorFactory = Validation.byProvider( HibernateValidator.class )
+        ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class)
                 .configure()
                 .buildValidatorFactory();
         Validator validator = validatorFactory.getValidator();
-        Product additionalProduct = new Product("Iphone 12", "best camera", -1200, Collections.singletonList("phone"), "phone",
-                20, "Moscow");
+
+        System.out.println("*** ADDITIONAL PRODUCT ***");
+        System.out.println("Укажите название продукта: ");
+        String title = new Scanner(System.in).nextLine();
+        System.out.println("Укажите описание продукта: ");
+        String description = new Scanner(System.in).nextLine();
+        System.out.println("Укажите цену продукта: ");
+        int price = new Scanner(System.in).nextInt();
+        System.out.println("Укажите категорию продукта: ");
+        String category = new Scanner(System.in).nextLine();
+        System.out.println("Укажите количество продукта: ");
+        int count = new Scanner(System.in).nextInt();
+        System.out.println("Укажите склад на котором хранится продукт: ");
+        String satellite = new Scanner(System.in).nextLine();
+        Product additionalProduct = new Product(title, description, price, Collections.singletonList("phone"), category,
+                count, satellite);
 
         Set<ConstraintViolation<Product>> violations = validator.validate(additionalProduct);
-        System.out.println(violations);
+        for (ConstraintViolation<Product> warning : violations) {
+            System.out.println(warning.getMessage());
+        }
     }
 }
