@@ -3,6 +3,9 @@ package saffchen.checkvalidation;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SatelliteConstraintValidator implements ConstraintValidator<City, String> {
 
     @Override
@@ -12,6 +15,14 @@ public class SatelliteConstraintValidator implements ConstraintValidator<City, S
 
     @Override
     public boolean isValid(String satelliteCity, ConstraintValidatorContext constraintValidatorContext) {
-        return satelliteCity.equals("Moscow") || satelliteCity.equals("Saint-Petersburg");
+        List<String> satellites = new ArrayList<>();
+        satellites.add("Moscow");
+        satellites.add("Saint-Petersburg");
+        boolean namingSatellite = false;
+        for (String s : satellites) {
+            namingSatellite = satelliteCity.equals(s);
+            return namingSatellite;
+        }
+        return namingSatellite;
     }
 }
