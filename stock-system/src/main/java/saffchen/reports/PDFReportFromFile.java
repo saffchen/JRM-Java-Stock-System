@@ -2,17 +2,17 @@ package saffchen.reports;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
-import org.apache.commons.collections.list.SetUniqueList;
 import saffchen.database.FileConnection;
 import saffchen.product.Product;
 import saffchen.utils.FileStorageUtils;
 
+import java.io.File;
 import java.io.FileOutputStream;
-import java.util.*;
 import java.util.List;
 
-public class PDFReportFromFileBySatellite implements IReport {
+public class PDFReportFromFile implements IReport {
     private String criteries;
+    private String field;
     private FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
     private FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
 
@@ -23,8 +23,9 @@ public class PDFReportFromFileBySatellite implements IReport {
     private final Font cellHeader = FontFactory.getFont(FontFactory.COURIER, 11, Font.NORMAL,
             new CMYKColor(0, 0, 0, 255));
 
-    public PDFReportFromFileBySatellite(String criteries) {
+    public PDFReportFromFile(String field, String criteries) {
         this.criteries = criteries;
+        this.field = field;
     }
 
     private PdfPTable drawTable(Integer columnCount) throws DocumentException {
@@ -35,14 +36,12 @@ public class PDFReportFromFileBySatellite implements IReport {
         table.setPaddingTop(50f);
         // Set Column widths
         float[] columnWidths = new float[columnCount];
-        for (int i = 1; i < columnCount; i++) {
+        for (int i = 0; i < columnCount; i++) {
             columnWidths[i] = 1f;
         }
         table.setWidths(columnWidths);
         return table;
     }
-
-    ;
 
     private PdfPCell drawCell(String text, BaseColor fontColor, Font style) {
         PdfPCell cell = new PdfPCell(new Paragraph(text, style));
@@ -59,22 +58,25 @@ public class PDFReportFromFileBySatellite implements IReport {
 
     @Override
     public void generateReport() throws Exception {
-        List<Product> tableData = fileStorageUtils.getDataForReportBySatelliteFromCSV(criteries);
+        //List<Product> tableData = fileStorageUtils.getDataForReportBySatelliteFromCSV("Satellite", criteries);
+        List<Product> tableData = fileStorageUtils.getDataForReportFromCSV(field, criteries);
+
         Document document = new Document();
         try {
             boolean isLight = true; //if background is light
 
             PdfWriter writer = PdfWriter.getInstance(document,
-                    new FileOutputStream("reportBySatellite.pdf"));
+                    new FileOutputStream("reportBy" + field + ".pdf"));
             document.open();
-            document.add(new Paragraph("Products in satellite", reportHeader));
+            document.add(new Paragraph("Found Products (by "
+                    + field +" with criteria \""
+                    + criteries + "\")", reportHeader));
 
             PdfPTable table = drawTable(7);
-
-            List<String> headers = Arrays.asList("TITLE", "DESCRIPTION", "PRICE", "TAGS", "CATEGORY", "COUNT", "SATELLITE");
+            List<String> headers = fileStorageUtils.getHeadersFromCSV();
 
             for (String cell : headers) {
-                table.addCell(drawCell(cell, BaseColor.LIGHT_GRAY, tableHeader));
+                table.addCell(drawCell(cell.toUpperCase(), BaseColor.LIGHT_GRAY, tableHeader));
             }
 
             BaseColor color;
