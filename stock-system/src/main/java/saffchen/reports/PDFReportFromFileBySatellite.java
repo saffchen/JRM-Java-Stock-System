@@ -15,6 +15,13 @@ public class PDFReportFromFileBySatellite implements Report {
     private String criteries;
     private FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
     private FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
+    private final static String TITLE = "TITLE";
+    private final static String DESCRIPTION = "DESCRIPTION";
+    private final static String PRICE = "PRICE";
+    private final static String TAGS = "TAGS";
+    private final static String CATEGORY = "CATEGORY";
+    private final static String COUNT = "COUNT";
+    private final static String SATELLITE = "SATELLITE";
 
     private final Font reportHeader = FontFactory.getFont(FontFactory.COURIER, 20, Font.BOLD,
             new CMYKColor(0, 255, 0, 0));
@@ -71,7 +78,7 @@ public class PDFReportFromFileBySatellite implements Report {
 
             PdfPTable table = drawTable(7);
 
-            List<String> headers = Arrays.asList("TITLE", "DESCRIPTION", "PRICE", "TAGS", "CATEGORY", "COUNT", "SATELLITE");
+            List<String> headers = Arrays.asList(TITLE, DESCRIPTION, PRICE, TAGS, CATEGORY, COUNT, SATELLITE);
 
             for (String cell : headers) {
                 table.addCell(drawCell(cell, BaseColor.LIGHT_GRAY, tableHeader));
