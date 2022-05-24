@@ -11,7 +11,7 @@ import java.io.FileOutputStream;
 import java.util.*;
 import java.util.List;
 
-public class PDFReportFromFileBySatellite implements IReport {
+public class PDFReportFromFileBySatellite implements Report {
     private String criteries;
     private FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
     private FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
