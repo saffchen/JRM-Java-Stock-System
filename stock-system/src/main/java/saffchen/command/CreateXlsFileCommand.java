@@ -19,7 +19,8 @@ import static saffchen.export_excel.CreateExcel.getSheetsService;
 
 public class CreateXlsFileCommand implements Command {
 
-    public void createXLS() throws GeneralSecurityException, IOException {
+    @Override
+    public void doCommand() throws GeneralSecurityException, IOException {
         System.out.println("Укажите путь, где будет храниться файл");
         String filePath = new Scanner(System.in).nextLine();
         System.out.println("Укажите название файла");
@@ -50,9 +51,4 @@ public class CreateXlsFileCommand implements Command {
         book.write(new FileOutputStream(path));
         book.close();
     }
-
-    @Override
-    public void doCommand() throws GeneralSecurityException, IOException {
-        createXLS();
-        }
-    }
+}
