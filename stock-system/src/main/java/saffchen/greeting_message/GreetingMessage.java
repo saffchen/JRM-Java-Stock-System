@@ -14,7 +14,7 @@ public class GreetingMessage {
             "6 Write an \"export_excel\" if you want to save excel file with all positions",
             "7 Write an \"import_csv\" if you want to save change to csv",
             "8 Write an \"import_excel\" if you want to save change to excel",
-            "9 Write an \"import_gsheets\" if you want to save change to google sheets",
+            "9 Write an \"import_gsheet\" if you want to save change to google sheets",
             "10 Write an \"generate_report\" if you want to save pdf file with all positions\n",
             "*******************************************************************************\n"
     );

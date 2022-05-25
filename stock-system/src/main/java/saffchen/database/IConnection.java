@@ -1,5 +1,5 @@
 package saffchen.database;
 
-public interface Connection {
+public interface IConnection {
 
 }

@@ -1,5 +1,5 @@
 package saffchen.reports;
 
-interface Report {
+interface IReport {
     void generateReport() throws Exception;
 }

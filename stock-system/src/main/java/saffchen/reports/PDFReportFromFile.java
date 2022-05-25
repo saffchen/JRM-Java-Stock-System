@@ -30,6 +30,7 @@ public class PDFReportFromFile implements IReport {
     private final Font cellHeader = FontFactory.getFont(FontFactory.COURIER, 11, Font.NORMAL,
             new CMYKColor(0, 0, 0, 255));
 
+
     public PDFReportFromFile(String field, String criteries) {
         this.criteries = criteries;
         this.field = field;

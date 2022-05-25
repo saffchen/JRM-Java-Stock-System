@@ -1,10 +1,10 @@
 package saffchen.utils;
 
-import saffchen.database.Connection;
+import saffchen.database.IConnection;
 import saffchen.product.Product;
 
 public interface StorageUtils {
-    Connection I_CONNECTION = null;
+    IConnection I_CONNECTION = null;
 
     public void addProduct(Product product);
 
