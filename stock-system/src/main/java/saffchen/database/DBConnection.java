@@ -1,6 +1,6 @@
 package saffchen.database;
 
-public class DBConnection implements IConnection {
+public class DBConnection implements Connection {
     private static DBConnection instance;
 
     private DBConnection() {

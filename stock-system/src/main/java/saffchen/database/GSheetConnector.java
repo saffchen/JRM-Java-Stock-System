@@ -1,4 +1,4 @@
 package saffchen.database;
-public class GSheetConnector implements IConnection {
+public class GSheetConnector implements Connection {
 
 }

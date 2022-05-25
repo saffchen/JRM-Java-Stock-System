@@ -6,11 +6,10 @@ import saffchen.database.FileConnection;
 import saffchen.product.Product;
 import saffchen.utils.FileStorageUtils;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
 
-public class PDFReportFromFile implements IReport {
+public class PDFReportFromFile implements Report {
     private String criteries;
     private String field;
     private FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");

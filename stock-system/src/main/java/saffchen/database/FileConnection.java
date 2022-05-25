@@ -1,6 +1,6 @@
 package saffchen.database;
 
-public class FileConnection implements IConnection {
+public class FileConnection implements Connection {
     private static FileConnection connection;
     private String filePath = null;
     private FileConnection(String path) {
