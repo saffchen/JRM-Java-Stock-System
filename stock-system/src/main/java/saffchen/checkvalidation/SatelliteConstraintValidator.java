@@ -18,11 +18,12 @@ public class SatelliteConstraintValidator implements ConstraintValidator<City, S
         List<String> satellites = new ArrayList<>();
         satellites.add("MOSCOW");
         satellites.add("SAINT-PETERSBURG");
-        boolean namingSatellite = false;
+        boolean isValidSatellite = false;
         for (String s : satellites) {
-            namingSatellite = satelliteCity.equals(s);
-            return namingSatellite;
-        }
-        return namingSatellite;
+            if (s.contains(satelliteCity)){
+                isValidSatellite = s.contains(satelliteCity);
+                break;
+            }
+        } return isValidSatellite;
     }
 }
