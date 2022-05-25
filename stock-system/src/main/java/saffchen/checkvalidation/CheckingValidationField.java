@@ -24,7 +24,7 @@ public class CheckingValidationField {
         System.out.print("Укажите цену продукта: ");
         int price = new Scanner(System.in).nextInt();
         System.out.print("Введите теги: ");
-        String tags = new Scanner(System.in).next().trim();
+        String[] tags = new Scanner(System.in).next().trim().split(",");
         System.out.print("Укажите категорию продукта: ");
         String category = new Scanner(System.in).next().trim();
         System.out.print("Укажите количество продукта: ");
@@ -32,7 +32,7 @@ public class CheckingValidationField {
         System.out.print("Укажите склад на котором хранится продукт: ");
         String satellite = new Scanner(System.in).next().toUpperCase(Locale.ROOT);
 
-        Product additionalProduct = new Product(title, description, price, Collections.singletonList(tags), category,
+        Product additionalProduct = new Product(title, description, price, List.of(tags), category,
                 count, satellite);
 
         Set<ConstraintViolation<Product>> violations = validator.validate(additionalProduct);

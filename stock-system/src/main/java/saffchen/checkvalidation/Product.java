@@ -18,7 +18,7 @@ public class Product {
     private int price;
 
     @NotEmpty(message = "Тег не может быть пустым!")
-    @Size(max = 2, message = "Количество тегов не может быть более 20")
+    @Size(max = 20, message = "Количество тегов не может быть более 20")
     private List<String> tags;
 
     @NotEmpty(message = "Категории не могут быть пустым!")
