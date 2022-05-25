@@ -1,14 +1,14 @@
 package saffchen.command;
 
 public class ShowAllCommand implements Command {
-    private ReceiverDB receiverDB;
+    private Receiver receiver;
 
-    public ShowAllCommand(ReceiverDB receiverDB) {
-        this.receiverDB = receiverDB;
+    public ShowAllCommand(Receiver receiver) {
+        this.receiver = receiver;
     }
 
     @Override
     public void doCommand() {
-        receiverDB.showAll();
+        receiver.showAll();
     }
 }

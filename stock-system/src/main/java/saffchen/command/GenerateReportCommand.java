@@ -1,13 +1,13 @@
 package saffchen.command;
 public class GenerateReportCommand implements Command {
-    private ReceiverDB receiverDB;
+    private Receiver receiver;
 
-    public GenerateReportCommand(ReceiverDB receiverDB) {
-        this.receiverDB = receiverDB;
+    public GenerateReportCommand(Receiver receiver) {
+        this.receiver = receiver;
     }
 
     @Override
     public void doCommand() {
-        receiverDB.createReport();
+        receiver.createReport();
     }
 }

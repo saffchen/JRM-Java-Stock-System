@@ -1,14 +1,14 @@
 package saffchen.command;
 
 public class DeleteCommand implements Command {
-    private ReceiverDB receiverDB;
+    private Receiver receiver;
 
-    public DeleteCommand(ReceiverDB receiverDB) {
-        this.receiverDB = receiverDB;
+    public DeleteCommand(Receiver receiver) {
+        this.receiver = receiver;
     }
 
     @Override
     public void doCommand() {
-        receiverDB.deleteProduct();
+        receiver.deleteProduct();
     }
 }

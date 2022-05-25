@@ -2,14 +2,14 @@ package saffchen.command;
 
 public class ImportFromGSheetCommand implements Command{
 
-    private ReceiverDB receiverDB;
+    private Receiver receiver;
 
-    public ImportFromGSheetCommand(ReceiverDB receiverDB) {
-        this.receiverDB = receiverDB;
+    public ImportFromGSheetCommand(Receiver receiver) {
+        this.receiver = receiver;
     }
 
     @Override
     public void doCommand() {
-        receiverDB.importFromGsheet();
+        receiver.importFromGsheet();
     }
 }

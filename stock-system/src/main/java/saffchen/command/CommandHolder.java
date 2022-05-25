@@ -6,17 +6,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CommandHolder {
-    private final ReceiverDB receiverDB = new ReceiverDB();
+    private final Receiver receiver = new Receiver();
     private final Map<String, Command> commandHolder = new HashMap<>();
 
     public Map<String, Command> getPreparedCommandHolder() {
-        addCommand("ADD_PRODUCT", new AddCommand(receiverDB, new Product()));
-        addCommand("DELETE_PRODUCT", new DeleteCommand(receiverDB));
-        addCommand("MODIFY_PRODUCT", new ModifyCommand(receiverDB));
+        addCommand("ADD_PRODUCT", new AddCommand(receiver, new Product()));
+        addCommand("DELETE_PRODUCT", new DeleteCommand(receiver));
+        addCommand("MODIFY_PRODUCT", new ModifyCommand(receiver));
         addCommand("EXPORT_EXCEL", new CreateXlsFileCommand());
-        addCommand("SHOW_ALL", new ShowAllCommand(receiverDB));
-        addCommand("GENERATE_REPORT", new GenerateReportCommand(receiverDB));
-        addCommand("IMPORT_GSHEET", new ImportFromGSheetCommand(receiverDB));
+        addCommand("SHOW_ALL", new ShowAllCommand(receiver));
+        addCommand("GENERATE_REPORT", new GenerateReportCommand(receiver));
+        addCommand("IMPORT_GSHEET", new ImportFromGSheetCommand(receiver));
         addCommand("EXIT", new ExitCommand());
 
         return this.commandHolder;
