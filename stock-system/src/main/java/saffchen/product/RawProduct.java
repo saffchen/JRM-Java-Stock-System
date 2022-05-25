@@ -96,7 +96,7 @@ public class RawProduct {
     }
 
     public String toCSVString(String sep){
-        return title + sep +
+        return "\n" + title + sep +
                 description + sep +
                 price + sep +
                 tags + sep +
