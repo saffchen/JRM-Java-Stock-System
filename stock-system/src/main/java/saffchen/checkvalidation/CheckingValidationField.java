@@ -5,6 +5,7 @@ import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import org.hibernate.validator.HibernateValidator;
+
 import java.util.*;
 
 public class CheckingValidationField {
@@ -16,20 +17,21 @@ public class CheckingValidationField {
         Validator validator = validatorFactory.getValidator();
 
         System.out.println("*** ADDITIONAL PRODUCT ***");
-        System.out.println("Укажите название продукта: ");
-        String title = new Scanner(System.in).nextLine();
-        System.out.println("Укажите описание продукта: ");
-        String description = new Scanner(System.in).nextLine();
-        System.out.println("Укажите цену продукта: ");
+        System.out.print("Укажите название продукта: ");
+        String title = new Scanner(System.in).next();
+        System.out.print("Укажите описание продукта: ");
+        String description = new Scanner(System.in).next();
+        System.out.print("Укажите цену продукта: ");
         int price = new Scanner(System.in).nextInt();
-        System.out.println("Введите теги");
-        String tags = new Scanner(System.in).nextLine();
-        System.out.println("Укажите категорию продукта: ");
-        String category = new Scanner(System.in).nextLine();
-        System.out.println("Укажите количество продукта: ");
+        System.out.print("Введите теги: ");
+        String tags = new Scanner(System.in).next().trim();
+        System.out.print("Укажите категорию продукта: ");
+        String category = new Scanner(System.in).next().trim();
+        System.out.print("Укажите количество продукта: ");
         int count = new Scanner(System.in).nextInt();
-        System.out.println("Укажите склад на котором хранится продукт: ");
-        String satellite = new Scanner(System.in).nextLine();
+        System.out.print("Укажите склад на котором хранится продукт: ");
+        String satellite = new Scanner(System.in).next().toUpperCase(Locale.ROOT);
+
         Product additionalProduct = new Product(title, description, price, Collections.singletonList(tags), category,
                 count, satellite);
 

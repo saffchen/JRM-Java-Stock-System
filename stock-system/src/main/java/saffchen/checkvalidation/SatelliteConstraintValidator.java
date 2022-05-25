@@ -16,8 +16,8 @@ public class SatelliteConstraintValidator implements ConstraintValidator<City, S
     @Override
     public boolean isValid(String satelliteCity, ConstraintValidatorContext constraintValidatorContext) {
         List<String> satellites = new ArrayList<>();
-        satellites.add("Moscow");
-        satellites.add("Saint-Petersburg");
+        satellites.add("MOSCOW");
+        satellites.add("SAINT-PETERSBURG");
         boolean namingSatellite = false;
         for (String s : satellites) {
             namingSatellite = satelliteCity.equals(s);
