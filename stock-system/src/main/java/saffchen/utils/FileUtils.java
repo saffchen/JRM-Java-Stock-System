@@ -8,7 +8,6 @@ public class FileUtils {
     public static String getBanner() {
         return getInfoFromTxtFile("banner.txt");
     }
-
     public static String getParticipants() {
         return getInfoFromTxtFile("participants.txt");
     }

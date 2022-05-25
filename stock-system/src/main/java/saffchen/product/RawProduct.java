@@ -3,21 +3,21 @@ package saffchen.product;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Product {
+public class RawProduct {
     private String title;
     private String description;
-    private Double price;
-    private List<String> tags;
+    private String price;
+    private String tags ;
     private String category;
-    private Integer count;
+    private String count;
     private String satellite;
 
-    public Product() {
+    public RawProduct() {
 
     }
 
-    public Product(String title, String description, Double price, List<String> tags,
-                   String category, Integer count, String satellite) {
+    public RawProduct(String title, String description, String price, String tags,
+                      String category, String count, String satellite) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -43,15 +43,15 @@ public class Product {
         this.satellite = satellite;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public void setTags(List<String> tags) {
+    public void setTags(String tags) {
         this.tags = tags;
     }
 
-    public void setCount(Integer count) {
+    public void setCount(String count) {
         this.count = count;
     }
 
@@ -63,11 +63,11 @@ public class Product {
         return description;
     }
 
-    public Double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public List<String> getTags() {
+    public String getTags() {
         return tags;
     }
 
@@ -75,7 +75,7 @@ public class Product {
         return category;
     }
 
-    public Integer getCount() {
+    public String getCount() {
         return count;
     }
 
@@ -97,11 +97,12 @@ public class Product {
 
     public String toCSVString(String sep){
         return title + sep +
-               description + sep +
-               price + sep +
-               tags.toString() + sep +
-               category + sep +
-               count + sep +
-               satellite;
+                description + sep +
+                price + sep +
+                tags + sep +
+                category + sep +
+                count + sep +
+                satellite;
     }
+
 }
