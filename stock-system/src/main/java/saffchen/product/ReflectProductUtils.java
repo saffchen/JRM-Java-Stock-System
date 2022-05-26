@@ -1,9 +1,6 @@
 package saffchen.product;
 
-import saffchen.utils.FileStorageUtils;
-
 import java.beans.IntrospectionException;
-import java.beans.ParameterDescriptor;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -16,7 +13,7 @@ public class ReflectProductUtils {
             PropertyDescriptor pd = new PropertyDescriptor(fieldName, product.getClass());
             pd.getWriteMethod().invoke(product, value);
         } catch (IntrospectionException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            System.out.println("Error: Can't invoke the setter");
+            System.err.println("Error: Can't invoke the setter");
         }
     }
 
@@ -25,8 +22,8 @@ public class ReflectProductUtils {
         try {
             pd = new PropertyDescriptor(fieldName, product.getClass());
             System.out.println(pd.getDisplayName() + "- " + pd.getReadMethod().invoke(product));
-        } catch (IntrospectionException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            System.out.println("Error: Can't invoke the getter");
+        } catch (IntrospectionException | ReflectiveOperationException | IllegalArgumentException e) {
+            System.err.println("Error: Can't invoke the getter");
         }
     }
 
@@ -41,7 +38,7 @@ public class ReflectProductUtils {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Error: Can't get the field names");
+            System.err.println("Error: Can't get the field names");
         }
         return fields;
     }
