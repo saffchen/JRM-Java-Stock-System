@@ -20,8 +20,11 @@ public class CheckingValidationField {
         boolean isValidProduct = true;
         while (isValidProduct) {
             System.out.println("*** ADDITIONAL PRODUCT ***");
+            System.out.println("Введите продукт или exit для того, чтобы выйти в главное меню");
             System.out.print("Укажите название продукта: ");
             String title = new Scanner(System.in).next();
+            if (title.equals("EXIT"))
+                break;
             System.out.print("Укажите описание продукта: ");
             String description = new Scanner(System.in).next();
             System.out.print("Укажите цену продукта: ");
@@ -53,7 +56,7 @@ public class CheckingValidationField {
             Set<ConstraintViolation<Product>> violations = validator.validate(product);
             for (ConstraintViolation<Product> warning : violations) {
                 System.out.println(warning.getMessage());
-                if (warning.getMessage().contains("быть")){
+                if (warning.getMessage().contains("быть")) {
                     isValidProduct = true;
                 }
             }
