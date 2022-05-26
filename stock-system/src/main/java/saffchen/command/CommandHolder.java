@@ -13,8 +13,8 @@ public class CommandHolder {
         addCommand("DELETE_PRODUCT", new DeleteCommand(receiver));
         addCommand("MODIFY_PRODUCT", new ModifyCommand(receiver));
         addCommand("EXPORT_EXCEL", new CreateXlsFileCommand());
-        addCommand("SHOW_ALL", new ShowAllCommand(receiver));
-        addCommand("GENERATE_REPORT", new GenerateReportCommand(receiver));
+        addCommand("SHOW_ALL", new ShowAllCommand());
+        addCommand("GENERATE_REPORT", new GenerateReportCommand());
         addCommand("IMPORT_GSHEET", new ImportFromGSheetCommand(receiver));
         addCommand("EXIT", new ExitCommand());
 

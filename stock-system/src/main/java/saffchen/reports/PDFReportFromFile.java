@@ -14,13 +14,6 @@ public class PDFReportFromFile implements Report {
     private String field;
     private FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
     private FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
-    private final static String TITLE = "TITLE";
-    private final static String DESCRIPTION = "DESCRIPTION";
-    private final static String PRICE = "PRICE";
-    private final static String TAGS = "TAGS";
-    private final static String CATEGORY = "CATEGORY";
-    private final static String COUNT = "COUNT";
-    private final static String SATELLITE = "SATELLITE";
 
     private final Font reportHeader = FontFactory.getFont(FontFactory.COURIER, 20, Font.BOLD,
             new CMYKColor(0, 255, 0, 0));
@@ -76,7 +69,7 @@ public class PDFReportFromFile implements Report {
                     new FileOutputStream("reportBy" + field + ".pdf"));
             document.open();
             document.add(new Paragraph("Found Products (by "
-                    + field +" with criteria \""
+                    + field + " with criteria \""
                     + criteries + "\")", reportHeader));
 
             PdfPTable table = drawTable(7);

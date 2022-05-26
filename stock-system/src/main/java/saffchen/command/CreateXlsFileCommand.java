@@ -26,7 +26,7 @@ public class CreateXlsFileCommand implements Command {
         System.out.println("Укажите название файла");
         System.out.println("Имя файла не должно содержать символы: /, |, ?, *, :, <, >");
         String name;
-        List <String> notAcceptSymbols = new ArrayList<>();
+        List<String> notAcceptSymbols = new ArrayList<>();
         notAcceptSymbols.add("/");
         notAcceptSymbols.add("|");
         notAcceptSymbols.add("?");
@@ -59,14 +59,12 @@ public class CreateXlsFileCommand implements Command {
         book.write(new FileOutputStream(path));
         book.close();
     }
+
     //проверяем исключения
-    public static boolean checkDefinition(List<String> notAcceptSymbols, String name)
-    {
+    public static boolean checkDefinition(List<String> notAcceptSymbols, String name) {
         boolean check = false;
-        for(int i = 0; i < notAcceptSymbols.size(); i++)
-        {
-            if(name.contains(notAcceptSymbols.get(i)))
-            {
+        for (int i = 0; i < notAcceptSymbols.size(); i++) {
+            if (name.contains(notAcceptSymbols.get(i))) {
                 check = name.contains(notAcceptSymbols.get(i));
                 break;
             } else check = false;

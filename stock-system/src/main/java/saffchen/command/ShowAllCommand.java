@@ -1,14 +1,13 @@
 package saffchen.command;
 
+import saffchen.database.FileConnection;
+import saffchen.utils.FileStorageUtils;
+
 public class ShowAllCommand implements Command {
-    private Receiver receiver;
-
-    public ShowAllCommand(Receiver receiver) {
-        this.receiver = receiver;
-    }
-
     @Override
     public void doCommand() {
-        receiver.showAll();
+        FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
+        FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
+        fileStorageUtils.showAllProducts();
     }
 }
