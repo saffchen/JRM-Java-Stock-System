@@ -18,28 +18,18 @@ import static saffchen.export_excel.CreateExcel.SPEADSHEET_ID;
 import static saffchen.export_excel.CreateExcel.getSheetsService;
 
 public class CreateXlsFileCommand implements Command {
+    private static final List <String> DEPRECATED_SYMBOLS = List.of("/", "|", "?", "*", "<", ">", "!");
 
     @Override
     public void doCommand() throws GeneralSecurityException, IOException {
         System.out.println("Укажите путь, где будет храниться файл");
         String filePath = new Scanner(System.in).nextLine();
-        System.out.println("Укажите название файла");
-        System.out.println("Имя файла не должно содержать символы: /, |, ?, *, :, <, >");
         String name;
-        List<String> notAcceptSymbols = new ArrayList<>();
-        notAcceptSymbols.add("/");
-        notAcceptSymbols.add("|");
-        notAcceptSymbols.add("?");
-        notAcceptSymbols.add("*");
-        notAcceptSymbols.add(":");
-        notAcceptSymbols.add(">");
-        notAcceptSymbols.add("<");
-        //проверяем исключения
         do {
-            System.out.println("Ошибка, введите название корректно");
-            System.out.println("Имя файла не должно содержать: /, |, ?, *, :, <, >");
+            System.out.println("Укажите название файла");
+            System.out.println("Имя файла не должно содержать символы: " + DEPRECATED_SYMBOLS);
             name = new Scanner(System.in).nextLine();
-        } while (checkDefinition(notAcceptSymbols, name));
+        } while (!isNameCorrect(name));
         String path = filePath + name + ".xls";
         Sheets sheetsService = getSheetsService();
         String range = "Sheet1!A1:Z1000";
@@ -61,14 +51,13 @@ public class CreateXlsFileCommand implements Command {
     }
 
     //проверяем исключения
-    public static boolean checkDefinition(List<String> notAcceptSymbols, String name) {
-        boolean check = false;
-        for (int i = 0; i < notAcceptSymbols.size(); i++) {
-            if (name.contains(notAcceptSymbols.get(i))) {
-                check = name.contains(notAcceptSymbols.get(i));
-                break;
-            } else check = false;
+    private boolean isNameCorrect(String name) {
+        for (String deprecatedSymbol: DEPRECATED_SYMBOLS) {
+            if (name.contains(deprecatedSymbol)) {
+                System.err.println("Ошибка, введите название корректно!");
+                return false;
+            }
         }
-        return check;
+        return true;
     }
 }
