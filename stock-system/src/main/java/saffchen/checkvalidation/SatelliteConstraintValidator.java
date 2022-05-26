@@ -7,23 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SatelliteConstraintValidator implements ConstraintValidator<City, String> {
-
-    @Override
-    public void initialize(City constraintAnnotation) {
-
-    }
+    private static final List<String> SATELLITE = List.of("MOSCOW", "SAINT-PETERSBURG");
 
     @Override
     public boolean isValid(String satelliteCity, ConstraintValidatorContext constraintValidatorContext) {
-        List<String> satellites = new ArrayList<>();
-        satellites.add("MOSCOW");
-        satellites.add("SAINT-PETERSBURG");
         boolean isValidSatellite = false;
-        for (String s : satellites) {
-            if (s.contains(satelliteCity)){
-                isValidSatellite = s.contains(satelliteCity);
+        for (String satellite : SATELLITE) {
+            if (satellite.contains(satelliteCity)) {
+                isValidSatellite = satellite.contains(satelliteCity);
                 break;
             }
-        } return isValidSatellite;
+        }
+        return isValidSatellite;
     }
 }

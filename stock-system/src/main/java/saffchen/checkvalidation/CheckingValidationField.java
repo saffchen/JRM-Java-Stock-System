@@ -16,14 +16,14 @@ public class CheckingValidationField {
                 .buildValidatorFactory();
         Validator validator = validatorFactory.getValidator();
         Product product;
+        System.out.println("*** ADDITIONAL PRODUCT ***");
 
         boolean isValidProduct = true;
         while (isValidProduct) {
-            System.out.println("*** ADDITIONAL PRODUCT ***");
             System.out.println("Введите продукт или exit для того, чтобы выйти в главное меню");
             System.out.print("Укажите название продукта: ");
             String title = new Scanner(System.in).next();
-            if (title.equals("EXIT"))
+            if (title.equals("exit"))
                 break;
             System.out.print("Укажите описание продукта: ");
             String description = new Scanner(System.in).next();
@@ -32,7 +32,7 @@ public class CheckingValidationField {
             try {
                 price = new Scanner(System.in).nextInt();
             } catch (Exception e) {
-                System.out.println("Вы ввели некорректное значение. Пожалуйста заполните продукт заново.");
+                System.err.println("Вы ввели некорректное значение. Пожалуйста заполните продукт заново.");
                 continue;
             }
             System.out.print("Введите теги (Теги заполняются через запятую, без пробелов): ");
@@ -44,7 +44,7 @@ public class CheckingValidationField {
             try {
                 count = new Scanner(System.in).nextInt();
             } catch (Exception e) {
-                System.out.println("Вы ввели некорректное значение. Пожалуйста заполните продукт заново. ");
+                System.err.println("Вы ввели некорректное значение. Пожалуйста заполните продукт заново. ");
                 continue;
             }
             System.out.print("Укажите склад на котором хранится продукт: ");
@@ -52,11 +52,12 @@ public class CheckingValidationField {
 
             product = new Product(title, description, price, List.of(tags), category,
                     count, satellite);
+
             isValidProduct = false;
             Set<ConstraintViolation<Product>> violations = validator.validate(product);
             for (ConstraintViolation<Product> warning : violations) {
-                System.out.println(warning.getMessage());
-                if (warning.getMessage().contains("быть")) {
+                System.err.println(warning.getMessage());
+                if (warning.getMessage().contains("!")) {
                     isValidProduct = true;
                 }
             }
