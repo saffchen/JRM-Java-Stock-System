@@ -58,7 +58,6 @@ public class PDFReportFromFile implements Report {
 
     @Override
     public void generateReport() throws Exception {
-        //List<Product> tableData = fileStorageUtils.getDataForReportBySatelliteFromCSV("Satellite", criteries);
         List<Product> tableData = fileStorageUtils.getDataForReportFromCSV(field, criteries);
 
         Document document = new Document();
