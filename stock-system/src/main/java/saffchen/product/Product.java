@@ -96,7 +96,7 @@ public class Product {
     }
 
     public String toCSVString(String sep){
-        return "\n"+title + sep +
+        return "\n" + title + sep +
                description + sep +
                price + sep +
                tags.toString() + sep +

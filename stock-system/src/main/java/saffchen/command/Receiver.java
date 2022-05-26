@@ -29,11 +29,38 @@ public class Receiver {
     }
 
     public void modifyProduct() {
-        System.out.println("Modified the product...");
+        FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
+        FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
+        fileStorageUtils.modifyProduct(new Product("Test record",
+                        "Description for test record",
+                        1200d,
+                        Arrays.asList("test1 tag", "test2 tag"),
+                        "test category",
+                        6,
+                        "Ekaterinburg"
+                ), new Product("Test record",
+                "Modified Description for test record",
+                1200d,
+                Arrays.asList("test1 tag", "test2 tag"),
+                "test category",
+                6,
+                "Modified Ekaterinburg")
+        );
     }
 
     public void deleteProduct() {
-        System.out.println("Deleting the product...");
+
+        FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
+        FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
+        fileStorageUtils.deleteProduct(new Product("Test record",
+                        "Description for test record",
+                        1200d,
+                        Arrays.asList("test1 tag", "test2 tag"),
+                        "test category",
+                        6,
+                        "Ekaterinburg"
+                )
+        );
     }
 
     public void showAll() {
