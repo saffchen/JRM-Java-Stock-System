@@ -17,15 +17,7 @@ public class Receiver {
     void addProduct(Product product) {
         FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
         FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
-        fileStorageUtils.addProduct(new Product("Test record",
-                        "Description for test record",
-                        1200d,
-                        Arrays.asList("test1 tag", "test2 tag"),
-                        "test category",
-                        6,
-                        "Ekaterinburg"
-                )
-        );
+        fileStorageUtils.addProduct(new Product());
     }
 
     public void modifyProduct() {
