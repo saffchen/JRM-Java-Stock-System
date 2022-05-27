@@ -3,9 +3,10 @@ package saffchen.command;
 import saffchen.product.Product;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class CommandHolder {
-    private final Map<String, Command> commandHolder = new HashMap<>();
+    private final Map<String, Command> commandHolder = new TreeMap<>();
 
     public Map<String, Command> getPreparedCommandHolder(){
         addCommand("ADD_PRODUCT", new AddCommand(new Product()));
