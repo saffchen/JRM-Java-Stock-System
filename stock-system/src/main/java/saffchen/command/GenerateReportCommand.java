@@ -11,7 +11,7 @@ public class GenerateReportCommand implements Command {
 
     @Override
     public String getInfo() {
-        return "* Write an \"generate_report\" if you want to save pdf file with all positions";
+        return "* Write a \"generate_report\" if you want to save pdf file with all positions";
     }
 
     private boolean isExit(String header){
