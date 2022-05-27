@@ -71,12 +71,12 @@ public class FileStorageUtils implements StorageUtils {
     }
 
     @Override
-    public void deleteProduct() {
+    public void deleteProduct(Product product) {
 
     }
 
     @Override
-    public void modifyProduct() {
+    public void modifyProduct(Product productBefore, Product productAfter) {
 
     }
 
