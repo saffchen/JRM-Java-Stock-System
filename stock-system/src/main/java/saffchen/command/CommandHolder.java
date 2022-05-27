@@ -34,6 +34,6 @@ public class CommandHolder {
         for(Map.Entry<String, Command> entry : this.getPreparedCommandHolder().entrySet()){
             System.out.println(entry.getValue().getInfo());
         }
-        System.out.println("*******************************************************************************\n");
+        System.out.println("\n*******************************************************************************\n");
     }
 }
