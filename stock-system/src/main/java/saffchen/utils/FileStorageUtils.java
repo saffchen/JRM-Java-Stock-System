@@ -1,7 +1,12 @@
 package saffchen.utils;
 
-import com.opencsv.*;
-import com.opencsv.bean.*;
+import com.opencsv.CSVParser;
+import com.opencsv.CSVParserBuilder;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
+import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
+import com.opencsv.bean.HeaderColumnNameTranslateMappingStrategy;
 import saffchen.database.FileConnection;
 import saffchen.product.Product;
 import saffchen.product.ProductAdapter;
@@ -9,9 +14,14 @@ import saffchen.product.RawProduct;
 import saffchen.product.ReflectProductUtils;
 
 import java.beans.PropertyDescriptor;
-
-import java.io.*;
-import java.util.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -25,7 +35,8 @@ public class FileStorageUtils implements StorageUtils {
     public List<String> getHeadersFromCSV() {
         List<String> headers = null;
         try {
-            CSVParser parser = new CSVParserBuilder().withSeparator(';').build();
+            CSVParser parser = new CSVParserBuilder().withSeparator(';')
+                    .build();
             CSVReader csvReader = new CSVReaderBuilder(new FileReader(fileConnection.getFilePath()))
                     .withCSVParser(parser)
                     .build();
@@ -46,21 +57,20 @@ public class FileStorageUtils implements StorageUtils {
         RawProduct rawProduct = new ProductAdapter(product).setDataToRawProduct();
         FileWriter productToCsv = null;
         try {
-            productToCsv = new FileWriter(fileConnection.getFilePath(),true);
+            productToCsv = new FileWriter(fileConnection.getFilePath(), true);
             productToCsv.write(rawProduct.toCSVString(";"));
             productToCsv.close();
 
             System.out.println(rawProduct.showInfo());
             System.out.println("Product was added to database successfully!");
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Error: Can't write data");
             try {
                 productToCsv.close();
             } catch (IOException ioException) {
                 System.out.println("");
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Error: Can't write data");
             try {
                 productToCsv.close();
@@ -71,8 +81,44 @@ public class FileStorageUtils implements StorageUtils {
     }
 
     @Override
-    public void deleteProduct() {
+    public void deleteProduct(Product product) {
+        List<RawProduct> updatedProducts = new ArrayList<>();
+        try {
+            CsvToBean<RawProduct> csvToBean = getCSVParser();
+            List<RawProduct> products = csvToBean.parse();
+            updatedProducts = products.stream()
+                    .map(x -> new ProductAdapter(x).getProduct())
+                    .filter(x -> !x.equals(product))
+                    .map(x -> new ProductAdapter(x).setDataToRawProduct())
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            System.out.println("Error: Can't get the data! Try again!");
+        }
 
+        FileWriter productToCsv = null;
+        try {
+            productToCsv = new FileWriter(fileConnection.getFilePath(), true);
+            for (RawProduct rawProduct : updatedProducts) {
+                productToCsv.write(rawProduct.toCSVString(";"));
+            }
+            productToCsv.close();
+
+            System.out.println("Product was deleted from database successfully!");
+        } catch (IOException e) {
+            System.out.println("Error: Can't write data");
+            try {
+                productToCsv.close();
+            } catch (IOException ioException) {
+                System.out.println("");
+            }
+        } catch (Exception e) {
+            System.out.println("Error: Can't write data");
+            try {
+                productToCsv.close();
+            } catch (IOException ioException) {
+                System.out.println("");
+            }
+        }
     }
 
     @Override
@@ -81,13 +127,31 @@ public class FileStorageUtils implements StorageUtils {
     }
 
     @Override
+    public Product getProductByTitle(String title) {
+        try {
+            CsvToBean<RawProduct> csvToBean = getCSVParser();
+            List<RawProduct> products = csvToBean.parse();
+            return products.stream()
+                    .map(x -> new ProductAdapter(x).getProduct())
+                    .filter(x -> x.getTitle()
+                            .equals(title))
+                    .findAny()
+                    .orElse(null);
+        } catch (Exception e) {
+            System.out.println("Error: Can't get the data! Try again!");
+            return null;
+        }
+    }
+
+    @Override
     public void showAllProducts() {
         try {
             CsvToBean<RawProduct> csvToBean = getCSVParser();
-            List<RawProduct> prdcts = csvToBean.parse();
-            for (RawProduct product : prdcts) {
+            List<RawProduct> products = csvToBean.parse();
+            for (RawProduct product : products) {
                 ProductAdapter productAdapter = new ProductAdapter(product);
-                System.out.println(productAdapter.getProduct().showInfo());
+                System.out.println(productAdapter.getProduct()
+                        .showInfo());
             }
         } catch (Exception e) {
             System.out.println("Error: Can't get the data! Try again!");
@@ -141,14 +205,17 @@ public class FileStorageUtils implements StorageUtils {
 
                 pd = new PropertyDescriptor(header, product.getClass());
 
-                fieldName = pd.getReadMethod().invoke(product).toString().trim().toUpperCase();
+                fieldName = pd.getReadMethod()
+                        .invoke(product)
+                        .toString()
+                        .trim()
+                        .toUpperCase();
                 if (fieldName.contains(criteries)) {
                     ProductAdapter productAdapter = new ProductAdapter(product);
                     products.add(productAdapter.getProduct());
                     //System.out.println(product.getTitle() + ":" + product.getDescription() + ":" + product.getPrice());
                 }
             }
-
         } catch (FileNotFoundException e) {
             System.out.println("Error: Can't find the database file");
         } catch (IOException e) {

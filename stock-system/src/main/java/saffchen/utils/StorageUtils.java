@@ -8,10 +8,12 @@ public interface StorageUtils {
 
     public void addProduct(Product product);
 
-    public void deleteProduct();
+    public void deleteProduct(Product product);
 
     public void modifyProduct();
 
     public void showAllProducts();
+
+    public Product getProductByTitle(String title);
 
 }

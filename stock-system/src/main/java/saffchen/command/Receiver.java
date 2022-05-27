@@ -32,14 +32,23 @@ public class Receiver {
         System.out.println("Modified the product...");
     }
 
-    public void deleteProduct() {
-        System.out.println("Deleting the product...");
+    public void deleteProduct(Product product) {
+        System.out.printf("Deleting the product %s%n", product.getTitle());
+        FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
+        FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
+        fileStorageUtils.deleteProduct(product);
     }
 
     public void showAll() {
         FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
         FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
         fileStorageUtils.showAllProducts();
+    }
+
+    public Product getProductByTitle(String title) {
+        FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
+        FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
+        return fileStorageUtils.getProductByTitle(title);
     }
 
     public void importFromGsheet(){
