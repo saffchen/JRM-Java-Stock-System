@@ -17,7 +17,7 @@ public class ModifyCommand implements Command {
     public void doCommand() {
         FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
         FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
-        fileStorageUtils.modifyProduct(new Product("Test record",
+        fileStorageUtils.modifyProduct(new Product("Test record Modified",
                         "Description for test record",
                         1200d,
                         Arrays.asList("test1 tag", "test2 tag"),
