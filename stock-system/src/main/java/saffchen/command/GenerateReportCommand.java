@@ -4,6 +4,7 @@ import saffchen.database.FileConnection;
 import saffchen.reports.PDFReportFromFile;
 import saffchen.utils.FileStorageUtils;
 
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class GenerateReportCommand implements Command {
@@ -14,7 +15,7 @@ public class GenerateReportCommand implements Command {
     }
 
     private boolean isExit(String header){
-        return (header.trim().toUpperCase().equals("EXIT"))?true:false;
+        return !(header.trim().toUpperCase().equals("EXIT"))?true:false;
     }
 
     @Override
