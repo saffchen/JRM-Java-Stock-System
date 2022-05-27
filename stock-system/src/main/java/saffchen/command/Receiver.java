@@ -33,10 +33,7 @@ public class Receiver {
     }
 
     public void deleteProduct(Product product) {
-        System.out.printf("Deleting the product %s%n", product.getTitle());
-        FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
-        FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
-        fileStorageUtils.deleteProduct(product);
+
     }
 
     public void showAll() {

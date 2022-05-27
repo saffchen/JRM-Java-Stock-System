@@ -10,7 +10,7 @@ public class CommandHolder {
 
     public Map<String, Command> getPreparedCommandHolder(){
         addCommand("ADD_PRODUCT", new AddCommand(receiver, new Product()));
-        addCommand("DELETE_PRODUCT", new DeleteCommand(receiver));
+        addCommand("DELETE_PRODUCT", new DeleteCommand());
         addCommand("MODIFY_PRODUCT", new ModifyCommand(receiver));
         addCommand("EXPORT_EXCEL", new CreateXlsFileCommand());
         addCommand("SHOW_ALL", new ShowAllCommand(receiver));
