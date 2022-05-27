@@ -13,10 +13,14 @@ public class AddCommand implements Command {
 
     @Override
     public void doCommand() {
-
         FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
         FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
         fileStorageUtils.addProduct(new Product());
+    }
+
+    @Override
+    public String getInfo(){
+        return "2 Write an \"add_product\" if you want to additional product";
     }
 
 }

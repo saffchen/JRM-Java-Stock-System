@@ -9,6 +9,11 @@ import java.util.Scanner;
 public class GenerateReportCommand implements Command {
 
     @Override
+    public String getInfo() {
+        return "10 Write an \"generate_report\" if you want to save pdf file with all positions\n";
+    }
+
+    @Override
     public void doCommand() {
         Scanner scanner = new Scanner(System.in);
         FileStorageUtils fileStorageUtils = new FileStorageUtils(

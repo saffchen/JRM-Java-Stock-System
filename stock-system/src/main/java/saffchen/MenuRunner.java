@@ -1,7 +1,6 @@
 package saffchen;
 
 import saffchen.command.*;
-import saffchen.greeting_message.GreetingMessage;
 import saffchen.utils.*;
 
 
@@ -11,13 +10,12 @@ import java.util.Scanner;
 public class MenuRunner {
     public static void main(String[] args) {
         CommandHolder holder = new CommandHolder();
-        GreetingMessage message = new GreetingMessage();
         Scanner scanner = new Scanner(System.in);
 
         System.out.println(FileUtils.getBanner());
         System.out.println(FileUtils.getParticipants());
 
-        message.printGreetingMessages();
+        holder.printCommandInfo();
 
         String inputCommand = "";
         while (true) {
