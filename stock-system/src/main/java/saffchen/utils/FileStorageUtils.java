@@ -72,12 +72,41 @@ public class FileStorageUtils implements StorageUtils {
 
     @Override
     public void deleteProduct(Product product) {
+        List<RawProduct> tempRawProducts = new ArrayList<>();
+        try {
+            RawProduct rawProduct = new ProductAdapter(product).setDataToRawProduct();
+            CsvToBean<RawProduct> csvToBean = getCSVParser();
+            List<RawProduct> prdcts = csvToBean.parse();
+            for (RawProduct prdct : prdcts) {
+                if (!prdct.equals(rawProduct))
+                    tempRawProducts.add(prdct);
+            }
+            addRawProductsFromListToCSV(tempRawProducts);
+        } catch (Exception e) {
+            System.out.println("Error: Can't get the data! Try again!");
+        }
 
     }
 
     @Override
     public void modifyProduct(Product productBefore, Product productAfter) {
+        List<RawProduct> tempRawProducts = new ArrayList<>();
+        try {
+            RawProduct rawProductBefore = new ProductAdapter(productBefore).setDataToRawProduct();
+            RawProduct rawProductAfter = new ProductAdapter(productAfter).setDataToRawProduct();
+            CsvToBean<RawProduct> csvToBean = getCSVParser();
+            List<RawProduct> prdcts = csvToBean.parse();
 
+            for (RawProduct prdct : prdcts) {
+                if (!prdct.equals(rawProductBefore))
+                    tempRawProducts.add(prdct);
+                else
+                    tempRawProducts.add(rawProductAfter);
+            }
+            addRawProductsFromListToCSV(tempRawProducts);
+        } catch (Exception e) {
+            System.out.println("Error: Can't get the data! Try again!");
+        }
     }
 
     @Override
