@@ -1,14 +1,15 @@
 package saffchen.command;
 
-public class DeleteCommand implements Command {
+public class ImportFromGSheetCommand implements Command{
+
     private Receiver receiver;
 
-    public DeleteCommand(Receiver receiver) {
+    public ImportFromGSheetCommand(Receiver receiver) {
         this.receiver = receiver;
     }
 
     @Override
     public void doCommand() {
-        receiver.deleteProduct();
+        receiver.importFromGsheet();
     }
 }

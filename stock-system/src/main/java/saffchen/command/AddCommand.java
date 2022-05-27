@@ -3,16 +3,17 @@ package saffchen.command;
 import saffchen.product.Product;
 
 public class AddCommand implements Command {
-    private ReceiverDB receiverDB;
+    private Receiver receiver;
     private Product product;
 
-    public AddCommand(ReceiverDB receiverDB, Product product) {
-        this.receiverDB = receiverDB;
+    public AddCommand(Receiver receiver, Product product) {
+        this.receiver = receiver;
         this.product = product;
     }
 
     @Override
     public void doCommand() {
-        receiverDB.addProduct(product);
+        receiver.addProduct(product);
     }
+
 }

@@ -1,5 +1,5 @@
 package saffchen.database;
 
-public interface DBWorker {
+public interface Connection {
 
 }

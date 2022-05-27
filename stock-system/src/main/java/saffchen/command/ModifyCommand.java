@@ -1,14 +1,14 @@
 package saffchen.command;
 
 public class ModifyCommand implements Command {
-    private ReceiverDB receiverDB;
+    private Receiver receiver;
 
-    public ModifyCommand(ReceiverDB receiverDB) {
-        this.receiverDB = receiverDB;
+    public ModifyCommand(Receiver receiver) {
+        this.receiver = receiver;
     }
 
     @Override
     public void doCommand() {
-        receiverDB.modifyProduct();
+        receiver.modifyProduct();
     }
 }

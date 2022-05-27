@@ -1,9 +1,7 @@
 package saffchen;
 
 import saffchen.command.*;
-import saffchen.command.ReceiverDB;
 import saffchen.greeting_message.GreetingMessage;
-import saffchen.product.Product;
 import saffchen.utils.*;
 
 
