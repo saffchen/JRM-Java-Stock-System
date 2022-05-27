@@ -11,6 +11,11 @@ import java.io.InputStreamReader;
 public class DeleteCommand implements Command {
 
     @Override
+    public String getInfo() {
+        return "* Write an \"delete_product\" if you want to delete product";
+    }
+
+    @Override
     public void doCommand() throws IOException {
         System.out.println("Введите имя продукта, который вы хотите удалить/Please, input the product name for deletion");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -18,7 +23,6 @@ public class DeleteCommand implements Command {
         FileStorageUtils fileStorageUtils = null;
         assert false;
         Product product = fileStorageUtils.getProductByTitle(title);
-        ;
         if (product == null) {
             System.out.printf("Данный продукт %s не найден/There is no %s product%n", title);
         } else {
