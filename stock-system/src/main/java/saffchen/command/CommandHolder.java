@@ -9,9 +9,9 @@ public class CommandHolder {
     private final Map<String, Command> commandHolder = new HashMap<>();
 
     public Map<String, Command> getPreparedCommandHolder(){
-        addCommand("ADD_PRODUCT", new AddCommand(receiver, new Product()));
-        addCommand("DELETE_PRODUCT", new DeleteCommand(receiver));
-        addCommand("MODIFY_PRODUCT", new ModifyCommand(receiver));
+        addCommand("ADD_PRODUCT", new AddCommand(new Product()));
+        addCommand("DELETE_PRODUCT", new DeleteCommand());
+        addCommand("MODIFY_PRODUCT", new ModifyCommand());
         addCommand("EXPORT_EXCEL", new CreateXlsFileCommand());
         addCommand("SHOW_ALL", new ShowAllCommand());
         addCommand("GENERATE_REPORT", new GenerateReportCommand());

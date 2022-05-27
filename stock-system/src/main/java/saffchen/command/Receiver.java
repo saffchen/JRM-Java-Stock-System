@@ -15,9 +15,7 @@ import java.util.Scanner;
 public class Receiver {
 
     void addProduct(Product product) {
-        FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
-        FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
-        fileStorageUtils.addProduct(new Product());
+
     }
 
     public void modifyProduct() {

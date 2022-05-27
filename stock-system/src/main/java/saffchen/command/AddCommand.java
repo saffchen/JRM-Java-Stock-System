@@ -1,19 +1,22 @@
 package saffchen.command;
 
+import saffchen.database.FileConnection;
 import saffchen.product.Product;
+import saffchen.utils.FileStorageUtils;
 
 public class AddCommand implements Command {
-    private Receiver receiver;
     private Product product;
 
-    public AddCommand(Receiver receiver, Product product) {
-        this.receiver = receiver;
+    public AddCommand(Product product) {
         this.product = product;
     }
 
     @Override
     public void doCommand() {
-        receiver.addProduct(product);
+
+        FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
+        FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
+        fileStorageUtils.addProduct(new Product());
     }
 
 }
