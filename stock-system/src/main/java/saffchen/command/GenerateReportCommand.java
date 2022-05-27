@@ -49,7 +49,7 @@ public class GenerateReportCommand implements Command {
                     PDFReportFromFile report = new PDFReportFromFile(header, criteria);
                     report.generateReport();
                 } catch (Exception e) {
-                    System.out.println("Error: Can't create the report! Try again!");
+                    System.out.println("Error: Can't create the report! Enter correct criteries and try again!");
                 }
             }
         }
