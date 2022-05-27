@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class DeleteCommand implements Command {
 
     public String getInfo(){
-        return "4 Write an \"delete_product\" if you want to delete product";
+        return "* Write an \"delete_product\" if you want to delete product";
     }
 
     @Override

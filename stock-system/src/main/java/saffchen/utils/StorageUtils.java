@@ -4,7 +4,6 @@ import saffchen.database.Connection;
 import saffchen.product.Product;
 
 public interface StorageUtils {
-    Connection CONNECTION = null;
 
     public void addProduct(Product product);
 

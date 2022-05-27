@@ -6,7 +6,7 @@ import saffchen.utils.FileStorageUtils;
 public class ShowAllCommand implements Command {
     @Override
     public String getInfo() {
-        return "5 Write an \"show_all\" if you want to view all positions";
+        return "* Write an \"show_all\" if you want to view all positions";
     }
 
     @Override
