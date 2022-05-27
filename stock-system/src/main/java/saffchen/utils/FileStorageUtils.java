@@ -35,7 +35,6 @@ public class FileStorageUtils implements StorageUtils {
             e.printStackTrace();
             System.out.println("Error: Can't get the headers. Try again!");
         }
-
         return headers;
     }
 
@@ -93,7 +92,10 @@ public class FileStorageUtils implements StorageUtils {
         try {
             CsvToBean<RawProduct> csvToBean = getCSVParser();
             List<RawProduct> products = csvToBean.parse();
-            updatedProducts = products.stream().map(x -> new ProductAdapter(x).getProduct()).filter(x -> !x.equals(product)).map(x -> new ProductAdapter(x).setDataToRawProduct()).collect(Collectors.toList());
+            updatedProducts = products.stream().map
+                            (x -> new ProductAdapter(x).getProduct())
+                    .filter(x -> !x.equals(product))
+                    .map(x -> new ProductAdapter(x).setDataToRawProduct()).collect(Collectors.toList());
         } catch (Exception e) {
             System.out.println("Error: Can't get the data! Try again!");
         }
@@ -184,7 +186,6 @@ public class FileStorageUtils implements StorageUtils {
 
         CsvToBean<RawProduct> csvToBean = new CsvToBeanBuilder<RawProduct>(new FileReader(fileConnection.getFilePath())).withType(RawProduct.class).withSeparator(';').withIgnoreLeadingWhiteSpace(true).withIgnoreEmptyLine(true).withMappingStrategy(strategy).build();
 
-
         return csvToBean;
     }
 
@@ -198,10 +199,7 @@ public class FileStorageUtils implements StorageUtils {
             String fieldName;
             PropertyDescriptor pd;
 
-
             for (RawProduct product : prdcts) {
-                //title = product.getTitle().trim().toUpperCase();
-
                 pd = new PropertyDescriptor(header, product.getClass());
 
                 fieldName = pd.getReadMethod().invoke(product).toString().trim().toUpperCase();
