@@ -1,14 +1,18 @@
 package saffchen.command;
 
-public class ShowAllCommand implements Command{
-    private ReceiverDB receiverDB;
+import saffchen.database.FileConnection;
+import saffchen.utils.FileStorageUtils;
 
-    public ShowAllCommand(ReceiverDB receiverDB) {
-        this.receiverDB = receiverDB;
+public class ShowAllCommand implements Command {
+    @Override
+    public String getInfo() {
+        return "* Write an \"show_all\" if you want to view all positions";
     }
 
     @Override
     public void doCommand() {
-        receiverDB.show_all();
+        FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
+        FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
+        fileStorageUtils.showAllProducts();
     }
 }

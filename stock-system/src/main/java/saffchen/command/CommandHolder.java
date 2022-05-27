@@ -1,19 +1,40 @@
 package saffchen.command;
 
+import saffchen.product.Product;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class CommandHolder {
-    public Map<String, Command> getCommandHolder() {
-        return commandHolder;
+    private final Map<String, Command> commandHolder = new TreeMap<>();
+
+    public Map<String, Command> getPreparedCommandHolder(){
+        addCommand("ADD_PRODUCT", new AddCommand(new Product()));
+        addCommand("DELETE_PRODUCT", new DeleteCommand());
+        addCommand("MODIFY_PRODUCT", new ModifyCommand());
+        addCommand("EXPORT_EXCEL", new CreateXlsFileCommand());
+        addCommand("SHOW_ALL", new ShowAllCommand());
+        addCommand("GENERATE_REPORT", new GenerateReportCommand());
+        addCommand("IMPORT_GSHEET", new ImportFromGSheetCommand());
+        addCommand("EXIT", new ExitCommand());
+
+        return this.commandHolder;
     }
 
-    private Map<String, Command> commandHolder = new HashMap<>();
-    public void addCommand(String key, Command command){
-        try{
+    public void addCommand(String key, Command command) {
+        try {
             commandHolder.put(key, command);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Error: Can't add the command");
         }
+    }
+
+    public void printCommandInfo(){
+        System.out.println("Welcome to the Stock System");
+        System.out.println("*******************************************************************************\n");
+        for(Map.Entry<String, Command> entry : this.getPreparedCommandHolder().entrySet()){
+            System.out.println(entry.getValue().getInfo());
+        }
+        System.out.println("\n*******************************************************************************\n");
     }
 }

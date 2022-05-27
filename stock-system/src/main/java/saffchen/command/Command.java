@@ -1,5 +1,9 @@
 package saffchen.command;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+
 public interface Command {
-    public void doCommand();
+    String getInfo();
+    void doCommand() throws GeneralSecurityException, IOException;
 }

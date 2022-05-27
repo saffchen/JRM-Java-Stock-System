@@ -5,19 +5,18 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class FileUtils {
-    public String getBanner(){
+    public static String getBanner() {
         return getInfoFromTxtFile("banner.txt");
     }
-
-    public String getParticipants(){
+    public static String getParticipants() {
         return getInfoFromTxtFile("participants.txt");
     }
 
-    public String getInfoFromTxtFile(String filePath){
+    public static String getInfoFromTxtFile(String filePath) {
         StringBuilder builder = new StringBuilder();
-        try(FileReader reader = new FileReader(filePath)){
-            while (reader.ready()){
-                builder.append((char)reader.read());
+        try (FileReader reader = new FileReader(filePath)) {
+            while (reader.ready()) {
+                builder.append((char) reader.read());
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -25,12 +24,11 @@ public class FileUtils {
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error: Can't read the file");
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error: Unknown error");
         }
 
         return builder.toString();
     }
-
 }
