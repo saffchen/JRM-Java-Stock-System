@@ -1,7 +1,5 @@
 package saffchen.command;
 
-import saffchen.product.Product;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -9,7 +7,7 @@ public class CommandHolder {
     private final Map<String, Command> commandHolder = new TreeMap<>();
 
     public Map<String, Command> getPreparedCommandHolder(){
-        addCommand("ADD_PRODUCT", new AddCommand(new Product()));
+        addCommand("ADD_PRODUCT", new AddCommand());
         addCommand("DELETE_PRODUCT", new DeleteCommand());
         addCommand("MODIFY_PRODUCT", new ModifyCommand());
         addCommand("EXPORT_EXCEL", new CreateXlsFileCommand());
@@ -25,7 +23,7 @@ public class CommandHolder {
         try {
             commandHolder.put(key, command);
         } catch (Exception e) {
-            System.out.println("Error: Can't add the command");
+            System.err.println("Error: Can't add the command");
         }
     }
 
