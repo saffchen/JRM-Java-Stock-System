@@ -94,14 +94,4 @@ public class Product {
                 ", satellite='" + satellite + '\'' +
                 '}';
     }
-
-    public String toCSVString(String sep){
-        return "\n"+title + sep +
-               description + sep +
-               price + sep +
-               tags.toString() + sep +
-               category + sep +
-               count + sep +
-               satellite;
-    }
 }
