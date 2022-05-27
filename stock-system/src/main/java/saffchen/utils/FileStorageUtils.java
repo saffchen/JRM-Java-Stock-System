@@ -70,6 +70,28 @@ public class FileStorageUtils implements StorageUtils {
         }
     }
 
+    private void addRawProductsFromListToCSV(List<RawProduct> rawProducts){
+        FileWriter productToCsv = null;
+        try {
+            String headersString = getHeadersFromCSV().stream()
+                    .collect(Collectors.joining(";"))
+                    .toString();
+            productToCsv = new FileWriter(fileConnection.getFilePath(), false);
+            productToCsv.write(headersString);
+            for (RawProduct rawProduct : rawProducts)
+                productToCsv.write(rawProduct.toCSVString(";"));
+
+            productToCsv.close();
+        } catch (Exception e) {
+            System.out.println("Error: Can't write data");
+            try {
+                productToCsv.close();
+            } catch (IOException ioException) {
+                System.out.println("");
+            }
+        }
+    }
+
     @Override
     public void deleteProduct(Product product) {
         List<RawProduct> tempRawProducts = new ArrayList<>();
