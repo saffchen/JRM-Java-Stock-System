@@ -3,6 +3,7 @@ package saffchen.command;
 import saffchen.database.FileConnection;
 import saffchen.reports.PDFReportFromFile;
 import saffchen.utils.FileStorageUtils;
+import saffchen.utils.MenuUtils;
 
 import java.util.HashSet;
 import java.util.Scanner;
@@ -14,10 +15,6 @@ public class GenerateReportCommand implements Command {
         return "* Write a \"generate_report\" if you want to save pdf file with all positions";
     }
 
-    private boolean isExit(String header){
-        return !(header.trim().toUpperCase().equals("EXIT"))?true:false;
-    }
-
     @Override
     public void doCommand() {
         Scanner scanner = new Scanner(System.in);
@@ -26,7 +23,7 @@ public class GenerateReportCommand implements Command {
 
         String criteria;
         String header = "";
-        while (isExit(header)) {
+        while (MenuUtils.isExit(header)) {
             System.out.println("*** REPORT ***");
             System.out.println("Possible values: ");
 
@@ -35,15 +32,12 @@ public class GenerateReportCommand implements Command {
 
             System.out.print("\nEnter the field to search or EXIT: ");
             header = scanner.next().trim().toUpperCase();
-            //if (header.equals("EXIT"))
-            //    break;
 
-            while (isExit(header)) {
+            while (MenuUtils.isExit(header)) {
                 System.out.println("*** Searching  by " + header + " ***");
                 System.out.print("Enter the KEYWORD or EXIT: ");
                 criteria = scanner.next().trim().toUpperCase();
-                //if (criteria.equals("EXIT"))
-                //    break;
+
                 try {
                     header = header.substring(0, 1) + header.substring(1, header.length()).toLowerCase();
                     PDFReportFromFile report = new PDFReportFromFile(header, criteria);
