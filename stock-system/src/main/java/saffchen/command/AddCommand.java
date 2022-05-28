@@ -42,7 +42,7 @@ public class AddCommand implements Command {
             try {
                 price = new Scanner(System.in).nextDouble();
             } catch (Exception e) {
-                System.err.println("Цена не может быть строкой. Пожалуйста заполните продукт заново.");
+                System.out.println("Цена не может быть строкой. Пожалуйста заполните продукт заново.");
                 continue;
             }
             System.out.print("Введите теги (Теги заполняются через запятую, без пробелов): ");
@@ -54,7 +54,7 @@ public class AddCommand implements Command {
             try {
                 count = new Scanner(System.in).nextInt();
             } catch (Exception e) {
-                System.err.println("Количество не может быть строкой. Пожалуйста заполните продукт заново.");
+                System.out.println("Количество не может быть строкой. Пожалуйста заполните продукт заново.");
                 continue;
             }
             System.out.print("Укажите склад на котором хранится продукт: ");
@@ -65,7 +65,7 @@ public class AddCommand implements Command {
             isValidProduct = false;
             Set<ConstraintViolation<Product>> violations = validator.validate(product);
             for (ConstraintViolation<Product> warning : violations) {
-                System.err.println(warning.getMessage());
+                System.out.println(warning.getMessage());
                 if (warning.getMessage().contains("!")) {
                     isValidProduct = true;
                 }

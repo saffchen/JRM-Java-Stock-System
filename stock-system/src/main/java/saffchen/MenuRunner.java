@@ -28,7 +28,7 @@ public class MenuRunner {
                     }
                 }
             } catch (Exception e) {
-                System.err.println("Unsupported operation \"" + inputCommand + "\". Try again.");
+                System.out.println("Unsupported operation \"" + inputCommand + "\". Try again.");
             }
         }
     }

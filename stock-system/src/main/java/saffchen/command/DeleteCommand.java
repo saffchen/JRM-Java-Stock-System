@@ -23,7 +23,7 @@ public class DeleteCommand implements Command {
         FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
         Product product = fileStorageUtils.getProductByTitle(title);
         if (product == null) {
-            System.err.println(String.format("Данный продукт %s не найден/There is no %<s product", title));
+            System.out.println(String.format("Данный продукт %s не найден/There is no %<s product", title));
         } else {
             System.out.println(String.format("Вы действительно хотите удалить %s?(Да/Нет)/Do you really want to delete %<s?(Yes/No)", title));
             String answer = bufferedReader.readLine().toUpperCase();

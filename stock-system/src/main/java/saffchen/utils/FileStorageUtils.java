@@ -213,12 +213,12 @@ public class FileStorageUtils implements StorageUtils {
             }
 
         } catch (FileNotFoundException e) {
-            System.err.println("Error: Can't find the database file");
+            System.out.println("Error: Can't find the database file");
         } catch (IOException e) {
-            System.err.println("Error: Can't read the database file");
+            System.out.println("Error: Can't read the database file");
         } catch (Exception e) {
             e.printStackTrace();
-            System.err.println("Error: Unknown error. Try to get correct information from database!");
+            System.out.println("Error: Unknown error. Try to get correct information from database!");
         }
 
         return products;

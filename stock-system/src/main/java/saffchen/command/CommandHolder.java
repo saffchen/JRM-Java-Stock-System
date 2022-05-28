@@ -23,7 +23,7 @@ public class CommandHolder {
         try {
             commandHolder.put(key, command);
         } catch (Exception e) {
-            System.err.println("Error: Can't add the command");
+            System.out.println("Error: Can't add the command");
         }
     }
 
