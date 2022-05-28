@@ -33,7 +33,7 @@ public class FileStorageUtils implements StorageUtils {
         } catch (Exception e) {
 
             e.printStackTrace();
-            System.out.println("Error: Can't get the headers. Try again!");
+            System.err.println("Error: Can't get the headers. Try again!");
         }
         return headers;
     }
@@ -50,14 +50,14 @@ public class FileStorageUtils implements StorageUtils {
             System.out.println(rawProduct.showInfo());
             System.out.println("Product was added to database successfully!");
         } catch (IOException e) {
-            System.out.println("Error: Can't write data");
+            System.err.println("Error: Can't write data");
             try {
                 productToCsv.close();
             } catch (IOException ioException) {
                 System.out.println("");
             }
         } catch (Exception e) {
-            System.out.println("Error: Can't write data");
+            System.err.println("Error: Can't write data");
             try {
                 productToCsv.close();
             } catch (IOException ioException) {
@@ -77,7 +77,7 @@ public class FileStorageUtils implements StorageUtils {
 
             productToCsv.close();
         } catch (Exception e) {
-            System.out.println("Error: Can't write data");
+            System.err.println("Error: Can't write data");
             try {
                 productToCsv.close();
             } catch (IOException ioException) {
@@ -97,7 +97,7 @@ public class FileStorageUtils implements StorageUtils {
                     .filter(x -> !x.getTitle().equals(product.getTitle()))
                     .map(x -> new ProductAdapter(x).setDataToRawProduct()).collect(Collectors.toList());
         } catch (Exception e) {
-            System.out.println("Error: Can't get the data! Try again!");
+            System.err.println("Error: Can't get the data! Try again!");
         }
 
         FileWriter productToCsv = null;
@@ -112,14 +112,14 @@ public class FileStorageUtils implements StorageUtils {
 
             System.out.println("Product was deleted from database successfully!");
         } catch (IOException e) {
-            System.out.println("Error: Can't write data");
+            System.err.println("Error: Can't write data");
             try {
                 productToCsv.close();
             } catch (IOException ioException) {
                 System.out.println("");
             }
         } catch (Exception e) {
-            System.out.println("Error: Can't write data");
+            System.err.println("Error: Can't write data");
             try {
                 productToCsv.close();
             } catch (IOException ioException) {
@@ -143,7 +143,7 @@ public class FileStorageUtils implements StorageUtils {
             }
             addRawProductsFromListToCSV(tempRawProducts);
         } catch (Exception e) {
-            System.out.println("Error: Can't get the data! Try again!");
+            System.err.println("Error: Can't get the data! Try again!");
         }
     }
 
@@ -157,7 +157,7 @@ public class FileStorageUtils implements StorageUtils {
                 System.out.println(productAdapter.getProduct().showInfo());
             }
         } catch (Exception e) {
-            System.out.println("Error: Can't get the data! Try again!");
+            System.err.println("Error: Can't get the data! Try again!");
         }
     }
 
@@ -168,7 +168,7 @@ public class FileStorageUtils implements StorageUtils {
             List<RawProduct> products = csvToBean.parse();
             return products.stream().map(x -> new ProductAdapter(x).getProduct()).filter(x -> x.getTitle().equals(title)).findAny().orElse(null);
         } catch (Exception e) {
-            System.out.println("Error: Can't get the data! Try again!");
+            System.err.println("Error: Can't get the data! Try again!");
             return null;
         }
     }
@@ -213,12 +213,12 @@ public class FileStorageUtils implements StorageUtils {
             }
 
         } catch (FileNotFoundException e) {
-            System.out.println("Error: Can't find the database file");
+            System.err.println("Error: Can't find the database file");
         } catch (IOException e) {
-            System.out.println("Error: Can't read the database file");
+            System.err.println("Error: Can't read the database file");
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Error: Unknown error. Try to get correct information from database!");
+            System.err.println("Error: Unknown error. Try to get correct information from database!");
         }
 
         return products;
