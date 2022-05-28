@@ -94,7 +94,7 @@ public class FileStorageUtils implements StorageUtils {
             List<RawProduct> products = csvToBean.parse();
             updatedProducts = products.stream().map
                             (x -> new ProductAdapter(x).getProduct())
-                    .filter(x -> !x.equals(product))
+                    .filter(x -> !x.getTitle().equals(product.getTitle()))
                     .map(x -> new ProductAdapter(x).setDataToRawProduct()).collect(Collectors.toList());
         } catch (Exception e) {
             System.out.println("Error: Can't get the data! Try again!");
@@ -102,7 +102,9 @@ public class FileStorageUtils implements StorageUtils {
 
         FileWriter productToCsv = null;
         try {
-            productToCsv = new FileWriter(fileConnection.getFilePath(), true);
+            String headersString = getHeadersFromCSV().stream().collect(Collectors.joining(";")).toString();
+            productToCsv = new FileWriter(fileConnection.getFilePath(), false);
+            productToCsv.write(headersString);
             for (RawProduct rawProduct : updatedProducts) {
                 productToCsv.write(rawProduct.toCSVString(";"));
             }
