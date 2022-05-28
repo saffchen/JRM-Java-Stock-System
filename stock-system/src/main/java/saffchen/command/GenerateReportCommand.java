@@ -3,9 +3,6 @@ package saffchen.command;
 import saffchen.database.FileConnection;
 import saffchen.reports.PDFReportFromFile;
 import saffchen.utils.FileStorageUtils;
-import saffchen.utils.MenuUtils;
-
-import java.util.HashSet;
 import java.util.Scanner;
 
 public class GenerateReportCommand implements Command {
