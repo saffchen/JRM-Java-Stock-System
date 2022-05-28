@@ -29,6 +29,7 @@ public class AddCommand implements Command {
 
         boolean isValidProduct = true;
         while (isValidProduct) {
+
             System.out.println("Введите продукт или exit для того, чтобы выйти в главное меню");
             System.out.print("Укажите название продукта: ");
             String title = new Scanner(System.in).next();
@@ -41,7 +42,7 @@ public class AddCommand implements Command {
             try {
                 price = new Scanner(System.in).nextDouble();
             } catch (Exception e) {
-                System.err.println("Вы ввели некорректное значение. Пожалуйста заполните продукт заново.");
+                System.err.println("Цена не может быть строкой. Пожалуйста заполните продукт заново.");
                 continue;
             }
             System.out.print("Введите теги (Теги заполняются через запятую, без пробелов): ");
@@ -53,7 +54,7 @@ public class AddCommand implements Command {
             try {
                 count = new Scanner(System.in).nextInt();
             } catch (Exception e) {
-                System.err.println("Вы ввели некорректное значение. Пожалуйста заполните продукт заново.");
+                System.err.println("Количество не может быть строкой. Пожалуйста заполните продукт заново.");
                 continue;
             }
             System.out.print("Укажите склад на котором хранится продукт: ");
@@ -72,9 +73,9 @@ public class AddCommand implements Command {
         }
         return product;
     }
+
     @Override
     public void doCommand() throws GeneralSecurityException, IOException {
-       
         FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
         FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
         fileStorageUtils.addProduct(additionalCommand());
