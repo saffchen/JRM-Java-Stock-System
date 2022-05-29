@@ -1,11 +1,13 @@
 package saffchen.product;
 
 import java.util.List;
+
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.Length;
 import saffchen.checkvalidation.City;
 
 public class Product {
+
     @NotEmpty(message = "Название не может быть пустым!")
     @Length(max = 255, message = "Название не может быть длиннее 255 символов!")
     private String title;
@@ -31,7 +33,7 @@ public class Product {
     private Integer count;
 
     @NotNull(message = "Название города не может быть пустым!")
-    @City
+    @City(message = "Укажите название склада из списка: ")
     private String satellite;
 
     public Product(String title, String description, Double price, List<String> tags, String category, Integer count, String satellite) {
@@ -106,26 +108,10 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", tags=" + tags +
-                ", category='" + category + '\'' +
-                ", count=" + count +
-                ", satellite='" + satellite + '\'' +
-                '}';
+        return title + ", " + description + ", " + price + ", " + tags + ", " + category + ", " + count + ", " + satellite;
     }
 
     public String showInfo() {
-        return "Product{" +
-                "title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", tags=" + tags +
-                ", category='" + category + '\'' +
-                ", count=" + count +
-                ", satellite='" + satellite + '\'' +
-                '}';
+        return  title + ", " + description + ", " + price + ", " + tags + ", " + category + ", " + count + ", " + satellite;
     }
 }
