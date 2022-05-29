@@ -9,10 +9,9 @@ import java.lang.annotation.Target;
 
 @Constraint(validatedBy = SatelliteConstraintValidator.class)
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.FIELD, ElementType.PARAMETER })
-public @
-interface City {
-    String message() default "Укажите название склада Москва или Санкт-Петербург!";
-    Class<?> [] groups() default {};
-    Class <? extends Payload>[] payload() default {};
-}
+@Target({ElementType.FIELD, ElementType.PARAMETER})
+public @interface City {
+    String message();
+    Class<?>[] groups() default {};
+    Class<? extends Payload>[] payload() default {};
+    }
