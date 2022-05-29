@@ -23,7 +23,7 @@ public class AddCommand implements Command {
         return "Write an \"add_product\" if you want to additional product";
     }
     
-    public Product addingProduct(){
+    public Product addNewProduct(){
         Product product = null;
 
         System.out.println("*** ADDING A PRODUCT ***");
@@ -77,6 +77,6 @@ public class AddCommand implements Command {
     public void doCommand() throws GeneralSecurityException, IOException {
         FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
         FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
-        fileStorageUtils.addProduct(addingProduct());
+        fileStorageUtils.addProduct(addNewProduct());
     }
 }
