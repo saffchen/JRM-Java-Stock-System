@@ -8,6 +8,7 @@ public class ExitCommand implements Command {
 
     @Override
     public void doCommand() {
+        System.out.println("Have a good day!");
         System.exit(0);
     }
 }
