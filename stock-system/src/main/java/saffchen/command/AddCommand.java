@@ -26,7 +26,7 @@ public class AddCommand implements Command {
         Validator validator = validatorFactory.getValidator();
         Product product = null;
 
-        System.out.println("*** ADDITIONAL PRODUCT ***");
+        System.out.println("*** ADDING A PRODUCT ***");
 
         boolean isValidProduct = true;
         while (isValidProduct) {
