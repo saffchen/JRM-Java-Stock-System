@@ -32,7 +32,7 @@ public class AddCommand implements Command {
 
             System.out.println("Введите продукт или exit для того, чтобы выйти в главное меню");
             System.out.print("Укажите название продукта: ");
-            String title = new Scanner(System.in).next();
+            String title = new Scanner(System.in).next().trim();
             if (title.equals("exit"))
                 break;
             System.out.print("Укажите описание продукта: ");
