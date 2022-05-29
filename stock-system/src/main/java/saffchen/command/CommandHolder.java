@@ -1,10 +1,10 @@
 package saffchen.command;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class CommandHolder {
-    private final Map<String, Command> commandHolder = new TreeMap<>();
+    private final Map<String, Command> commandHolder = new LinkedHashMap<>();
 
     public Map<String, Command> getPreparedCommandHolder(){
         addCommand("ADD_PRODUCT", new AddCommand());
