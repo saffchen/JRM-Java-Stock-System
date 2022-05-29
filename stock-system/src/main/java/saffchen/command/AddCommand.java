@@ -13,9 +13,10 @@ import java.security.GeneralSecurityException;
 import java.util.*;
 
 public class AddCommand implements Command {
+
     @Override
     public String getInfo() {
-        return "* Write an \"add_product\" if you want to additional product";
+        return "Write an \"add_product\" if you want to additional product";
     }
     
     public Product additionalCommand(){

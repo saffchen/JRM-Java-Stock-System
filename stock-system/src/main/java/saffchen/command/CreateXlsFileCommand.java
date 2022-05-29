@@ -22,7 +22,7 @@ public class CreateXlsFileCommand implements Command {
 
     @Override
     public String getInfo() {
-        return "* Write an \"export_excel\" if you want to save excel file with all positions";
+        return "Write an \"export_excel\" if you want to save excel file with all positions";
     }
 
     @Override

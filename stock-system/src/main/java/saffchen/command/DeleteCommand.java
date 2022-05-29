@@ -11,7 +11,7 @@ public class DeleteCommand implements Command {
 
     @Override
     public String getInfo() {
-        return "* Write an \"delete_product\" if you want to delete product";
+        return "Write an \"delete_product\" if you want to delete product";
     }
 
     @Override

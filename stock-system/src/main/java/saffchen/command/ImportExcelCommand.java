@@ -6,7 +6,7 @@ import java.security.GeneralSecurityException;
 public class ImportExcelCommand implements Command{
     @Override
     public String getInfo() {
-        return "* Write an \"import_excel\" if you want to save change to excel";
+        return "Write an \"import_excel\" if you want to save change to excel";
     }
 
     @Override

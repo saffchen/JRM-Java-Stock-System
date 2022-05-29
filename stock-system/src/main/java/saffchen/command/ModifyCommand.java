@@ -10,7 +10,7 @@ public class ModifyCommand implements Command {
 
     @Override
     public String getInfo() {
-        return "* Write an \"modify_product\" if you want to make changes";
+        return "Write an \"modify_product\" if you want to make changes";
     }
 
     @Override

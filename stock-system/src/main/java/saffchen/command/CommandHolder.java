@@ -31,7 +31,7 @@ public class CommandHolder {
         System.out.println("Welcome to the Stock System");
         System.out.println("*******************************************************************************\n");
         for(Map.Entry<String, Command> entry : this.getPreparedCommandHolder().entrySet()){
-            System.out.println(entry.getValue().getInfo());
+            System.out.println("* " + entry.getValue().getInfo());
         }
         System.out.println("\n*******************************************************************************\n");
     }
