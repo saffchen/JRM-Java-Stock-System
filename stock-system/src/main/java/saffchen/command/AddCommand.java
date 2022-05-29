@@ -19,7 +19,7 @@ public class AddCommand implements Command {
         return "Write an \"add_product\" if you want to additional product";
     }
     
-    public Product additionalCommand(){
+    public Product addingCommand(){
         ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class)
                 .configure()
                 .buildValidatorFactory();
@@ -35,7 +35,7 @@ public class AddCommand implements Command {
             System.out.print("Укажите название продукта: ");
             String title = new Scanner(System.in).nextLine().trim();
             if (title.equals("exit"))
-                break;
+                System.exit(0);
             System.out.print("Укажите описание продукта: ");
             String description = new Scanner(System.in).nextLine();
             System.out.print("Укажите цену продукта: ");
@@ -67,9 +67,8 @@ public class AddCommand implements Command {
             Set<ConstraintViolation<Product>> violations = validator.validate(product);
             for (ConstraintViolation<Product> warning : violations) {
                 System.out.println(warning.getMessage());
-                if (warning.getMessage().contains("!")) {
-                    isValidProduct = true;
-                }
+                warning.getMessage();
+                isValidProduct = true;
             }
         }
         return product;
@@ -79,6 +78,6 @@ public class AddCommand implements Command {
     public void doCommand() throws GeneralSecurityException, IOException {
         FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
         FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
-        fileStorageUtils.addProduct(additionalCommand());
+        fileStorageUtils.addProduct(addingCommand());
     }
 }
