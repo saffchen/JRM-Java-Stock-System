@@ -32,11 +32,11 @@ public class AddCommand implements Command {
 
             System.out.println("Введите продукт или exit для того, чтобы выйти в главное меню");
             System.out.print("Укажите название продукта: ");
-            String title = new Scanner(System.in).next().trim();
+            String title = new Scanner(System.in).nextLine().trim();
             if (title.equals("exit"))
                 break;
             System.out.print("Укажите описание продукта: ");
-            String description = new Scanner(System.in).next();
+            String description = new Scanner(System.in).nextLine();
             System.out.print("Укажите цену продукта: ");
             Double price;
             try {
@@ -46,9 +46,9 @@ public class AddCommand implements Command {
                 continue;
             }
             System.out.print("Введите теги (Теги заполняются через запятую, без пробелов): ");
-            String[] tags = new Scanner(System.in).next().trim().split(",");
+            String[] tags = new Scanner(System.in).nextLine().trim().split(",");
             System.out.print("Укажите категорию продукта: ");
-            String category = new Scanner(System.in).next().trim();
+            String category = new Scanner(System.in).nextLine().trim();
             System.out.print("Укажите количество продукта: ");
             Integer count;
             try {
