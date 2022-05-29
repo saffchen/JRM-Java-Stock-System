@@ -46,7 +46,7 @@ public class AddCommand implements Command {
                 System.out.println("Цена не может быть строкой. Пожалуйста заполните продукт заново.");
                 continue;
             }
-            System.out.print("Введите теги (Теги заполняются через запятую, без пробелов): ");
+            System.out.print("Введите теги : ");
             String[] tags = new Scanner(System.in).nextLine().trim().split(",");
             System.out.print("Укажите категорию продукта: ");
             String category = new Scanner(System.in).nextLine().trim();
