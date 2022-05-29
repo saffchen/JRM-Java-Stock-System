@@ -13,24 +13,23 @@ import java.security.GeneralSecurityException;
 import java.util.*;
 
 public class AddCommand implements Command {
+    static ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class)
+            .configure()
+            .buildValidatorFactory();
+    static Validator validator = validatorFactory.getValidator();
 
     @Override
     public String getInfo() {
         return "Write an \"add_product\" if you want to additional product";
     }
     
-    public Product addingCommand(){
-        ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class)
-                .configure()
-                .buildValidatorFactory();
-        Validator validator = validatorFactory.getValidator();
+    public Product addingProduct(){
         Product product = null;
 
         System.out.println("*** ADDING A PRODUCT ***");
 
         boolean isValidProduct = true;
         while (isValidProduct) {
-
             System.out.println("Введите продукт или exit для того, чтобы выйти в главное меню");
             System.out.print("Укажите название продукта: ");
             String title = new Scanner(System.in).nextLine().trim();
@@ -43,7 +42,7 @@ public class AddCommand implements Command {
             try {
                 price = new Scanner(System.in).nextDouble();
             } catch (Exception e) {
-                System.out.println("Цена не может быть строкой. Пожалуйста заполните продукт заново.");
+                System.out.println("Вы ввели некорректное значение цены продукта. Пожалуйста заполните продукт заново.");
                 continue;
             }
             System.out.print("Введите теги : ");
@@ -55,7 +54,7 @@ public class AddCommand implements Command {
             try {
                 count = new Scanner(System.in).nextInt();
             } catch (Exception e) {
-                System.out.println("Количество не может быть строкой. Пожалуйста заполните продукт заново.");
+                System.out.println("Вы ввели некорректное значение количества продукта. Пожалуйста заполните продукт заново.");
                 continue;
             }
             System.out.print("Укажите склад на котором хранится продукт: ");
@@ -78,6 +77,6 @@ public class AddCommand implements Command {
     public void doCommand() throws GeneralSecurityException, IOException {
         FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
         FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
-        fileStorageUtils.addProduct(addingCommand());
+        fileStorageUtils.addProduct(addingProduct());
     }
 }
