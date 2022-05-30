@@ -20,6 +20,7 @@ public class CommandHolder {
         addCommand("GENERATE_REPORT", new GenerateReportCommand());
         addCommand("IMPORT_GSHEET", new ImportFromGSheetCommand());
         addCommand("EXIT", new ExitCommand());
+        addCommand("ADD_SATELLITE", new AddSatellite());
 
         return this.commandHolder;
     }
