@@ -95,6 +95,5 @@
             <artifactId>log4j-core</artifactId>
             <version>${org.apache.logging.log4j.version}</version>
         </dependency>
-
     </dependencies>
 </project>
