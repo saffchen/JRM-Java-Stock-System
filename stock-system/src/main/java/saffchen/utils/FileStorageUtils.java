@@ -26,7 +26,10 @@ public class FileStorageUtils implements StorageUtils {
         List<String> headers = null;
         try {
             CSVParser parser = new CSVParserBuilder().withSeparator(';').build();
-            CSVReader csvReader = new CSVReaderBuilder(new FileReader(fileConnection.getFilePath())).withCSVParser(parser).build();
+            CSVReader csvReader = new CSVReaderBuilder(new FileReader(fileConnection.getFilePath()))
+                    .withCSVParser(parser)
+                    .build();
+
             headers = Arrays.asList(csvReader.readNext());
 
             csvReader.close();
@@ -93,7 +96,7 @@ public class FileStorageUtils implements StorageUtils {
             CsvToBean<RawProduct> csvToBean = getCSVParser();
             List<RawProduct> products = csvToBean.parse();
             updatedProducts = products.stream().map
-                            (x -> new ProductAdapter(x).getProduct())
+                    (x -> new ProductAdapter(x).getProduct())
                     .filter(x -> !x.getTitle().equals(product.getTitle()))
                     .map(x -> new ProductAdapter(x).setDataToRawProduct()).collect(Collectors.toList());
         } catch (Exception e) {
@@ -151,8 +154,8 @@ public class FileStorageUtils implements StorageUtils {
     public void showAllProducts() {
         try {
             CsvToBean<RawProduct> csvToBean = getCSVParser();
-            List<RawProduct> prdcts = csvToBean.parse();
-            for (RawProduct product : prdcts) {
+            List<RawProduct> products = csvToBean.parse();
+            for (RawProduct product : products) {
                 ProductAdapter productAdapter = new ProductAdapter(product);
                 System.out.println(productAdapter.getProduct().showInfo());
             }
@@ -166,7 +169,11 @@ public class FileStorageUtils implements StorageUtils {
         try {
             CsvToBean<RawProduct> csvToBean = getCSVParser();
             List<RawProduct> products = csvToBean.parse();
-            return products.stream().map(x -> new ProductAdapter(x).getProduct()).filter(x -> x.getTitle().equals(title)).findAny().orElse(null);
+            return products.stream().map(x -> new ProductAdapter(x).getProduct())
+                    .filter(x -> x.getTitle().equals(title))
+                    .findAny()
+                    .orElse(null);
+
         } catch (Exception e) {
             System.err.println("Error: Can't get the data! Try again!");
             return null;
@@ -177,7 +184,9 @@ public class FileStorageUtils implements StorageUtils {
         List<String> headersFromClass = new ReflectProductUtils().getFieldsFromClass(new Product());
         List<String> headersFromCSV = getHeadersFromCSV();
 
-        Map mapping = IntStream.range(0, headersFromCSV.size()).boxed().collect(Collectors.toMap(headersFromCSV::get, headersFromClass::get));
+        Map mapping = IntStream.range(0, headersFromCSV.size())
+                .boxed()
+                .collect(Collectors.toMap(headersFromCSV::get, headersFromClass::get));
 
         CsvToBean csv = null;
 
@@ -186,7 +195,13 @@ public class FileStorageUtils implements StorageUtils {
         strategy.setColumnMapping(mapping);
         strategy.setType(RawProduct.class);
 
-        CsvToBean<RawProduct> csvToBean = new CsvToBeanBuilder<RawProduct>(new FileReader(fileConnection.getFilePath())).withType(RawProduct.class).withSeparator(';').withIgnoreLeadingWhiteSpace(true).withIgnoreEmptyLine(true).withMappingStrategy(strategy).build();
+        CsvToBean<RawProduct> csvToBean = new CsvToBeanBuilder<RawProduct>(
+                new FileReader(fileConnection.getFilePath())).withType(RawProduct.class)
+                .withSeparator(';')
+                .withIgnoreLeadingWhiteSpace(true)
+                .withIgnoreEmptyLine(true)
+                .withMappingStrategy(strategy)
+                .build();
 
         return csvToBean;
     }

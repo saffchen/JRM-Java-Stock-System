@@ -9,7 +9,7 @@ public interface StorageUtils {
 
     public void deleteProduct(Product product);
 
-    public void modifyProduct(Product productBefore, Product productAfter);
+    public void modifyProduct(Product before, Product after);
 
     public void showAllProducts();
 
