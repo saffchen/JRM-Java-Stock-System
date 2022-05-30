@@ -4,7 +4,12 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class CommandHolder {
-    private final Map<String, Command> commandHolder = new LinkedHashMap<>();
+
+    private final Map<String, Command> commandHolder;
+
+    {
+        commandHolder = new LinkedHashMap<>();
+    }
 
     public Map<String, Command> getPreparedCommandHolder(){
         addCommand("ADD_PRODUCT", new AddCommand());
