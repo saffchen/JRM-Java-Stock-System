@@ -9,7 +9,7 @@ public class GenerateReportCommand implements Command {
 
     @Override
     public String getInfo() {
-        return "* Write a \"generate_report\" if you want to save pdf file with all positions";
+        return "Write a \"generate_report\" if you want to save pdf file with all positions";
     }
 
     @Override

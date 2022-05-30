@@ -1,15 +1,13 @@
 package saffchen.command;
 
-import saffchen.product.Product;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class CommandHolder {
-    private final Map<String, Command> commandHolder = new TreeMap<>();
+    private final Map<String, Command> commandHolder = new LinkedHashMap<>();
 
     public Map<String, Command> getPreparedCommandHolder(){
-        addCommand("ADD_PRODUCT", new AddCommand(new Product()));
+        addCommand("ADD_PRODUCT", new AddCommand());
         addCommand("DELETE_PRODUCT", new DeleteCommand());
         addCommand("MODIFY_PRODUCT", new ModifyCommand());
         addCommand("EXPORT_EXCEL", new CreateXlsFileCommand());
@@ -33,7 +31,7 @@ public class CommandHolder {
         System.out.println("Welcome to the Stock System");
         System.out.println("*******************************************************************************\n");
         for(Map.Entry<String, Command> entry : this.getPreparedCommandHolder().entrySet()){
-            System.out.println(entry.getValue().getInfo());
+            System.out.println("* " + entry.getValue().getInfo());
         }
         System.out.println("\n*******************************************************************************\n");
     }

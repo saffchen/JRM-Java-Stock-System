@@ -11,7 +11,7 @@ public class DeleteCommand implements Command {
 
     @Override
     public String getInfo() {
-        return "* Write an \"delete_product\" if you want to delete product";
+        return "Write an \"delete_product\" if you want to delete product";
     }
 
     @Override
@@ -19,21 +19,19 @@ public class DeleteCommand implements Command {
         System.out.println("Введите имя продукта, который вы хотите удалить/Please, input the product name for deletion");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String title = bufferedReader.readLine();
-        FileStorageUtils fileStorageUtils = null;
-        assert false;
+        FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
+        FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
         Product product = fileStorageUtils.getProductByTitle(title);
         if (product == null) {
-            System.out.printf("Данный продукт %s не найден/There is no %s product%n", title);
+            System.out.println(String.format("Данный продукт %s не найден/There is no %<s product", title));
         } else {
-            System.out.printf("Вы действительно хотите удалить %s?(Да/Нет)/Do you really want to delete %s?(Yes/No)", title);
-            String answer = bufferedReader.readLine();
-            if (answer.equals("Да") || answer.equals("Yes")) {
-                FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
+            System.out.println(String.format("Вы действительно хотите удалить %s?(Да/Нет)/Do you really want to delete %<s?(Yes/No)", title));
+            String answer = bufferedReader.readLine().toUpperCase();
+            if (answer.equals("ДА") || answer.equals("YES")) {
                 fileStorageUtils = new FileStorageUtils(fileConnection);
-                System.out.printf("Deleting the product %s%n", product.getTitle());
+                System.out.println(String.format("Deleting the product %s", title));
                 fileStorageUtils.deleteProduct(product);
             }
         }
-        bufferedReader.close();
     }
 }

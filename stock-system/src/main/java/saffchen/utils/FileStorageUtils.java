@@ -33,7 +33,7 @@ public class FileStorageUtils implements StorageUtils {
         } catch (Exception e) {
 
             e.printStackTrace();
-            System.out.println("Error: Can't get the headers. Try again!");
+            System.err.println("Error: Can't get the headers. Try again!");
         }
         return headers;
     }
@@ -50,14 +50,14 @@ public class FileStorageUtils implements StorageUtils {
             System.out.println(rawProduct.showInfo());
             System.out.println("Product was added to database successfully!");
         } catch (IOException e) {
-            System.out.println("Error: Can't write data");
+            System.err.println("Error: Can't write data");
             try {
                 productToCsv.close();
             } catch (IOException ioException) {
                 System.out.println("");
             }
         } catch (Exception e) {
-            System.out.println("Error: Can't write data");
+            System.err.println("Error: Can't write data");
             try {
                 productToCsv.close();
             } catch (IOException ioException) {
@@ -77,7 +77,7 @@ public class FileStorageUtils implements StorageUtils {
 
             productToCsv.close();
         } catch (Exception e) {
-            System.out.println("Error: Can't write data");
+            System.err.println("Error: Can't write data");
             try {
                 productToCsv.close();
             } catch (IOException ioException) {
@@ -94,15 +94,17 @@ public class FileStorageUtils implements StorageUtils {
             List<RawProduct> products = csvToBean.parse();
             updatedProducts = products.stream().map
                             (x -> new ProductAdapter(x).getProduct())
-                    .filter(x -> !x.equals(product))
+                    .filter(x -> !x.getTitle().equals(product.getTitle()))
                     .map(x -> new ProductAdapter(x).setDataToRawProduct()).collect(Collectors.toList());
         } catch (Exception e) {
-            System.out.println("Error: Can't get the data! Try again!");
+            System.err.println("Error: Can't get the data! Try again!");
         }
 
         FileWriter productToCsv = null;
         try {
-            productToCsv = new FileWriter(fileConnection.getFilePath(), true);
+            String headersString = getHeadersFromCSV().stream().collect(Collectors.joining(";")).toString();
+            productToCsv = new FileWriter(fileConnection.getFilePath(), false);
+            productToCsv.write(headersString);
             for (RawProduct rawProduct : updatedProducts) {
                 productToCsv.write(rawProduct.toCSVString(";"));
             }
@@ -110,14 +112,14 @@ public class FileStorageUtils implements StorageUtils {
 
             System.out.println("Product was deleted from database successfully!");
         } catch (IOException e) {
-            System.out.println("Error: Can't write data");
+            System.err.println("Error: Can't write data");
             try {
                 productToCsv.close();
             } catch (IOException ioException) {
                 System.out.println("");
             }
         } catch (Exception e) {
-            System.out.println("Error: Can't write data");
+            System.err.println("Error: Can't write data");
             try {
                 productToCsv.close();
             } catch (IOException ioException) {
@@ -141,7 +143,7 @@ public class FileStorageUtils implements StorageUtils {
             }
             addRawProductsFromListToCSV(tempRawProducts);
         } catch (Exception e) {
-            System.out.println("Error: Can't get the data! Try again!");
+            System.err.println("Error: Can't get the data! Try again!");
         }
     }
 
@@ -155,7 +157,7 @@ public class FileStorageUtils implements StorageUtils {
                 System.out.println(productAdapter.getProduct().showInfo());
             }
         } catch (Exception e) {
-            System.out.println("Error: Can't get the data! Try again!");
+            System.err.println("Error: Can't get the data! Try again!");
         }
     }
 
@@ -166,7 +168,7 @@ public class FileStorageUtils implements StorageUtils {
             List<RawProduct> products = csvToBean.parse();
             return products.stream().map(x -> new ProductAdapter(x).getProduct()).filter(x -> x.getTitle().equals(title)).findAny().orElse(null);
         } catch (Exception e) {
-            System.out.println("Error: Can't get the data! Try again!");
+            System.err.println("Error: Can't get the data! Try again!");
             return null;
         }
     }

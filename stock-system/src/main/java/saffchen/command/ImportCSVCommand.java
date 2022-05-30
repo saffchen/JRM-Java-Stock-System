@@ -6,11 +6,10 @@ import java.security.GeneralSecurityException;
 public class ImportCSVCommand implements Command{
     @Override
     public String getInfo() {
-        return "* Write an \"import_csv\" if you want to save change to csv";
+        return "Write an \"import_csv\" if you want to save change to csv";
     }
 
     @Override
     public void doCommand() throws GeneralSecurityException, IOException {
-
     }
 }
