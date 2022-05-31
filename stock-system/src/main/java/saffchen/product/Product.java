@@ -1,10 +1,12 @@
 package saffchen.product;
 
-import java.util.List;
-
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.Length;
 import saffchen.checkvalidation.City;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 public class Product {
 
@@ -44,6 +46,46 @@ public class Product {
         this.category = category;
         this.count = count;
         this.satellite = satellite;
+    }
+
+    public Product(Map<String, String> fieldsMap) {
+        for (Map.Entry<String, String> entry : fieldsMap.entrySet()) {
+            String fieldName = entry.getKey();
+            String value = entry.getValue();
+            switch (fieldName) {
+                case "title":
+                    setTitle(value);
+                    break;
+                case "description":
+                    setDescription(value);
+                    break;
+                case "price":
+                    try{
+                        setPrice(Double.parseDouble(value));
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case "tags":
+                    setTags(Arrays.asList(value.split("\\s")));
+                    break;
+                case "category":
+                    setCategory(value);
+                    break;
+                case "count":
+                    try {
+                        setCount(Integer.parseInt(value));
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case "satellite":
+                    setSatellite(value);
+                    break;
+                default:
+                    System.out.println("There are no matches");
+            }
+        }
     }
 
     public Product() {
@@ -112,6 +154,6 @@ public class Product {
     }
 
     public String showInfo() {
-        return  title + ", " + description + ", " + price + ", " + tags + ", " + category + ", " + count + ", " + satellite;
+        return title + ", " + description + ", " + price + ", " + tags + ", " + category + ", " + count + ", " + satellite;
     }
 }
