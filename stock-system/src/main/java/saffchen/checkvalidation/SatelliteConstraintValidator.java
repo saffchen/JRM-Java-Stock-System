@@ -10,7 +10,7 @@ import java.util.List;
 import static com.google.common.io.Files.readLines;
 
 public class SatelliteConstraintValidator implements ConstraintValidator<City, String> {
-    private static List<String> SATELLITE;
+    private static List<String> SATELLITE = null;
     static {
         try {
             SATELLITE = readLines(new File("satellite.txt"), StandardCharsets.UTF_8);
@@ -21,13 +21,10 @@ public class SatelliteConstraintValidator implements ConstraintValidator<City, S
 
     @Override
     public boolean isValid(String satelliteCity, ConstraintValidatorContext constraintValidatorContext) {
-        boolean isValidSatellite = false;
         for (String satellite : SATELLITE) {
             if (satellite.contains(satelliteCity)) {
-                isValidSatellite = satellite.contains(satelliteCity);
-                break;
+                return true;
             }
-        }
-        return isValidSatellite;
+        } return false;
     }
 }
