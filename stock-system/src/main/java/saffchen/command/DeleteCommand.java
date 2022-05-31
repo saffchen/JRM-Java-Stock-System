@@ -36,7 +36,7 @@ public class DeleteCommand implements Command {
                 System.out.println(String.format("Deleting the product %s", title));
                 fileStorageUtils.deleteProduct(product);
             } else {
-                System.out.println(String.format("Вы не подвердили удаление вводом команды Да. Вы вели %s." +
+                System.out.println(String.format("Вы не подтвердили удаление вводом команды Да. Вы вели %s." +
                         "/You haven't confirmed the deletion using the command Yes. You input is %<s", answer));
             }
         }
