@@ -11,7 +11,7 @@ public class MenuUtils {
     }
 
     public static boolean isYes(String keyword) {
-        return POSITIVE_ANSWERS.contains(keyword.trim().toUpperCase()) ? true : false;
+        return POSITIVE_ANSWERS.contains(keyword.trim().toUpperCase());
     }
 }
 
