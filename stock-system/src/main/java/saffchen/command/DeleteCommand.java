@@ -22,6 +22,7 @@ public class DeleteCommand implements Command {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Имя продукта/The product name is: ");
         String title = bufferedReader.readLine();
+
         FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
         FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
         Product product = fileStorageUtils.getProductByTitle(title);
