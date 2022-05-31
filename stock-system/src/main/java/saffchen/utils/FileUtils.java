@@ -15,8 +15,11 @@ public class FileUtils {
         return getInfoFromTxtFile("participants.txt");
     }
 
-    public static List<String> getSatellites() {
+    public static List<String> getSatelliteList() {
         return Collections.singletonList(getInfoFromTxtFile("satellite.txt"));
+    }
+    public static String getSatelliteString(){
+        return getInfoFromTxtFile("satellite.txt");
     }
 
     public static String getInfoFromTxtFile(String filePath) {
