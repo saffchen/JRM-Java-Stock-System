@@ -6,7 +6,7 @@ import saffchen.utils.FileUtils;
 import java.util.List;
 
 public class SatelliteConstraintValidator implements ConstraintValidator<City, String> {
-    private static List<String> SATELLITE = FileUtils.getSatellites();
+    private static final List<String> SATELLITE = FileUtils.getSatellites();
 
     @Override
     public boolean isValid(String satelliteCity, ConstraintValidatorContext constraintValidatorContext) {
