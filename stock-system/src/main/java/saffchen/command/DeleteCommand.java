@@ -3,6 +3,8 @@ package saffchen.command;
 import saffchen.database.FileConnection;
 import saffchen.product.Product;
 import saffchen.utils.FileStorageUtils;
+import saffchen.utils.MenuUtils;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,6 +20,7 @@ public class DeleteCommand implements Command {
     public void doCommand() throws IOException {
         System.out.println("Введите имя продукта, который вы хотите удалить/Please, input the product name for deletion");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.print("Имя продукта/The product name is: ");
         String title = bufferedReader.readLine();
         FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
         FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
@@ -26,11 +29,14 @@ public class DeleteCommand implements Command {
             System.out.println(String.format("Данный продукт %s не найден/There is no %<s product", title));
         } else {
             System.out.println(String.format("Вы действительно хотите удалить %s?(Да/Нет)/Do you really want to delete %<s?(Yes/No)", title));
-            String answer = bufferedReader.readLine().toUpperCase();
-            if (answer.equals("ДА") || answer.equals("YES")) {
+            String answer = bufferedReader.readLine();
+            if (MenuUtils.isYes(answer)) {
                 fileStorageUtils = new FileStorageUtils(fileConnection);
                 System.out.println(String.format("Deleting the product %s", title));
                 fileStorageUtils.deleteProduct(product);
+            } else {
+                System.out.println(String.format("Вы не подвердили удаление вводом команды Да. Вы вели %s." +
+                        "/You haven't confirmed the deletion using the command Yes. You input is %<s", answer));
             }
         }
     }
