@@ -1,24 +1,26 @@
 package saffchen.command;
 
-import saffchen.product.Product;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class CommandHolder {
-    private final Receiver receiver = new Receiver();
-    private final Map<String, Command> commandHolder = new HashMap<>();
+    private final Map<String, Command> commandHolder;
 
-    public Map<String, Command> getPreparedCommandHolder(){
-        addCommand("ADD_PRODUCT", new AddCommand(receiver, new Product()));
-        addCommand("DELETE_PRODUCT", new DeleteCommand(receiver));
-        addCommand("MODIFY_PRODUCT", new ModifyCommand(receiver));
+    {
+        commandHolder = new LinkedHashMap<>();
+        addCommand("ADD_PRODUCT", new AddCommand());
+        addCommand("DELETE_PRODUCT", new DeleteCommand());
+        addCommand("MODIFY_PRODUCT", new ModifyCommand());
         addCommand("EXPORT_EXCEL", new CreateXlsFileCommand());
         addCommand("SHOW_ALL", new ShowAllCommand());
         addCommand("GENERATE_REPORT", new GenerateReportCommand());
-        addCommand("IMPORT_GSHEET", new ImportFromGSheetCommand(receiver));
+        addCommand("IMPORT_GSHEET", new ImportFromGSheetCommand());
         addCommand("EXIT", new ExitCommand());
+        addCommand("ADD_SATELLITE", new AddSatellite());
+    }
 
-        return this.commandHolder;
+    public Map<String, Command> getCommandHolder() {
+        return commandHolder;
     }
 
     public void addCommand(String key, Command command) {
@@ -27,5 +29,14 @@ public class CommandHolder {
         } catch (Exception e) {
             System.out.println("Error: Can't add the command");
         }
+    }
+
+    public void printCommandInfo(){
+        System.out.println("Welcome to the Stock System");
+        System.out.println("*******************************************************************************\n");
+        for(Map.Entry<String, Command> entry : this.getCommandHolder().entrySet()){
+            System.out.println("* " + entry.getValue().getInfo());
+        }
+        System.out.println("\n*******************************************************************************\n");
     }
 }

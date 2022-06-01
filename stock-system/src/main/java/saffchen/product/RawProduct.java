@@ -2,6 +2,7 @@ package saffchen.product;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class RawProduct {
     private String title;
@@ -104,5 +105,22 @@ public class RawProduct {
                 count + sep +
                 satellite;
     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RawProduct that = (RawProduct) o;
+        return title.equals(that.title) &&
+                description.equals(that.description) &&
+                price.equals(that.price) &&
+                tags.equals(that.tags) &&
+                category.equals(that.category) &&
+                count.equals(that.count) &&
+                satellite.equals(that.satellite);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, description, price, tags, category, count, satellite);
+    }
 }

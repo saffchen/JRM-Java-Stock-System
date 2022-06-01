@@ -21,6 +21,11 @@ public class CreateXlsFileCommand implements Command {
     private static final List <String> DEPRECATED_SYMBOLS = List.of("/", "|", "?", "*", "<", ">", "!");
 
     @Override
+    public String getInfo() {
+        return "Write an \"export_excel\" if you want to save excel file with all positions";
+    }
+
+    @Override
     public void doCommand() throws GeneralSecurityException, IOException {
         System.out.println("Укажите путь, где будет храниться файл");
         String filePath = new Scanner(System.in).nextLine();

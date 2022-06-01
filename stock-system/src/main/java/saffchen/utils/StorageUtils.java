@@ -4,14 +4,15 @@ import saffchen.database.Connection;
 import saffchen.product.Product;
 
 public interface StorageUtils {
-    Connection CONNECTION = null;
 
     public void addProduct(Product product);
 
-    public void deleteProduct();
+    public void deleteProduct(Product product);
 
-    public void modifyProduct();
+    public void modifyProduct(Product before, Product after);
 
     public void showAllProducts();
+
+    public Product getProductByTitle(String title);
 
 }

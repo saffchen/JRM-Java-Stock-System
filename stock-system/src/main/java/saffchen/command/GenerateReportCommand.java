@@ -3,10 +3,14 @@ package saffchen.command;
 import saffchen.database.FileConnection;
 import saffchen.reports.PDFReportFromFile;
 import saffchen.utils.FileStorageUtils;
-
 import java.util.Scanner;
 
 public class GenerateReportCommand implements Command {
+
+    @Override
+    public String getInfo() {
+        return "Write a \"generate_report\" if you want to save pdf file with all positions";
+    }
 
     @Override
     public void doCommand() {
@@ -40,6 +44,7 @@ public class GenerateReportCommand implements Command {
                     report.generateReport();
                 } catch (Exception e) {
                     System.out.println("Error: Can't create the report! Try again!");
+
                 }
             }
         }
