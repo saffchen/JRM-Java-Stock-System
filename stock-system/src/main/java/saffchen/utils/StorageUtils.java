@@ -13,6 +13,6 @@ public interface StorageUtils {
 
     public void showAllProducts();
 
-    public Product getProductByTitle(String title);
+    //public Product getProductByTitle(String title);
 
 }
