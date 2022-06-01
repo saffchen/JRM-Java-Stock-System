@@ -202,7 +202,7 @@ public class FileStorageUtils implements StorageUtils {
 
         CsvToBean csv = null;
 
-        HeaderColumnNameTranslateMappingStrategy<RawProduct> strategy = new HeaderColumnNameTranslateMappingStrategy<RawProduct>();
+        var strategy = new HeaderColumnNameTranslateMappingStrategy<RawProduct>();
 
         strategy.setColumnMapping(mapping);
         strategy.setType(RawProduct.class);
@@ -224,11 +224,11 @@ public class FileStorageUtils implements StorageUtils {
         try {
             CsvToBean<RawProduct> csvToBean = getCSVParser();
 
-            List<RawProduct> prdcts = csvToBean.parse();
+            List<RawProduct> rawProducts = csvToBean.parse();
             String fieldName;
             PropertyDescriptor pd;
 
-            for (RawProduct product : prdcts) {
+            for (RawProduct product : rawProducts) {
                 pd = new PropertyDescriptor(header, product.getClass());
 
                 fieldName = pd.getReadMethod().invoke(product).toString().trim().toUpperCase();
