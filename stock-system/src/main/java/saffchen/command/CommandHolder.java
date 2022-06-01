@@ -4,14 +4,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class CommandHolder {
-
     private final Map<String, Command> commandHolder;
 
     {
         commandHolder = new LinkedHashMap<>();
-    }
-
-    public Map<String, Command> getPreparedCommandHolder(){
         addCommand("ADD_PRODUCT", new AddCommand());
         addCommand("DELETE_PRODUCT", new DeleteCommand());
         addCommand("MODIFY_PRODUCT", new ModifyCommand());
@@ -21,8 +17,10 @@ public class CommandHolder {
         addCommand("IMPORT_GSHEET", new ImportFromGSheetCommand());
         addCommand("EXIT", new ExitCommand());
         addCommand("ADD_SATELLITE", new AddSatellite());
+    }
 
-        return this.commandHolder;
+    public Map<String, Command> getCommandHolder() {
+        return commandHolder;
     }
 
     public void addCommand(String key, Command command) {
@@ -36,7 +34,7 @@ public class CommandHolder {
     public void printCommandInfo(){
         System.out.println("Welcome to the Stock System");
         System.out.println("*******************************************************************************\n");
-        for(Map.Entry<String, Command> entry : this.getPreparedCommandHolder().entrySet()){
+        for(Map.Entry<String, Command> entry : this.getCommandHolder().entrySet()){
             System.out.println("* " + entry.getValue().getInfo());
         }
         System.out.println("\n*******************************************************************************\n");
