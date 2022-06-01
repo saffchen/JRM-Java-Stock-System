@@ -30,18 +30,13 @@ public class ModifyCommand implements Command {
 
     @Override
     public void doCommand() throws IOException {
-
         bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String inputString = "";
-
-
         do {
             System.out.println("Введите имя продукта, который вы хотите изменить/Please, input the product name for update");
             System.out.println("Или введите Exit для выхода из этой команды/Either input Exit to exit from modify_product");
             System.out.print("Имя продукта/The product name is: ");
-            inputString = bufferedReader.readLine()
-                                        .trim();
-
+            inputString = bufferedReader.readLine().trim();
             FileStorageUtils fileStorageUtils = new FileStorageUtils(FileConnection.getInstance("stock_import_csv.csv"));
             Product product = fileStorageUtils.getProductByTitle(inputString);
             Field[] fields = Product.class.getDeclaredFields();
