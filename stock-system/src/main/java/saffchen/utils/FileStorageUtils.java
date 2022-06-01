@@ -152,6 +152,8 @@ public class FileStorageUtils implements StorageUtils {
                 if (product.getTitle().equals(before.getTitle()) &&
                         !product.equals(after)) {
                     tempRawProducts.add(new ProductAdapter(after).setDataToRawProduct());
+                    System.out.println(String.format("You have modified an old product\n %s\n" +
+                            "to a new product\n %s\n", before, after));
                 } else {
                     tempRawProducts.add(product);
                 }
