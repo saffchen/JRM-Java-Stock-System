@@ -18,28 +18,28 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class GSheetStorageUtils implements StorageUtils{
+public class GSheetStorageUtils implements StorageUtils {
     private final String range = "Sheet1!A2:G";
     private Sheets service;
 
-    public GSheetStorageUtils(Sheets service){
+    public GSheetStorageUtils(Sheets service) {
         this.service = service;
     }
 
-    public List<Product> getDataFromGSheet(){
+    public List<RawProduct> getDataFromGSheet() {
         ValueRange result = null;
         List<List<Object>> values = null;
         List<String> listOfStrProducts = new ArrayList<>();
-        List<Product> products = new ArrayList<>();
+        List<RawProduct> products = new ArrayList<>();
         try {
-            result = service.spreadsheets().values().get(GSheetConnection.SPEADSHEET_ID, range) .execute();
+            result = service.spreadsheets().values().get(GSheetConnection.SPEADSHEET_ID, range).execute();
             values = result.getValues();
 
             values.remove(0);
-            if (values == null || values.isEmpty()){
+            if (values == null || values.isEmpty()) {
                 System.out.println("No data found!");
-            }else {
-                for (List row : values){
+            } else {
+                for (List row : values) {
                     System.out.println(row);
                     listOfStrProducts.add((String) row.stream().collect(Collectors.joining(";")));
                 }
@@ -50,18 +50,36 @@ public class GSheetStorageUtils implements StorageUtils{
         ReflectProductUtils reflectProductUtils = new ReflectProductUtils();
         List<String> headersFromClass = reflectProductUtils.getFieldsFromClass(new RawProduct());
 
-            for (List row : values) {
-                Map<String, Object> mapping = IntStream.range(0, headersFromClass.size())
-                                                        .boxed()
-                                                        .collect(Collectors.toMap(headersFromClass::get, row::get));
-                RawProduct rawProduct = new RawProduct();
-                for (Map.Entry<String, Object> entry : mapping.entrySet()) {
-                    reflectProductUtils.invokeSetter(rawProduct, (String) entry.getKey(), (Object) entry.getValue());
-                }
-                products.add(new ProductAdapter(rawProduct).getProduct());
+        for (List row : values) {
+            Map<String, Object> mapping = IntStream.range(0, headersFromClass.size())
+                    .boxed()
+                    .collect(Collectors.toMap(headersFromClass::get, row::get));
+            RawProduct rawProduct = new RawProduct();
+            for (Map.Entry<String, Object> entry : mapping.entrySet()) {
+                reflectProductUtils.invokeSetter(rawProduct, (String) entry.getKey(), (Object) entry.getValue());
             }
+            products.add(rawProduct);
+        }
 
         return products;
+    }
+
+    public List<RawProduct> checkTheDublicates(List<RawProduct> gsheetData, List<RawProduct> csvData) {
+        List<RawProduct> toImport = new ArrayList<>();
+        try {
+
+            if (gsheetData.isEmpty() || gsheetData == null || csvData.isEmpty() || csvData == null)
+                throw new Exception();
+
+            for (RawProduct fromGsheet : gsheetData) {
+                if (!csvData.contains(fromGsheet))
+                    toImport.add(fromGsheet);
+
+            }
+        } catch (Exception e) {
+            System.out.println("Error: Can't import the data from gsheet to csv");
+        }
+        return toImport;
     }
 
     @Override

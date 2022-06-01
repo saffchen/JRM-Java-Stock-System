@@ -1,8 +1,12 @@
 package saffchen.utils;
 
-import com.opencsv.*;
-import com.opencsv.bean.*;
-import saffchen.database.Connection;
+import com.opencsv.CSVParser;
+import com.opencsv.CSVParserBuilder;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
+import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
+import com.opencsv.bean.HeaderColumnNameTranslateMappingStrategy;
 import saffchen.database.FileConnection;
 import saffchen.product.Product;
 import saffchen.product.ProductAdapter;
@@ -10,9 +14,14 @@ import saffchen.product.RawProduct;
 import saffchen.product.ReflectProductUtils;
 
 import java.beans.PropertyDescriptor;
-
-import java.io.*;
-import java.util.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -40,6 +49,20 @@ public class FileStorageUtils implements StorageUtils {
             System.err.println("Error: Can't get the headers. Try again!");
         }
         return headers;
+    }
+
+    public List<RawProduct> getDataFromCSV() {
+        List<RawProduct> products = null;
+        try {
+            CsvToBean<RawProduct> csvToBean = getCSVParser();
+            products = csvToBean.parse();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            System.err.println("Error: Can't get the data from csv.");
+        }
+        return products;
     }
 
     public void addHeadersToCSV(String headers) {
@@ -95,12 +118,19 @@ public class FileStorageUtils implements StorageUtils {
         }
     }
 
-    private void addRawProductsFromListToCSV(List<RawProduct> rawProducts) {
+    public void addRawProductsFromListToCSV(List<RawProduct> rawProducts) {
         FileWriter productToCsv = null;
         try {
+            if (rawProducts == null)
+                throw new Exception();
+            if (rawProducts.isEmpty()) {
+                System.out.println("There ara no data for import");
+                return;
+            }
+
             String headersString = getHeadersFromCSV().stream().collect(Collectors.joining(";")).toString();
-            productToCsv = new FileWriter(fileConnection.getFilePath(), false);
-            productToCsv.write(headersString);
+            productToCsv = new FileWriter(fileConnection.getFilePath(), true);
+            //productToCsv.write(headersString);
             for (RawProduct rawProduct : rawProducts)
                 productToCsv.write(rawProduct.toCSVString(";"));
 
@@ -119,6 +149,8 @@ public class FileStorageUtils implements StorageUtils {
     public void deleteProduct(Product product) {
         List<RawProduct> updatedProducts = new ArrayList<>();
         try {
+            if (product == null)
+                throw new Exception();
             CsvToBean<RawProduct> csvToBean = getCSVParser();
             List<RawProduct> products = csvToBean.parse();
             updatedProducts = products.stream().map
@@ -127,6 +159,7 @@ public class FileStorageUtils implements StorageUtils {
                     .map(x -> new ProductAdapter(x).setDataToRawProduct()).collect(Collectors.toList());
         } catch (Exception e) {
             System.err.println("Error: Can't get the data! Try again!");
+            return;
         }
 
         FileWriter productToCsv = null;
@@ -158,17 +191,21 @@ public class FileStorageUtils implements StorageUtils {
     }
 
     @Override
-    public void modifyProduct(Product productBefore, Product productAfter) {
+    public void modifyProduct(Product before, Product after) {
         List<RawProduct> tempRawProducts = new ArrayList<>();
         try {
-            RawProduct rawProductBefore = new ProductAdapter(productBefore).setDataToRawProduct();
-            RawProduct rawProductAfter = new ProductAdapter(productAfter).setDataToRawProduct();
+            if (before == null || after == null)
+                throw new Exception();
             CsvToBean<RawProduct> csvToBean = getCSVParser();
-            List<RawProduct> prdcts = csvToBean.parse();
+            List<RawProduct> products = csvToBean.parse();
 
-            for (RawProduct prdct : prdcts) {
-                if (!prdct.equals(rawProductBefore)) tempRawProducts.add(prdct);
-                else tempRawProducts.add(rawProductAfter);
+            for (RawProduct product : products) {
+                if (product.getTitle().equals(before.getTitle()) &&
+                        !product.equals(after)) {
+                    tempRawProducts.add(new ProductAdapter(after).setDataToRawProduct());
+                } else {
+                    tempRawProducts.add(product);
+                }
             }
             addRawProductsFromListToCSV(tempRawProducts);
         } catch (Exception e) {
@@ -190,7 +227,6 @@ public class FileStorageUtils implements StorageUtils {
         }
     }
 
-
     public Product getProductByTitle(String title) {
         try {
             CsvToBean<RawProduct> csvToBean = getCSVParser();
@@ -206,7 +242,7 @@ public class FileStorageUtils implements StorageUtils {
         }
     }
 
-    protected CsvToBean<RawProduct> getCSVParser() throws FileNotFoundException {
+    public CsvToBean<RawProduct> getCSVParser() throws FileNotFoundException {
         List<String> headersFromClass = new ReflectProductUtils().getFieldsFromClass(new Product());
         List<String> headersFromCSV = getHeadersFromCSV();
 
@@ -216,7 +252,7 @@ public class FileStorageUtils implements StorageUtils {
 
         CsvToBean csv = null;
 
-        HeaderColumnNameTranslateMappingStrategy<RawProduct> strategy = new HeaderColumnNameTranslateMappingStrategy<RawProduct>();
+        var strategy = new HeaderColumnNameTranslateMappingStrategy<RawProduct>();
 
         strategy.setColumnMapping(mapping);
         strategy.setType(RawProduct.class);
@@ -238,11 +274,11 @@ public class FileStorageUtils implements StorageUtils {
         try {
             CsvToBean<RawProduct> csvToBean = getCSVParser();
 
-            List<RawProduct> prdcts = csvToBean.parse();
+            List<RawProduct> rawProducts = csvToBean.parse();
             String fieldName;
             PropertyDescriptor pd;
 
-            for (RawProduct product : prdcts) {
+            for (RawProduct product : rawProducts) {
                 pd = new PropertyDescriptor(header, product.getClass());
 
                 fieldName = pd.getReadMethod().invoke(product).toString().trim().toUpperCase();
