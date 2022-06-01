@@ -59,7 +59,7 @@ public class ModifyCommand implements Command {
                                                                                     .map(String::valueOf)
                                                                                     .collect(Collectors.joining(" "));
                         } else {
-                            inputString = getInputString(field, product);
+                            inputString = String.valueOf(runGetter(field, product));
                         }
                         // Price validation
                     } else if (fieldName.equals("price") && !isStringToDoubleValid(inputString)) {
@@ -91,13 +91,9 @@ public class ModifyCommand implements Command {
         inputString = bufferedReader.readLine()
                                     .trim();
         if (inputString.equals("") || isExit(inputString)) {
-            inputString = getInputString(field, product);
+            inputString = String.valueOf(runGetter(field, product));
         }
         return inputString;
-    }
-
-    private String getInputString(Field field, Product product) {
-        return String.valueOf(runGetter(field, product));
     }
 
     // https://stackoverflow.com/questions/13400075/reflection-generic-get-field-value
