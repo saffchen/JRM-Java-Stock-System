@@ -142,16 +142,16 @@ public class FileStorageUtils implements StorageUtils {
     }
 
     @Override
-    public void modifyProduct(Product productBefore, Product productAfter) {
+    public void modifyProduct(Product before, Product after) {
         List<RawProduct> tempRawProducts = new ArrayList<>();
         try {
             CsvToBean<RawProduct> csvToBean = getCSVParser();
             List<RawProduct> products = csvToBean.parse();
 
             for (RawProduct product : products) {
-                if (product.getTitle().equals(productBefore.getTitle()) &&
-                        !product.equals(productAfter)) {
-                    tempRawProducts.add(new ProductAdapter(productAfter).setDataToRawProduct());
+                if (product.getTitle().equals(before.getTitle()) &&
+                        !product.equals(after)) {
+                    tempRawProducts.add(new ProductAdapter(after).setDataToRawProduct());
                 } else {
                     tempRawProducts.add(product);
                 }
