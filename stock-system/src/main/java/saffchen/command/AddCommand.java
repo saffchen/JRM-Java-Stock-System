@@ -8,6 +8,8 @@ import org.hibernate.validator.HibernateValidator;
 import saffchen.database.FileConnection;
 import saffchen.product.Product;
 import saffchen.utils.FileStorageUtils;
+import saffchen.utils.FileUtils;
+
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.*;
@@ -57,6 +59,7 @@ public class AddCommand implements Command {
                 System.out.println("Вы ввели некорректное значение количества продукта. Пожалуйста заполните продукт заново.");
                 continue;
             }
+            System.out.println("Доступные склады: \n" + FileUtils.getSatelliteString());
             System.out.print("Укажите склад на котором хранится продукт: ");
             String satellite = new Scanner(System.in).next().toUpperCase(Locale.ROOT);
 

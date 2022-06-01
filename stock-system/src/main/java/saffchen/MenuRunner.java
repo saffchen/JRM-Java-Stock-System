@@ -22,7 +22,7 @@ public class MenuRunner {
             try {
                 System.out.print("Enter the command: ");
                 inputCommand = scanner.next().trim().toUpperCase();
-                for (Map.Entry<String, Command> entry : holder.getPreparedCommandHolder().entrySet()) {
+                for (Map.Entry<String, Command> entry : holder.getCommandHolder().entrySet()) {
                     if (inputCommand.equals(entry.getKey())) {
                         entry.getValue().doCommand();
                     }

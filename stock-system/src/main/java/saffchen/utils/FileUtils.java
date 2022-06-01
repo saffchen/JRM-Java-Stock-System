@@ -3,13 +3,23 @@ package saffchen.utils;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
 public class FileUtils {
     public static String getBanner() {
         return getInfoFromTxtFile("banner.txt");
     }
+
     public static String getParticipants() {
         return getInfoFromTxtFile("participants.txt");
+    }
+
+    public static List<String> getSatelliteList() {
+        return Collections.singletonList(getInfoFromTxtFile("satellite.txt"));
+    }
+    public static String getSatelliteString(){
+        return getInfoFromTxtFile("satellite.txt");
     }
 
     public static String getInfoFromTxtFile(String filePath) {
@@ -28,7 +38,6 @@ public class FileUtils {
             e.printStackTrace();
             System.out.println("Error: Unknown error");
         }
-
         return builder.toString();
     }
 }
