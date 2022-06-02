@@ -2,10 +2,8 @@ package saffchen.command;
 
 import saffchen.database.FileConnection;
 import saffchen.database.GSheetConnection;
-import saffchen.product.Product;
-import saffchen.product.RawProduct;
 import saffchen.utils.FileStorageUtils;
-import saffchen.utils.GSheetStorageUtils;
+import saffchen.utils.GSheetImportUtils;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -23,9 +21,9 @@ public class ImportFromGSheetCommand implements Command {
         try {
             FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
             FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
-            GSheetStorageUtils gSheetStorageUtils = new GSheetStorageUtils(GSheetConnection.getSheetsService());
-            fileStorageUtils.addRawProductsFromListToCSV(gSheetStorageUtils.checkTheDublicates(
-                                                        gSheetStorageUtils.getDataFromGSheet(),
+            GSheetImportUtils gSheetImportUtils = new GSheetImportUtils(GSheetConnection.getSheetsService());
+            fileStorageUtils.addRawProductsFromListToCSV(gSheetImportUtils.checkTheDublicates(
+                                                        gSheetImportUtils.getData(),
                                                         fileStorageUtils.getDataFromCSV()));
         } catch (GeneralSecurityException e) {
             e.printStackTrace();

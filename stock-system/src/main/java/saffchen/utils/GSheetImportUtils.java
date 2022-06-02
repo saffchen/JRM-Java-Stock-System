@@ -1,32 +1,31 @@
 package saffchen.utils;
 
 import com.google.api.services.sheets.v4.Sheets;
-import com.google.api.services.sheets.v4.model.Sheet;
 import com.google.api.services.sheets.v4.model.ValueRange;
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
-import com.opencsv.bean.HeaderColumnNameTranslateMappingStrategy;
 import saffchen.database.GSheetConnection;
-import saffchen.product.Product;
-import saffchen.product.ProductAdapter;
 import saffchen.product.RawProduct;
 import saffchen.product.ReflectProductUtils;
 
 import java.io.*;
-import java.security.GeneralSecurityException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class GSheetStorageUtils implements StorageUtils {
+public class GSheetImportUtils implements ImportUtils{
     private final String range = "Sheet1!A2:G";
     private Sheets service;
 
-    public GSheetStorageUtils(Sheets service) {
+    public GSheetImportUtils(Sheets service) {
         this.service = service;
     }
 
-    public List<RawProduct> getDataFromGSheet() {
+    @Override
+    public List<RawProduct> checkTheDublicates(List<RawProduct> gsheetData, List<RawProduct> csvData) {
+        return ImportUtils.super.checkTheDublicates(gsheetData, csvData);
+    }
+
+    @Override
+    public List<RawProduct> getData() {
         ValueRange result = null;
         List<List<Object>> values = null;
         List<String> listOfStrProducts = new ArrayList<>();
@@ -63,35 +62,4 @@ public class GSheetStorageUtils implements StorageUtils {
 
         return products;
     }
-
-    public List<RawProduct> checkTheDublicates(List<RawProduct> gsheetData, List<RawProduct> csvData) {
-        List<RawProduct> toImport = new ArrayList<>();
-        try {
-
-            if (gsheetData.isEmpty() || gsheetData == null || csvData.isEmpty() || csvData == null)
-                throw new Exception();
-
-            for (RawProduct fromGsheet : gsheetData) {
-                if (!csvData.contains(fromGsheet))
-                    toImport.add(fromGsheet);
-
-            }
-        } catch (Exception e) {
-            System.out.println("Error: Can't import the data from gsheet to csv");
-        }
-        return toImport;
-    }
-
-    @Override
-    public void addProduct(Product product) { /*NOP*/ }
-
-    @Override
-    public void deleteProduct(Product product) { /*NOP*/}
-
-    @Override
-    public void modifyProduct(Product before, Product after) { /*NOP*/ }
-
-    @Override
-    public void showAllProducts() { /*NOP*/ }
-
 }
