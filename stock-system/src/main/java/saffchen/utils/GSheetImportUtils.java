@@ -20,11 +20,6 @@ public class GSheetImportUtils implements ImportUtils{
     }
 
     @Override
-    public List<RawProduct> checkTheDublicates(List<RawProduct> gsheetData, List<RawProduct> csvData) {
-        return ImportUtils.super.checkTheDublicates(gsheetData, csvData);
-    }
-
-    @Override
     public List<RawProduct> getData() {
         ValueRange result = null;
         List<List<Object>> values = null;
