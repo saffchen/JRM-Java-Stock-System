@@ -15,6 +15,7 @@ public class CommandHolder {
         addCommand("SHOW_ALL", new ShowAllCommand());
         addCommand("GENERATE_REPORT", new GenerateReportCommand());
         addCommand("IMPORT_GSHEET", new ImportFromGSheetCommand());
+        addCommand("IMPORT_EXCEL", new ImportExcelCommand());
         addCommand("EXIT", new ExitCommand());
         addCommand("ADD_SATELLITE", new AddSatellite());
     }

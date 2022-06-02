@@ -11,7 +11,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class GSheetImportUtils implements ImportUtils{
+public class GSheetImportUtils implements ImportUtils {
     private final String range = "Sheet1!A2:G";
     private Sheets service;
 
@@ -57,4 +57,5 @@ public class GSheetImportUtils implements ImportUtils{
 
         return products;
     }
+
 }

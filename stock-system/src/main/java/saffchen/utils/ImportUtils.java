@@ -23,5 +23,5 @@ public interface ImportUtils {
         return toImport;
     }
 
-    List<RawProduct> getData();
+    List<RawProduct> getData() throws Exception;
 }
