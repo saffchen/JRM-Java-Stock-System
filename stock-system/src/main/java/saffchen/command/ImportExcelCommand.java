@@ -24,7 +24,14 @@ public class ImportExcelCommand implements Command {
 
         try {
             String filePath = null;
-            ExcelConnection fileExcelConnection = ExcelConnection.getInstance("c:\\work\\jrm store\\stock_import_csv.xlsx");
+            do{
+                System.out.print("Enter the path of XLSX file or EXIT: ");
+                filePath = new Scanner(System.in).nextLine();
+                if (filePath.trim().toUpperCase().equals("EXIT"))
+                    return;
+            } while(!Files.exists(Path.of(filePath)));
+            System.out.println(filePath);
+            ExcelConnection fileExcelConnection = ExcelConnection.getInstance(filePath);
             FileConnection fileCsvConnection = FileConnection.getInstance("stock_import_csv.csv");
 
             FileStorageUtils fileStorageUtils = new FileStorageUtils(fileCsvConnection);
