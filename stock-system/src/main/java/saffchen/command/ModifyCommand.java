@@ -13,6 +13,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static saffchen.utils.MenuUtils.*;
@@ -31,23 +32,17 @@ public class ModifyCommand implements Command {
     @Override
     public void doCommand() throws IOException {
         bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        String inputString = "";
-        do {
-            System.out.println("Введите имя продукта, который вы хотите изменить/Please, input the product name for update");
-            System.out.println("Или введите Exit для выхода из этой команды/Either input Exit to exit from modify_product");
-            System.out.print("Имя продукта/The product name is: ");
-            inputString = bufferedReader.readLine().trim();
+        String inputString = inputProductNameOrExit();
+
+        while (!isExit(inputString)) {
             FileStorageUtils fileStorageUtils = new FileStorageUtils(FileConnection.getInstance("stock_import_csv.csv"));
             Product product = fileStorageUtils.getProductByTitle(inputString);
-            Field[] fields = Product.class.getDeclaredFields();
 
-            if (product == null && !isExit(inputString)) {
-                System.out.println(String.format("Данный продукт %s не найден/There is no %<s product", inputString));
-            } else {
+            if (product != null) {
                 System.out.println(product.toString());
+                Field[] fields = Product.class.getDeclaredFields();
                 Map<String, String> newFieldsMap = new HashMap<>();
-                for (int x = 0; x < fields.length; x++) {
-                    Field field = fields[x];
+                for (Field field : fields) {
                     String fieldName = field.getName();
                     System.out.print(String.format("Please, enter a new %s: ", fieldName.toUpperCase()));
                     inputString = bufferedReader.readLine()
@@ -55,9 +50,10 @@ public class ModifyCommand implements Command {
                     if (inputString.equals("") || isExit(inputString)) {
                         // Converting the List to String with a "\\s" delimiter
                         if (fieldName.equals("tags")) {
-                            inputString = ((List<String>) runGetter(field, product)).stream()
-                                                                                    .map(String::valueOf)
-                                                                                    .collect(Collectors.joining(" "));
+                            inputString = ((List<String>) Optional.ofNullable(runGetter(field, product))
+                                                                  .orElse("")).stream()
+                                                                              .map(String::valueOf)
+                                                                              .collect(Collectors.joining(" "));
                         } else {
                             inputString = String.valueOf(runGetter(field, product));
                         }
@@ -77,8 +73,19 @@ public class ModifyCommand implements Command {
                     System.out.println();
                 }
                 fileStorageUtils.modifyProduct(product, new Product(newFieldsMap));
+            } else {
+                System.out.println(String.format("Данный продукт %s не найден/There is no %<s product", inputString));
             }
-        } while (!isExit(inputString));
+
+            inputString = inputProductNameOrExit();
+        }
+    }
+
+    private String inputProductNameOrExit() throws IOException {
+        System.out.println("Введите имя продукта, который вы хотите изменить/Please, input the product name for update");
+        System.out.println("Или введите Exit для выхода из этой команды/Either input Exit to exit from modify_product");
+        System.out.print("Имя продукта/The product name is: ");
+        return bufferedReader.readLine().trim();
     }
 
     private String inputCorrectValue(Field field, Product product) throws IOException {
