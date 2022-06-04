@@ -17,9 +17,8 @@ public class ImportCSVCommand implements Command {
 
     @Override
     public void doCommand() throws GeneralSecurityException, IOException {
-
-        List<String> listCSV = List.of(FileUtils.getInfoFromTxtFile("stock_import_csv.csv"));
         try {
+        List<String> listCSV = List.of(FileUtils.getInfoFromTxtFile("stock_import_csv.csv"));
             FileWriter fileWriter = new FileWriter(new File(System.getProperty("user.dir"), "csvFromDB.csv"));
             for (String product : listCSV) {
                 fileWriter.write(product + " " + System.getProperty("line.separator"));
@@ -28,6 +27,7 @@ public class ImportCSVCommand implements Command {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("File is not found! Please, try again!");
         }
     }
 }
