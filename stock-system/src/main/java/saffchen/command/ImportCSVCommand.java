@@ -23,7 +23,7 @@ public class ImportCSVCommand implements Command {
             FileWriter fileWriter = new FileWriter(new File(System.getProperty("user.dir"), "csvFromDB.csv"));
             for (String product : listCSV) {
                 fileWriter.write(product + " " + System.getProperty("line.separator"));
-                System.out.println("Success " + System.getProperty("user.dir"));
+                System.out.println("Success! File saved: " + System.getProperty("user.dir"));
                 fileWriter.close();
             }
         } catch (IOException e) {
