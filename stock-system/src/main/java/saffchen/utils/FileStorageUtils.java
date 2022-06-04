@@ -51,6 +51,45 @@ public class FileStorageUtils implements StorageUtils {
         return headers;
     }
 
+    public List<RawProduct> getDataFromCSV() {
+        List<RawProduct> products = null;
+        try {
+            CsvToBean<RawProduct> csvToBean = getCSVParser();
+            products = csvToBean.parse();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            System.err.println("Error: Can't get the data from csv.");
+        }
+        return products;
+    }
+
+    public void addHeadersToCSV(String headers) {
+        FileWriter productToCsv = null;
+        try {
+            productToCsv = new FileWriter(fileConnection.getFilePath(), false);
+            productToCsv.write(headers);
+            productToCsv.close();
+
+            System.out.println("Headers were added to database successfully!");
+        } catch (IOException e) {
+            System.err.println("Error: Can't write the headers to csv");
+            try {
+                productToCsv.close();
+            } catch (IOException ioException) {
+                System.out.println("");
+            }
+        } catch (Exception e) {
+            System.err.println("Error: Can't write the headers to csv");
+            try {
+                productToCsv.close();
+            } catch (IOException ioException) {
+                System.out.println("Error: Can't close the csv");
+            }
+        }
+    }
+
     @Override
     public void addProduct(Product product) {
         RawProduct rawProduct = new ProductAdapter(product).setDataToRawProduct();
@@ -79,12 +118,19 @@ public class FileStorageUtils implements StorageUtils {
         }
     }
 
-    private void addRawProductsFromListToCSV(List<RawProduct> rawProducts) {
+    public void addRawProductsFromListToCSV(List<RawProduct> rawProducts) {
         FileWriter productToCsv = null;
         try {
+            if (rawProducts == null)
+                throw new Exception();
+            if (rawProducts.isEmpty()) {
+                System.out.println("There ara no data for import");
+                return;
+            }
+
             String headersString = getHeadersFromCSV().stream().collect(Collectors.joining(";")).toString();
-            productToCsv = new FileWriter(fileConnection.getFilePath(), false);
-            productToCsv.write(headersString);
+            productToCsv = new FileWriter(fileConnection.getFilePath(), true);
+            //productToCsv.write(headersString);
             for (RawProduct rawProduct : rawProducts)
                 productToCsv.write(rawProduct.toCSVString(";"));
 
@@ -103,6 +149,8 @@ public class FileStorageUtils implements StorageUtils {
     public void deleteProduct(Product product) {
         List<RawProduct> updatedRawProducts = new ArrayList<>();
         try {
+            if (product == null)
+                throw new Exception();
             CsvToBean<RawProduct> csvToBean = getCSVParser();
             List<RawProduct> products = csvToBean.parse();
             updatedRawProducts = products.stream().map
@@ -111,6 +159,7 @@ public class FileStorageUtils implements StorageUtils {
                     .map(x -> new ProductAdapter(x).setDataToRawProduct()).collect(Collectors.toList());
         } catch (Exception e) {
             System.err.println("Error: Can't get the data! Try again!");
+            return;
         }
         addRawProductsFromListToCSV(updatedRawProducts);
     }
@@ -119,6 +168,8 @@ public class FileStorageUtils implements StorageUtils {
     public void modifyProduct(Product before, Product after) {
         List<RawProduct> updatedRawProducts = new ArrayList<>();
         try {
+            if (before == null || after == null)
+                throw new Exception();
             CsvToBean<RawProduct> csvToBean = getCSVParser();
             List<RawProduct> products = csvToBean.parse();
 
@@ -152,7 +203,6 @@ public class FileStorageUtils implements StorageUtils {
         }
     }
 
-    @Override
     public Product getProductByTitle(String title) {
         try {
             CsvToBean<RawProduct> csvToBean = getCSVParser();
@@ -168,7 +218,7 @@ public class FileStorageUtils implements StorageUtils {
         }
     }
 
-    private CsvToBean<RawProduct> getCSVParser() throws FileNotFoundException {
+    public CsvToBean<RawProduct> getCSVParser() throws FileNotFoundException {
         List<String> headersFromClass = new ReflectProductUtils().getFieldsFromClass(new Product());
         List<String> headersFromCSV = getHeadersFromCSV();
 

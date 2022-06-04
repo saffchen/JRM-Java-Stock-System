@@ -17,6 +17,15 @@ public class ReflectProductUtils {
         }
     }
 
+    public void invokeSetter(RawProduct product, String fieldName, Object value) {
+        try {
+            PropertyDescriptor pd = new PropertyDescriptor(fieldName, product.getClass());
+            pd.getWriteMethod().invoke(product, value);
+        } catch (IntrospectionException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+            System.err.println("Error: Can't invoke the setter");
+        }
+    }
+
     public void invokeGetter(Product product, String fieldName) {
         PropertyDescriptor pd;
         try {
@@ -28,6 +37,22 @@ public class ReflectProductUtils {
     }
 
     public List<String> getFieldsFromClass(Product product){
+        List<String> fields = new ArrayList<>();
+
+        try {
+            Field[] productFields = product.getClass().getDeclaredFields();
+            for(Field f : productFields){
+                f.setAccessible(true);
+                fields.add(f.getName());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error: Can't get the field names");
+        }
+        return fields;
+    }
+
+    public List<String> getFieldsFromClass(RawProduct product){
         List<String> fields = new ArrayList<>();
 
         try {
