@@ -1,11 +1,7 @@
 package saffchen.command;
 
 import saffchen.utils.FileUtils;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.security.GeneralSecurityException;
 import java.util.List;
 
@@ -25,7 +21,7 @@ public class ImportCSVCommand implements Command {
                 System.out.println("Success! File saved: " + System.getProperty("user.dir"));
                 fileWriter.close();
             }
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.out.println("File is not found! Please, try again!");
         }
