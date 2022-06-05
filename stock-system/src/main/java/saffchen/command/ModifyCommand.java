@@ -17,8 +17,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static saffchen.utils.MenuUtils.*;
-import static saffchen.utils.ValidationUtil.isStringToDoubleValid;
-import static saffchen.utils.ValidationUtil.isStringToIntegerValid;
+import static saffchen.utils.ValidationUtil.validPositiveDouble;
+import static saffchen.utils.ValidationUtil.validPositiveInteger;
 
 public class ModifyCommand implements Command {
 
@@ -58,13 +58,13 @@ public class ModifyCommand implements Command {
                             inputString = String.valueOf(runGetter(field, product));
                         }
                         // Price validation
-                    } else if (fieldName.equals("price") && !isStringToDoubleValid(inputString)) {
+                    } else if (fieldName.equals("price") && !validPositiveDouble(inputString)) {
                         do {
                             inputString = inputCorrectValue(field, product);
                         }
                         while (!isDoubleValidOrExit(inputString));
                         // Count validation
-                    } else if (fieldName.equals("count") && !isStringToIntegerValid(inputString)) {
+                    } else if (fieldName.equals("count") && !validPositiveInteger(inputString)) {
                         do {
                             inputString = inputCorrectValue(field, product);
                         } while (!isIntegerValidOrExit(inputString));

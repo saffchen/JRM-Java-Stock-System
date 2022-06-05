@@ -6,7 +6,7 @@ package saffchen.utils;
  */
 public class ValidationUtil {
 
-    public static boolean isStringToDoubleValid(String checkingString) {
+    public static boolean validPositiveDouble(String checkingString) {
         try{
             double price = Double.parseDouble(checkingString);
             return price > 0;
@@ -15,7 +15,7 @@ public class ValidationUtil {
         }
     }
 
-    public static boolean isStringToIntegerValid(String checkingString) {
+    public static boolean validPositiveInteger(String checkingString) {
         try{
             int count = Integer.parseInt(checkingString);
             return count >= 0;
