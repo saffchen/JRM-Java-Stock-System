@@ -29,8 +29,6 @@ public class CreateXlsFileCommand implements Command {
 
     @Override
     public void doCommand() throws GeneralSecurityException, IOException {
-        /*System.out.println("Укажите путь, где будет храниться файл");
-        String filePath = new Scanner(System.in).nextLine();*/
         String name;
         do {
             System.out.println("Укажите название файла");
