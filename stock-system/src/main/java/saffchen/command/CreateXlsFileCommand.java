@@ -7,7 +7,9 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
@@ -27,15 +29,15 @@ public class CreateXlsFileCommand implements Command {
 
     @Override
     public void doCommand() throws GeneralSecurityException, IOException {
-        System.out.println("Укажите путь, где будет храниться файл");
-        String filePath = new Scanner(System.in).nextLine();
+        /*System.out.println("Укажите путь, где будет храниться файл");
+        String filePath = new Scanner(System.in).nextLine();*/
         String name;
         do {
             System.out.println("Укажите название файла");
             System.out.println("Имя файла не должно содержать символы: " + DEPRECATED_SYMBOLS);
             name = new Scanner(System.in).nextLine();
         } while (!isNameCorrect(name));
-        String path = filePath + name + ".xls";
+        String path = name + ".xls";
         Sheets sheetsService = getSheetsService();
         String range = "Sheet1!A1:Z1000";
         ValueRange response = sheetsService.spreadsheets().values().get(SPEADSHEET_ID, range).execute();
@@ -51,8 +53,9 @@ public class CreateXlsFileCommand implements Command {
             }
             i++;
         }
-        book.write(new FileOutputStream(path));
-        book.close();
+        FileWriter fileWriter = new FileWriter(new File(System.getProperty("user.dir"), path));
+        System.out.println("Success! File saved: " + System.getProperty("user.dir"));
+        fileWriter.close();
     }
 
     //проверяем исключения
