@@ -21,7 +21,7 @@ import java.util.Properties;
 public class GSheetConnection implements Connection {
 
     private static Properties properties = new Properties();
-
+    public static String RANGE;
     private static String APPLICATION_NAME;
     public static String SPEADSHEET_ID;
     private static Credential authorize() throws IOException, GeneralSecurityException {
@@ -48,6 +48,7 @@ public class GSheetConnection implements Connection {
 
         GSheetConnection.APPLICATION_NAME = properties.getProperty("APPLICATION_NAME");
         GSheetConnection.SPEADSHEET_ID = properties.getProperty("SPEADSHEET_ID");
+        GSheetConnection.RANGE = properties.getProperty("RANGE");
 
         Credential credential = authorize();
         return new Sheets.Builder(GoogleNetHttpTransport.newTrustedTransport(), JacksonFactory.getDefaultInstance(), credential)

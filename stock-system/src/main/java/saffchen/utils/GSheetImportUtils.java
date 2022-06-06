@@ -14,7 +14,7 @@ import java.util.stream.IntStream;
 import static java.util.stream.Collectors.toList;
 
 public class GSheetImportUtils implements ImportUtils {
-    private final String range = "Sheet1!A2:G";
+    private final String RANGE = GSheetConnection.RANGE;
     private Sheets service;
 
     public GSheetImportUtils(Sheets service) {
@@ -28,7 +28,7 @@ public class GSheetImportUtils implements ImportUtils {
         List<String> listOfStrProducts = new ArrayList<>();
         List<RawProduct> products = new ArrayList<>();
         try {
-            result = service.spreadsheets().values().get(GSheetConnection.SPEADSHEET_ID, range).execute();
+            result = service.spreadsheets().values().get(GSheetConnection.SPEADSHEET_ID, RANGE).execute();
             values = result.getValues().stream()
                     .map(list -> {
                         List<String> listOfString = list.stream()
