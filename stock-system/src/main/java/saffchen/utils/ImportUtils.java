@@ -11,12 +11,14 @@ public interface ImportUtils {
         try {
 
             if (gsheetData.isEmpty() || gsheetData == null || csvData.isEmpty() || csvData == null)
-                throw new Exception();
+                throw new IllegalArgumentException();
 
             for (RawProduct fromGsheet : gsheetData) {
                 if (!csvData.contains(fromGsheet))
                     toImport.add(fromGsheet);
             }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: The arguments are not correсt!");
         } catch (Exception e) {
             System.out.println("Error: Can't import the data from gsheet to csv");
         }

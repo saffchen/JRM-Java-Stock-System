@@ -29,7 +29,9 @@ public class GSheetImportUtils implements ImportUtils {
             result = service.spreadsheets().values().get(GSheetConnection.SPEADSHEET_ID, range).execute();
             values = result.getValues();
 
+            //remove the headers
             values.remove(0);
+
             if (values == null || values.isEmpty()) {
                 System.out.println("No data found!");
             } else {
