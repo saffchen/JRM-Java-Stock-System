@@ -11,6 +11,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static java.util.stream.Collectors.toList;
+
 public class GSheetImportUtils implements ImportUtils {
     private final String range = "Sheet1!A2:G";
     private Sheets service;
@@ -22,12 +24,19 @@ public class GSheetImportUtils implements ImportUtils {
     @Override
     public List<RawProduct> getData() {
         ValueRange result = null;
-        List<List<Object>> values = null;
+        List<List<String>> values = null;
         List<String> listOfStrProducts = new ArrayList<>();
         List<RawProduct> products = new ArrayList<>();
         try {
             result = service.spreadsheets().values().get(GSheetConnection.SPEADSHEET_ID, range).execute();
-            values = result.getValues();
+            values = result.getValues().stream()
+                    .map(list -> {
+                        List<String> listOfString = list.stream()
+                                .map(m -> String.valueOf(m))
+                                .collect(Collectors.toList());
+                        return listOfString;
+                    })
+                    .collect(Collectors.toList());
 
             //remove the headers
             values.remove(0);
@@ -35,7 +44,7 @@ public class GSheetImportUtils implements ImportUtils {
             if (values == null || values.isEmpty()) {
                 System.out.println("No data found!");
             } else {
-                for (List row : values) {
+                for (List<String> row : values) {
                     System.out.println(row);
                     listOfStrProducts.add((String) row.stream().collect(Collectors.joining(";")));
                 }
