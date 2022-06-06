@@ -30,18 +30,20 @@ public class ReflectProductUtils {
         PropertyDescriptor pd;
         try {
             pd = new PropertyDescriptor(fieldName, product.getClass());
-            System.out.println(pd.getDisplayName() + "- " + pd.getReadMethod().invoke(product));
+            System.out.println(pd.getDisplayName() + " - " + pd.getReadMethod().invoke(product));
         } catch (IntrospectionException | ReflectiveOperationException | IllegalArgumentException e) {
             System.err.println("Error: Can't invoke the getter");
+        } catch (Exception e) {
+            System.err.println("Error: Can't get the info about getter!");
         }
     }
 
-    public List<String> getFieldsFromClass(Product product){
+    public List<String> getFieldsFromClass(Product product) {
         List<String> fields = new ArrayList<>();
 
         try {
             Field[] productFields = product.getClass().getDeclaredFields();
-            for(Field f : productFields){
+            for (Field f : productFields) {
                 f.setAccessible(true);
                 fields.add(f.getName());
             }
@@ -52,12 +54,12 @@ public class ReflectProductUtils {
         return fields;
     }
 
-    public List<String> getFieldsFromClass(RawProduct product){
+    public List<String> getFieldsFromClass(RawProduct product) {
         List<String> fields = new ArrayList<>();
 
         try {
             Field[] productFields = product.getClass().getDeclaredFields();
-            for(Field f : productFields){
+            for (Field f : productFields) {
                 f.setAccessible(true);
                 fields.add(f.getName());
             }
