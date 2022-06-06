@@ -20,9 +20,7 @@ public class ImportFromGSheetCommand implements Command {
 
     @Override
     public void doCommand() {
-
         try {
-
             FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
             FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
 

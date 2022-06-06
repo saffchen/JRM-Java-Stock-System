@@ -13,16 +13,17 @@ import com.google.api.services.sheets.v4.SheetsScopes;
 import saffchen.command.CreateXlsFileCommand;
 import saffchen.database.Connection;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.security.GeneralSecurityException;
 import java.util.List;
+import java.util.Properties;
 
 public class GSheetConnection implements Connection {
-    private static final String APPLICATION_NAME = "STOCK_VALUES";
-    public static final String SPEADSHEET_ID = "1Rdg7aHSejhaAtuHG9MDv_ktBL8cYFxlvBQJrcUBOBPk";
 
+    private static Properties properties = new Properties();
+
+    private static String APPLICATION_NAME;
+    public static String SPEADSHEET_ID;
     private static Credential authorize() throws IOException, GeneralSecurityException {
         //авторизация по токену, который нужно создать в гугл акке
         InputStream in = GSheetConnection.class.getResourceAsStream("/credentials.json");
@@ -41,6 +42,13 @@ public class GSheetConnection implements Connection {
     }
 
     public static Sheets getSheetsService() throws GeneralSecurityException, IOException {
+        Properties properties = new Properties();
+        properties.load(new InputStreamReader(
+                GSheetConnection.class.getResourceAsStream("/gsheet.properties")));
+
+        GSheetConnection.APPLICATION_NAME = properties.getProperty("APPLICATION_NAME");
+        GSheetConnection.SPEADSHEET_ID = properties.getProperty("SPEADSHEET_ID");
+
         Credential credential = authorize();
         return new Sheets.Builder(GoogleNetHttpTransport.newTrustedTransport(), JacksonFactory.getDefaultInstance(), credential)
                 .setApplicationName(APPLICATION_NAME)
