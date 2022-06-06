@@ -12,7 +12,7 @@ public class ExcelConnection implements Connection{
             return filePath;
         }
 
-        public static saffchen.database.ExcelConnection getInstance(String path) {
+        public static ExcelConnection getInstance(String path) {
             if (connection == null) {
                 connection = new saffchen.database.ExcelConnection(path);
             }
