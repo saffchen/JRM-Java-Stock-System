@@ -18,7 +18,7 @@ public class MenuUtils {
         if (isExit(keyword)) {
             return true;
         } else {
-            return ValidationUtil.isStringToDoubleValid(keyword);
+            return ValidationUtil.validPositiveDouble(keyword);
         }
     }
 
@@ -26,7 +26,7 @@ public class MenuUtils {
         if (isExit(keyword)) {
             return true;
         } else {
-            return ValidationUtil.isStringToIntegerValid(keyword);
+            return ValidationUtil.validPositiveInteger(keyword);
         }
     }
 }
