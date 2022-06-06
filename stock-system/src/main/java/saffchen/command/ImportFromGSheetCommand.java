@@ -22,13 +22,6 @@ public class ImportFromGSheetCommand implements Command {
     public void doCommand() {
 
         try {
-            /*String name = null;
-            do {
-                System.out.println("File name should not contain the follow symbols: " + DEPRECATED_SYMBOLS);
-                System.out.println("Enter a file name.");
-                name = new Scanner(System.in).nextLine();
-            } while (!isNameCorrect(name));
-            */
 
             FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
             FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
@@ -45,7 +38,7 @@ public class ImportFromGSheetCommand implements Command {
     }
 
     private boolean isNameCorrect(String name) {
-        for (String deprecatedSymbol: DEPRECATED_SYMBOLS) {
+        for (String deprecatedSymbol : DEPRECATED_SYMBOLS) {
             if (name.contains(deprecatedSymbol)) {
                 System.err.println("Ошибка, введите название корректно!");
                 return false;

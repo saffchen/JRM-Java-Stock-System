@@ -15,6 +15,7 @@ import java.util.List;
 
 public class ExcelImportUtils implements ImportUtils {
     private ExcelConnection excelConnection;
+    private final int COMLUMN_COUNT = 7;
 
     public ExcelImportUtils(ExcelConnection excelConnection) {
         this.excelConnection = excelConnection;
@@ -33,19 +34,19 @@ public class ExcelImportUtils implements ImportUtils {
             ReflectProductUtils reflectProductUtils = new ReflectProductUtils();
             List<String> headersFromClass = reflectProductUtils.getFieldsFromClass(new RawProduct());
 
-            for (int i = 1; i < myExcelSheet.getLastRowNum(); i++ ){
+            for (int i = 1; i < myExcelSheet.getLastRowNum(); i++) {
                 row = myExcelSheet.getRow(i);
                 RawProduct rawProduct = new RawProduct();
                 String strValueInCell = null;
-                for (int j = 0; j < 7; j++){
-                    if(row.getCell(j).getCellType() == XSSFCell.CELL_TYPE_STRING)
+                for (int j = 0; j < COMLUMN_COUNT; j++) {
+                    if (row.getCell(j).getCellType() == XSSFCell.CELL_TYPE_STRING)
                         strValueInCell = row.getCell(j).getStringCellValue();
-                    if(row.getCell(j).getCellType() == XSSFCell.CELL_TYPE_NUMERIC) {
+                    if (row.getCell(j).getCellType() == XSSFCell.CELL_TYPE_NUMERIC) {
                         strValueInCell = String.valueOf(row.getCell(j).getNumericCellValue());
                     }
                     reflectProductUtils.invokeSetter(rawProduct,
-                                                    headersFromClass.get(j),
-                                                    (Object) strValueInCell);
+                            headersFromClass.get(j),
+                            (Object) strValueInCell);
                 }
                 products.add(rawProduct);
             }
@@ -56,11 +57,11 @@ public class ExcelImportUtils implements ImportUtils {
         } catch (Exception e) {
             try {
                 myExcelBook.close();
-            } catch (Exception a){
+            } catch (Exception a) {
                 System.out.println("Error: Can't close the file");
             }
         }
-    return products;
+        return products;
     }
 
 
