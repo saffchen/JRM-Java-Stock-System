@@ -1,6 +1,7 @@
 package saffchen.command;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -21,10 +22,10 @@ public class AddSatellite implements Command {
             System.out.print("Введите название нового склада: ");
             String str = new Scanner(System.in).nextLine().toUpperCase(Locale.ROOT);
             if (str.equals("EXIT")) break;
-            BufferedWriter writer = new BufferedWriter(new FileWriter("satellite.txt", true));
-            writer.append("\n");
-            writer.append(str);
-            writer.close();
+            FileWriter fileWriter = new FileWriter(new File(System.getProperty("user.dir"), "satellite.txt"));
+            fileWriter.append("\n");
+            fileWriter.append(str);
+            fileWriter.close();
         }
     }
 }

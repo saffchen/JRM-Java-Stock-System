@@ -60,11 +60,7 @@ public class Product {
                     setDescription(value);
                     break;
                 case "price":
-                    try{
-                        setPrice(Double.parseDouble(value));
-                    } catch (NumberFormatException e) {
-                        e.printStackTrace();
-                    }
+                    setPrice(Double.parseDouble(value));
                     break;
                 case "tags":
                     setTags(Arrays.asList(value.split("\\s")));
@@ -73,11 +69,7 @@ public class Product {
                     setCategory(value);
                     break;
                 case "count":
-                    try {
-                        setCount(Integer.parseInt(value));
-                    } catch (NumberFormatException e) {
-                        e.printStackTrace();
-                    }
+                    setCount(Integer.parseInt(value));
                     break;
                 case "satellite":
                     setSatellite(value);

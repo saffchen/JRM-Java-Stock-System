@@ -51,6 +51,45 @@ public class FileStorageUtils implements StorageUtils {
         return headers;
     }
 
+    public List<RawProduct> getDataFromCSV() {
+        List<RawProduct> products = null;
+        try {
+            CsvToBean<RawProduct> csvToBean = getCSVParser();
+            products = csvToBean.parse();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            System.err.println("Error: Can't get the data from csv.");
+        }
+        return products;
+    }
+
+    public void addHeadersToCSV(String headers) {
+        FileWriter productToCsv = null;
+        try {
+            productToCsv = new FileWriter(fileConnection.getFilePath(), false);
+            productToCsv.write(headers);
+            productToCsv.close();
+
+            System.out.println("Headers were added to database successfully!");
+        } catch (IOException e) {
+            System.err.println("Error: Can't write the headers to csv");
+            try {
+                productToCsv.close();
+            } catch (IOException ioException) {
+                System.out.println("");
+            }
+        } catch (Exception e) {
+            System.err.println("Error: Can't write the headers to csv");
+            try {
+                productToCsv.close();
+            } catch (IOException ioException) {
+                System.out.println("Error: Can't close the csv");
+            }
+        }
+    }
+
     @Override
     public void addProduct(Product product) {
         RawProduct rawProduct = new ProductAdapter(product).setDataToRawProduct();
@@ -79,84 +118,70 @@ public class FileStorageUtils implements StorageUtils {
         }
     }
 
-    private void addRawProductsFromListToCSV(List<RawProduct> rawProducts) {
+    public String addRawProductsFromListToCSV(List<RawProduct> rawProducts) {
         FileWriter productToCsv = null;
         try {
+            if (rawProducts == null)
+                throw new Exception();
+            if (rawProducts.isEmpty()) {
+                return "There ara no data for import";
+            }
+
             String headersString = getHeadersFromCSV().stream().collect(Collectors.joining(";")).toString();
-            productToCsv = new FileWriter(fileConnection.getFilePath(), false);
-            productToCsv.write(headersString);
+            productToCsv = new FileWriter(fileConnection.getFilePath(), true);
             for (RawProduct rawProduct : rawProducts)
                 productToCsv.write(rawProduct.toCSVString(";"));
 
             productToCsv.close();
         } catch (Exception e) {
-            System.err.println("Error: Can't write data");
             try {
                 productToCsv.close();
             } catch (IOException ioException) {
-                System.out.println("");
+                return "Error: Can't close the file!";
             }
         }
+        return "Data were imported successfully!";
     }
 
     @Override
     public void deleteProduct(Product product) {
-        List<RawProduct> updatedProducts = new ArrayList<>();
+        List<RawProduct> updatedRawProducts = new ArrayList<>();
         try {
+            if (product == null)
+                throw new Exception();
             CsvToBean<RawProduct> csvToBean = getCSVParser();
             List<RawProduct> products = csvToBean.parse();
-            updatedProducts = products.stream().map
+            updatedRawProducts = products.stream().map
                     (x -> new ProductAdapter(x).getProduct())
                     .filter(x -> !x.getTitle().equals(product.getTitle()))
                     .map(x -> new ProductAdapter(x).setDataToRawProduct()).collect(Collectors.toList());
         } catch (Exception e) {
             System.err.println("Error: Can't get the data! Try again!");
+            return;
         }
-
-        FileWriter productToCsv = null;
-        try {
-            String headersString = getHeadersFromCSV().stream().collect(Collectors.joining(";")).toString();
-            productToCsv = new FileWriter(fileConnection.getFilePath(), false);
-            productToCsv.write(headersString);
-            for (RawProduct rawProduct : updatedProducts) {
-                productToCsv.write(rawProduct.toCSVString(";"));
-            }
-            productToCsv.close();
-
-            System.out.println("Product was deleted from database successfully!");
-        } catch (IOException e) {
-            System.err.println("Error: Can't write data");
-            try {
-                productToCsv.close();
-            } catch (IOException ioException) {
-                System.out.println("");
-            }
-        } catch (Exception e) {
-            System.err.println("Error: Can't write data");
-            try {
-                productToCsv.close();
-            } catch (IOException ioException) {
-                System.out.println("");
-            }
-        }
+        addRawProductsFromListToCSV(updatedRawProducts);
     }
 
     @Override
     public void modifyProduct(Product before, Product after) {
-        List<RawProduct> tempRawProducts = new ArrayList<>();
+        List<RawProduct> updatedRawProducts = new ArrayList<>();
         try {
+            if (before == null || after == null)
+                throw new Exception();
             CsvToBean<RawProduct> csvToBean = getCSVParser();
             List<RawProduct> products = csvToBean.parse();
 
             for (RawProduct product : products) {
                 if (product.getTitle().equals(before.getTitle()) &&
                         !product.equals(after)) {
-                    tempRawProducts.add(new ProductAdapter(after).setDataToRawProduct());
+                    updatedRawProducts.add(new ProductAdapter(after).setDataToRawProduct());
+                    System.out.println(String.format("You have modified an old product\n %s\n" +
+                            "to a new product\n %s\n", before, after));
                 } else {
-                    tempRawProducts.add(product);
+                    updatedRawProducts.add(product);
                 }
             }
-            addRawProductsFromListToCSV(tempRawProducts);
+            addRawProductsFromListToCSV(updatedRawProducts);
         } catch (Exception e) {
             System.err.println("Error: Can't get the data! Try again!");
         }
@@ -176,7 +201,6 @@ public class FileStorageUtils implements StorageUtils {
         }
     }
 
-    @Override
     public Product getProductByTitle(String title) {
         try {
             CsvToBean<RawProduct> csvToBean = getCSVParser();
@@ -192,7 +216,7 @@ public class FileStorageUtils implements StorageUtils {
         }
     }
 
-    private CsvToBean<RawProduct> getCSVParser() throws FileNotFoundException {
+    public CsvToBean<RawProduct> getCSVParser() throws FileNotFoundException {
         List<String> headersFromClass = new ReflectProductUtils().getFieldsFromClass(new Product());
         List<String> headersFromCSV = getHeadersFromCSV();
 
@@ -235,7 +259,6 @@ public class FileStorageUtils implements StorageUtils {
                 if (fieldName.contains(criteries)) {
                     ProductAdapter productAdapter = new ProductAdapter(product);
                     products.add(productAdapter.getProduct());
-                    //System.out.println(product.getTitle() + ":" + product.getDescription() + ":" + product.getPrice());
                 }
             }
 
