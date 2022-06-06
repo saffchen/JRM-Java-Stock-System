@@ -118,31 +118,29 @@ public class FileStorageUtils implements StorageUtils {
         }
     }
 
-    public void addRawProductsFromListToCSV(List<RawProduct> rawProducts) {
+    public String addRawProductsFromListToCSV(List<RawProduct> rawProducts) {
         FileWriter productToCsv = null;
         try {
             if (rawProducts == null)
                 throw new Exception();
             if (rawProducts.isEmpty()) {
-                System.out.println("There ara no data for import");
-                return;
+                return "There ara no data for import";
             }
 
             String headersString = getHeadersFromCSV().stream().collect(Collectors.joining(";")).toString();
             productToCsv = new FileWriter(fileConnection.getFilePath(), true);
-            //productToCsv.write(headersString);
             for (RawProduct rawProduct : rawProducts)
                 productToCsv.write(rawProduct.toCSVString(";"));
 
             productToCsv.close();
         } catch (Exception e) {
-            System.err.println("Error: Can't write data");
             try {
                 productToCsv.close();
             } catch (IOException ioException) {
-                System.out.println("");
+                return "Error: Can't close the file!";
             }
         }
+        return "Data were imported successfully!";
     }
 
     @Override

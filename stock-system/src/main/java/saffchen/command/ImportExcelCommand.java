@@ -23,27 +23,24 @@ public class ImportExcelCommand implements Command {
     public void doCommand() throws GeneralSecurityException, IOException {
 
         try {
-            String filePath = null;
+            String fileName = null;
             do{
-                System.out.print("Enter the path of XLSX file or EXIT: ");
-                filePath = new Scanner(System.in).nextLine();
-                if (filePath.trim().toUpperCase().equals("EXIT"))
+                System.out.print("Enter the name of XLSX file or EXIT: ");
+                fileName = new Scanner(System.in).nextLine();
+                if (fileName.trim().toUpperCase().equals("EXIT"))
                     return;
-            } while(!Files.exists(Path.of(filePath)));
-            System.out.println(filePath);
-            ExcelConnection fileExcelConnection = ExcelConnection.getInstance(filePath);
+            } while(!Files.exists(Path.of(fileName)));
+            ExcelConnection fileExcelConnection = ExcelConnection.getInstance(fileName);
             FileConnection fileCsvConnection = FileConnection.getInstance("stock_import_csv.csv");
 
             FileStorageUtils fileStorageUtils = new FileStorageUtils(fileCsvConnection);
             ExcelImportUtils excelImportUtils = new ExcelImportUtils(fileExcelConnection);
 
-            fileStorageUtils.addRawProductsFromListToCSV(excelImportUtils.checkTheDublicates(
+            String result = fileStorageUtils.addRawProductsFromListToCSV(excelImportUtils.checkTheDublicates(
                     excelImportUtils.getData(),
                     fileStorageUtils.getDataFromCSV())
             );
-
-            System.out.println("Data were imported successfully!");
-
+            System.out.println(result);
         } catch (Exception e) {
             System.out.println("Error: Can't get data for import");;
         }
