@@ -95,5 +95,12 @@
             <artifactId>log4j-core</artifactId>
             <version>${org.apache.logging.log4j.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mindrot/jbcrypt -->
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.4</version>
+        </dependency>
+
     </dependencies>
 </project>
