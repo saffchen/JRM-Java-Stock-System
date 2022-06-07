@@ -1,22 +1,25 @@
 package saffchen;
 
 import saffchen.command.*;
+import saffchen.database.Authorization;
+import saffchen.database.User;
 import saffchen.utils.*;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 public class MenuRunner {
     public static void main(String[] args) {
         CommandHolder holder = new CommandHolder();
-        Scanner scanner = new Scanner(System.in);
 
+        Scanner scanner = new Scanner(System.in);
         System.out.println(FileUtils.getBanner());
         System.out.println(FileUtils.getParticipants());
 
         holder.printCommandInfo();
-
         String inputCommand = "";
         while (true) {
             try {
@@ -28,7 +31,7 @@ public class MenuRunner {
                     }
                 }
             } catch (Exception e) {
-               System.out.println("Unsupported operation \"" + inputCommand + "\". Try again.");
+                System.out.println("Unsupported operation \"" + inputCommand + "\". Try again.");
             }
         }
     }
