@@ -31,7 +31,7 @@ public class ModifyCommand implements Command {
 
     @Override
     public void doCommand() throws IOException {
-        if (ModifyCommand.authUser != null) {
+        if (ModifyCommand.authUser == null) {
             Scanner creds = new Scanner(System.in);
             boolean isFailed = true;
             try {
@@ -41,7 +41,7 @@ public class ModifyCommand implements Command {
                     System.out.println("Enter login and password (Attempt count = " + (Authorization.ATTEMPT_COUNT - i) + ")");
                     System.out.print("login: ");
                     String login = creds.nextLine().trim().toLowerCase();
-                    System.out.println("Enter the password: ");
+                    System.out.print("Enter the password: ");
                     String password = creds.nextLine();
 
                     ModifyCommand.authUser = authorization.authorize(login, password);
@@ -132,7 +132,6 @@ public class ModifyCommand implements Command {
         return inputString;
     }
 
-    // https://stackoverflow.com/questions/13400075/reflection-generic-get-field-value
     private Object runGetter(Field field, Product product) {
         for (Method method : product.getClass()
                 .getMethods()) {
