@@ -5,7 +5,7 @@
     <jmxConfigurator/>
 
     <appender name="file" class="ch.qos.logback.core.FileAppender">
-        <file>${JRM_Java_Stock_System}/log/StockSystem.log</file>
+        <file>${JRM_JAVA_STOCK_SYSTEM}/log/StockSystem.log</file>
 
         <encoder>
             <charset>UTF-8</charset>
