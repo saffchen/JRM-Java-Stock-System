@@ -1,5 +1,7 @@
 package saffchen.command;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import saffchen.database.FileConnection;
 import saffchen.product.Product;
 import saffchen.utils.FileStorageUtils;
@@ -16,11 +18,14 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static org.slf4j.LoggerFactory.getLogger;
 import static saffchen.utils.MenuUtils.*;
 import static saffchen.utils.ValidationUtil.validPositiveDouble;
 import static saffchen.utils.ValidationUtil.validPositiveInteger;
 
 public class ModifyCommand implements Command {
+
+    private static final Logger log = getLogger(ModifyCommand.class);
 
     private BufferedReader bufferedReader;
 
@@ -72,6 +77,10 @@ public class ModifyCommand implements Command {
                     newFieldsMap.put(fieldName, inputString);
                     System.out.println();
                 }
+                //https://github.com/logfellow/logstash-logback-encoder#pattern-json-provider
+                //https://www.loggly.com/ultimate-guide/java-logging-basics/
+                //https://stackoverflow.com/questions/22615311/is-there-a-logback-layout-that-creates-json-objects-with-message-parameters-as-a
+                log.info("--- MODIFY_PRODUCT --- {}", product);
                 fileStorageUtils.modifyProduct(product, new Product(newFieldsMap));
             } else {
                 System.out.println(String.format("Данный продукт %s не найден/There is no %<s product", inputString));
