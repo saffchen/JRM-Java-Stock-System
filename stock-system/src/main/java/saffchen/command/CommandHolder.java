@@ -17,8 +17,8 @@ public class CommandHolder {
         addCommand("IMPORT_GSHEET", new ImportFromGSheetCommand());
         addCommand("IMPORT_EXCEL", new ImportExcelCommand());
         addCommand("IMPORT_CSV", new ImportCSVCommand());
-        addCommand("EXIT", new ExitCommand());
         addCommand("ADD_SATELLITE", new AddSatellite());
+        addCommand("EXIT", new ExitCommand());
     }
 
     public Map<String, Command> getCommandHolder() {
