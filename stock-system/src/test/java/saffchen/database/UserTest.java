@@ -7,6 +7,10 @@ import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserTest {
@@ -30,6 +34,23 @@ class UserTest {
 
     @Test
     void isAuthorized() {
+        try {
+            Field authorized = user.getClass().getDeclaredField("authorized");
+            HashMap<String, Boolean> auth = new HashMap<String, Boolean>();
+            auth.put("password", Boolean.TRUE);
+            auth.put("login", Boolean.TRUE);
+            authorized.setAccessible(true);
+            authorized.set(user, auth);
+            assertTrue(user.isAuthorized());
+
+            auth.put("password", Boolean.FALSE);
+            auth.put("login", Boolean.TRUE);
+            authorized.setAccessible(true);
+            authorized.set(user, auth);
+            assertFalse(user.isAuthorized());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 }
