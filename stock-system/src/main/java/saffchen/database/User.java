@@ -51,5 +51,4 @@ public class User {
         return authorized.get("password") && authorized.get("login");
     }
 
-
 }

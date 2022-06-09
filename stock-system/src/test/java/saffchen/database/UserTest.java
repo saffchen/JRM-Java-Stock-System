@@ -2,26 +2,29 @@ package saffchen.database;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserTest {
     User user = new User();
 
-    @Test
-    void checkPassword() {
-        boolean check = user.checkPassword(null);
+    @ParameterizedTest
+    @NullSource
+    @EmptySource
+    void checkPassword(String pass) {
+        boolean check = user.checkPassword(pass);
         assertFalse(check);
-        check = user.checkPassword("");
-        assertFalse(check);
-
     }
 
-    @Test
-    void checkTheLogin() {
-        boolean check = user.checkTheLogin(null);
-        assertFalse(check);
-        check = user.checkTheLogin("");
+    @ParameterizedTest
+    @NullSource
+    @EmptySource
+    void checkTheLogin(String login) {
+        boolean check = user.checkTheLogin(login);
         assertFalse(check);
     }
 
