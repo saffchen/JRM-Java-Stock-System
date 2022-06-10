@@ -23,6 +23,11 @@ public class ModifyCommand implements Command {
     private static User authUser = null;
     private static final Authorization authorization = new Authorization();
     private BufferedReader bufferedReader;
+    private Exit exit;
+
+    private void setExit(Exit exit) {
+        this.exit = exit;
+    }
 
     @Override
     public String getInfo() {
@@ -41,6 +46,10 @@ public class ModifyCommand implements Command {
                     System.out.println("Enter login and password (Attempt count = " + (Authorization.ATTEMPT_COUNT - i) + ")");
                     System.out.print("login: ");
                     String login = creds.nextLine().trim().toLowerCase();
+                    if (creds.equals("exit")) {
+                        setExit(new ExitFromCommandMenu());
+                        exit.doSmth();
+                    }
                     System.out.print("Enter the password: ");
                     String password = creds.nextLine();
 

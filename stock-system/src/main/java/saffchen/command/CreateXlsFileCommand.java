@@ -20,7 +20,12 @@ import static saffchen.export_excel.CreateExcel.SPEADSHEET_ID;
 import static saffchen.export_excel.CreateExcel.getSheetsService;
 
 public class CreateXlsFileCommand implements Command {
+    private Exit exit;
     private static final List <String> DEPRECATED_SYMBOLS = List.of("/", "|", "?", "*", "<", ">", "!");
+
+    private void setExit(Exit exit) {
+        this.exit = exit;
+    }
 
     @Override
     public String getInfo() {
@@ -28,13 +33,17 @@ public class CreateXlsFileCommand implements Command {
     }
 
     @Override
-    public void doCommand() throws GeneralSecurityException, IOException {
+    public void doCommand() throws Exception {
         String name;
         do {
             System.out.println("Укажите название файла");
             System.out.println("Имя файла не должно содержать символы: " + DEPRECATED_SYMBOLS);
             name = new Scanner(System.in).nextLine();
         } while (!isNameCorrect(name));
+        if (name.equals("exit")) {
+            setExit(new ExitFromCommandMenu());
+            exit.doSmth();
+        }
         String path = name + ".xls";
         Sheets sheetsService = getSheetsService();
         String range = "Sheet1!A1:Z1000";

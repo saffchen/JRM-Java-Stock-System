@@ -14,6 +14,11 @@ import java.security.GeneralSecurityException;
 import java.util.Scanner;
 
 public class ImportExcelCommand implements Command {
+    private Exit exit;
+
+    private void setExit(Exit exit) {
+        this.exit = exit;
+    }
     @Override
     public String getInfo() {
         return "Write an \"import_excel\" if you want to save change to excel";
@@ -27,8 +32,10 @@ public class ImportExcelCommand implements Command {
             do{
                 System.out.print("Enter the name of XLSX file or EXIT: ");
                 fileName = new Scanner(System.in).nextLine();
-                if (fileName.trim().toUpperCase().equals("EXIT"))
-                    return;
+                if (fileName.equals("exit")) {
+                    setExit(new ExitFromCommandMenu());
+                    exit.doSmth();
+                }
             } while(!Files.exists(Path.of(fileName)));
             ExcelConnection fileExcelConnection = ExcelConnection.getInstance(fileName);
             FileConnection fileCsvConnection = FileConnection.getInstance("stock_import_csv.csv");

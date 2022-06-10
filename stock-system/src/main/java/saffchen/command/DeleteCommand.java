@@ -10,6 +10,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class DeleteCommand implements Command {
+    private Exit exit;
+
+    private void setExit(Exit exit) {
+        this.exit = exit;
+    }
 
     @Override
     public String getInfo() {
@@ -17,12 +22,15 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public void doCommand() throws IOException {
+    public void doCommand() throws Exception {
+        System.out.println("Если вы хотите выйти введите exit/ If you want to exit - please. input exit");
         System.out.println("Введите имя продукта, который вы хотите удалить/Please, input the product name for deletion");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Имя продукта/The product name is: ");
         String title = bufferedReader.readLine();
-
+        if (title.equals("exit")) {
+            setExit(new ExitFromCommandMenu());
+            exit.doSmth();}
         FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
         FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
         Product product = fileStorageUtils.getProductByTitle(title);
