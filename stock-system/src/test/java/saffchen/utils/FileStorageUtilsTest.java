@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mockito;
 import org.mockito.stubbing.OngoingStubbing;
 import saffchen.database.FileConnection;
+import saffchen.product.Product;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class FileStorageUtilsTest {
@@ -66,7 +68,26 @@ class FileStorageUtilsTest {
 
 
     @Test
+
     void addProduct() {
+        Product product = new Product("title", "description", 11111.1, new ArrayList<String>(), "category",6, "satellite");
+        FileConnection fc = Mockito.mock(FileConnection.class);
+        FileStorageUtils fsu = new FileStorageUtils(fc);
+
+        PrintStream originalOut = System.out;
+        String consoleOutput = "";
+        try {
+            ByteArrayOutputStream out = new ByteArrayOutputStream(200);
+            PrintStream capture = new PrintStream(out);
+            System.setOut(capture);
+            fsu.addProduct(product);
+            capture.flush();
+            consoleOutput = out.toString();
+            System.setOut(originalOut);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("Product was added to database successfully!", consoleOutput.trim());
     }
 
     @Test

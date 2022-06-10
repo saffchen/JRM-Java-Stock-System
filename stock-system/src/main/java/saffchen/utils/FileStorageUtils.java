@@ -94,8 +94,14 @@ public class FileStorageUtils implements StorageUtils {
         }
     }
 
+
+
     @Override
     public void addProduct(Product product) {
+        if (product == null) {
+            System.out.println("Error: There is no product for add!");
+            return;
+        }
         RawProduct rawProduct = new ProductAdapter(product).setDataToRawProduct();
         FileWriter productToCsv = null;
         try {
