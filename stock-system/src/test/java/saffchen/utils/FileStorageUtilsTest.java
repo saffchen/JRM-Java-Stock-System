@@ -2,9 +2,16 @@ package saffchen.utils;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mockito;
+import org.mockito.stubbing.OngoingStubbing;
 import saffchen.database.FileConnection;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -32,11 +39,31 @@ class FileStorageUtilsTest {
 
     @Test
     void getDataFromCSV() {
+
     }
 
-    @Test
-    void addHeadersToCSV() {
+    @ParameterizedTest
+    @NullSource
+    @EmptySource
+    void addHeadersToCSV(String headers) {
+        PrintStream originalOut = System.out;
+        String consoleOutput = "";
+        try {
+            ByteArrayOutputStream out = new ByteArrayOutputStream(200);
+            PrintStream capture = new PrintStream(out);
+            System.setOut(capture);
+            FileConnection fc = Mockito.mock(FileConnection.class);
+            FileStorageUtils fsu = new FileStorageUtils(fc);
+            fsu.addHeadersToCSV(headers);
+            capture.flush();
+            consoleOutput = out.toString();
+            System.setOut(originalOut);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("Error: There are no headers in the string!", consoleOutput.trim());
     }
+
 
     @Test
     void addProduct() {

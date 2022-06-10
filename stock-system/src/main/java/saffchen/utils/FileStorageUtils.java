@@ -66,6 +66,10 @@ public class FileStorageUtils implements StorageUtils {
     }
 
     public void addHeadersToCSV(String headers) {
+        if (headers == null || headers.isEmpty()){
+            System.out.println("Error: There are no headers in the string!");
+            return;
+        }
         FileWriter productToCsv = null;
         try {
             productToCsv = new FileWriter(fileConnection.getFilePath(), false);
