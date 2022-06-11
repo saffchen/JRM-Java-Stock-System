@@ -25,9 +25,8 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public void doCommand() throws IOException {
-        logger.info(" --- DELETE_PRODUCT --- ");
     public void doCommand() throws Exception {
+        logger.info(" --- DELETE_PRODUCT --- ");
         System.out.println("Если вы хотите выйти введите exit/ If you want to exit - please. input exit");
         System.out.println("Введите имя продукта, который вы хотите удалить/Please, input the product name for deletion");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));

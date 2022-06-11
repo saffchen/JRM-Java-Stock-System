@@ -6,6 +6,8 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -35,7 +37,7 @@ public class CreateXlsFileCommand implements Command {
     }
 
     @Override
-    public void doCommand() throws GeneralSecurityException, IOException {
+    public void doCommand() throws Exception {
         logger.info(" --- EXPORT_EXCEL ---");
         String name;
         do {

@@ -21,6 +21,7 @@ public class ImportExcelCommand implements Command {
     private void setExit(Exit exit) {
         this.exit = exit;
     }
+
     private static final Logger logger
             = LoggerFactory.getLogger(ImportExcelCommand.class);
 
@@ -34,14 +35,14 @@ public class ImportExcelCommand implements Command {
         logger.info(" --- IMPORT_EXCEL ---");
         try {
             String fileName = null;
-            do{
+            do {
                 System.out.print("Enter the name of XLSX file or EXIT: ");
                 fileName = new Scanner(System.in).nextLine();
                 if (fileName.equals("exit")) {
                     setExit(new ExitFromCommandMenu());
                     exit.doSmth();
                 }
-            } while(!Files.exists(Path.of(fileName)));
+            } while (!Files.exists(Path.of(fileName)));
             ExcelConnection fileExcelConnection = ExcelConnection.getInstance(fileName);
             FileConnection fileCsvConnection = FileConnection.getInstance("stock_import_csv.csv");
 
@@ -54,7 +55,8 @@ public class ImportExcelCommand implements Command {
             );
             System.out.println(result);
         } catch (Exception e) {
-            System.out.println("Error: Can't get data for import");;
+            System.out.println("Error: Can't get data for import");
+            ;
         }
     }
 }

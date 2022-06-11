@@ -1,5 +1,7 @@
 package saffchen.command;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import saffchen.database.Authorization;
 import saffchen.database.FileConnection;
 import saffchen.database.User;
@@ -14,8 +16,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Collectors;
-
-import static org.slf4j.LoggerFactory.getLogger;
 import static saffchen.utils.MenuUtils.*;
 import static saffchen.utils.ValidationUtil.validPositiveDouble;
 import static saffchen.utils.ValidationUtil.validPositiveInteger;
@@ -41,6 +41,41 @@ public class ModifyCommand implements Command {
     @Override
     public void doCommand() throws IOException {
         logger.info(" --- MODIFY_PRODUCT --- ");
+
+        if (ModifyCommand.authUser == null) {
+            Scanner creds = new Scanner(System.in);
+            boolean isFailed = true;
+            try {
+
+                for (int i = 0; i < Authorization.ATTEMPT_COUNT; i++) {
+
+                    System.out.println("Enter login and password (Attempt count = " + (Authorization.ATTEMPT_COUNT - i) + ")");
+                    System.out.print("login: ");
+                    String login = creds.nextLine().trim().toLowerCase();
+                    if (creds.equals("exit")) {
+                        setExit(new ExitFromCommandMenu());
+                        exit.doSmth();
+                    }
+                    System.out.print("Enter the password: ");
+                    String password = creds.nextLine();
+
+                    ModifyCommand.authUser = authorization.authorize(login, password);
+                    if (ModifyCommand.authUser == null)
+                        System.out.println("Fail: Check login or password");
+                    else {
+                        System.out.println("Successful!");
+                        isFailed = false;
+                        break;
+                    }
+                }
+                if (isFailed)
+                    return;
+            } catch (Exception e) {
+                System.out.println("Error: Authorization was broken!");
+            }
+        }
+
+
         bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String inputString = inputProductNameOrExit();
 
