@@ -28,6 +28,8 @@ public class FileUtils {
     public static List<User> getUsersFromFile(String path) {
         List<User> users = new ArrayList<>();
         String str = null;
+        if (path == null || path.isEmpty())
+            return users;
         try (Scanner reader = new Scanner(new InputStreamReader(
                 FileUtils.class.getResourceAsStream("/" + path)))) {
             while (reader.hasNext()) {
@@ -44,7 +46,6 @@ public class FileUtils {
             e.printStackTrace();
             System.out.println("Error: Unknown error");
         }
-
         return users;
     }
 

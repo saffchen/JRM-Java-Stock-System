@@ -9,12 +9,8 @@ import java.util.Map;
 public class User {
     private String login;
     private String passHash;
-    private Map<String, Boolean> authorized = new HashMap<>();
-
-    {
-        authorized.put("login", Boolean.FALSE);
-        authorized.put("password", Boolean.FALSE);
-    }
+    private Map<String, Boolean> authorized =
+            new HashMap<>(Map.of("login", Boolean.FALSE, "password", Boolean.FALSE));
 
     public boolean checkPassword(String password) {
 
@@ -50,6 +46,5 @@ public class User {
     public boolean isAuthorized() {
         return authorized.get("password") && authorized.get("login");
     }
-
 
 }

@@ -22,8 +22,11 @@
         <apachepdfbox.version>2.0.0</apachepdfbox.version>
         <apachepoi.version>3.12</apachepoi.version>
         <itextpdf.version>5.5.13.3</itextpdf.version>
-        <org.apache.logging.log4j.version>2.17.1</org.apache.logging.log4j.version>
         <maven-clean.version>2.6.1</maven-clean.version>
+
+        <!-- Logging -->
+        <logback.version>1.2.11</logback.version>
+        <slf4j.version>1.7.36</slf4j.version>
     </properties>
     <build>
         <plugins>
@@ -90,16 +93,32 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+        <!-- Logging with SLF4J & LogBack -->
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${org.apache.logging.log4j.version}</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+            <scope>runtime</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.mindrot/jbcrypt -->
         <dependency>
             <groupId>org.mindrot</groupId>
             <artifactId>jbcrypt</artifactId>
             <version>0.4</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>4.5.1</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

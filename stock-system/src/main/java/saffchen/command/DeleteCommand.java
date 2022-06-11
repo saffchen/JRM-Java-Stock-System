@@ -1,31 +1,44 @@
 package saffchen.command;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import saffchen.database.FileConnection;
 import saffchen.product.Product;
 import saffchen.utils.FileStorageUtils;
 import saffchen.utils.MenuUtils;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class DeleteCommand implements Command {
+    private Exit exit;
 
+    private void setExit(Exit exit) {
+        this.exit = exit;
+    }
+
+    private static final Logger logger
+            = LoggerFactory.getLogger(DeleteCommand.class);
     @Override
     public String getInfo() {
         return "Write an \"delete_product\" if you want to delete product";
     }
 
     @Override
-    public void doCommand() throws IOException {
+    public void doCommand() throws Exception {
+        logger.info(" --- DELETE_PRODUCT --- ");
+        System.out.println("Если вы хотите выйти введите exit/ If you want to exit - please. input exit");
         System.out.println("Введите имя продукта, который вы хотите удалить/Please, input the product name for deletion");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Имя продукта/The product name is: ");
         String title = bufferedReader.readLine();
-
+        if (title.equals("exit")) {
+            setExit(new ExitFromCommandMenu());
+            exit.doSmth();}
         FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
         FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
         Product product = fileStorageUtils.getProductByTitle(title);
+        logger.info(" --- DELETE_PRODUCT --- {{}}", product);
         if (product == null) {
             System.out.println(String.format("Данный продукт %s не найден/There is no %<s product", title));
         } else {

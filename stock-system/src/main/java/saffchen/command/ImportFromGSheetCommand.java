@@ -1,5 +1,7 @@
 package saffchen.command;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import saffchen.database.FileConnection;
 import saffchen.database.GSheetConnection;
 import saffchen.utils.FileStorageUtils;
@@ -11,6 +13,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ImportFromGSheetCommand implements Command {
+    private static final Logger logger
+            = LoggerFactory.getLogger(ImportFromGSheetCommand.class);
+
     private static final List<String> DEPRECATED_SYMBOLS = List.of("/", "|", "?", "*", "<", ">", "!");
 
     @Override
@@ -20,6 +25,7 @@ public class ImportFromGSheetCommand implements Command {
 
     @Override
     public void doCommand() {
+        logger.info(" --- IMPORT_GSHEET ---");
         try {
             FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
             FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
