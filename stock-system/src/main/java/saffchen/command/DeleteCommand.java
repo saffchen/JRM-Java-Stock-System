@@ -6,7 +6,6 @@ import saffchen.database.FileConnection;
 import saffchen.product.Product;
 import saffchen.utils.FileStorageUtils;
 import saffchen.utils.MenuUtils;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -30,6 +29,7 @@ public class DeleteCommand implements Command {
         FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
         FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
         Product product = fileStorageUtils.getProductByTitle(title);
+        logger.info(" --- DELETE_PRODUCT --- {{}}", product);
         if (product == null) {
             System.out.println(String.format("Данный продукт %s не найден/There is no %<s product", title));
         } else {
@@ -42,7 +42,6 @@ public class DeleteCommand implements Command {
             } else {
                 System.out.println(String.format("Вы не подтвердили удаление вводом команды Да. Вы вели %s." +
                         "/You haven't confirmed the deletion using the command Yes. You input is %<s", answer));
-                logger.info(" --- DELETE_PRODUCT --- {{}}", product);
             }
         }
     }
