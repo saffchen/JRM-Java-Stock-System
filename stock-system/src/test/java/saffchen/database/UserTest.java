@@ -36,7 +36,7 @@ class UserTest {
     void isAuthorized() {
         try {
             Field authorized = user.getClass().getDeclaredField("authorized");
-            HashMap<String, Boolean> auth = new HashMap<String, Boolean>();
+            HashMap<String, Boolean> auth = new HashMap<>();
             auth.put("password", Boolean.TRUE);
             auth.put("login", Boolean.TRUE);
             authorized.setAccessible(true);

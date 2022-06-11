@@ -21,6 +21,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class FileStorageUtilsTest {
+/*
 
     @Test
     void getHeadersFromCSV() {
@@ -38,6 +39,7 @@ class FileStorageUtilsTest {
         when(fsu.getHeadersFromCSV()).thenReturn(null);
         assertNull(fsu.getHeadersFromCSV());
     }
+*/
 
     @Test
     void getDataFromCSV() {
