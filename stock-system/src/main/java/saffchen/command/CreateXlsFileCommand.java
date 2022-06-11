@@ -6,6 +6,8 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -20,6 +22,8 @@ import static saffchen.export_excel.CreateExcel.SPEADSHEET_ID;
 import static saffchen.export_excel.CreateExcel.getSheetsService;
 
 public class CreateXlsFileCommand implements Command {
+    private static final Logger logger
+            = LoggerFactory.getLogger(CreateXlsFileCommand.class);
     private static final List <String> DEPRECATED_SYMBOLS = List.of("/", "|", "?", "*", "<", ">", "!");
 
     @Override
@@ -29,6 +33,7 @@ public class CreateXlsFileCommand implements Command {
 
     @Override
     public void doCommand() throws GeneralSecurityException, IOException {
+        logger.info(" --- EXPORT_EXCEL ---");
         String name;
         do {
             System.out.println("Укажите название файла");

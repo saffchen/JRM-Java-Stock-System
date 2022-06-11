@@ -5,16 +5,19 @@ import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import org.hibernate.validator.HibernateValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import saffchen.database.FileConnection;
 import saffchen.product.Product;
 import saffchen.utils.FileStorageUtils;
 import saffchen.utils.FileUtils;
-
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.*;
 
 public class AddCommand implements Command {
+    private static final Logger logger
+            = LoggerFactory.getLogger(AddCommand.class);
     static ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class)
             .configure()
             .buildValidatorFactory();
@@ -26,10 +29,9 @@ public class AddCommand implements Command {
     }
     
     public Product addNewProduct(){
+        logger.info(" --- ADD_PRODUCT --- ");
         Product product = null;
-
         System.out.println("*** ADDING A PRODUCT ***");
-
         boolean isValidProduct = true;
         while (isValidProduct) {
             System.out.println("Введите продукт или exit для того, чтобы выйти в главное меню");
@@ -65,6 +67,7 @@ public class AddCommand implements Command {
 
             product = new Product(title, description, price, List.of(tags), category,
                     count, satellite);
+            logger.info(" --- ADD_PRODUCT --- {{}}" ,product);
             isValidProduct = false;
             Set<ConstraintViolation<Product>> violations = validator.validate(product);
             for (ConstraintViolation<Product> warning : violations) {

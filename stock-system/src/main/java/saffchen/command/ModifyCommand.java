@@ -24,8 +24,8 @@ import static saffchen.utils.ValidationUtil.validPositiveDouble;
 import static saffchen.utils.ValidationUtil.validPositiveInteger;
 
 public class ModifyCommand implements Command {
-
-    private static final Logger log = getLogger(ModifyCommand.class);
+    private static final Logger logger
+            = LoggerFactory.getLogger(ModifyCommand.class);
 
     private BufferedReader bufferedReader;
 
@@ -36,6 +36,7 @@ public class ModifyCommand implements Command {
 
     @Override
     public void doCommand() throws IOException {
+        logger.info(" --- MODIFY_PRODUCT --- ");
         bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String inputString = inputProductNameOrExit();
 
@@ -80,7 +81,7 @@ public class ModifyCommand implements Command {
                 //https://github.com/logfellow/logstash-logback-encoder#pattern-json-provider
                 //https://www.loggly.com/ultimate-guide/java-logging-basics/
                 //https://stackoverflow.com/questions/22615311/is-there-a-logback-layout-that-creates-json-objects-with-message-parameters-as-a
-                log.info("--- MODIFY_PRODUCT --- {}", product);
+                logger.info("--- MODIFY_PRODUCT --- {}", product);
                 fileStorageUtils.modifyProduct(product, new Product(newFieldsMap));
             } else {
                 System.out.println(String.format("Данный продукт %s не найден/There is no %<s product", inputString));

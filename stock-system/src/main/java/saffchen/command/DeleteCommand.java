@@ -1,5 +1,7 @@
 package saffchen.command;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import saffchen.database.FileConnection;
 import saffchen.product.Product;
 import saffchen.utils.FileStorageUtils;
@@ -10,7 +12,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class DeleteCommand implements Command {
-
+    private static final Logger logger
+            = LoggerFactory.getLogger(DeleteCommand.class);
     @Override
     public String getInfo() {
         return "Write an \"delete_product\" if you want to delete product";
@@ -18,6 +21,7 @@ public class DeleteCommand implements Command {
 
     @Override
     public void doCommand() throws IOException {
+        logger.info(" --- DELETE_PRODUCT --- ");
         System.out.println("Введите имя продукта, который вы хотите удалить/Please, input the product name for deletion");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Имя продукта/The product name is: ");
@@ -38,6 +42,7 @@ public class DeleteCommand implements Command {
             } else {
                 System.out.println(String.format("Вы не подтвердили удаление вводом команды Да. Вы вели %s." +
                         "/You haven't confirmed the deletion using the command Yes. You input is %<s", answer));
+                logger.info(" --- DELETE_PRODUCT --- {{}}", product);
             }
         }
     }
