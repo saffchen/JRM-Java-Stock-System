@@ -5,46 +5,40 @@ import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import org.hibernate.validator.HibernateValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import saffchen.database.FileConnection;
 import saffchen.product.Product;
 import saffchen.utils.FileStorageUtils;
 import saffchen.utils.FileUtils;
-
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.*;
 
 public class AddCommand implements Command {
-    private Exit exit;
-
+    private static final Logger logger
+            = LoggerFactory.getLogger(AddCommand.class);
     static ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class)
             .configure()
             .buildValidatorFactory();
     static Validator validator = validatorFactory.getValidator();
-
-    private void setExit(Exit exit){
-        this.exit = exit;
-    }
 
     @Override
     public String getInfo() {
         return "Write an \"add_product\" if you want to additional product";
     }
     
-    public Product addNewProduct() throws Exception {
+    public Product addNewProduct(){
+        logger.info(" --- ADD_PRODUCT --- ");
         Product product = null;
-
         System.out.println("*** ADDING A PRODUCT ***");
-
         boolean isValidProduct = true;
         while (isValidProduct) {
             System.out.println("Введите продукт или exit для того, чтобы выйти в главное меню");
             System.out.print("Укажите название продукта: ");
             String title = new Scanner(System.in).nextLine().trim();
-            if (title.equals("exit")) {
-                setExit(new ExitFromCommandMenu());
-                exit.doSmth();
-            }
+            if (title.equals("exit"))
+                System.exit(0);
             System.out.print("Укажите описание продукта: ");
             String description = new Scanner(System.in).nextLine();
             System.out.print("Укажите цену продукта: ");
@@ -73,6 +67,7 @@ public class AddCommand implements Command {
 
             product = new Product(title, description, price, List.of(tags), category,
                     count, satellite);
+            logger.info(" --- ADD_PRODUCT --- {{}}" ,product);
             isValidProduct = false;
             Set<ConstraintViolation<Product>> violations = validator.validate(product);
             for (ConstraintViolation<Product> warning : violations) {
@@ -88,11 +83,6 @@ public class AddCommand implements Command {
     public void doCommand() throws GeneralSecurityException, IOException {
         FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
         FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
-        try {
-            fileStorageUtils.addProduct(addNewProduct());
-        } catch (Exception e) {
-
-        }
-
+        fileStorageUtils.addProduct(addNewProduct());
     }
 }

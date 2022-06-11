@@ -23,4 +23,5 @@
 hs_err_pid*
 /.idea/
 *.iml
-reportByTitle.pdf
+/stock-system/target/classes/log4j.properties
+/stock-system/target/classes/logback.xml

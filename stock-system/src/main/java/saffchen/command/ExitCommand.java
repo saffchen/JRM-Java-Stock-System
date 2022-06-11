@@ -1,5 +1,8 @@
 package saffchen.command;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ExitCommand implements Command {
     private Exit exit;
 

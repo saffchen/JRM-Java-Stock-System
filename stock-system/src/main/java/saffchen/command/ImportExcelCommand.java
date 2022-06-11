@@ -1,5 +1,7 @@
 package saffchen.command;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import saffchen.database.ExcelConnection;
 import saffchen.database.FileConnection;
 import saffchen.utils.ExcelImportUtils;
@@ -19,6 +21,9 @@ public class ImportExcelCommand implements Command {
     private void setExit(Exit exit) {
         this.exit = exit;
     }
+    private static final Logger logger
+            = LoggerFactory.getLogger(ImportExcelCommand.class);
+
     @Override
     public String getInfo() {
         return "Write an \"import_excel\" if you want to save change to excel";
@@ -26,7 +31,7 @@ public class ImportExcelCommand implements Command {
 
     @Override
     public void doCommand() throws GeneralSecurityException, IOException {
-
+        logger.info(" --- IMPORT_EXCEL ---");
         try {
             String fileName = null;
             do{

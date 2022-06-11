@@ -20,6 +20,8 @@ import static saffchen.export_excel.CreateExcel.SPEADSHEET_ID;
 import static saffchen.export_excel.CreateExcel.getSheetsService;
 
 public class CreateXlsFileCommand implements Command {
+    private static final Logger logger
+            = LoggerFactory.getLogger(CreateXlsFileCommand.class);
     private Exit exit;
     private static final List <String> DEPRECATED_SYMBOLS = List.of("/", "|", "?", "*", "<", ">", "!");
 
@@ -33,7 +35,8 @@ public class CreateXlsFileCommand implements Command {
     }
 
     @Override
-    public void doCommand() throws Exception {
+    public void doCommand() throws GeneralSecurityException, IOException {
+        logger.info(" --- EXPORT_EXCEL ---");
         String name;
         do {
             System.out.println("Укажите название файла");

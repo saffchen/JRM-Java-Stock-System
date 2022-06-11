@@ -18,6 +18,7 @@ public class CommandHolder {
         addCommand("IMPORT_EXCEL", new ImportExcelCommand());
         addCommand("IMPORT_CSV", new ImportCSVCommand());
         addCommand("ADD_SATELLITE", new AddSatellite());
+        addCommand("DELETE_SATELLITE", new DeleteSatellite());
         addCommand("EXIT", new ExitCommand());
     }
 

@@ -15,6 +15,7 @@ import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static org.slf4j.LoggerFactory.getLogger;
 import static saffchen.utils.MenuUtils.*;
 import static saffchen.utils.ValidationUtil.validPositiveDouble;
 import static saffchen.utils.ValidationUtil.validPositiveInteger;
@@ -22,6 +23,9 @@ import static saffchen.utils.ValidationUtil.validPositiveInteger;
 public class ModifyCommand implements Command {
     private static User authUser = null;
     private static final Authorization authorization = new Authorization();
+    private static final Logger logger
+            = LoggerFactory.getLogger(ModifyCommand.class);
+
     private BufferedReader bufferedReader;
     private Exit exit;
 
@@ -36,39 +40,7 @@ public class ModifyCommand implements Command {
 
     @Override
     public void doCommand() throws IOException {
-        if (ModifyCommand.authUser == null) {
-            Scanner creds = new Scanner(System.in);
-            boolean isFailed = true;
-            try {
-
-                for (int i = 0; i < Authorization.ATTEMPT_COUNT; i++) {
-
-                    System.out.println("Enter login and password (Attempt count = " + (Authorization.ATTEMPT_COUNT - i) + ")");
-                    System.out.print("login: ");
-                    String login = creds.nextLine().trim().toLowerCase();
-                    if (creds.equals("exit")) {
-                        setExit(new ExitFromCommandMenu());
-                        exit.doSmth();
-                    }
-                    System.out.print("Enter the password: ");
-                    String password = creds.nextLine();
-
-                    ModifyCommand.authUser = authorization.authorize(login, password);
-                    if (ModifyCommand.authUser == null)
-                        System.out.println("Fail: Check login or password");
-                    else {
-                        System.out.println("Successful!");
-                        isFailed = false;
-                        break;
-                    }
-                }
-                if (isFailed)
-                    return;
-            } catch (Exception e) {
-                System.out.println("Error: Authorization was broken!");
-            }
-        }
-
+        logger.info(" --- MODIFY_PRODUCT --- ");
         bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String inputString = inputProductNameOrExit();
 
@@ -110,6 +82,10 @@ public class ModifyCommand implements Command {
                     newFieldsMap.put(fieldName, inputString);
                     System.out.println();
                 }
+                //https://github.com/logfellow/logstash-logback-encoder#pattern-json-provider
+                //https://www.loggly.com/ultimate-guide/java-logging-basics/
+                //https://stackoverflow.com/questions/22615311/is-there-a-logback-layout-that-creates-json-objects-with-message-parameters-as-a
+                logger.info("--- MODIFY_PRODUCT --- {}", product);
                 fileStorageUtils.modifyProduct(product, new Product(newFieldsMap));
             } else {
                 System.out.println(String.format("Данный продукт %s не найден/There is no %<s product", inputString));
@@ -128,22 +104,23 @@ public class ModifyCommand implements Command {
 
     private String inputCorrectValue(Field field, Product product) throws IOException {
         String fieldName = field.getName()
-                .toUpperCase();
+                                .toUpperCase();
         String inputString;
         System.out.println(String.format("Пожалуйста, введите корректную %s. %<s может состоять только из цифр./" +
                 "Please input a correct %<s. %<s can consist the digits only", fieldName));
         System.out.print(String.format("Please, enter a new %s: ", fieldName));
         inputString = bufferedReader.readLine()
-                .trim();
+                                    .trim();
         if (inputString.equals("") || isExit(inputString)) {
             inputString = String.valueOf(runGetter(field, product));
         }
         return inputString;
     }
 
+    // https://stackoverflow.com/questions/13400075/reflection-generic-get-field-value
     private Object runGetter(Field field, Product product) {
         for (Method method : product.getClass()
-                .getMethods()) {
+                                    .getMethods()) {
             if ((method.getName()
                     .startsWith("get")) && (method.getName()
                     .length() == (field.getName()
