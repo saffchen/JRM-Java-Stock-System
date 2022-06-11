@@ -51,5 +51,6 @@ public class DeleteSatellite implements Command {
         }
         logger.info(" --- DELETE_SATELLITE --- {{}}" ,str);
         Files.move(tempFile, inputFile, StandardCopyOption.REPLACE_EXISTING);
+        System.out.println(String.format("Success! Satellite %s has been removed", str ));
     }
 }
