@@ -35,7 +35,7 @@ public class AddSatellite implements Command {
                 writer.append(str);
                 writer.close();
                 logger.info(" --- ADD_SATELLITE --- {{}}", str);
-                System.out.println(String.format("Success! Satellite %s was added", str ));
+                System.out.printf("Success! Satellite %s was added%n", str );
             } catch (IOException e){
                 throw new RuntimeException(e);
             } finally {
