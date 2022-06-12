@@ -38,7 +38,7 @@ public class GenerateReportCommand implements Command {
 
             System.out.print("\nEnter the field to search or EXIT: ");
             header = scanner.next().trim().toUpperCase();
-            if (header.equals("exit")) {
+            if (header.equals("EXIT")) {
                 setExit(new ExitFromCommandMenu());
                 exit.doSmth();}
 
