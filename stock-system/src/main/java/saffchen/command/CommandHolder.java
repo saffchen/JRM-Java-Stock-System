@@ -34,10 +34,10 @@ public class CommandHolder {
         }
     }
 
-    public void printCommandInfo(){
+    public void printCommandInfo() {
         System.out.println("Welcome to the Stock System");
         System.out.println("*******************************************************************************\n");
-        for(Map.Entry<String, Command> entry : this.getCommandHolder().entrySet()){
+        for (Map.Entry<String, Command> entry : this.getCommandHolder().entrySet()) {
             System.out.println("* " + entry.getValue().getInfo());
         }
         System.out.println("\n*******************************************************************************\n");

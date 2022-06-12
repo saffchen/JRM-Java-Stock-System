@@ -11,7 +11,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.security.GeneralSecurityException;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.stream.Stream;
@@ -22,13 +21,14 @@ import java.util.stream.Stream;
  */
 public class DeleteSatellite implements Command {
     private static User authUser = null;
-    private static final Authorization authorization = new Authorization();
+    private static final Authorization AUTHORIZATION = new Authorization();
     private Exit exit;
 
     private void setExit(Exit exit) {
         this.exit = exit;
     }
-    private static final Logger logger
+
+    private static final Logger LOGGER
             = LoggerFactory.getLogger(AddCommand.class);
 
     @Override
@@ -38,8 +38,7 @@ public class DeleteSatellite implements Command {
 
     @Override
     public void doCommand() throws Exception {
-        logger.info(" --- DELETE_SATELLITE --- ");
-
+        LOGGER.info(" --- DELETE_SATELLITE --- ");
 
         if (DeleteSatellite.authUser == null) {
             Scanner creds = new Scanner(System.in);
@@ -51,14 +50,14 @@ public class DeleteSatellite implements Command {
                     System.out.println("Enter login and password (Attempt count = " + (Authorization.ATTEMPT_COUNT - i) + ")");
                     System.out.print("login: ");
                     String login = creds.nextLine().trim().toLowerCase();
-                    if (creds.equals("exit")) {
+                    if (login.equals("exit")) {
                         setExit(new ExitFromCommandMenu());
                         exit.doSmth();
                     }
                     System.out.print("Enter the password: ");
                     String password = creds.nextLine();
 
-                    DeleteSatellite.authUser = authorization.authorize(login, password);
+                    DeleteSatellite.authUser = AUTHORIZATION.authorize(login, password);
                     if (DeleteSatellite.authUser == null)
                         System.out.println("Fail: Check login or password");
                     else {
@@ -80,7 +79,8 @@ public class DeleteSatellite implements Command {
         String str = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
         if (str.equals("exit")) {
             setExit(new ExitFromCommandMenu());
-            exit.doSmth();}
+            exit.doSmth();
+        }
         Path inputFile = Paths.get("satellite.txt");
         Path tempFile = Files.createTempFile("temp", ".txt");
         Stream<String> lines = Files.lines(inputFile);
@@ -96,8 +96,8 @@ public class DeleteSatellite implements Command {
                         }
                     });
         }
-        logger.info(" --- DELETE_SATELLITE --- {{}}" ,str);
+        LOGGER.info(" --- DELETE_SATELLITE --- {{}}", str);
         Files.move(tempFile, inputFile, StandardCopyOption.REPLACE_EXISTING);
-        System.out.println(String.format("Success! Satellite %s has been removed", str ));
+        System.out.println(String.format("Success! Satellite %s has been removed", str));
     }
 }

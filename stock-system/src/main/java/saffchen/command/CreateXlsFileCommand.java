@@ -10,10 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,7 +19,7 @@ import static saffchen.export_excel.CreateExcel.SPEADSHEET_ID;
 import static saffchen.export_excel.CreateExcel.getSheetsService;
 
 public class CreateXlsFileCommand implements Command {
-    private static final Logger logger
+    private static final Logger LOGGER
             = LoggerFactory.getLogger(CreateXlsFileCommand.class);
     private Exit exit;
     private static final List <String> DEPRECATED_SYMBOLS = List.of("/", "|", "?", "*", "<", ">", "!");
@@ -38,7 +35,7 @@ public class CreateXlsFileCommand implements Command {
 
     @Override
     public void doCommand() throws Exception {
-        logger.info(" --- EXPORT_EXCEL ---");
+        LOGGER.info(" --- EXPORT_EXCEL ---");
         String name;
         do {
             System.out.println("Укажите название файла");

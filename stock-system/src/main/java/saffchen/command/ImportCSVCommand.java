@@ -8,7 +8,7 @@ import java.security.GeneralSecurityException;
 import java.util.List;
 
 public class ImportCSVCommand implements Command {
-    private static final Logger logger
+    private static final Logger LOGGER
             = LoggerFactory.getLogger(ImportCSVCommand.class);
     @Override
     public String getInfo() {
@@ -17,7 +17,7 @@ public class ImportCSVCommand implements Command {
 
     @Override
     public void doCommand() throws GeneralSecurityException, IOException {
-        logger.info(" --- IMPORT_CSV ---");
+        LOGGER.info(" --- IMPORT_CSV ---");
         try {
         List<String> listCSV = List.of(FileUtils.getInfoFromTxtFile("stock_import_csv.csv"));
             FileWriter fileWriter = new FileWriter(new File(System.getProperty("user.dir"), "csvFromDB.csv"));

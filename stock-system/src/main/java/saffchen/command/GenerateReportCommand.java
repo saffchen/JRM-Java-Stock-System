@@ -13,7 +13,7 @@ public class GenerateReportCommand implements Command {
     private void setExit(Exit exit) {
         this.exit = exit;
     }
-    private static final Logger logger
+    private static final Logger LOGGER
             = LoggerFactory.getLogger(GenerateReportCommand.class);
     @Override
     public String getInfo() {
@@ -22,7 +22,7 @@ public class GenerateReportCommand implements Command {
 
     @Override
     public void doCommand() throws Exception {
-        logger.info(" --- GENERATE_REPORT ---");
+        LOGGER.info(" --- GENERATE_REPORT ---");
         Scanner scanner = new Scanner(System.in);
         FileStorageUtils fileStorageUtils = new FileStorageUtils(
                 FileConnection.getInstance("stock_import_csv.csv"));
