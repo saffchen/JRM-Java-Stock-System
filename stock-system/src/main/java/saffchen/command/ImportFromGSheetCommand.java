@@ -10,10 +10,9 @@ import saffchen.utils.GSheetImportUtils;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.List;
-import java.util.Scanner;
 
 public class ImportFromGSheetCommand implements Command {
-    private static final Logger logger
+    private static final Logger LOGGER
             = LoggerFactory.getLogger(ImportFromGSheetCommand.class);
 
     private static final List<String> DEPRECATED_SYMBOLS = List.of("/", "|", "?", "*", "<", ">", "!");
@@ -25,7 +24,7 @@ public class ImportFromGSheetCommand implements Command {
 
     @Override
     public void doCommand() {
-        logger.info(" --- IMPORT_GSHEET ---");
+        LOGGER.info(" --- IMPORT_GSHEET ---");
         try {
             FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
             FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);

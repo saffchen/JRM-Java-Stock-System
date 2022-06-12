@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import saffchen.database.FileConnection;
 import saffchen.reports.PDFReportFromFile;
 import saffchen.utils.FileStorageUtils;
+
 import java.util.Scanner;
 
 public class GenerateReportCommand implements Command {
@@ -13,8 +14,10 @@ public class GenerateReportCommand implements Command {
     private void setExit(Exit exit) {
         this.exit = exit;
     }
-    private static final Logger logger
+
+    private static final Logger LOGGER
             = LoggerFactory.getLogger(GenerateReportCommand.class);
+
     @Override
     public String getInfo() {
         return "Write a \"generate_report\" if you want to save pdf file with all positions";
@@ -22,7 +25,7 @@ public class GenerateReportCommand implements Command {
 
     @Override
     public void doCommand() throws Exception {
-        logger.info(" --- GENERATE_REPORT ---");
+        LOGGER.info(" --- GENERATE_REPORT ---");
         Scanner scanner = new Scanner(System.in);
         FileStorageUtils fileStorageUtils = new FileStorageUtils(
                 FileConnection.getInstance("stock_import_csv.csv"));
@@ -40,14 +43,17 @@ public class GenerateReportCommand implements Command {
             header = scanner.next().trim().toUpperCase();
             if (header.equals("EXIT")) {
                 setExit(new ExitFromCommandMenu());
-                exit.doSmth();}
+                exit.doSmth();
+            }
 
             while (true) {
                 System.out.println("*** Searching  by " + header + " ***");
                 System.out.print("Enter the KEYWORD or EXIT: ");
                 criteria = scanner.next().trim().toUpperCase();
-                if (criteria.equals("EXIT"))
-                    break;
+                if (criteria.equals("EXIT")) {
+                    setExit(new ExitFromCommandMenu());
+                    exit.doSmth();
+                }
                 try {
                     header = header.substring(0, 1) + header.substring(1, header.length()).toLowerCase();
                     PDFReportFromFile report = new PDFReportFromFile(header, criteria);

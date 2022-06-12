@@ -22,8 +22,8 @@ import static saffchen.utils.ValidationUtil.validPositiveInteger;
 
 public class ModifyCommand implements Command {
     private static User authUser = null;
-    private static final Authorization authorization = new Authorization();
-    private static final Logger logger
+    private static final Authorization AUTHORIZATION = new Authorization();
+    private static final Logger LOGGER
             = LoggerFactory.getLogger(ModifyCommand.class);
 
     private BufferedReader bufferedReader;
@@ -40,7 +40,7 @@ public class ModifyCommand implements Command {
 
     @Override
     public void doCommand() throws IOException {
-        logger.info(" --- MODIFY_PRODUCT --- ");
+        LOGGER.info(" --- MODIFY_PRODUCT --- ");
 
         if (ModifyCommand.authUser == null) {
             Scanner creds = new Scanner(System.in);
@@ -52,14 +52,14 @@ public class ModifyCommand implements Command {
                     System.out.println("Enter login and password (Attempt count = " + (Authorization.ATTEMPT_COUNT - i) + ")");
                     System.out.print("login: ");
                     String login = creds.nextLine().trim().toLowerCase();
-                    if (creds.equals("exit")) {
+                    if (login.equals("exit")) {
                         setExit(new ExitFromCommandMenu());
                         exit.doSmth();
                     }
                     System.out.print("Enter the password: ");
                     String password = creds.nextLine();
 
-                    ModifyCommand.authUser = authorization.authorize(login, password);
+                    ModifyCommand.authUser = AUTHORIZATION.authorize(login, password);
                     if (ModifyCommand.authUser == null)
                         System.out.println("Fail: Check login or password");
                     else {
@@ -120,7 +120,7 @@ public class ModifyCommand implements Command {
                 //https://github.com/logfellow/logstash-logback-encoder#pattern-json-provider
                 //https://www.loggly.com/ultimate-guide/java-logging-basics/
                 //https://stackoverflow.com/questions/22615311/is-there-a-logback-layout-that-creates-json-objects-with-message-parameters-as-a
-                logger.info("--- MODIFY_PRODUCT --- {}", product);
+                LOGGER.info("--- MODIFY_PRODUCT --- {}", product);
                 fileStorageUtils.modifyProduct(product, new Product(newFieldsMap));
             } else {
                 System.out.println(String.format("Данный продукт %s не найден/There is no %<s product", inputString));

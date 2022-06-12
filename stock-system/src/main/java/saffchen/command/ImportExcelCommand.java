@@ -7,11 +7,9 @@ import saffchen.database.FileConnection;
 import saffchen.utils.ExcelImportUtils;
 import saffchen.utils.FileStorageUtils;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
 import java.util.Scanner;
 
@@ -22,7 +20,7 @@ public class ImportExcelCommand implements Command {
         this.exit = exit;
     }
 
-    private static final Logger logger
+    private static final Logger LOGGER
             = LoggerFactory.getLogger(ImportExcelCommand.class);
 
     @Override
@@ -32,7 +30,7 @@ public class ImportExcelCommand implements Command {
 
     @Override
     public void doCommand() throws GeneralSecurityException, IOException {
-        logger.info(" --- IMPORT_EXCEL ---");
+        LOGGER.info(" --- IMPORT_EXCEL ---");
         try {
             String fileName = null;
             do {

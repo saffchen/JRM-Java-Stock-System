@@ -7,7 +7,6 @@ import saffchen.product.Product;
 import saffchen.utils.FileStorageUtils;
 import saffchen.utils.MenuUtils;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class DeleteCommand implements Command {
@@ -17,7 +16,7 @@ public class DeleteCommand implements Command {
         this.exit = exit;
     }
 
-    private static final Logger logger
+    private static final Logger LOGGER
             = LoggerFactory.getLogger(DeleteCommand.class);
     @Override
     public String getInfo() {
@@ -26,7 +25,7 @@ public class DeleteCommand implements Command {
 
     @Override
     public void doCommand() throws Exception {
-        logger.info(" --- DELETE_PRODUCT --- ");
+        LOGGER.info(" --- DELETE_PRODUCT --- ");
         System.out.println("Если вы хотите выйти введите exit/ If you want to exit - please. input exit");
         System.out.println("Введите имя продукта, который вы хотите удалить/Please, input the product name for deletion");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -38,7 +37,7 @@ public class DeleteCommand implements Command {
         FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
         FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
         Product product = fileStorageUtils.getProductByTitle(title);
-        logger.info(" --- DELETE_PRODUCT --- {{}}", product);
+        LOGGER.info(" --- DELETE_PRODUCT --- {{}}", product);
         if (product == null) {
             System.out.println(String.format("Данный продукт %s не найден/There is no %<s product", title));
         } else {

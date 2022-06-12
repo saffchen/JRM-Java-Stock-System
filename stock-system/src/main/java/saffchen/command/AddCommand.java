@@ -22,7 +22,7 @@ public class AddCommand implements Command {
     private void setExit(Exit exit) {
         this.exit = exit;
     }
-    private static final Logger logger
+    private static final Logger LOGGER
             = LoggerFactory.getLogger(AddCommand.class);
     static ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class)
             .configure()
@@ -35,7 +35,7 @@ public class AddCommand implements Command {
     }
 
     public Product addNewProduct() throws Exception {
-        logger.info(" --- ADD_PRODUCT --- ");
+        LOGGER.info(" --- ADD_PRODUCT --- ");
         Product product = null;
         System.out.println("*** ADDING A PRODUCT ***");
         boolean isValidProduct = true;
@@ -75,7 +75,7 @@ public class AddCommand implements Command {
 
             product = new Product(title, description, price, List.of(tags), category,
                     count, satellite);
-            logger.info(" --- ADD_PRODUCT --- {{}}", product);
+            LOGGER.info(" --- ADD_PRODUCT --- {{}}", product);
             isValidProduct = false;
             Set<ConstraintViolation<Product>> violations = validator.validate(product);
             for (ConstraintViolation<Product> warning : violations) {
