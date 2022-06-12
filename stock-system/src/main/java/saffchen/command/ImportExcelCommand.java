@@ -54,7 +54,6 @@ public class ImportExcelCommand implements Command {
             System.out.println(result);
         } catch (Exception e) {
             System.out.println("Error: Can't get data for import");
-            ;
         }
     }
 }
