@@ -21,14 +21,14 @@ import java.util.stream.Stream;
  */
 public class DeleteSatellite implements Command {
     private static User authUser = null;
-    private static final Authorization authorization = new Authorization();
+    private static final Authorization AUTHORIZATION = new Authorization();
     private Exit exit;
 
     private void setExit(Exit exit) {
         this.exit = exit;
     }
 
-    private static final Logger logger
+    private static final Logger LOGGER
             = LoggerFactory.getLogger(AddCommand.class);
 
     @Override
@@ -54,7 +54,7 @@ public class DeleteSatellite implements Command {
                     System.out.print("Enter the password: ");
                     String password = creds.nextLine();
 
-                    DeleteSatellite.authUser = authorization.authorize(login, password);
+                    DeleteSatellite.authUser = AUTHORIZATION.authorize(login, password);
                     if (DeleteSatellite.authUser == null)
                         System.out.println("Fail: Check login or password");
                     else {
@@ -73,7 +73,7 @@ public class DeleteSatellite implements Command {
 
     @Override
     public void doCommand() throws Exception {
-        logger.info(" --- DELETE_SATELLITE --- ");
+        LOGGER.info(" --- DELETE_SATELLITE --- ");
 
         isAuthorizedSuccessfully();
 
@@ -100,7 +100,7 @@ public class DeleteSatellite implements Command {
                         }
                     });
         }
-        logger.info(" --- DELETE_SATELLITE --- {{}}", str);
+        LOGGER.info(" --- DELETE_SATELLITE --- {{}}", str);
         Files.move(tempFile, inputFile, StandardCopyOption.REPLACE_EXISTING);
         System.out.println(String.format("Success! Satellite %s has been removed", str));
     }

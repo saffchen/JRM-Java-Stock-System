@@ -13,14 +13,14 @@ import java.util.Scanner;
 
 public class AddSatellite implements Command {
     private static User authUser = null;
-    private static final Authorization authorization = new Authorization();
+    private static final Authorization AUTHORIZATION = new Authorization();
     private Exit exit;
 
     private void setExit(Exit exit) {
         this.exit = exit;
     }
 
-    private static final Logger logger
+    private static final Logger LOGGER
             = LoggerFactory.getLogger(AddCommand.class);
 
     @Override
@@ -46,7 +46,7 @@ public class AddSatellite implements Command {
                     System.out.print("Enter the password: ");
                     String password = creds.nextLine();
 
-                    AddSatellite.authUser = authorization.authorize(login, password);
+                    AddSatellite.authUser = AUTHORIZATION.authorize(login, password);
                     if (AddSatellite.authUser == null)
                         System.out.println("Fail: Check login or password");
                     else {
@@ -65,7 +65,7 @@ public class AddSatellite implements Command {
 
     @Override
     public void doCommand() throws Exception {
-        logger.info(" --- ADD_SATELLITE --- ");
+        LOGGER.info(" --- ADD_SATELLITE --- ");
 
         isAuthorizedSuccessfully();
 
@@ -83,7 +83,7 @@ public class AddSatellite implements Command {
                 writer.append("\n");
                 writer.append(str);
                 writer.close();
-                logger.info(" --- ADD_SATELLITE --- {{}}", str);
+                LOGGER.info(" --- ADD_SATELLITE --- {{}}", str);
                 System.out.printf("Success! Satellite %s was added%n", str);
             } catch (IOException e) {
                 throw new RuntimeException(e);
