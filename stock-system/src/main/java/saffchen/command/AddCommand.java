@@ -12,8 +12,6 @@ import saffchen.product.Product;
 import saffchen.utils.FileStorageUtils;
 import saffchen.utils.FileUtils;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
 import java.util.*;
 
 public class AddCommand implements Command {
@@ -46,7 +44,7 @@ public class AddCommand implements Command {
             String title = new Scanner(System.in).nextLine().trim();
             if (title.equals("exit")) {
                 setExit(new ExitFromCommandMenu());
-                exit.doSmth();
+                exit.doExit();
             }
             System.out.print("Укажите описание продукта: ");
             String description = new Scanner(System.in).nextLine();

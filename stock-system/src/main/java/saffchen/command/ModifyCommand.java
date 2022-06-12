@@ -54,7 +54,7 @@ public class ModifyCommand implements Command {
                     String login = creds.nextLine().trim().toLowerCase();
                     if (login.equals("exit")) {
                         setExit(new ExitFromCommandMenu());
-                        exit.doSmth();
+                        exit.doExit();
                     }
                     System.out.print("Enter the password: ");
                     String password = creds.nextLine();

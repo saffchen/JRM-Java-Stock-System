@@ -42,7 +42,7 @@ public class AddSatellite implements Command {
                     String login = creds.nextLine().trim().toLowerCase();
                     if (login.equals("exit")) {
                         setExit(new ExitFromCommandMenu());
-                        exit.doSmth();
+                        exit.doExit();
                     }
                     System.out.print("Enter the password: ");
                     String password = creds.nextLine();
@@ -69,7 +69,7 @@ public class AddSatellite implements Command {
                 String str = new Scanner(System.in).nextLine().toUpperCase(Locale.ROOT);
                 if (str.equals("EXIT")) {
                     setExit(new ExitFromCommandMenu());
-                    exit.doSmth();
+                    exit.doExit();
                 }
                 BufferedWriter writer = new BufferedWriter(new FileWriter("satellite.txt", true));
                 writer.append("\n");

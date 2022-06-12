@@ -1,8 +1,5 @@
 package saffchen.command;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class ExitCommand implements Command {
     private Exit exit;
 
@@ -18,6 +15,6 @@ public class ExitCommand implements Command {
     @Override
     public void doCommand() throws Exception {
         setExit(new ExitFromApp());
-        exit.doSmth();
+        exit.doExit();
     }
 }

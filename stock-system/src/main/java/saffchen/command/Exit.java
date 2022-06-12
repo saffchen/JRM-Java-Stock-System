@@ -1,5 +1,5 @@
 package saffchen.command;
 
 public interface Exit {
-    void doSmth() throws Exception;
+    void doExit() throws Exception;
 }

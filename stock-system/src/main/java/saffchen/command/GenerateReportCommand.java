@@ -43,7 +43,7 @@ public class GenerateReportCommand implements Command {
             header = scanner.next().trim().toUpperCase();
             if (header.equals("EXIT")) {
                 setExit(new ExitFromCommandMenu());
-                exit.doSmth();
+                exit.doExit();
             }
 
             while (true) {
@@ -52,7 +52,7 @@ public class GenerateReportCommand implements Command {
                 criteria = scanner.next().trim().toUpperCase();
                 if (criteria.equals("EXIT")) {
                     setExit(new ExitFromCommandMenu());
-                    exit.doSmth();
+                    exit.doExit();
                 }
                 try {
                     header = header.substring(0, 1) + header.substring(1, header.length()).toLowerCase();

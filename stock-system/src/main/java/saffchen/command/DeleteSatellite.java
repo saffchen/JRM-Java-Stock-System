@@ -52,7 +52,7 @@ public class DeleteSatellite implements Command {
                     String login = creds.nextLine().trim().toLowerCase();
                     if (login.equals("exit")) {
                         setExit(new ExitFromCommandMenu());
-                        exit.doSmth();
+                        exit.doExit();
                     }
                     System.out.print("Enter the password: ");
                     String password = creds.nextLine();
@@ -79,7 +79,7 @@ public class DeleteSatellite implements Command {
         String str = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
         if (str.equals("exit")) {
             setExit(new ExitFromCommandMenu());
-            exit.doSmth();
+            exit.doExit();
         }
         Path inputFile = Paths.get("satellite.txt");
         Path tempFile = Files.createTempFile("temp", ".txt");
