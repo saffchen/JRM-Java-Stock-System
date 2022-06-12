@@ -39,7 +39,7 @@ public class AddSatellite implements Command {
                     System.out.println("Enter login and password (Attempt count = " + (Authorization.ATTEMPT_COUNT - i) + ")");
                     System.out.print("login: ");
                     String login = creds.nextLine().trim().toLowerCase();
-                    if (creds.equals("exit")) {
+                    if (login.equals("exit")) {
                         setExit(new ExitFromCommandMenu());
                         exit.doExit();
                     }
@@ -73,7 +73,7 @@ public class AddSatellite implements Command {
             System.out.println("Чтобы выйти из режима добавления склада введите команду exit");
             System.out.print("Введите название нового склада: ");
             String str = new Scanner(System.in).nextLine().toUpperCase(Locale.ROOT);
-            if (str.equals("exit")) {
+            if (str.equals("EXIT")) {
                 setExit(new ExitFromCommandMenu());
                 exit.doExit();
             }

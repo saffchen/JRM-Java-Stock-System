@@ -50,7 +50,7 @@ public class ModifyCommand implements Command {
                     System.out.println("Enter login and password (Attempt count = " + (Authorization.ATTEMPT_COUNT - i) + ")");
                     System.out.print("login: ");
                     String login = creds.nextLine().trim().toLowerCase();
-                    if (creds.equals("exit")) {
+                    if (login.equals("exit")) {
                         setExit(new ExitFromCommandMenu());
                         exit.doExit();
                     }

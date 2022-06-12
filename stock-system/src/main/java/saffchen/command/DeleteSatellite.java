@@ -81,7 +81,7 @@ public class DeleteSatellite implements Command {
         System.out.print("Введите название склада, который необходимо удалить: ");
         Scanner scanner = new Scanner(System.in);
         String str = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
-        if (str.equals("exit")) {
+        if (str.equals("EXIT")) {
             setExit(new ExitFromCommandMenu());
             exit.doExit();
         }
