@@ -29,7 +29,7 @@ public class DeleteSatellite implements Command {
     }
 
     private static final Logger LOGGER
-            = LoggerFactory.getLogger(AddCommand.class);
+            = LoggerFactory.getLogger(DeleteSatellite.class);
 
     @Override
     public String getInfo() {
