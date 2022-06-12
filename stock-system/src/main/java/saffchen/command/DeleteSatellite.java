@@ -21,25 +21,22 @@ import java.util.stream.Stream;
  */
 public class DeleteSatellite implements Command {
     private static User authUser = null;
-    private static final Authorization AUTHORIZATION = new Authorization();
+    private static final Authorization authorization = new Authorization();
     private Exit exit;
 
     private void setExit(Exit exit) {
         this.exit = exit;
     }
 
-    private static final Logger LOGGER
-            = LoggerFactory.getLogger(DeleteSatellite.class);
+    private static final Logger logger
+            = LoggerFactory.getLogger(AddCommand.class);
 
     @Override
     public String getInfo() {
         return "Write an \"delete_satellite\" if you want to delete satellite";
     }
 
-    @Override
-    public void doCommand() throws Exception {
-        LOGGER.info(" --- DELETE_SATELLITE --- ");
-
+    public void isAuthorizedSuccessfully() {
         if (DeleteSatellite.authUser == null) {
             Scanner creds = new Scanner(System.in);
             boolean isFailed = true;
@@ -57,7 +54,7 @@ public class DeleteSatellite implements Command {
                     System.out.print("Enter the password: ");
                     String password = creds.nextLine();
 
-                    DeleteSatellite.authUser = AUTHORIZATION.authorize(login, password);
+                    DeleteSatellite.authUser = authorization.authorize(login, password);
                     if (DeleteSatellite.authUser == null)
                         System.out.println("Fail: Check login or password");
                     else {
@@ -72,6 +69,13 @@ public class DeleteSatellite implements Command {
                 System.out.println("Error: Authorization was broken!");
             }
         }
+    }
+
+    @Override
+    public void doCommand() throws Exception {
+        logger.info(" --- DELETE_SATELLITE --- ");
+
+        isAuthorizedSuccessfully();
 
         System.out.println("Введите exit для того, чтобы выйти в главное меню");
         System.out.print("Введите название склада, который необходимо удалить: ");
@@ -96,7 +100,7 @@ public class DeleteSatellite implements Command {
                         }
                     });
         }
-        LOGGER.info(" --- DELETE_SATELLITE --- {{}}", str);
+        logger.info(" --- DELETE_SATELLITE --- {{}}", str);
         Files.move(tempFile, inputFile, StandardCopyOption.REPLACE_EXISTING);
         System.out.println(String.format("Success! Satellite %s has been removed", str));
     }
