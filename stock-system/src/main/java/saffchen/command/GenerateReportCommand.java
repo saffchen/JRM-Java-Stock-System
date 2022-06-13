@@ -60,7 +60,6 @@ public class GenerateReportCommand implements Command {
                     report.generateReport();
                 } catch (Exception e) {
                     System.out.println("Error: Can't create the report! Try again!");
-
                 }
             }
         }
