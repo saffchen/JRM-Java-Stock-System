@@ -1,6 +1,5 @@
 package saffchen.utils;
 
-import com.beust.ah.A;
 import saffchen.database.GSheetConnection;
 import saffchen.database.User;
 
