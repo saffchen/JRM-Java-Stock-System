@@ -17,7 +17,7 @@ import java.util.*;
 public class AddCommand implements Command {
     private Exit exit;
 
-    private void setExit(Exit exit) {
+    public void setExit(Exit exit) {
         this.exit = exit;
     }
 
