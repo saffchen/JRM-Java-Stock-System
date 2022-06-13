@@ -17,8 +17,9 @@ public class CommandHolder {
         addCommand("IMPORT_GSHEET", new ImportFromGSheetCommand());
         addCommand("IMPORT_EXCEL", new ImportExcelCommand());
         addCommand("IMPORT_CSV", new ImportCSVCommand());
-        addCommand("EXIT", new ExitCommand());
         addCommand("ADD_SATELLITE", new AddSatellite());
+        addCommand("DELETE_SATELLITE", new DeleteSatellite());
+        addCommand("EXIT", new ExitCommand());
     }
 
     public Map<String, Command> getCommandHolder() {
@@ -33,10 +34,10 @@ public class CommandHolder {
         }
     }
 
-    public void printCommandInfo(){
+    public void printCommandInfo() {
         System.out.println("Welcome to the Stock System");
         System.out.println("*******************************************************************************\n");
-        for(Map.Entry<String, Command> entry : this.getCommandHolder().entrySet()){
+        for (Map.Entry<String, Command> entry : this.getCommandHolder().entrySet()) {
             System.out.println("* " + entry.getValue().getInfo());
         }
         System.out.println("\n*******************************************************************************\n");

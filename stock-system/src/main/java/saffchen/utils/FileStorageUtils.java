@@ -66,6 +66,10 @@ public class FileStorageUtils implements StorageUtils {
     }
 
     public void addHeadersToCSV(String headers) {
+        if (headers == null || headers.isEmpty()){
+            System.out.println("Error: There are no headers in the string!");
+            return;
+        }
         FileWriter productToCsv = null;
         try {
             productToCsv = new FileWriter(fileConnection.getFilePath(), false);
@@ -90,8 +94,14 @@ public class FileStorageUtils implements StorageUtils {
         }
     }
 
+
+
     @Override
     public void addProduct(Product product) {
+        if (product == null) {
+            System.out.println("Error: There is no product for add!");
+            return;
+        }
         RawProduct rawProduct = new ProductAdapter(product).setDataToRawProduct();
         FileWriter productToCsv = null;
         try {
