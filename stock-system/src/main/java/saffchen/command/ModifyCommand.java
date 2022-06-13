@@ -76,20 +76,17 @@ public class ModifyCommand implements Command {
     }
 
     @Override
-    public void doCommand() throws Exception {
+    public void doCommand() throws IOException {
         LOGGER.info(" --- MODIFY_PRODUCT --- ");
 
         isAuthorizedSuccessfully();
 
-        while (AddSatellite.authUser != null) {
+        while (ModifyCommand.authUser != null) {
+
             bufferedReader = new BufferedReader(new InputStreamReader(System.in));
             String inputString = inputProductNameOrExit();
             FileStorageUtils fileStorageUtils = new FileStorageUtils(FileConnection.getInstance("stock_import_csv.csv"));
             Product product = fileStorageUtils.getProductByTitle(inputString);
-            if (inputString.equals("exit")) {
-                setExit(new ExitFromCommandMenu());
-                exit.doExit();
-            }
 
             if (product != null) {
                 System.out.println(product.toString());

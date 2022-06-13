@@ -77,7 +77,7 @@ public class DeleteSatellite implements Command {
 
         isAuthorizedSuccessfully();
 
-        while (AddSatellite.authUser != null) {
+        while (DeleteSatellite.authUser != null) {
             System.out.println("Введите exit для того, чтобы выйти в главное меню");
             System.out.print("Введите название склада, который необходимо удалить: ");
             Scanner scanner = new Scanner(System.in);
