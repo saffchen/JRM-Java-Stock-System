@@ -12,7 +12,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class AddSatellite implements Command {
-    private static User authUser = null;
+    static User authUser = null;
     private static final Authorization AUTHORIZATION = new Authorization();
     private Exit exit;
 
@@ -70,7 +70,7 @@ public class AddSatellite implements Command {
 
         isAuthorizedSuccessfully();
 
-        while (true) {
+        while (AddSatellite.authUser != null) {
             System.out.println("Чтобы выйти из режима добавления склада введите команду exit");
             System.out.print("Введите название нового склада: ");
             String str = new Scanner(System.in).nextLine().toUpperCase(Locale.ROOT);

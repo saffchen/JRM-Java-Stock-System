@@ -77,31 +77,33 @@ public class DeleteSatellite implements Command {
 
         isAuthorizedSuccessfully();
 
-        System.out.println("Введите exit для того, чтобы выйти в главное меню");
-        System.out.print("Введите название склада, который необходимо удалить: ");
-        Scanner scanner = new Scanner(System.in);
-        String str = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
-        if (str.equals("EXIT")) {
-            setExit(new ExitFromCommandMenu());
-            exit.doExit();
+        while (AddSatellite.authUser != null) {
+            System.out.println("Введите exit для того, чтобы выйти в главное меню");
+            System.out.print("Введите название склада, который необходимо удалить: ");
+            Scanner scanner = new Scanner(System.in);
+            String str = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
+            if (str.equals("EXIT")) {
+                setExit(new ExitFromCommandMenu());
+                exit.doExit();
+            }
+            Path inputFile = Paths.get("satellite.txt");
+            Path tempFile = Files.createTempFile("temp", ".txt");
+            Stream<String> lines = Files.lines(inputFile);
+            try (BufferedWriter writer = Files.newBufferedWriter(tempFile)) {
+                lines
+                        .filter(line -> !line.startsWith(str))
+                        .forEach(line -> {
+                            try {
+                                writer.write(line);
+                                writer.newLine();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        });
+            }
+            LOGGER.info(" --- DELETE_SATELLITE --- {{}}", str);
+            Files.move(tempFile, inputFile, StandardCopyOption.REPLACE_EXISTING);
+            System.out.printf("Success! Satellite %s has been removed%n", str);
         }
-        Path inputFile = Paths.get("satellite.txt");
-        Path tempFile = Files.createTempFile("temp", ".txt");
-        Stream<String> lines = Files.lines(inputFile);
-        try (BufferedWriter writer = Files.newBufferedWriter(tempFile)) {
-            lines
-                    .filter(line -> !line.startsWith(str))
-                    .forEach(line -> {
-                        try {
-                            writer.write(line);
-                            writer.newLine();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    });
-        }
-        LOGGER.info(" --- DELETE_SATELLITE --- {{}}", str);
-        Files.move(tempFile, inputFile, StandardCopyOption.REPLACE_EXISTING);
-        System.out.printf("Success! Satellite %s has been removed%n", str);
     }
 }
