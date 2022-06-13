@@ -20,16 +20,16 @@ import java.util.stream.Stream;
  * @project JRM-Java-Stock-System
  */
 public class DeleteSatellite implements Command {
-    private static User authUser = null;
     private static final Authorization AUTHORIZATION = new Authorization();
+    private static final Logger LOGGER
+            = LoggerFactory.getLogger(DeleteSatellite.class);
+
+    private static User authUser = null;
     private Exit exit;
 
     private void setExit(Exit exit) {
         this.exit = exit;
     }
-
-    private static final Logger LOGGER
-            = LoggerFactory.getLogger(AddCommand.class);
 
     @Override
     public String getInfo() {
@@ -63,8 +63,8 @@ public class DeleteSatellite implements Command {
                         break;
                     }
                 }
-                if (isFailed)
-                    return;
+                if (isFailed) {
+                }
             } catch (Exception e) {
                 System.out.println("Error: Authorization was broken!");
             }
@@ -102,6 +102,6 @@ public class DeleteSatellite implements Command {
         }
         LOGGER.info(" --- DELETE_SATELLITE --- {{}}", str);
         Files.move(tempFile, inputFile, StandardCopyOption.REPLACE_EXISTING);
-        System.out.println(String.format("Success! Satellite %s has been removed", str));
+        System.out.printf("Success! Satellite %s has been removed%n", str);
     }
 }

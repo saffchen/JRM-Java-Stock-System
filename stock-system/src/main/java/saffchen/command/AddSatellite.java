@@ -28,6 +28,7 @@ public class AddSatellite implements Command {
         return "Write an \"add_satellite\" if you want to additional satellite";
     }
 
+
     public void isAuthorizedSuccessfully() {
         if (AddSatellite.authUser == null) {
             Scanner creds = new Scanner(System.in);
