@@ -30,7 +30,7 @@ public class ModifyCommand implements Command {
     private BufferedReader bufferedReader;
     private Exit exit;
 
-    private void setExit(Exit exit) {
+    public void setExit(Exit exit) {
         this.exit = exit;
     }
 

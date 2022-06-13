@@ -16,7 +16,7 @@ public class AddSatellite implements Command {
     private static final Authorization AUTHORIZATION = new Authorization();
     private Exit exit;
 
-    private void setExit(Exit exit) {
+    public void setExit(Exit exit) {
         this.exit = exit;
     }
 

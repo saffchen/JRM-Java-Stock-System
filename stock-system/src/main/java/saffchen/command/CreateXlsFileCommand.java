@@ -24,7 +24,7 @@ public class CreateXlsFileCommand implements Command {
     private Exit exit;
     private static final List <String> DEPRECATED_SYMBOLS = List.of("/", "|", "?", "*", "<", ">", "!");
 
-    private void setExit(Exit exit) {
+    public void setExit(Exit exit) {
         this.exit = exit;
     }
 

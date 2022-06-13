@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class GenerateReportCommand implements Command {
     private Exit exit;
 
-    private void setExit(Exit exit) {
+    public void setExit(Exit exit) {
         this.exit = exit;
     }
 

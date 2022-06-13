@@ -27,7 +27,7 @@ public class DeleteSatellite implements Command {
     private static User authUser = null;
     private Exit exit;
 
-    private void setExit(Exit exit) {
+    public void setExit(Exit exit) {
         this.exit = exit;
     }
 

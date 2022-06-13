@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class ImportExcelCommand implements Command {
     private Exit exit;
 
-    private void setExit(Exit exit) {
+    public void setExit(Exit exit) {
         this.exit = exit;
     }
 
