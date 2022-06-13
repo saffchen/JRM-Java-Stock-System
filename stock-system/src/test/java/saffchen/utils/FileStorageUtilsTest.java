@@ -21,26 +21,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class FileStorageUtilsTest {
-/*
-
-    @Test
-    void getHeadersFromCSV() {
-        FileStorageUtils fsu = Mockito.mock(FileStorageUtils.class);
-        when(fsu.getHeadersFromCSV()).thenReturn(new ArrayList<String>(
-                Arrays.asList("Title", "Description", "Price ($)", "Tags", "Category", "Count", "Satellite")));
-        ArrayList<String> headers = new ArrayList<String>(
-                Arrays.asList("Title", "Description", "Price ($)", "Tags", "Category", "Count", "Satellite"));
-
-        assertEquals(headers, fsu.getHeadersFromCSV());
-    }
-    @Test
-    void getNullHeadersFromCSV() {
-        FileStorageUtils fsu = Mockito.mock(FileStorageUtils.class);
-        when(fsu.getHeadersFromCSV()).thenReturn(null);
-        assertNull(fsu.getHeadersFromCSV());
-    }
-*/
-
     @Test
     void getDataFromCSV() {
 

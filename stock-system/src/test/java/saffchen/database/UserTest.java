@@ -33,8 +33,7 @@ class UserTest {
     }
 
     @Test
-    void isAuthorized() {
-        try {
+    void isAuthorized() throws NoSuchFieldException, IllegalAccessException {
             Field authorized = user.getClass().getDeclaredField("authorized");
             HashMap<String, Boolean> auth = new HashMap<>();
             auth.put("password", Boolean.TRUE);
@@ -48,9 +47,5 @@ class UserTest {
             authorized.setAccessible(true);
             authorized.set(user, auth);
             assertFalse(user.isAuthorized());
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
     }
 }

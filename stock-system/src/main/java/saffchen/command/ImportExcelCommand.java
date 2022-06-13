@@ -38,7 +38,7 @@ public class ImportExcelCommand implements Command {
                 fileName = new Scanner(System.in).nextLine();
                 if (fileName.equals("exit")) {
                     setExit(new ExitFromCommandMenu());
-                    exit.doSmth();
+                    exit.doExit();
                 }
             } while (!Files.exists(Path.of(fileName)));
             ExcelConnection fileExcelConnection = ExcelConnection.getInstance(fileName);
@@ -54,7 +54,6 @@ public class ImportExcelCommand implements Command {
             System.out.println(result);
         } catch (Exception e) {
             System.out.println("Error: Can't get data for import");
-            ;
         }
     }
 }

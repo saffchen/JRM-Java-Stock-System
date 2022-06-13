@@ -33,7 +33,7 @@ public class DeleteCommand implements Command {
         String title = bufferedReader.readLine();
         if (title.equals("exit")) {
             setExit(new ExitFromCommandMenu());
-            exit.doSmth();}
+            exit.doExit();}
         FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
         FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
         Product product = fileStorageUtils.getProductByTitle(title);

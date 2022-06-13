@@ -44,7 +44,7 @@ public class CreateXlsFileCommand implements Command {
         } while (!isNameCorrect(name));
         if (name.equals("exit")) {
             setExit(new ExitFromCommandMenu());
-            exit.doSmth();
+            exit.doExit();
         }
         String path = name + ".xls";
         Sheets sheetsService = getSheetsService();

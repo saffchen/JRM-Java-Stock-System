@@ -36,10 +36,7 @@ public class DeleteSatellite implements Command {
         return "Write an \"delete_satellite\" if you want to delete satellite";
     }
 
-    @Override
-    public void doCommand() throws Exception {
-        LOGGER.info(" --- DELETE_SATELLITE --- ");
-
+    public void isAuthorizedSuccessfully() {
         if (DeleteSatellite.authUser == null) {
             Scanner creds = new Scanner(System.in);
             boolean isFailed = true;
@@ -52,7 +49,7 @@ public class DeleteSatellite implements Command {
                     String login = creds.nextLine().trim().toLowerCase();
                     if (login.equals("exit")) {
                         setExit(new ExitFromCommandMenu());
-                        exit.doSmth();
+                        exit.doExit();
                     }
                     System.out.print("Enter the password: ");
                     String password = creds.nextLine();
@@ -72,14 +69,21 @@ public class DeleteSatellite implements Command {
                 System.out.println("Error: Authorization was broken!");
             }
         }
+    }
+
+    @Override
+    public void doCommand() throws Exception {
+        LOGGER.info(" --- DELETE_SATELLITE --- ");
+
+        isAuthorizedSuccessfully();
 
         System.out.println("Введите exit для того, чтобы выйти в главное меню");
         System.out.print("Введите название склада, который необходимо удалить: ");
         Scanner scanner = new Scanner(System.in);
         String str = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
-        if (str.equals("exit")) {
+        if (str.equals("EXIT")) {
             setExit(new ExitFromCommandMenu());
-            exit.doSmth();
+            exit.doExit();
         }
         Path inputFile = Paths.get("satellite.txt");
         Path tempFile = Files.createTempFile("temp", ".txt");

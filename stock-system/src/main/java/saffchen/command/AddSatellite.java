@@ -7,29 +7,28 @@ import saffchen.database.User;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class AddSatellite implements Command {
     private static User authUser = null;
     private static final Authorization AUTHORIZATION = new Authorization();
-    private static final Logger LOGGER
-            = LoggerFactory.getLogger(AddCommand.class);
-    public Exit exit;
+    private Exit exit;
 
-    public void setExit(Exit exit) {
+    private void setExit(Exit exit) {
         this.exit = exit;
     }
+
+    private static final Logger LOGGER
+            = LoggerFactory.getLogger(AddCommand.class);
 
     @Override
     public String getInfo() {
         return "Write an \"add_satellite\" if you want to additional satellite";
     }
 
-    @Override
-    public void doCommand() throws Exception {
-        LOGGER.info(" --- ADD_SATELLITE --- ");
-
+    public void isAuthorizedSuccessfully() {
         if (AddSatellite.authUser == null) {
             Scanner creds = new Scanner(System.in);
             boolean isFailed = true;
@@ -42,7 +41,7 @@ public class AddSatellite implements Command {
                     String login = creds.nextLine().trim().toLowerCase();
                     if (login.equals("exit")) {
                         setExit(new ExitFromCommandMenu());
-                        exit.doSmth();
+                        exit.doExit();
                     }
                     System.out.print("Enter the password: ");
                     String password = creds.nextLine();
@@ -61,22 +60,36 @@ public class AddSatellite implements Command {
             } catch (Exception e) {
                 System.out.println("Error: Authorization was broken!");
             }
+        }
+    }
 
+    @Override
+    public void doCommand() throws Exception {
+        LOGGER.info(" --- ADD_SATELLITE --- ");
 
-            while (true) {
-                System.out.println("Чтобы выйти из режима добавления склада введите команду exit");
-                System.out.print("Введите название нового склада: ");
-                String str = new Scanner(System.in).nextLine().toUpperCase(Locale.ROOT);
-                if (str.equals("EXIT")) {
-                    setExit(new ExitFromCommandMenu());
-                    exit.doSmth();
-                }
-                BufferedWriter writer = new BufferedWriter(new FileWriter("satellite.txt", true));
+        isAuthorizedSuccessfully();
+
+        while (true) {
+            System.out.println("Чтобы выйти из режима добавления склада введите команду exit");
+            System.out.print("Введите название нового склада: ");
+            String str = new Scanner(System.in).nextLine().toUpperCase(Locale.ROOT);
+            if (str.equals("EXIT")) {
+                setExit(new ExitFromCommandMenu());
+                exit.doExit();
+            }
+            BufferedWriter writer = null;
+            try {
+                writer = new BufferedWriter(new FileWriter("satellite.txt", true));
                 writer.append("\n");
                 writer.append(str);
                 writer.close();
                 LOGGER.info(" --- ADD_SATELLITE --- {{}}", str);
                 System.out.printf("Success! Satellite %s was added%n", str);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } finally {
+                assert writer != null;
+                writer.close();
             }
         }
     }

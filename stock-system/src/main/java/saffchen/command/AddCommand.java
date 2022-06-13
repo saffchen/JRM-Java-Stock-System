@@ -12,8 +12,6 @@ import saffchen.product.Product;
 import saffchen.utils.FileStorageUtils;
 import saffchen.utils.FileUtils;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
 import java.util.*;
 
 public class AddCommand implements Command {
@@ -22,6 +20,7 @@ public class AddCommand implements Command {
     private void setExit(Exit exit) {
         this.exit = exit;
     }
+
     private static final Logger LOGGER
             = LoggerFactory.getLogger(AddCommand.class);
     static ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class)
@@ -45,7 +44,7 @@ public class AddCommand implements Command {
             String title = new Scanner(System.in).nextLine().trim();
             if (title.equals("exit")) {
                 setExit(new ExitFromCommandMenu());
-                exit.doSmth();
+                exit.doExit();
             }
             System.out.print("Укажите описание продукта: ");
             String description = new Scanner(System.in).nextLine();
@@ -88,13 +87,13 @@ public class AddCommand implements Command {
     }
 
     @Override
-    public void doCommand() throws GeneralSecurityException, IOException {
+    public void doCommand() throws Exception {
         FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
         FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
         try {
             fileStorageUtils.addProduct(addNewProduct());
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.info(e.getMessage());
         }
     }
 }

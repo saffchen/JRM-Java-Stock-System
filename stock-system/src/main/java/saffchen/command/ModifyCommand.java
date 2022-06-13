@@ -16,6 +16,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Collectors;
+
 import static saffchen.utils.MenuUtils.*;
 import static saffchen.utils.ValidationUtil.validPositiveDouble;
 import static saffchen.utils.ValidationUtil.validPositiveInteger;
@@ -38,10 +39,7 @@ public class ModifyCommand implements Command {
         return "Write an \"modify_product\" if you want to make changes";
     }
 
-    @Override
-    public void doCommand() throws IOException {
-        LOGGER.info(" --- MODIFY_PRODUCT --- ");
-
+    public void isAuthorizedSuccessfully() {
         if (ModifyCommand.authUser == null) {
             Scanner creds = new Scanner(System.in);
             boolean isFailed = true;
@@ -54,7 +52,7 @@ public class ModifyCommand implements Command {
                     String login = creds.nextLine().trim().toLowerCase();
                     if (login.equals("exit")) {
                         setExit(new ExitFromCommandMenu());
-                        exit.doSmth();
+                        exit.doExit();
                     }
                     System.out.print("Enter the password: ");
                     String password = creds.nextLine();
@@ -75,6 +73,13 @@ public class ModifyCommand implements Command {
             }
         }
 
+    }
+
+    @Override
+    public void doCommand() throws IOException {
+        LOGGER.info(" --- MODIFY_PRODUCT --- ");
+
+        isAuthorizedSuccessfully();
 
         bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String inputString = inputProductNameOrExit();
@@ -139,13 +144,13 @@ public class ModifyCommand implements Command {
 
     private String inputCorrectValue(Field field, Product product) throws IOException {
         String fieldName = field.getName()
-                                .toUpperCase();
+                .toUpperCase();
         String inputString;
         System.out.println(String.format("Пожалуйста, введите корректную %s. %<s может состоять только из цифр./" +
                 "Please input a correct %<s. %<s can consist the digits only", fieldName));
         System.out.print(String.format("Please, enter a new %s: ", fieldName));
         inputString = bufferedReader.readLine()
-                                    .trim();
+                .trim();
         if (inputString.equals("") || isExit(inputString)) {
             inputString = String.valueOf(runGetter(field, product));
         }
@@ -155,7 +160,7 @@ public class ModifyCommand implements Command {
     // https://stackoverflow.com/questions/13400075/reflection-generic-get-field-value
     private Object runGetter(Field field, Product product) {
         for (Method method : product.getClass()
-                                    .getMethods()) {
+                .getMethods()) {
             if ((method.getName()
                     .startsWith("get")) && (method.getName()
                     .length() == (field.getName()
