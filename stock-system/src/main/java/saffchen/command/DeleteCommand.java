@@ -12,10 +12,6 @@ import java.io.InputStreamReader;
 public class DeleteCommand implements Command {
     private Exit exit;
 
-    private void setExit(Exit exit) {
-        this.exit = exit;
-    }
-
     private static final Logger LOGGER
             = LoggerFactory.getLogger(DeleteCommand.class);
     @Override
@@ -52,5 +48,8 @@ public class DeleteCommand implements Command {
                         "/You haven't confirmed the deletion using the command Yes. You input is %<s", answer));
             }
         }
+    }
+    private void setExit(Exit exit) {
+        this.exit = exit;
     }
 }
