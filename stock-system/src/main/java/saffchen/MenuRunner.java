@@ -1,10 +1,12 @@
 package saffchen;
 
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import saffchen.command.*;
 import saffchen.utils.*;
 import java.util.Map;
 import java.util.Scanner;
 
+@SpringBootApplication
 public class MenuRunner {
     public static void main(String[] args) {
         CommandHolder holder = new CommandHolder();
