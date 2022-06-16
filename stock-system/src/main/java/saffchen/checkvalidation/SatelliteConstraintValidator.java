@@ -1,8 +1,9 @@
 package saffchen.checkvalidation;
 
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
 import saffchen.utils.FileUtils;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 
 public class SatelliteConstraintValidator implements ConstraintValidator<City, String> {

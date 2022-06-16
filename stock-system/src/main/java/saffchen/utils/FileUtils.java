@@ -1,6 +1,5 @@
 package saffchen.utils;
 
-import saffchen.database.GSheetConnection;
 import saffchen.database.User;
 
 import java.io.*;
