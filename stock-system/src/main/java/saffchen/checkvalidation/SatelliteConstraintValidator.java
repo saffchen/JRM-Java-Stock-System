@@ -1,7 +1,5 @@
 package saffchen.checkvalidation;
 
-//import jakarta.validation.ConstraintValidator;
-//import jakarta.validation.ConstraintValidatorContext;
 import saffchen.utils.FileUtils;
 
 import javax.validation.ConstraintValidator;
