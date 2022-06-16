@@ -1,8 +1,8 @@
 package saffchen.database;
 
 import com.google.api.client.auth.oauth2.Credential;
-import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
-import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
+//import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
+//import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
@@ -37,8 +37,9 @@ public class GSheetConnection implements Connection {
                 .setDataStoreFactory(new FileDataStoreFactory((new java.io.File("tokens"))))
                 .setAccessType("offline")
                 .build();
-        return new AuthorizationCodeInstalledApp(flow,
-                new LocalServerReceiver()).authorize("user");
+//        return new AuthorizationCodeInstalledApp(flow,
+//                new LocalServerReceiver()).authorize("user");
+        return null;
     }
 
     public static Sheets getSheetsService() throws GeneralSecurityException, IOException {

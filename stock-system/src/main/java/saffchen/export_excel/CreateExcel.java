@@ -1,8 +1,8 @@
 package saffchen.export_excel;
 
 import com.google.api.client.auth.oauth2.Credential;
-import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
-import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
+//import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
+//import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
@@ -24,16 +24,17 @@ public class CreateExcel {
 
     private static Credential authorize() throws IOException, GeneralSecurityException {
         //авторизация по токену, который нужно создать в гугл акке
-        InputStream in = CreateXlsFileCommand.class.getResourceAsStream("/credentials.json");
-        GoogleClientSecrets clientSecrets = GoogleClientSecrets.
-                load(JacksonFactory.getDefaultInstance(), new InputStreamReader(in));
-        List<String> scopes = List.of(SheetsScopes.SPREADSHEETS);
-        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow
-                .Builder(GoogleNetHttpTransport.newTrustedTransport(), JacksonFactory
-                .getDefaultInstance(), clientSecrets, scopes)
-                .setDataStoreFactory(new FileDataStoreFactory((new java.io.File("tokens"))))
-                .setAccessType("offline").build();
-        return new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
+//        InputStream in = CreateXlsFileCommand.class.getResourceAsStream("/credentials.json");
+//        GoogleClientSecrets clientSecrets = GoogleClientSecrets.
+//                load(JacksonFactory.getDefaultInstance(), new InputStreamReader(in));
+//        List<String> scopes = List.of(SheetsScopes.SPREADSHEETS);
+//        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow
+//                .Builder(GoogleNetHttpTransport.newTrustedTransport(), JacksonFactory
+//                .getDefaultInstance(), clientSecrets, scopes)
+//                .setDataStoreFactory(new FileDataStoreFactory((new java.io.File("tokens"))))
+//                .setAccessType("offline").build();
+//        return new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
+        return null;
     }
 
     public static Sheets getSheetsService() throws GeneralSecurityException, IOException {

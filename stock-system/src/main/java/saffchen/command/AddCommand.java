@@ -1,10 +1,10 @@
 package saffchen.command;
 
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
-import org.hibernate.validator.HibernateValidator;
+//import jakarta.validation.ConstraintViolation;
+//import jakarta.validation.Validation;
+//import jakarta.validation.Validator;
+//import jakarta.validation.ValidatorFactory;
+//import org.hibernate.validator.HibernateValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import saffchen.database.FileConnection;
@@ -12,6 +12,10 @@ import saffchen.product.Product;
 import saffchen.utils.FileStorageUtils;
 import saffchen.utils.FileUtils;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.*;
 
 public class AddCommand implements Command {
@@ -23,9 +27,8 @@ public class AddCommand implements Command {
 
     private static final Logger LOGGER
             = LoggerFactory.getLogger(AddCommand.class);
-    static ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class)
-            .configure()
-            .buildValidatorFactory();
+    static ValidatorFactory validatorFactory = Validation.byDefaultProvider().configure()
+                                                         .buildValidatorFactory();
     static Validator validator = validatorFactory.getValidator();
 
     @Override
