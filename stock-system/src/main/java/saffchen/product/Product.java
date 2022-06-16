@@ -1,6 +1,5 @@
 package saffchen.product;
 
-//import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.Length;
 import saffchen.checkvalidation.City;
 
