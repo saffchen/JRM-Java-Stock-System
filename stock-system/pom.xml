@@ -139,5 +139,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <finalName>stock-system</finalName>
     </build>
 </project>
