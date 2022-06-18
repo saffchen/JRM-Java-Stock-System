@@ -1,3 +1,5 @@
 import { createApp } from 'vue'
 
-createApp(App).mount('#app')
+import HomePage from './HomePage'
+
+createApp(HomePage).mount('#app')
