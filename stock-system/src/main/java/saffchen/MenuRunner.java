@@ -1,6 +1,5 @@
 package saffchen;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import saffchen.command.*;
@@ -10,13 +9,9 @@ import java.util.Map;
 import java.util.Scanner;
 
 @SpringBootApplication
-public class MenuRunner implements CommandLineRunner {
+public class MenuRunner {
     public static void main(String[] args) {
         SpringApplication.run(MenuRunner.class, args);
-    }
-
-    @Override
-    public void run(String... args) throws Exception {
 
         CommandHolder holder = new CommandHolder();
 
