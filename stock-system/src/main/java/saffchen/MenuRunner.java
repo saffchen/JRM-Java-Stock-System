@@ -16,7 +16,6 @@ public class MenuRunner {
         CommandHolder holder = new CommandHolder();
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println(FileUtils.getBanner());
         System.out.println(FileUtils.getParticipants());
 
         holder.printCommandInfo();
