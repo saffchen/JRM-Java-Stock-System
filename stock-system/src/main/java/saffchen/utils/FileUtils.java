@@ -7,14 +7,6 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 public class FileUtils {
-    public static String getBanner() {
-        return getInfoFromTxtFile("banner.txt");
-    }
-
-    public static String getParticipants() {
-        return getInfoFromTxtFile("participants.txt");
-    }
-
     public static List<String> getSatelliteList() {
         return Collections.singletonList(getInfoFromTxtFile("satellite.txt"));
     }
