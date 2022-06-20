@@ -12,20 +12,7 @@
   import Main from "@/components/main/Main"
   import Footer from "@/components/footer/Footer";
 
-    function date() {
-        const current = new Date();
-        const day =  format(current.getDate());
-        const month = format(current.getMonth() + 1);
-        const year = current.getFullYear();
-        return day + '.' + month + '.' + year;
-    }
 
-    function format(value) {
-        if (value < 10) {
-            value = '0' + value;
-        }
-        return value;
-    }
 
 
   export default {
@@ -38,7 +25,6 @@
       mounted() {
         window.addEventListener("load", () => {
           $('#datatable').DataTable();
-          document.getElementById('date').innerHTML = date();
         });
       }
   }
