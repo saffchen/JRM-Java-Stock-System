@@ -172,6 +172,10 @@
       }
     }
 }
+
+    $('#datatable').ready(() => {
+      $('#datatable').DataTable()
+    });
 </script>
 
 <style>
