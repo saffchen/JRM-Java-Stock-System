@@ -1,9 +1,9 @@
 package saffchen.product;
 
-import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.Length;
 import saffchen.checkvalidation.City;
 
+import javax.validation.constraints.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
