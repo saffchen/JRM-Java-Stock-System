@@ -12,20 +12,12 @@
   import Main from "@/components/main/Main"
   import Footer from "@/components/footer/Footer";
 
-
-
-
   export default {
       name: 'app',
       components: {
           Header,
           Footer,
           Main
-      },
-      mounted() {
-        window.addEventListener("load", () => {
-          $('#datatable').DataTable();
-        });
       }
   }
 </script>
