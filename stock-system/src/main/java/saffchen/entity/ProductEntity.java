@@ -55,7 +55,6 @@ public class ProductEntity {
     @PositiveOrZero(message = "Количество не может быть отрицательным!")
     private Integer count;
 
-
     @ManyToOne
     @JoinColumn(name="satelliteId", referencedColumnName = "id")
     @NotNull(message = "Название города не может быть пустым!")
