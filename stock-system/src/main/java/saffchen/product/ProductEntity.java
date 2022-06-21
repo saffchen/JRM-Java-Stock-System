@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class Product {
+public class ProductEntity {
 
     @NotEmpty(message = "Название не может быть пустым!")
     @Length(max = 255, message = "Название не может быть длиннее 255 символов!")
@@ -38,7 +38,7 @@ public class Product {
     @City(message = "Укажите название склада из списка: ")
     private String satellite;
 
-    public Product(String title, String description, Double price, List<String> tags, String category, Integer count, String satellite) {
+    public ProductEntity(String title, String description, Double price, List<String> tags, String category, Integer count, String satellite) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -48,7 +48,7 @@ public class Product {
         this.satellite = satellite;
     }
 
-    public Product(Map<String, String> fieldsMap) {
+    public ProductEntity(Map<String, String> fieldsMap) {
         for (Map.Entry<String, String> entry : fieldsMap.entrySet()) {
             String fieldName = entry.getKey();
             String value = entry.getValue();
@@ -80,7 +80,7 @@ public class Product {
         }
     }
 
-    public Product() {
+    public ProductEntity() {
 
     }
 

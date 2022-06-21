@@ -3,7 +3,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import saffchen.product.Product;
+import saffchen.product.ProductEntity;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,15 +17,15 @@ import java.util.List;
 public class SatelliteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "Name", unique = true, nullable = false)
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @Column(name="Description")
+    @Column(name="description")
     private String description;
 
     @OneToMany(mappedBy = "satellite")
-    private List<Product> products;
+    private List<ProductEntity> product;
 }

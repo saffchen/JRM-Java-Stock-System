@@ -3,7 +3,7 @@ package saffchen.command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import saffchen.database.FileConnection;
-import saffchen.product.Product;
+import saffchen.product.ProductEntity;
 import saffchen.utils.FileStorageUtils;
 import saffchen.utils.FileUtils;
 
@@ -31,9 +31,9 @@ public class AddCommand implements Command {
         return "Write an \"add_product\" if you want to additional product";
     }
 
-    public Product addNewProduct() throws Exception {
+    public ProductEntity addNewProduct() throws Exception {
         LOGGER.info(" --- ADD_PRODUCT --- ");
-        Product product = null;
+        ProductEntity product = null;
         System.out.println("*** ADDING A PRODUCT ***");
         boolean isValidProduct = true;
         while (isValidProduct) {
@@ -70,12 +70,12 @@ public class AddCommand implements Command {
             System.out.print("Укажите склад на котором хранится продукт: ");
             String satellite = new Scanner(System.in).next().toUpperCase(Locale.ROOT);
 
-            product = new Product(title, description, price, List.of(tags), category,
+            product = new ProductEntity(title, description, price, List.of(tags), category,
                     count, satellite);
             LOGGER.info(" --- ADD_PRODUCT --- {{}}", product);
             isValidProduct = false;
-            Set<ConstraintViolation<Product>> violations = validator.validate(product);
-            for (ConstraintViolation<Product> warning : violations) {
+            Set<ConstraintViolation<ProductEntity>> violations = validator.validate(product);
+            for (ConstraintViolation<ProductEntity> warning : violations) {
                 System.out.println(warning.getMessage());
                 warning.getMessage();
                 isValidProduct = true;
