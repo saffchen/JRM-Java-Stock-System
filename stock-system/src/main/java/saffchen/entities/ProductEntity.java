@@ -1,4 +1,4 @@
-package saffchen.entity;
+package saffchen.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,12 +6,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 import saffchen.checkvalidation.City;
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -43,6 +42,7 @@ public class ProductEntity {
     @Column(name="tags")
     @NotEmpty(message = "Тег не может быть пустым!")
     @Size(max = 20, message = "Количество тегов не может быть более 20!")
+    @ElementCollection(targetClass=String.class)
     private List<String> tags;
 
     @Column(name="category", nullable = false)
@@ -68,5 +68,8 @@ public class ProductEntity {
 
     public String showInfo() {
         return this.showInfo();
+    }
+    public String getTags(){
+        return this.tags.stream().collect(Collectors.joining(",")).toString();
     }
 }

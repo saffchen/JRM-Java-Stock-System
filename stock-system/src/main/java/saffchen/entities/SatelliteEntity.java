@@ -1,11 +1,13 @@
-package saffchen.entity;
+package saffchen.entities;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import saffchen.product.ProductEntity;
+import saffchen.entities.ProductEntity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
