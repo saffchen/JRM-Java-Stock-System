@@ -9,7 +9,5 @@ import saffchen.database.DBConnection;
 public class MenuRunner {
     public static void main(String[] args) {
         SpringApplication.run(MenuRunner.class, args);
-        //DBConnection pgConnection = new DBConnection();
-        //Session session = pgConnection.pgConnect();
     }
 }
