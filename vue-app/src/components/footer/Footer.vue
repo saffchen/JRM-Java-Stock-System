@@ -15,46 +15,38 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
+    name: 'Footer',
     data() {
-        return {
+      return {
           date: getDate(),
-            
-          contributors: [
-              {
-                  'id': 1,
-                  'email': 'denis.savchenko98@yandex.ru',
-                  'nickname': 'saffchen'
-              },
-              {
-                  'id': 2,
-                  'email': 'freesky15@yandex.ru',
-                  'nickname': 'freesky15'
-              },
-              {
-                  'id': 3,
-                  'email': 'rusokolov4@gmail.com',
-                  'nickname': 'rusokolov1987'
-              },
-              {
-                  'id': 4,
-                  'email': 'thiend.weisman@gmail.com',
-                  'nickname': 'ReyBove'
-              },
-              {
-                  'id': 5,
-                  'email': 'alexan.sergeev@gmail.com',
-                  'nickname': 'aalexeen'
-              },
-              {
-                  'id': 6,
-                  'email': 'vit.shvaichuk@gmail.com',
-                  'nickname': 'fstk1337'
-              }
-          ]
+          contributors: []
         }
+    },
+    mounted() {
+      getContributors(this)
     }
 }
+
+function getContributors(obj) {
+    const axiosInstance = axios.create({
+      baseURL: 'http://localhost:8080',
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+
+    return axiosInstance.get('/participants')
+                        .then(response => {
+                          obj.contributors = response.data;
+                        })
+                        .catch(error => {
+                          console.error(error);
+                        });
+}
+
 
 function getDate() {
   const current = new Date();

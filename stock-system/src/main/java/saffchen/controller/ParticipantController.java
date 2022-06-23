@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import saffchen.dto.ParticipantDto;
 import saffchen.service.ParticipantService;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -16,7 +17,8 @@ public class ParticipantController {
     private final ParticipantService participantService;
 
     @GetMapping
-    public List<ParticipantDto> getParticipants() {
+    public List<ParticipantDto> getParticipants(HttpServletResponse response) {
+        response.addHeader("Access-Control-Allow-Origin", "*");
         return participantService.getAll();
     }
 }
