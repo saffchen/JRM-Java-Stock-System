@@ -42,7 +42,7 @@ public class ProductEntity {
     @Column(name="tags")
     @NotEmpty(message = "Тег не может быть пустым!")
     @Size(max = 20, message = "Количество тегов не может быть более 20!")
-    @ElementCollection(targetClass=String.class)
+    @ElementCollection
     private List<String> tags;
 
     @Column(name="category", nullable = false)
