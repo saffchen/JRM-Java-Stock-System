@@ -2,7 +2,7 @@
     <footer class="footer bg-secondary p-1">
         <div class="container">
             <div class="pt-4 pb-3 text-decoration-underline">Project contributors:</div>
-            <div class="row mb-3">
+            <div  class="row mb-3">
                 <div class="col-lg-4 col-md-6" v-for="contributor in contributors">
                     <p class="text-nowrap">{{ contributor.email }} - {{ contributor.nickname }}</p>
                 </div>
@@ -25,26 +25,27 @@ export default {
           contributors: []
         }
     },
-    mounted() {
-      getContributors(this)
-    }
-}
+    methods: {
+      getContributors: function() {
+        const axiosInstance = axios.create({
+          baseURL: 'http://localhost:8080',
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
 
-function getContributors(obj) {
-    const axiosInstance = axios.create({
-      baseURL: 'http://localhost:8080',
-      headers: {
-        'Accept': 'application/json'
+         axiosInstance.get('/participants')
+            .then(response => {
+              this.contributors = response.data;
+            })
+            .catch(error => {
+              console.error(error);
+            });
       }
-    });
-
-    return axiosInstance.get('/participants')
-                        .then(response => {
-                          obj.contributors = response.data;
-                        })
-                        .catch(error => {
-                          console.error(error);
-                        });
+    },
+    created() {
+        this.getContributors();
+    }
 }
 
 
