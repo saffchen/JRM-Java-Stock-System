@@ -7,7 +7,7 @@ import axios from 'axios'
 //import VueAxios from 'vue-axios'
 
 const instance = axios.create({
-    baseURL: 'http://localhost:80/api/',
+    baseURL: 'http://localhost:3000/api/',
     withCredentials: true,
     headers: {
         accept: 'application/json'
