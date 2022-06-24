@@ -58,7 +58,6 @@ public class ProductEntity {
     @ManyToOne
     @JoinColumn(name="satelliteId", referencedColumnName = "id")
     @NotNull(message = "Название города не может быть пустым!")
-    @City(message = "Укажите название склада из списка: ")
     private SatelliteEntity satellite;
 
     @Override
