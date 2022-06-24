@@ -1,8 +1,8 @@
 import instance from "./instance";
 
-import ProductTable from "../components/main/ProductTable";
+import productModule from "./products";
 
 export default {
-    product: ProductTable(instance)
+    products: productModule(instance)
 }
 

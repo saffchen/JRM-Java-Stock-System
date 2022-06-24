@@ -2,13 +2,13 @@
 // https://v2.vuejs.org/v2/cookbook/using-axios-to-consume-apis.html?redirect=true
 // https://youtu.be/cJfEJ4mXBEg
 // https://vueuse.org/integrations/useAxios/#usage
+// https://www.codemag.com/Article/2103071/The-Complete-Guide-to-Vue-3-Plug-ins-Part-2
 
 import axios from 'axios'
-//import VueAxios from 'vue-axios'
 
 const instance = axios.create({
-    baseURL: 'http://localhost:3000/api/',
-    withCredentials: true,
+    baseURL: 'http://localhost:8080/api/',
+    withCredentials: false,
     headers: {
         accept: 'application/json'
     }
