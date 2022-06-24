@@ -3,7 +3,7 @@ package saffchen.reports;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import saffchen.database.FileConnection;
-import saffchen.product.Product;
+import saffchen.product.ProductEntity;
 import saffchen.utils.FileStorageUtils;
 
 import java.io.FileOutputStream;
@@ -58,7 +58,7 @@ public class PDFReportFromFile implements Report {
 
     @Override
     public void generateReport() throws Exception {
-        List<Product> tableData = fileStorageUtils.getDataForReportFromCSV(field, criteries);
+        List<ProductEntity> tableData = fileStorageUtils.getDataForReportFromCSV(field, criteries);
 
         Document document = new Document();
         try {
@@ -78,7 +78,7 @@ public class PDFReportFromFile implements Report {
             }
 
             BaseColor color;
-            for (Product product : tableData) {
+            for (ProductEntity product : tableData) {
                 if (isLight)
                     color = BaseColor.LIGHT_GRAY;
                 else

@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import saffchen.database.Authorization;
 import saffchen.database.FileConnection;
 import saffchen.database.User;
-import saffchen.product.Product;
+import saffchen.product.ProductEntity;
 import saffchen.utils.FileStorageUtils;
 
 import java.io.BufferedReader;
@@ -86,11 +86,11 @@ public class ModifyCommand implements Command {
             bufferedReader = new BufferedReader(new InputStreamReader(System.in));
             String inputString = inputProductNameOrExit();
             FileStorageUtils fileStorageUtils = new FileStorageUtils(FileConnection.getInstance("stock_import_csv.csv"));
-            Product product = fileStorageUtils.getProductByTitle(inputString);
+            ProductEntity product = fileStorageUtils.getProductByTitle(inputString);
 
             if (product != null) {
                 System.out.println(product.toString());
-                Field[] fields = Product.class.getDeclaredFields();
+                Field[] fields = ProductEntity.class.getDeclaredFields();
                 Map<String, String> newFieldsMap = new HashMap<>();
                 for (Field field : fields) {
                     String fieldName = field.getName();
@@ -126,7 +126,7 @@ public class ModifyCommand implements Command {
                 //https://www.loggly.com/ultimate-guide/java-logging-basics/
                 //https://stackoverflow.com/questions/22615311/is-there-a-logback-layout-that-creates-json-objects-with-message-parameters-as-a
                 LOGGER.info("--- MODIFY_PRODUCT --- {}", product);
-                fileStorageUtils.modifyProduct(product, new Product(newFieldsMap));
+                fileStorageUtils.modifyProduct(product, new ProductEntity(newFieldsMap));
             } else {
                 System.out.println(String.format("Данный продукт %s не найден/There is no %<s product", inputString));
             }
@@ -142,7 +142,7 @@ public class ModifyCommand implements Command {
         return bufferedReader.readLine().trim();
     }
 
-    private String inputCorrectValue(Field field, Product product) throws IOException {
+    private String inputCorrectValue(Field field, ProductEntity product) throws IOException {
         String fieldName = field.getName()
                 .toUpperCase();
         String inputString;
@@ -158,7 +158,7 @@ public class ModifyCommand implements Command {
     }
 
     // https://stackoverflow.com/questions/13400075/reflection-generic-get-field-value
-    private Object runGetter(Field field, Product product) {
+    private Object runGetter(Field field, ProductEntity product) {
         for (Method method : product.getClass()
                 .getMethods()) {
             if ((method.getName()
