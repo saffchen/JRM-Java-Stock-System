@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axiosInstance from "@/config/axios.cfg";
 
 export default {
     name: 'Footer',
@@ -27,14 +27,8 @@ export default {
     },
     methods: {
       getContributors: function() {
-        const axiosInstance = axios.create({
-          baseURL: 'http://localhost:8080',
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-
-         axiosInstance.get('/participants')
+        return axiosInstance
+            .get('/participants')
             .then(response => {
               this.contributors = response.data;
             })
