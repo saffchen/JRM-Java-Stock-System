@@ -18,7 +18,6 @@ public class ParticipantController {
 
     @GetMapping
     public List<ParticipantDto> getParticipants(HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
         return participantService.getAll();
     }
 }
