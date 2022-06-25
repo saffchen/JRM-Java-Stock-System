@@ -1,24 +1,19 @@
 package saffchen.utils;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mockito;
-import org.mockito.stubbing.OngoingStubbing;
 import saffchen.database.FileConnection;
-import saffchen.product.Product;
+import saffchen.product.ProductEntity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 class FileStorageUtilsTest {
     @Test
@@ -52,7 +47,7 @@ class FileStorageUtilsTest {
     @Test
 
     void addProduct() {
-        Product product = new Product("title", "description", 11111.1, new ArrayList<String>(), "category",6, "satellite");
+        ProductEntity product = new ProductEntity("title", "description", 11111.1, new ArrayList<String>(), "category",6, "satellite");
         FileConnection fc = Mockito.mock(FileConnection.class);
         FileStorageUtils fsu = new FileStorageUtils(fc);
 

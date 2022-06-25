@@ -8,7 +8,7 @@ import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.bean.HeaderColumnNameTranslateMappingStrategy;
 import saffchen.database.FileConnection;
-import saffchen.product.Product;
+import saffchen.product.ProductEntity;
 import saffchen.product.ProductAdapter;
 import saffchen.product.RawProduct;
 import saffchen.product.ReflectProductUtils;
@@ -97,7 +97,7 @@ public class FileStorageUtils implements StorageUtils {
 
 
     @Override
-    public void addProduct(Product product) {
+    public void addProduct(ProductEntity product) {
         if (product == null) {
             System.out.println("Error: There is no product for add!");
             return;
@@ -154,7 +154,7 @@ public class FileStorageUtils implements StorageUtils {
     }
 
     @Override
-    public void deleteProduct(Product product) {
+    public void deleteProduct(ProductEntity product) {
         List<RawProduct> updatedRawProducts = new ArrayList<>();
         try {
             if (product == null)
@@ -173,7 +173,7 @@ public class FileStorageUtils implements StorageUtils {
     }
 
     @Override
-    public void modifyProduct(Product before, Product after) {
+    public void modifyProduct(ProductEntity before, ProductEntity after) {
         List<RawProduct> updatedRawProducts = new ArrayList<>();
         try {
             if (before == null || after == null)
@@ -211,7 +211,7 @@ public class FileStorageUtils implements StorageUtils {
         }
     }
 
-    public Product getProductByTitle(String title) {
+    public ProductEntity getProductByTitle(String title) {
         try {
             CsvToBean<RawProduct> csvToBean = getCSVParser();
             List<RawProduct> products = csvToBean.parse();
@@ -227,7 +227,7 @@ public class FileStorageUtils implements StorageUtils {
     }
 
     public CsvToBean<RawProduct> getCSVParser() throws FileNotFoundException {
-        List<String> headersFromClass = new ReflectProductUtils().getFieldsFromClass(new Product());
+        List<String> headersFromClass = new ReflectProductUtils().getFieldsFromClass(new ProductEntity());
         List<String> headersFromCSV = getHeadersFromCSV();
 
         Map mapping = IntStream.range(0, headersFromCSV.size())
@@ -252,8 +252,8 @@ public class FileStorageUtils implements StorageUtils {
         return csvToBean;
     }
 
-    public List<Product> getDataForReportFromCSV(String header, String criteries) {
-        List<Product> products = new ArrayList<>();
+    public List<ProductEntity> getDataForReportFromCSV(String header, String criteries) {
+        List<ProductEntity> products = new ArrayList<>();
 
         try {
             CsvToBean<RawProduct> csvToBean = getCSVParser();
