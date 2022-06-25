@@ -1,5 +1,11 @@
-import { createApp } from 'vue'
+import { createApp } from 'vue';
 
-import HomePage from './HomePage'
+import HomePage from './HomePage';
 
-createApp(HomePage).mount('#app')
+import ApiPlugin from './plugins/api';
+import LoadPlugin from './plugins/load';
+
+createApp(HomePage)
+    .use(ApiPlugin)
+    .use(LoadPlugin)
+    .mount('#app');
