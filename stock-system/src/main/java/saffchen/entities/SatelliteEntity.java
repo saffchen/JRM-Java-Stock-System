@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import saffchen.entities.ProductEntity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,5 +27,5 @@ public class SatelliteEntity {
     private String description;
 
     @OneToMany(mappedBy = "satellite")
-    private List<ProductEntity> product;
+    private List<ProductEntity> products;
 }
