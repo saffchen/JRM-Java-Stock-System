@@ -7,5 +7,5 @@ import java.io.Serializable;
 @Data
 public class ParticipantDto implements Serializable {
     private String email;
-    private String nickName;
+    private String nickname;
 }
