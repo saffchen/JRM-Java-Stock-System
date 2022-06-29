@@ -11,7 +11,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static java.util.stream.Collectors.toList;
 
 public class GSheetImportUtils implements ImportUtils {
     private final String RANGE = GSheetConnection.RANGE;

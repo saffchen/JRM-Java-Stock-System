@@ -8,7 +8,7 @@ import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.bean.HeaderColumnNameTranslateMappingStrategy;
 import saffchen.database.FileConnection;
-import saffchen.product.ProductEntity;
+import saffchen.entities.ProductEntity;
 import saffchen.product.ProductAdapter;
 import saffchen.product.RawProduct;
 import saffchen.product.ReflectProductUtils;

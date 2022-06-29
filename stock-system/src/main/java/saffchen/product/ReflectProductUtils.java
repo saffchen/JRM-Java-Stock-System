@@ -1,5 +1,7 @@
 package saffchen.product;
 
+import saffchen.entities.ProductEntity;
+
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;

@@ -3,7 +3,7 @@ package saffchen.reports;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import saffchen.database.FileConnection;
-import saffchen.product.ProductEntity;
+import saffchen.entities.ProductEntity;
 import saffchen.utils.FileStorageUtils;
 
 import java.io.FileOutputStream;
@@ -90,7 +90,7 @@ public class PDFReportFromFile implements Report {
                 table.addCell(drawCell(product.getTags().toString(), color, cellHeader));
                 table.addCell(drawCell(product.getCategory(), color, cellHeader));
                 table.addCell(drawCell(product.getCount().toString(), color, cellHeader));
-                table.addCell(drawCell(product.getSatellite(), color, cellHeader));
+                table.addCell(drawCell(product.getSatellite().getName(), color, cellHeader));
 
                 isLight = !isLight;
                 table.completeRow();

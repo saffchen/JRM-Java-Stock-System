@@ -1,5 +1,7 @@
 package saffchen.product;
 
+import saffchen.entities.ProductEntity;
+
 import java.util.*;
 import java.util.stream.Collectors;
 

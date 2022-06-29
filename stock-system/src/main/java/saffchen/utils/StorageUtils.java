@@ -1,6 +1,6 @@
 package saffchen.utils;
 
-import saffchen.product.ProductEntity;
+import saffchen.entities.ProductEntity;
 
 public interface StorageUtils {
 

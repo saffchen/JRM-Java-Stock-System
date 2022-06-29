@@ -6,7 +6,8 @@ import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.mockito.Mockito;
 import saffchen.database.FileConnection;
-import saffchen.product.ProductEntity;
+import saffchen.entities.ProductEntity;
+import saffchen.entities.SatelliteEntity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -47,7 +48,7 @@ class FileStorageUtilsTest {
     @Test
 
     void addProduct() {
-        ProductEntity product = new ProductEntity("title", "description", 11111.1, new ArrayList<String>(), "category",6, "satellite");
+        ProductEntity product = new ProductEntity("title", "description", 11111.1, new ArrayList<String>(), "category",6, new SatelliteEntity("satellite"));
         FileConnection fc = Mockito.mock(FileConnection.class);
         FileStorageUtils fsu = new FileStorageUtils(fc);
 

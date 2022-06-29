@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import saffchen.database.Authorization;
 import saffchen.database.FileConnection;
 import saffchen.database.User;
-import saffchen.product.ProductEntity;
+import saffchen.entities.ProductEntity;
 import saffchen.utils.FileStorageUtils;
 
 import java.io.BufferedReader;
