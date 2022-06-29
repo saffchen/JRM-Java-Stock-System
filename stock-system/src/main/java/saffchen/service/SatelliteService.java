@@ -24,8 +24,14 @@ public class SatelliteService {
         return satelliteRepository.findAll();
     }
 
-    public SatelliteEntity findOne(Long id){
-        Optional<SatelliteEntity> foundSatellite = satelliteRepository.findById(id);
+    public SatelliteEntity findById(Long id){
+        Long convertedId = Long.valueOf(id);
+        Optional<SatelliteEntity> foundSatellite = satelliteRepository.findById(convertedId);
+        return foundSatellite.orElse(null);
+    }
+
+    public SatelliteEntity findByNameIgnoreCase(String name){
+        Optional<SatelliteEntity> foundSatellite = satelliteRepository.findByNameIgnoreCase(name);
         return foundSatellite.orElse(null);
     }
 }

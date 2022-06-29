@@ -27,8 +27,14 @@ public class SatelliteRestController {
         return satelliteService.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public SatelliteEntity getSatellite(@PathVariable("id") Long id){
-        return satelliteService.findOne(id);
+
+        return satelliteService.findById(id);
+    }
+
+    @GetMapping("/name/{name}")
+    public SatelliteEntity getSatellite(@PathVariable("name") String name){
+        return satelliteService.findByNameIgnoreCase(name);
     }
 }
