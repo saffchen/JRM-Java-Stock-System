@@ -28,7 +28,7 @@ export default {
     methods: {
       getContributors: function() {
         return axiosInstance
-            .get('/participants')
+            .get('/api/participants')
             .then(response => {
               this.contributors = response.data;
             })
