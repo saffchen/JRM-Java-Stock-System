@@ -49,17 +49,24 @@
         products: []
       }
     },
-      created() {
-          this.$load(async() => {
-            this.products = (await this.$api.products.getAll()).data
-            console.log(this.products)
-          } )
+    methods: {
+      getProducts: function() {
+        this.$load(async () => {
+          this.products = (await this.$api.products.getAll()).data
+          console.log(this.products)
+        })
+      },
+      applyTable: function() {
+        $("#datatable").DataTable();
       }
+    },
+    created() {
+      this.getProducts();
+    },
+    updated() {
+      this.applyTable();
+    }
 }
-
-    $('#datatable').ready(() => {
-      $('#datatable').DataTable()
-    });
 </script>
 
 <style>
