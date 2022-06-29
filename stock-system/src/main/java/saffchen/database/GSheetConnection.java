@@ -8,8 +8,6 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.SheetsScopes;
-import saffchen.command.CreateXlsFileCommand;
-import saffchen.database.Connection;
 
 import java.io.*;
 import java.security.GeneralSecurityException;

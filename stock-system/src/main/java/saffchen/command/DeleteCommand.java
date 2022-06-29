@@ -3,7 +3,7 @@ package saffchen.command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import saffchen.database.FileConnection;
-import saffchen.product.ProductEntity;
+import saffchen.entities.ProductEntity;
 import saffchen.utils.FileStorageUtils;
 import saffchen.utils.MenuUtils;
 import java.io.BufferedReader;

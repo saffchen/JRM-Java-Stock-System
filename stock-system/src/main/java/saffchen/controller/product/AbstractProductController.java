@@ -3,7 +3,7 @@ package saffchen.controller.product;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import saffchen.product.Product;
+import saffchen.entities.ProductEntity;
 import saffchen.service.ProductService;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class AbstractProductController {
     @Autowired
     protected ProductService service;
 
-    public ResponseEntity<List<Product>> getAll() {
+    public ResponseEntity<List<ProductEntity>> getAll() {
         log.info("get all products");
         return ResponseEntity.of(Optional.ofNullable(service.getAll()));
     }

@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import saffchen.product.Product;
+import saffchen.entities.ProductEntity;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class ProductController extends AbstractProductController {
 
     @Override
     @GetMapping
-    public ResponseEntity<List<Product>> getAll() {
+    public ResponseEntity<List<ProductEntity>> getAll() {
         log.info("getAll");
         return super.getAll();
     }

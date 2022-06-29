@@ -25,7 +25,7 @@ class ParticipantControllerTest {
     void getParticipants() throws Exception {
         var participants = participantService.getAll();
 
-        mockMvc.perform(get("/participants"))
+        mockMvc.perform(get("/api/participants"))
                .andExpect(status().isOk())
                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                .andExpect(content().json(om.writeValueAsString(participants)));
