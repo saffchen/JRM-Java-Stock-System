@@ -1,17 +1,19 @@
 package saffchen.product;
 
+import saffchen.entities.ProductEntity;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class ProductAdapter {
     private RawProduct rawProduct;
-    private Product product;
+    private ProductEntity product;
 
     public ProductAdapter(RawProduct rawProduct) {
         this.rawProduct = rawProduct;
     }
 
-    public ProductAdapter(Product product) {
+    public ProductAdapter(ProductEntity product) {
         this.product = product;
     }
 
@@ -29,8 +31,8 @@ public class ProductAdapter {
         return result.substring(0, result.length()-1);
     }
 
-    public Product getProduct() {
-        Product product = new Product();
+    public ProductEntity getProduct() {
+        ProductEntity product = new ProductEntity();
         product.setTitle(rawProduct.getTitle());
         product.setCategory(rawProduct.getCategory());
         product.setPrice(Double.valueOf(rawProduct.getPrice()));

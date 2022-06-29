@@ -1,15 +1,14 @@
 package saffchen.utils;
 
-import saffchen.database.Connection;
-import saffchen.product.Product;
+import saffchen.entities.ProductEntity;
 
 public interface StorageUtils {
 
-    public void addProduct(Product product);
+    public void addProduct(ProductEntity product);
 
-    public void deleteProduct(Product product);
+    public void deleteProduct(ProductEntity product);
 
-    public void modifyProduct(Product before, Product after);
+    public void modifyProduct(ProductEntity before, ProductEntity after);
 
     public void showAllProducts();
 

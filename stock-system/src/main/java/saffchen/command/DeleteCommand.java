@@ -3,7 +3,7 @@ package saffchen.command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import saffchen.database.FileConnection;
-import saffchen.product.Product;
+import saffchen.entities.ProductEntity;
 import saffchen.utils.FileStorageUtils;
 import saffchen.utils.MenuUtils;
 import java.io.BufferedReader;
@@ -32,7 +32,7 @@ public class DeleteCommand implements Command {
             exit.doExit();}
         FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
         FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
-        Product product = fileStorageUtils.getProductByTitle(title);
+        ProductEntity product = fileStorageUtils.getProductByTitle(title);
         LOGGER.info(" --- DELETE_PRODUCT --- {{}}", product);
         if (product == null) {
             System.out.println(String.format("Данный продукт %s не найден/There is no %<s product", title));

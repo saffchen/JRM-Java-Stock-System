@@ -1,5 +1,7 @@
 package saffchen.product;
 
+import saffchen.entities.ProductEntity;
+
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
@@ -8,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReflectProductUtils {
-    public void invokeSetter(Product product, String fieldName, Object value) {
+    public void invokeSetter(ProductEntity product, String fieldName, Object value) {
         try {
             PropertyDescriptor pd = new PropertyDescriptor(fieldName, product.getClass());
             pd.getWriteMethod().invoke(product, value);
@@ -26,7 +28,7 @@ public class ReflectProductUtils {
         }
     }
 
-    public void invokeGetter(Product product, String fieldName) {
+    public void invokeGetter(ProductEntity product, String fieldName) {
         PropertyDescriptor pd;
         try {
             pd = new PropertyDescriptor(fieldName, product.getClass());
@@ -38,7 +40,7 @@ public class ReflectProductUtils {
         }
     }
 
-    public List<String> getFieldsFromClass(Product product) {
+    public List<String> getFieldsFromClass(ProductEntity product) {
         List<String> fields = new ArrayList<>();
 
         try {
