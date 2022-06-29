@@ -11,7 +11,6 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 @Table(name="Satellite")
 public class SatelliteEntity {
     @Id

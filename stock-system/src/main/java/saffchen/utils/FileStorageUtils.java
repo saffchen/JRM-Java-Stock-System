@@ -109,7 +109,7 @@ public class FileStorageUtils implements StorageUtils {
             productToCsv.write(rawProduct.toCSVString(";"));
             productToCsv.close();
 
-            System.out.println(rawProduct.showInfo());
+            //System.out.println(rawProduct.showInfo());
             System.out.println("Product was added to database successfully!");
         } catch (IOException e) {
             System.err.println("Error: Can't write data");

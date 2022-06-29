@@ -71,7 +71,7 @@ public class AddCommand implements Command {
             System.out.print("Укажите склад на котором хранится продукт: ");
             String satellite = new Scanner(System.in).next().toUpperCase(Locale.ROOT);
 
-            product = new ProductEntity(title, description, price, List.of(tags), category,
+            product = new ProductEntity(0L, title, description, price, List.of(tags), category,
                     count, new SatelliteEntity(satellite));
             LOGGER.info(" --- ADD_PRODUCT --- {{}}", product);
             isValidProduct = false;

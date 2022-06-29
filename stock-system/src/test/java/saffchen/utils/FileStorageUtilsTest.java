@@ -11,10 +11,9 @@ import saffchen.entities.SatelliteEntity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
 
 class FileStorageUtilsTest {
     @Test
@@ -48,8 +47,8 @@ class FileStorageUtilsTest {
     @Test
 
     void addProduct() {
-        ProductEntity product = new ProductEntity("title", "description", 11111.1, new ArrayList<String>(), "category",6, new SatelliteEntity("satellite"));
-        FileConnection fc = Mockito.mock(FileConnection.class);
+        ProductEntity product = new ProductEntity(0L,"title", "description", 11111.1, List.of("tag1", "tag2"), "category",6, new SatelliteEntity("satellite"));
+        FileConnection fc = FileConnection.getInstance("test.csv");
         FileStorageUtils fsu = new FileStorageUtils(fc);
 
         PrintStream originalOut = System.out;

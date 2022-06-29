@@ -13,7 +13,6 @@ import java.util.Map;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 @Table(name="Product")
 public class ProductEntity {
     @Id
