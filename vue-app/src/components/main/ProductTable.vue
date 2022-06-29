@@ -42,7 +42,7 @@
 </template>
 
 <script>
-    export default {
+export default {
     data() {
       return {
         headers: ['Title', 'Price $', 'Tags', 'Category', 'Count', 'Satellite', 'Actions'],
@@ -53,7 +53,6 @@
       getProducts: function() {
         this.$load(async () => {
           this.products = (await this.$api.products.getAll()).data
-          console.log(this.products)
         })
       },
       applyTable: function() {
