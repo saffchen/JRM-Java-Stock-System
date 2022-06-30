@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Entity
@@ -59,7 +60,7 @@ public class ProductEntity {
     @JoinColumn(name="satelliteId", referencedColumnName = "id")
     @NotNull(message = "Название города не может быть пустым!")
     private SatelliteEntity satellite;
-
+    /*
     @Override
     public String toString() {
         return title + ", " + description + ", " + price + ", " + tags + ", " + category + ", " + count + ", " + satellite;
@@ -67,8 +68,35 @@ public class ProductEntity {
 
     public String showInfo() {
         return this.showInfo();
-    }
+    }*/
     public String getTags(){
         return this.tags.stream().collect(Collectors.joining(",")).toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductEntity that = (ProductEntity) o;
+        return id == that.id && title.equals(that.title) && Objects.equals(description, that.description) && price.equals(that.price) && Objects.equals(tags, that.tags) && category.equals(that.category) && count.equals(that.count) && satellite.equals(that.satellite);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, description, price, tags, category, count, satellite);
+    }
+
+    @Override
+    public String toString() {
+        return "ProductEntity{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", tags=" + tags +
+                ", category='" + category + '\'' +
+                ", count=" + count +
+                ", satellite=" + satellite +
+                '}';
     }
 }
