@@ -24,7 +24,7 @@
         <org.mindrot.jbcrypt.version>0.4</org.mindrot.jbcrypt.version>
         <logback.version>1.2.11</logback.version>
         <slf4j.version>1.7.36</slf4j.version>
-        <org.postgresql.version>42.2.18</org.postgresql.version>
+        <org.postgresql.version>42.3.6</org.postgresql.version>
         <java.version>17</java.version>
     </properties>
 
@@ -122,6 +122,7 @@
     </dependencies>
 
     <build>
+        <finalName>stock</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
