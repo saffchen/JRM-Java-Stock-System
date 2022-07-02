@@ -4,7 +4,7 @@ services:
   postgres:
     image: 'postgres:14.4-alpine'
     healthcheck:
-      test: ["CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres"]
+      test: ["CMD", "pg_isready", "-q", "-d", "docker", "-U", "docker"]
       timeout: 45s
       interval: 10s
       retries: 10
