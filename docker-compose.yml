@@ -21,7 +21,10 @@ services:
       - '5432:5432'
 
   stock:
-    build: ./stock-system
+    build:
+      context: ./stock-system
+      args:
+        MVN_NO_TEST: -Dmaven.test.skip=true
     depends_on:
       postgres:
         condition: service_healthy
