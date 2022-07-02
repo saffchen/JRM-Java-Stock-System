@@ -25,6 +25,11 @@ services:
       context: ./stock-system
       args:
         MVN_NO_TEST: -Dmaven.test.skip=true
+    healthcheck:
+      test: curl --silent --fail http://localhost:8080/actuator/health | grep {\"status\":\"UP\"} || exit 1
+      timeout: 20s
+      interval: 10s
+      retries: 10
     depends_on:
       postgres:
         condition: service_healthy
