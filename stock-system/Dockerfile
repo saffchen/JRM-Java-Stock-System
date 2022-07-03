@@ -4,7 +4,7 @@ COPY src /app/src
 COPY pom.xml /app/pom.xml
 
 WORKDIR /app
-RUN mvn clean package -Dmaven.test.skip
+RUN --mount=type=cache,target=/root/.m2 mvn clean package -Dmaven.test.skip
 
 FROM eclipse-temurin:17-alpine
 
