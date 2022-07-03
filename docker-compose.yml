@@ -32,3 +32,16 @@ services:
         condition: service_healthy
     ports:
       - '8080:8080'
+
+  vue-app:
+    build: ./vue-app
+    healthcheck:
+      test: wget -q http://localhost:3000 -O - | grep "<\!DOCTYPE html>" || exit 1
+      timeout: 10s
+      interval: 10s
+      retries: 3
+    depends_on:
+      stock:
+        condition: service_healthy
+    ports:
+      - '3000:3000'
