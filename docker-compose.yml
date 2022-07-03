@@ -40,8 +40,15 @@ services:
       timeout: 10s
       interval: 10s
       retries: 3
+    volumes:
+      - ./vue-app:/app
+      - npm-cache:/root/.npm
     depends_on:
       stock:
         condition: service_healthy
     ports:
       - '3000:3000'
+
+volumes:
+  npm-cache:
+    external: false
