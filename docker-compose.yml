@@ -21,12 +21,9 @@ services:
       - '5432:5432'
 
   stock:
-    build:
-      context: ./stock-system
-      args:
-        MVN_NO_TEST: -Dmaven.test.skip=true
+    build: ./stock-system
     healthcheck:
-      test: curl --silent --fail http://localhost:8080/actuator/health | grep {\"status\":\"UP\"} || exit 1
+      test: wget -q http://localhost:8080/actuator/health -O - | grep {\"status\":\"UP\"} || exit 1
       timeout: 20s
       interval: 10s
       retries: 10

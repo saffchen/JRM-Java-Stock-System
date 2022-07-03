@@ -1,12 +1,13 @@
-FROM maven:3.8.5-openjdk-17-slim
+FROM maven:3.8.6-eclipse-temurin-17-alpine as builder
 
 COPY src /app/src
 COPY pom.xml /app/pom.xml
 
 WORKDIR /app
-ARG MVN_NO_TEST
-RUN mvn $MVN_NO_TEST clean package
+RUN mvn clean package -Dmaven.test.skip
 
-WORKDIR /app/target
-EXPOSE 8080
+FROM eclipse-temurin:17-alpine
+
+WORKDIR /app
+COPY --from=builder /app/target/stock.jar /app/stock.jar
 ENTRYPOINT ["java", "-jar", "stock.jar"]
