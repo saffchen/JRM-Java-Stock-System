@@ -11,10 +11,9 @@ import saffchen.service.SatelliteService;
 import java.util.List;
 
 @RestController
-//@RequestMapping(value = SatelliteRestController.REST_URL)
 @RequestMapping("/api/satellites")
 public class SatelliteRestController {
-    //static final String REST_URL = "/api/satellites";
+
     private final SatelliteService satelliteService;
 
     @Autowired
