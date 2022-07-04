@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Setter
@@ -29,27 +28,4 @@ public class SatelliteEntity {
 
     @OneToMany(mappedBy = "satellite")
     private List<ProductEntity> products;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SatelliteEntity that = (SatelliteEntity) o;
-        return id.equals(that.id) && name.equals(that.name) && Objects.equals(description, that.description);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, description);
-    }
-
-    @Override
-    public String toString() {
-        return "SatelliteEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", products=" + products +
-                '}';
-    }
 }
