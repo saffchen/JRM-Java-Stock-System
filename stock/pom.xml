@@ -5,13 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.4</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>org.example</groupId>
+        <artifactId>JRM-Java-Stock-System</artifactId>
+        <version>1.0</version>
     </parent>
 
-    <groupId>org.example</groupId>
+    <groupId>org.example.stock</groupId>
     <artifactId>stock</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
@@ -22,10 +21,7 @@
         <itextpdf.version>5.5.13.3</itextpdf.version>
         <glassfish.version>4.0.1</glassfish.version>
         <org.mindrot.jbcrypt.version>0.4</org.mindrot.jbcrypt.version>
-        <logback.version>1.2.11</logback.version>
-        <slf4j.version>1.7.36</slf4j.version>
         <org.postgresql.version>42.2.18</org.postgresql.version>
-        <java.version>17</java.version>
     </properties>
 
     <dependencies>
@@ -69,19 +65,6 @@
             <groupId>org.glassfish</groupId>
             <artifactId>jakarta.el</artifactId>
             <version>${glassfish.version}</version>
-        </dependency>
-        <!-- Logging with SLF4J & LogBack -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback.version}</version>
-            <scope>runtime</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.mindrot/jbcrypt -->
         <dependency>
