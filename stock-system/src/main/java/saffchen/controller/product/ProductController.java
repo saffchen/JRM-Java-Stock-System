@@ -10,10 +10,7 @@ import saffchen.entities.ProductEntity;
 
 import java.util.List;
 
-/**
- * @author alex_jd on 6/24/22
- * @project JRM-Java-Stock-System
- */
+
 @RestController
 @RequestMapping(value = ProductController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
