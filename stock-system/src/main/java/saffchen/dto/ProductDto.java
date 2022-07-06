@@ -1,5 +1,6 @@
 package saffchen.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import saffchen.entities.SatelliteEntity;
@@ -13,8 +14,8 @@ import java.util.List;
  */
 
 @Data
-@Builder
-public class ProductDto implements Serializable {
+@AllArgsConstructor
+public class ProductDto{
     private Long id;
     private String title;
     private String description;
