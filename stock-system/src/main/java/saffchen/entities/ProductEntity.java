@@ -1,5 +1,6 @@
 package saffchen.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
@@ -61,6 +62,7 @@ public class ProductEntity {
     @JoinColumn(name="satelliteId", referencedColumnName = "id")
     @NotNull(message = "Название города не может быть пустым!")
     @NonNull
+    @JsonBackReference
     private SatelliteEntity satellite;
 
     public ProductEntity(Map<String, String> fieldsMap) {
