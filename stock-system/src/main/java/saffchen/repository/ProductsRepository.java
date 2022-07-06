@@ -1,5 +1,6 @@
 package saffchen.repository;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import saffchen.entities.ProductEntity;
 
@@ -8,5 +9,6 @@ import saffchen.entities.ProductEntity;
  * @project JRM-Java-Stock-System
  */
 @Transactional(readOnly = true)
+@Repository
 public interface ProductsRepository extends BaseRepository<ProductEntity> {
 }
