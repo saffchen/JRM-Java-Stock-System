@@ -2,6 +2,7 @@ package saffchen.mapper;
 
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
+import org.springframework.stereotype.Component;
 import saffchen.dto.ProductDto;
 import saffchen.entities.ProductEntity;
 
