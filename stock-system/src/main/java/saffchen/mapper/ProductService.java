@@ -1,4 +1,4 @@
-package saffchen.service;
+package saffchen.mapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -7,9 +7,13 @@ import org.springframework.stereotype.Service;
 import saffchen.entities.ProductEntity;
 import saffchen.repository.ProductsRepository;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
+/**
+ * @author saffchen created on 06.07.2022
+ * @project JRM-Java-Stock-System
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -19,10 +23,15 @@ public class ProductService {
     private ProductsRepository productRepository;
 
     public List<ProductEntity> getAllProducts() {
-        return productRepository.findAll();
+        try {
+            return productRepository.findAll();
+        } catch (Exception e) {
+            log.error("Object is not found");
+            return Collections.emptyList();
+        }
     }
 
-    public Optional<ProductEntity> getProductById(Long id) {
-        return productRepository.findById(id);
+    public ProductEntity getProductById(Long id) {
+        return productRepository.findById(id).orElseThrow();
     }
 }

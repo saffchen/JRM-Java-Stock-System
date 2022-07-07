@@ -7,6 +7,7 @@ import saffchen.dto.ProductDto;
 import saffchen.entities.ProductEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author saffchen created on 06.07.2022
@@ -16,6 +17,8 @@ import java.util.List;
 public interface ProductMapper {
 
     ProductDto productToProductDto(ProductEntity product);
+
     List<ProductDto> toProductsDtoList(List<ProductEntity> productEntities);
+
     ProductEntity productDtoToProduct(ProductDto productDto);
 }

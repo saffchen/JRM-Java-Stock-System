@@ -12,15 +12,18 @@ import java.io.IOException;
 import java.util.List;
 
 import static java.util.Collections.emptyList;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class ParticipantService {
     private static final String PARTICIPANT_FILE = "classpath:participants.json";
     private final ObjectMapper om;
+
     public List<ParticipantDto> getAll() {
         try {
-            return om.readValue(ResourceUtils.getFile(PARTICIPANT_FILE), new TypeReference<>() {});
+            return om.readValue(ResourceUtils.getFile(PARTICIPANT_FILE), new TypeReference<>() {
+            });
         } catch (IOException e) {
             log.error("Ошибка при чтении файла: {}", PARTICIPANT_FILE);
 

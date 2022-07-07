@@ -15,7 +15,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class ProductDto{
+public class ProductDto {
     private Long id;
     private String title;
     private String description;
