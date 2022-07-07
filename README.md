@@ -1,14 +1,19 @@
-# JRM Java Stock System
+# JRM Java Stock System Project
 
-## Start Postgresql server with docker compose
-<img src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white"/>
+## Run application (development approach):
+<img alt="docker" src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white"/>
 
-From the root directory of the project with root privileges run:
+### 1. Clone project repository.
+### 2. Make sure you have docker installed.
+#### 2a. On Windows OS make sure that docker engine has started.
+### 3. From the root directory of the project with root privileges run:
 ```bash
-$ docker compose up -d
+$ docker compose up --build -V -d
 ```
 
-To stop and remove the container run:
+## Stop application:
+
+### To stop application and remove the containers run:
 ```bash
 $ docker compose down
 ```
