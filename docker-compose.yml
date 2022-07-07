@@ -21,7 +21,7 @@ services:
       - '5432:5432'
 
   stock:
-    build: ./stock-system
+    build: ./stock
     healthcheck:
       test: wget -q http://localhost:8080/actuator/health -O - | grep {\"status\":\"UP\"} || exit 1
       timeout: 20s

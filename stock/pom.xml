@@ -13,6 +13,8 @@
     <groupId>org.example.stock</groupId>
     <artifactId>stock</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <name>stock</name>
+
     <properties>
         <opencsv.version>5.6</opencsv.version>
         <googleapi.version>1.23.0</googleapi.version>
@@ -21,7 +23,7 @@
         <itextpdf.version>5.5.13.3</itextpdf.version>
         <glassfish.version>4.0.1</glassfish.version>
         <org.mindrot.jbcrypt.version>0.4</org.mindrot.jbcrypt.version>
-        <org.postgresql.version>42.2.18</org.postgresql.version>
+        <org.postgresql.version>42.3.6</org.postgresql.version>
     </properties>
 
     <dependencies>
