@@ -24,8 +24,8 @@
         <org.mindrot.jbcrypt.version>0.4</org.mindrot.jbcrypt.version>
         <logback.version>1.2.11</logback.version>
         <slf4j.version>1.7.36</slf4j.version>
-        <org.postgresql.version>42.2.18</org.postgresql.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
+        <org.postgresql.version>42.3.6</org.postgresql.version>
         <java.version>17</java.version>
     </properties>
 
@@ -109,6 +109,10 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
@@ -130,6 +134,7 @@
     </dependencies>
 
     <build>
+        <finalName>stock</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

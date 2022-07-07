@@ -1,11 +1,10 @@
-version: '3'
+version: '3.8'
 
 services:
-
   postgres:
-    image: 'postgres:latest'
+    image: 'postgres:14.4-alpine'
     healthcheck:
-      test: ["CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres"]
+      test: ["CMD", "pg_isready", "-q", "-d", "docker", "-U", "docker"]
       timeout: 45s
       interval: 10s
       retries: 10
@@ -13,10 +12,43 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - APP_DB_USER=docker
-      - APP_DB_PASSWORD=docker
-      - APP_DB_NAME=stock
+      - STOCK_DB_USER=docker
+      - STOCK_DB_PASSWORD=docker
+      - STOCK_DB_NAME=stock
     volumes:
       - ./db:/docker-entrypoint-initdb.d/
     ports:
       - '5432:5432'
+
+  stock:
+    build: ./stock-system
+    healthcheck:
+      test: wget -q http://localhost:8080/actuator/health -O - | grep {\"status\":\"UP\"} || exit 1
+      timeout: 20s
+      interval: 10s
+      retries: 10
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - '8080:8080'
+
+  vue-app:
+    build: ./vue-app
+    healthcheck:
+      test: wget -q http://localhost:3000 -O - | grep "<\!DOCTYPE html>" || exit 1
+      timeout: 10s
+      interval: 10s
+      retries: 3
+    volumes:
+      - ./vue-app:/app
+      - npm-cache:/root/.npm
+    depends_on:
+      stock:
+        condition: service_healthy
+    ports:
+      - '3000:3000'
+
+volumes:
+  npm-cache:
+    external: false
