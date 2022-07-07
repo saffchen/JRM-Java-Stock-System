@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import saffchen.dto.ProductDto;
 import saffchen.mapper.ProductMapper;
-import saffchen.mapper.ProductService;
+import saffchen.exception.NoEntityException;
+import saffchen.service.ProductService;
 
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDto> getProductById(@PathVariable Long id) {
+    public ResponseEntity<ProductDto> getProductById(@PathVariable Long id) throws NoEntityException {
         return ResponseEntity.ok(productMapper.productToProductDto(productService.getProductById(id)));
     }
 }

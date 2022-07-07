@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name="Satellite")
+@Table(name = "Satellite")
 public class SatelliteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class SatelliteEntity {
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @Column(name="description")
+    @Column(name = "description")
     private String description;
 
     @OneToMany(mappedBy = "satellite")
