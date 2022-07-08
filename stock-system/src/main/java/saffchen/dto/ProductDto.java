@@ -3,6 +3,7 @@ package saffchen.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.mapstruct.Mapping;
 import saffchen.entities.SatelliteEntity;
 
 import java.io.Serializable;

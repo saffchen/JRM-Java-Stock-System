@@ -18,7 +18,8 @@ public class ParticipantService {
 
     public List<ParticipantDto> getAll() {
         try {
-            return om.readValue(PARTICIPANTS, new TypeReference<>() {});
+            return om.readValue(PARTICIPANTS, new TypeReference<>() {
+            });
         } catch (IOException e) {
             log.error("Ошибка при чтении файла: {}", PARTICIPANTS);
             return java.util.Collections.emptyList();
