@@ -30,6 +30,7 @@ public class ProductService {
     }
 
     public ProductEntity getProductById(Long id) throws NoEntityException {
-        return productRepository.findById(id).orElseThrow(() -> new NoEntityException("Object with id " + id + " is not found"));
+        return productRepository.findById(id).orElseThrow(
+        () -> new NoEntityException("Object with id " + id + " is not found"));
     }
 }
