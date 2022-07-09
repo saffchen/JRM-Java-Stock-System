@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -63,6 +64,9 @@ public class ProductEntity {
     @JsonBackReference
     private SatelliteEntity satellite;
 
+    public ProductEntity(Map<String, String> newFieldsMap) {
+    }
+
     public String getTags(){
         return this.tags.stream().collect(Collectors.joining(",")).toString();
     }
@@ -94,6 +98,18 @@ public class ProductEntity {
                 ", category='" + category + '\'' +
                 ", count=" + count +
                 ", satellite=" + satellite +
+                '}';
+    }
+    public String showInfo() {
+        return "Product{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", tags=" + tags +
+                ", category='" + category + '\'' +
+                ", count=" + count +
+                ", satellite='" + satellite.toString() + '\'' +
                 '}';
     }
 }

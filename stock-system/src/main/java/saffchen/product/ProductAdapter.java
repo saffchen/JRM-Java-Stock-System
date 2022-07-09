@@ -51,7 +51,7 @@ public class ProductAdapter {
         rawProduct.setPrice(product.getPrice().toString());
         rawProduct.setDescription(product.getDescription());
         rawProduct.setCount(product.getCount().toString());
-        rawProduct.setTags(tagsToString(product.getTags()));
+        rawProduct.setTags(tagsToString(Collections.singletonList(product.getTags())));
         rawProduct.setSatellite(product.getSatellite());
 
         return rawProduct;
