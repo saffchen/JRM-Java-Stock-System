@@ -1,9 +1,9 @@
 package saffchen.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,7 +11,8 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="Satellite")
+@Data
+@Table(name = "Satellite")
 public class SatelliteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,28 +20,15 @@ public class SatelliteEntity {
     private Long id;
 
     @Column(name = "name", unique = true, nullable = false)
-    @NonNull
     private String name;
 
-    @Column(name="description")
-    @NonNull
+    @Column(name = "description")
     private String description;
 
     @OneToMany(mappedBy = "satellite")
-    private final List<ProductEntity> products = new ArrayList<>();
+    @JsonManagedReference
+    private List<ProductEntity> products;
 
-    public SatelliteEntity(@NonNull String name) {
-        this.name = name;
-        description = "";
-    }
-
-    @Override
-    public String toString() {
-        return "Satellite{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", products=" + products +
-                '}';
+    public SatelliteEntity(String satellite) {
     }
 }
