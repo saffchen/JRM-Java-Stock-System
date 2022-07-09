@@ -26,6 +26,7 @@
         <slf4j.version>1.7.36</slf4j.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
         <org.postgresql.version>42.3.6</org.postgresql.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <java.version>17</java.version>
     </properties>
 
@@ -143,7 +144,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <source>${java.version}</source> <!-- depending on your project -->
                     <target>${java.version}</target> <!-- depending on your project -->
@@ -153,7 +154,6 @@
                             <artifactId>lombok</artifactId>
                             <version>1.18.20</version>
                         </path>
-                        <!-- This is needed when using Lombok 1.18.16 and above -->
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok-mapstruct-binding</artifactId>
