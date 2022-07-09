@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-alpine
+FROM openjdk:20-jdk
 
 COPY target/stock.jar /app/stock.jar
 WORKDIR /app

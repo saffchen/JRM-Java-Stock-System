@@ -23,10 +23,10 @@ services:
   stock:
     build: ./stock
     healthcheck:
-      test: wget -q http://localhost:8080/actuator/health -O - | grep {\"status\":\"UP\"} || exit 1
+      test: curl --silent http://localhost:8080/actuator/health | grep {\"status\":\"UP\"} || exit 1
       timeout: 20s
       interval: 10s
-      retries: 10
+      retries: 5
     environment:
       - DB_HOST=postgres
     depends_on:
