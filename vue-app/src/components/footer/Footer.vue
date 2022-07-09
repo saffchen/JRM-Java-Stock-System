@@ -15,8 +15,6 @@
 </template>
 
 <script>
-import axiosInstance from "@/config/axios.cfg";
-
 export default {
     name: 'Footer',
     data() {
@@ -26,20 +24,17 @@ export default {
         }
     },
     methods: {
-      getContributors: function() {
-        return axiosInstance
-            .get('/participants')
-            .then(response => {
-              this.contributors = response.data;
-            })
-            .catch(error => {
-              console.error(error);
-            });
+      getContributors: function () {
+        this.$load(async () => {
+          this.contributors = (await this.$api.participants.getAll()).data
+        })
       }
     },
+
     created() {
-        this.getContributors();
+      this.getContributors();
     }
+
 }
 
 

@@ -28,7 +28,7 @@
                     </td>
                     <td v-text="record.category"></td>
                     <td v-text="record.count"></td>
-                    <td v-text="record.satellite"></td>
+                    <td v-text="record.satellite.name"></td>
                     <td>
                       <div class="d-flex align-items-center justify-content-around">
                         <button type="button" class="btn btn-outline-warning btn-sm me-2 border-0">Edit</button>
@@ -42,24 +42,30 @@
 </template>
 
 <script>
-    export default {
+export default {
     data() {
       return {
         headers: ['Title', 'Price $', 'Tags', 'Category', 'Count', 'Satellite', 'Actions'],
         products: []
       }
     },
-      created() {
-          this.$load(async() => {
-            this.products = (await this.$api.products.getAll()).data
-            console.log(this.products)
-          } )
+    methods: {
+      getProducts: function() {
+        this.$load(async () => {
+          this.products = (await this.$api.products.getAll()).data
+        })
+      },
+      applyTable: function() {
+        $("#datatable").DataTable();
       }
+    },
+    created() {
+      this.getProducts();
+    },
+    updated() {
+      this.applyTable();
+    }
 }
-
-    $('#datatable').ready(() => {
-      $('#datatable').DataTable()
-    });
 </script>
 
 <style>

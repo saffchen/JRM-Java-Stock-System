@@ -8,7 +8,7 @@ import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.bean.HeaderColumnNameTranslateMappingStrategy;
 import saffchen.database.FileConnection;
-import saffchen.product.ProductEntity;
+import saffchen.entities.ProductEntity;
 import saffchen.product.ProductAdapter;
 import saffchen.product.RawProduct;
 import saffchen.product.ReflectProductUtils;
@@ -109,7 +109,7 @@ public class FileStorageUtils implements StorageUtils {
             productToCsv.write(rawProduct.toCSVString(";"));
             productToCsv.close();
 
-            System.out.println(rawProduct.showInfo());
+            //System.out.println(rawProduct.showInfo());
             System.out.println("Product was added to database successfully!");
         } catch (IOException e) {
             System.err.println("Error: Can't write data");

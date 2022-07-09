@@ -2,7 +2,6 @@ package saffchen.database;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import java.security.MessageDigest;
 import java.util.HashMap;
 import java.util.Map;
 
