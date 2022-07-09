@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import saffchen.dto.SatelliteDTO;
 import saffchen.entities.SatelliteEntity;
 import saffchen.service.SatelliteService;
 
@@ -21,8 +22,8 @@ public class SatelliteRestController {
         this.satelliteService = satelliteService;
     }
 
-    @GetMapping()
-    public List<SatelliteEntity> getSatellites(){
+    @GetMapping("/all")
+    public List<SatelliteDTO> getAllSatellitesWithProductCount(){
         return satelliteService.findAll();
     }
 

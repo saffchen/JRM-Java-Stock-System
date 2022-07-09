@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import saffchen.dto.SatelliteDTO;
 import saffchen.entities.ProductEntity;
 import saffchen.entities.SatelliteEntity;
 import saffchen.repositories.SatelliteRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,15 +28,19 @@ public class SatelliteService {
         this.satelliteRepository = satelliteRepository;
     }
 
-    public List<SatelliteEntity> findAll(){
-        List<SatelliteEntity> lse = em.createQuery(
-                        "SELECT se.id, se.name, se.description, COUNT(p.id) " +
-                                "FROM SatelliteEntity se " +
-                                "JOIN se.products p " +
-                                "GROUP BY se.id")
-                .getResultList();
-        return lse;
-        //return satelliteRepository.findAllSatellites();
+    public List<SatelliteDTO> findAll(){
+        List<SatelliteDTO> sdtos =  satelliteRepository.findAllSatellitesWithProductCount();
+        for (SatelliteDTO sdto: sdtos) {
+            System.out.println(sdto.getId() + " : " + sdto.getName() + " : " + sdto.getDescription() + " : " + sdto.getCount());
+        }
+        return sdtos;
+    }
+    private SatelliteDTO convertToSatelliteDTO(SatelliteEntity satelliteEntity){
+        SatelliteDTO satelliteDTO = new SatelliteDTO();
+        //satelliteDTO.setId(Long.valueOf(satelliteEntity.getId()));
+        satelliteDTO.setName(satelliteEntity.getName());
+        //satelliteDTO.setDescription(satelliteDTO.getDescription());
+        return satelliteDTO;
     }
 
     public SatelliteEntity findById(Long id){
