@@ -2,28 +2,35 @@ package saffchen.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import saffchen.entities.ProductEntity;
-import saffchen.entities.SatelliteEntity;
+import saffchen.exception.NoEntityException;
+import saffchen.repository.ProductsRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author alex_jd on 6/24/22
- * @project JRM-Java-Stock-System
- */
+import static java.util.Collections.emptyList;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class ProductService {
 
-    public List<ProductEntity> getAll() {
-        ProductEntity product = new ProductEntity(1L,"testTitle", "testDescription", 5000.0, List.of("tag1", "tag2"), "testCategory", 100, new SatelliteEntity("Moscow"));
-        ProductEntity product1 = new ProductEntity(2L,"testTitle1", "testDescription1", 10000.0, List.of("tag3", "tag4"), "testCategory1", 200, new SatelliteEntity("Moscow"));
-        List<ProductEntity> productList = new ArrayList<>();
-        productList.add(product);
-        productList.add(product1);
-        return productList;
+    @Autowired
+    private ProductsRepository productRepository;
+
+    public List<ProductEntity> getAllProducts() {
+        try {
+            return productRepository.findAll();
+        } catch (Exception e) {
+            log.error("Object is not found");
+            return emptyList();
+        }
+    }
+
+    public ProductEntity getProductById(Long id) throws NoEntityException {
+        return productRepository.findById(id).orElseThrow(
+                () -> new NoEntityException("Object with id " + id + " is not found"));
     }
 }
