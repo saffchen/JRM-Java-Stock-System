@@ -7,9 +7,21 @@
 ### 2. Make sure you have docker installed.
 #### 2a. On Windows OS make sure that docker engine has started.
 ### 3. From the root directory of the project with root privileges run:
+a.
 ```bash
-$ docker compose up --build -V -d
+$ docker compose up --build -d postgres
 ```
+b.
+```bash
+$ ./mvnw clean install #linux/macOS
+$ mvnw.cmd clean install #windows 
+```
+c.
+```bash
+$ docker compose up --build -d
+```
+
+### 4. After that you can open <i>http://localhost:3000\/</i> in your browser.
 
 ## Stop application:
 

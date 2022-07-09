@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   postgres:
-    image: 'postgres:14.4-alpine'
+    image: postgres:14.4-alpine
     healthcheck:
       test: ["CMD", "pg_isready", "-q", "-d", "docker", "-U", "docker"]
       timeout: 45s
@@ -27,6 +27,8 @@ services:
       timeout: 20s
       interval: 10s
       retries: 10
+    environment:
+      - DB_HOST=postgres
     depends_on:
       postgres:
         condition: service_healthy
@@ -35,13 +37,7 @@ services:
 
   vue-app:
     build: ./vue-app
-    healthcheck:
-      test: wget -q http://localhost:3000 -O - | grep "<\!DOCTYPE html>" || exit 1
-      timeout: 10s
-      interval: 10s
-      retries: 3
     volumes:
-      - ./vue-app:/app
       - npm-cache:/root/.npm
     depends_on:
       stock:
