@@ -67,10 +67,6 @@ public class ProductEntity {
     public ProductEntity(Map<String, String> newFieldsMap) {
     }
 
-    public String getTags(){
-        return this.tags.stream().collect(Collectors.joining(",")).toString();
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
