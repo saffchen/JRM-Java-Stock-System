@@ -18,7 +18,7 @@ $ mvnw.cmd clean install #windows
 ```
 c.
 ```bash
-$ docker compose up --build -d
+$ docker compose up 
 ```
 
 ### 4. After that you can open <i>http://localhost:3000</i> in your browser.
