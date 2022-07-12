@@ -13,12 +13,6 @@ import saffchen.mapper.SatelliteMapper;
 import saffchen.service.SatelliteService;
 
 import java.util.List;
-
-/**
- * @author saffchen created on 06.07.2022
- * @project JRM-Java-Stock-System
- */
-
 @AllArgsConstructor
 @RestController
 @RequestMapping(value = SatelliteController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
