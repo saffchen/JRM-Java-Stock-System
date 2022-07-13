@@ -3,13 +3,12 @@ package saffchen.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import saffchen.dto.SatelliteDto;
+import saffchen.entities.SatelliteEntity;
 import saffchen.exception.NoEntityException;
 import saffchen.mapper.SatelliteMapper;
+import saffchen.repository.SatellitesRepository;
 import saffchen.service.SatelliteService;
 
 import java.util.List;
@@ -37,5 +36,9 @@ public class SatelliteController {
         return ResponseEntity.ok(satelliteDto);
     }
 
+    @PostMapping()
+    public ResponseEntity<SatelliteDto> saveNewSatellite(@RequestBody SatelliteEntity satellite){
+        return ResponseEntity.ok(satelliteMapper.satelliteToSatelliteDto(satelliteService.saveNewSatellite(satellite)));
+    }
 }
 

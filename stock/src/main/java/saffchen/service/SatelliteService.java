@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import saffchen.entities.SatelliteEntity;
 import saffchen.exception.NoEntityException;
 import saffchen.repository.ProductsRepository;
@@ -39,4 +40,9 @@ public class SatelliteService {
     public Long getProductCountBySatelliteId(Long id){
         return Long.valueOf(productRepository.productCountBySatelliteId(id).size());
     }
+
+    public SatelliteEntity saveNewSatellite(SatelliteEntity satellite){
+        return satelliteRepository.save(satellite);
+    }
+
 }
