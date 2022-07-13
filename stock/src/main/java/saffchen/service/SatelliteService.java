@@ -38,7 +38,6 @@ public class SatelliteService {
     }
 
     public Long getProductCountBySatelliteId(Long id){
-        List<ProductEntity> productEntities = productRepository.productCountBySatelliteId(id);
-        return Long.valueOf(productEntities.size());
+        return Long.valueOf(productRepository.productCountBySatelliteId(id).size());
     }
 }
