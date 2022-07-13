@@ -23,7 +23,7 @@ public class SatelliteController {
     private final SatelliteService satelliteService;
 
     @GetMapping
-    public ResponseEntity<List<SatelliteDto>> getAllProducts() {
+    public ResponseEntity<List<SatelliteDto>> getAllSatellites() {
         List<SatelliteDto> satelliteDtoList = satelliteMapper.toSatellitesDtoList(satelliteService.getAllSatellites());
         for(SatelliteDto satelliteDto : satelliteDtoList)
             satelliteDto.setCount(satelliteService.getProductCountBySatelliteId(satelliteDto.getId()));
@@ -31,7 +31,7 @@ public class SatelliteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SatelliteDto> getProductById(@PathVariable Long id) throws NoEntityException {
+    public ResponseEntity<SatelliteDto> getSatelliteById(@PathVariable Long id) throws NoEntityException {
         SatelliteDto satelliteDto = satelliteMapper.satelliteToSatelliteDto(satelliteService.getSatelliteById(id));
         satelliteDto.setCount(satelliteService.getProductCountBySatelliteId(id));
         return ResponseEntity.ok(satelliteDto);
