@@ -1,13 +1,31 @@
 version: '3.8'
 
 services:
+  zookeeper:
+    image: zookeeper:latest
+    ports:
+      - "2181:2181"
+      # https://www.confluent.io/blog/kafka-client-cannot-connect-to-broker-on-aws-on-docker-etc/
+
+  kafka:
+    image: ubuntu/kafka:latest
+    container_name: broker
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+
   postgres:
     image: postgres:14.4-alpine
     healthcheck:
       test: ["CMD", "pg_isready", "-q", "-d", "docker", "-U", "docker"]
-      timeout: 45s
-      interval: 10s
-      retries: 10
+      timeout: 20s
+      interval: 5s
+      retries: 5
     restart: always
     environment:
       - POSTGRES_USER=postgres
