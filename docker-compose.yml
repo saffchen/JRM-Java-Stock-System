@@ -19,6 +19,22 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
 
+  akhq:
+    image: tchiotludo/akhq
+    container_name: kafka_gui
+    environment:
+      AKHQ_CONFIGURATION: |
+        akhq:
+          connections:
+            docker-kafka-server:
+              properties:
+                bootstrap.servers: "kafka:9092"
+    ports:
+      - '9090:8080'
+    depends_on:
+      - kafka
+    restart: always
+
   postgres:
     image: postgres:14.4-alpine
     healthcheck:
