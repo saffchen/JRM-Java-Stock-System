@@ -1,22 +1,68 @@
-version: '3'
+version: '3.8'
 
 services:
+  zookeeper:
+    image: zookeeper:latest
+    ports:
+      - "2181:2181"
+      # https://www.confluent.io/blog/kafka-client-cannot-connect-to-broker-on-aws-on-docker-etc/
+
+  kafka:
+    image: ubuntu/kafka:latest
+    container_name: broker
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
 
   postgres:
-    image: 'postgres:latest'
+    image: postgres:14.4-alpine
     healthcheck:
-      test: ["CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres"]
-      timeout: 45s
-      interval: 10s
-      retries: 10
+      test: ["CMD", "pg_isready", "-q", "-d", "docker", "-U", "docker"]
+      timeout: 20s
+      interval: 5s
+      retries: 5
     restart: always
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - APP_DB_USER=docker
-      - APP_DB_PASSWORD=docker
-      - APP_DB_NAME=stock
+      - STOCK_DB_USER=docker
+      - STOCK_DB_PASSWORD=docker
+      - STOCK_DB_NAME=stock
     volumes:
       - ./db:/docker-entrypoint-initdb.d/
     ports:
       - '5432:5432'
+
+  stock:
+    build: ./stock
+    healthcheck:
+      test: curl --silent http://localhost:8080/actuator/health | grep {\"status\":\"UP\"} || exit 1
+      timeout: 20s
+      interval: 10s
+      retries: 5
+    environment:
+      - DB_HOST=postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - '8080:8080'
+
+  vue-app:
+    build: ./vue-app
+    volumes:
+      - npm-cache:/root/.npm
+    depends_on:
+      stock:
+        condition: service_healthy
+    ports:
+      - '3000:3000'
+
+volumes:
+  npm-cache:
+    external: false
