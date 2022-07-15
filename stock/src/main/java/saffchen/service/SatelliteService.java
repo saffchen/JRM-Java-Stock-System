@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 import saffchen.entities.SatelliteEntity;
 import saffchen.exception.NoEntityException;
+import saffchen.exception.SatelliteAlreadyExistException;
 import saffchen.repository.ProductsRepository;
 import saffchen.repository.SatellitesRepository;
 
@@ -42,7 +42,12 @@ public class SatelliteService {
     }
 
     public SatelliteEntity saveNewSatellite(SatelliteEntity satellite){
-        return satelliteRepository.save(satellite);
+        SatelliteEntity satelliteIsExist = satelliteRepository.findById(satellite.getId())
+                .orElse(null);
+        if (satelliteIsExist == null) {
+           satelliteRepository.save(satellite);
+           return satellite;
+        }
+        else throw new SatelliteAlreadyExistException("Object is already exist");
     }
-
 }

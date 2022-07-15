@@ -8,7 +8,6 @@ import saffchen.dto.SatelliteDto;
 import saffchen.entities.SatelliteEntity;
 import saffchen.exception.NoEntityException;
 import saffchen.mapper.SatelliteMapper;
-import saffchen.repository.SatellitesRepository;
 import saffchen.service.SatelliteService;
 
 import java.util.List;
@@ -18,7 +17,6 @@ import java.util.List;
 public class SatelliteController {
     static final String REST_URL = "/api/satellites";
     private final SatelliteMapper satelliteMapper;
-
     private final SatelliteService satelliteService;
 
     @GetMapping
@@ -36,9 +34,8 @@ public class SatelliteController {
         return ResponseEntity.ok(satelliteDto);
     }
 
-    @PostMapping()
-    public ResponseEntity<SatelliteDto> saveNewSatellite(@RequestBody SatelliteEntity satellite){
-        return ResponseEntity.ok(satelliteMapper.satelliteToSatelliteDto(satelliteService.saveNewSatellite(satellite)));
+    @PostMapping
+    public ResponseEntity<SatelliteEntity> saveNewSatellite(@RequestBody SatelliteEntity satellite){
+       return ResponseEntity.ok(satelliteService.saveNewSatellite(satellite));
     }
 }
-
