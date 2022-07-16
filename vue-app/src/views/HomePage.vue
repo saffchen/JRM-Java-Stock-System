@@ -23,6 +23,6 @@
 </script>
 
 <style>
-  @import 'bootstrap/dist/css/bootstrap.min.css';
+  @import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
   @import 'https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css';
 </style>
