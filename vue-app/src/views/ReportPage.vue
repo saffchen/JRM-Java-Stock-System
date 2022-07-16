@@ -1,6 +1,8 @@
 <template>
     <Header/>
-
+    <main class="main mb-5">
+      <StockTable/>
+    </main>
     <Footer/>
 </template>
 

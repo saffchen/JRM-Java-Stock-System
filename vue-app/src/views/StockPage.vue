@@ -1,6 +1,8 @@
 <template>
     <Header/>
-
+    <main class="main mb-5">
+      <StockTable/>
+    </main>
     <Footer/>
 </template>
 
@@ -9,15 +11,15 @@
   import 'bootstrap/dist/js/bootstrap.js'
 
   import Header from "@/components/header/Header";
-
+  import StockTable from "@/components/main/StockTable";
   import Footer from "@/components/footer/Footer";
 
   export default {
       name: 'app',
       components: {
           Header,
+          StockTable,
           Footer,
-
       }
   }
 </script>
