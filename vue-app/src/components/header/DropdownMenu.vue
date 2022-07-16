@@ -4,8 +4,8 @@
             <span class="fs-5">Navigate</span>
         </button>
         <ul class="dropdown-menu dropdown-menu-start animate slidein p-0" aria-labelledby="menu">
-          <li v-for="item in menuItems">
-            <a class="dropdown-item p-2" href="#">{{ item }}</a>
+          <li v-for="entry in Object.entries(menuItems)">
+            <router-link class="dropdown-item p-2" :to="{ name: entry[1] }">{{ entry[0] }}</router-link>
           </li>
         </ul>
     </div>
@@ -16,7 +16,14 @@
 export default {
     data() {
       return {
-        menuItems: ['Login', 'View Stocks', 'Generate report', 'Import', 'Export']
+        menuItems: {
+          'Home': 'Home',
+          'Login': 'Login',
+          'View Stocks': 'Stocks',
+          'Generate report': 'Report',
+          'Import': 'Import',
+          'Export': 'Export'
+        }
       }
     }
 }
