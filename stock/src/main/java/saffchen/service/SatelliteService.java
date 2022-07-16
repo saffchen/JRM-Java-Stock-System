@@ -45,8 +45,7 @@ public class SatelliteService {
         SatelliteEntity satelliteIsExist = satelliteRepository.findById(satellite.getId())
                 .orElse(null);
         if (satelliteIsExist == null) {
-           satelliteRepository.save(satellite);
-           return satellite;
+            return satelliteRepository.save(satellite);
         }
         else throw new SatelliteAlreadyExistException("Object is already exist");
     }

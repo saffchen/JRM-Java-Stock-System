@@ -7,5 +7,4 @@ import saffchen.entities.SatelliteEntity;
 @Transactional(readOnly = true)
 @Repository
 public interface SatellitesRepository extends BaseRepository<SatelliteEntity>{
-
 }

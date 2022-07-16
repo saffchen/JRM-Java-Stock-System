@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import saffchen.dto.SatelliteDto;
 import saffchen.entities.SatelliteEntity;
 import saffchen.exception.ErrorResponse;
+import saffchen.exception.GlobalExceptionHandler;
 import saffchen.exception.NoEntityException;
 import saffchen.exception.SatelliteAlreadyExistException;
 import saffchen.mapper.SatelliteMapper;
@@ -17,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping(value = SatelliteController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-public class SatelliteController {
+public class SatelliteController extends GlobalExceptionHandler {
     static final String REST_URL = "/api/satellites";
     private final SatelliteMapper satelliteMapper;
     private final SatelliteService satelliteService;
@@ -40,11 +41,5 @@ public class SatelliteController {
     @PostMapping
     public ResponseEntity<SatelliteEntity> saveNewSatellite(@RequestBody SatelliteEntity satellite){
        return ResponseEntity.ok(satelliteService.saveNewSatellite(satellite));
-    }
-
-    @ExceptionHandler(value = SatelliteAlreadyExistException.class)
-    @ResponseStatus(org.springframework.http.HttpStatus.CONFLICT)
-    public ErrorResponse handleSatelliteAlreadyExistException(SatelliteAlreadyExistException satelliteAlreadyExistException){
-        return new ErrorResponse(HttpStatus.CONFLICT.value(), satelliteAlreadyExistException.getMessage());
     }
 }
