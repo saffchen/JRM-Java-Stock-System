@@ -47,6 +47,6 @@ public class SatelliteService {
         if (satelliteIsExist == null) {
             return satelliteRepository.save(satellite);
         }
-        else throw new SatelliteAlreadyExistException("Object is already exist");
-    }
+        else throw new SatelliteAlreadyExistException("You cannot specify the ID field yourself. Please drop the ID field and try again.");
+  }
 }

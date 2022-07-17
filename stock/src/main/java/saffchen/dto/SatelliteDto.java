@@ -2,7 +2,6 @@ package saffchen.dto;
 
 import lombok.*;
 
-@Data
 @Setter
 @Getter
 @AllArgsConstructor

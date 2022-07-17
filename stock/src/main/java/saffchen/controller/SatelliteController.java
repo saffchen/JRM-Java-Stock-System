@@ -39,7 +39,7 @@ public class SatelliteController extends GlobalExceptionHandler {
     }
 
     @PostMapping
-    public ResponseEntity<SatelliteEntity> saveNewSatellite(@RequestBody SatelliteEntity satellite){
-       return ResponseEntity.ok(satelliteService.saveNewSatellite(satellite));
+    public ResponseEntity<SatelliteDto> saveNewSatellite(@RequestBody SatelliteEntity satellite){
+       return ResponseEntity.ok(satelliteMapper.satelliteToSatelliteDto(satelliteService.saveNewSatellite(satellite)));
     }
 }
