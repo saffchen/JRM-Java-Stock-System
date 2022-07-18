@@ -1,16 +1,11 @@
 package saffchen.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import saffchen.dto.SatelliteDto;
-import saffchen.entities.SatelliteEntity;
-import saffchen.exception.ErrorResponse;
-import saffchen.exception.GlobalExceptionHandler;
 import saffchen.exception.NoEntityException;
-import saffchen.exception.SatelliteAlreadyExistException;
 import saffchen.mapper.SatelliteMapper;
 import saffchen.service.SatelliteService;
 
@@ -41,6 +36,6 @@ public class SatelliteController {
 
     @PostMapping
     public ResponseEntity<SatelliteDto> saveNewSatellite(@RequestBody SatelliteDto satellite) {
-        return ResponseEntity.ok(satelliteMapper.satelliteToSatelliteDto(satelliteService.saveNewSatellite(satelliteMapper.satelliteToSatelliteDto(satellite))));
+        return ResponseEntity.ok(satelliteMapper.satelliteToSatelliteDto(satelliteService.saveNewSatellite(satelliteMapper.satelliteEntityToSatelliteDtoToSatelliteEntity(satellite))));
     }
 }
