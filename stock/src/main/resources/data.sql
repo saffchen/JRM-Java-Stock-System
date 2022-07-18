@@ -82,7 +82,8 @@ VALUES (1, 'Car', 51, 1546, 'Renault', 17, 'test description'),
        (47, 'Car', 11, 1590, 'Mitsubishi Motors', 7, 'test description'),
        (48, 'Car', 22, 1291, 'Smart', 5, 'test description'),
        (49, 'Car', 21, 250, 'JLR', 24, 'test description'),
-       (50, 'Car', 41, 4264, 'Subaru', 5, 'test description');
+       (50, 'Car', 41, 4264, 'Subaru', 5, 'test description');  
+       SELECT setval('product_id_seq', 50, true);
 
 insert into product_entity_tags (product_entity_id, tags)
 values (1, 'car'),
@@ -135,5 +136,3 @@ values (1, 'car'),
        (48, 'car'),
        (49, 'car'),
        (50, 'car');
-
-SELECT setval('product_id_seq', 50, true);
