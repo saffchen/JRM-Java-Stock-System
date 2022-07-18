@@ -37,16 +37,15 @@ public class SatelliteService {
         return satelliteRepository.findById(id).orElseThrow(() -> new NoEntityException("Object with id " + id + "is not found"));
     }
 
-    public Long getProductCountBySatelliteId(Long id){
+    public Long getProductCountBySatelliteId(Long id) {
         return Long.valueOf(productRepository.productCountBySatelliteId(id).size());
     }
 
-    public SatelliteEntity saveNewSatellite(SatelliteEntity satellite){
-        SatelliteEntity satelliteIsExist = satelliteRepository.findById(satellite.getId())
+    public SatelliteEntity saveNewSatellite(SatelliteEntity satellite) {
+        SatelliteEntity satelliteIsExist = satelliteRepository.findByName(satellite.getName())
                 .orElse(null);
         if (satelliteIsExist == null) {
             return satelliteRepository.save(satellite);
-        }
-        else throw new SatelliteAlreadyExistException("You cannot specify the ID field yourself. Please drop the ID field and try again.");
-  }
+        } else throw new SatelliteAlreadyExistException("This satellite already has been exist.");
+    }
 }

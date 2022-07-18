@@ -14,7 +14,8 @@ public class ReflectProductUtils {
         try {
             PropertyDescriptor pd = new PropertyDescriptor(fieldName, product.getClass());
             pd.getWriteMethod().invoke(product, value);
-        } catch (IntrospectionException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+        } catch (IntrospectionException | IllegalAccessException | IllegalArgumentException |
+                 InvocationTargetException e) {
             System.err.println("Error: Can't invoke the setter");
         }
     }
@@ -23,7 +24,8 @@ public class ReflectProductUtils {
         try {
             PropertyDescriptor pd = new PropertyDescriptor(fieldName, product.getClass());
             pd.getWriteMethod().invoke(product, value);
-        } catch (IntrospectionException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+        } catch (IntrospectionException | IllegalAccessException | IllegalArgumentException |
+                 InvocationTargetException e) {
             System.err.println("Error: Can't invoke the setter");
         }
     }

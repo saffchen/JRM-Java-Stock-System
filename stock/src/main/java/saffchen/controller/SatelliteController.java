@@ -15,10 +15,11 @@ import saffchen.mapper.SatelliteMapper;
 import saffchen.service.SatelliteService;
 
 import java.util.List;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping(value = SatelliteController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-public class SatelliteController extends GlobalExceptionHandler {
+public class SatelliteController {
     static final String REST_URL = "/api/satellites";
     private final SatelliteMapper satelliteMapper;
     private final SatelliteService satelliteService;
@@ -26,7 +27,7 @@ public class SatelliteController extends GlobalExceptionHandler {
     @GetMapping
     public ResponseEntity<List<SatelliteDto>> getAllSatellites() {
         List<SatelliteDto> satelliteDtoList = satelliteMapper.toSatellitesDtoList(satelliteService.getAllSatellites());
-        for(SatelliteDto satelliteDto : satelliteDtoList)
+        for (SatelliteDto satelliteDto : satelliteDtoList)
             satelliteDto.setCount(satelliteService.getProductCountBySatelliteId(satelliteDto.getId()));
         return ResponseEntity.ok(satelliteDtoList);
     }
@@ -39,7 +40,7 @@ public class SatelliteController extends GlobalExceptionHandler {
     }
 
     @PostMapping
-    public ResponseEntity<SatelliteDto> saveNewSatellite(@RequestBody SatelliteEntity satellite){
-       return ResponseEntity.ok(satelliteMapper.satelliteToSatelliteDto(satelliteService.saveNewSatellite(satellite)));
+    public ResponseEntity<SatelliteDto> saveNewSatellite(@RequestBody SatelliteDto satellite) {
+        return ResponseEntity.ok(satelliteMapper.satelliteToSatelliteDto(satelliteService.saveNewSatellite(satelliteMapper.satelliteToSatelliteDto(satellite))));
     }
 }

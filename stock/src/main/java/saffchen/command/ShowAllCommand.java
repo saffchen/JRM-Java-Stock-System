@@ -8,6 +8,7 @@ import saffchen.utils.FileStorageUtils;
 public class ShowAllCommand implements Command {
     private static final Logger LOGGER
             = LoggerFactory.getLogger(ShowAllCommand.class);
+
     @Override
     public String getInfo() {
         return "Write an \"show_all\" if you want to view all positions";

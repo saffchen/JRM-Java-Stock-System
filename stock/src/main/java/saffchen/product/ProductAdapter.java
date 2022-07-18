@@ -17,18 +17,18 @@ public class ProductAdapter {
         this.product = product;
     }
 
-    private List<String> parseTags(String tagStr, String separator){
+    private List<String> parseTags(String tagStr, String separator) {
         ArrayList<String> splittedTags = new ArrayList<>();
         Collections.addAll(splittedTags, rawProduct.getTags().trim().split(separator));
 
         return splittedTags;
     }
 
-    private String tagsToString(List<String> tags){
+    private String tagsToString(List<String> tags) {
         String result = tags.stream()
                 .map(x -> x + ",")
                 .collect(Collectors.joining());
-        return result.substring(0, result.length()-1);
+        return result.substring(0, result.length() - 1);
     }
 
     public ProductEntity getProduct() {
@@ -44,7 +44,7 @@ public class ProductAdapter {
         return product;
     }
 
-    public RawProduct setDataToRawProduct(){
+    public RawProduct setDataToRawProduct() {
         RawProduct rawProduct = new RawProduct();
         rawProduct.setTitle(product.getTitle());
         rawProduct.setCategory(product.getCategory());

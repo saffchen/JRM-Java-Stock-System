@@ -23,7 +23,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping(value = ProductController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-public class ProductController extends GlobalExceptionHandler {
+public class ProductController {
     static final String REST_URL = "/api/products";
     private final ProductMapper productMapper;
     private final ProductService productService;

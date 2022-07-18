@@ -12,6 +12,8 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 public @interface City {
     String message();
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
-    }
+}
