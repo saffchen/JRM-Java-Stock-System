@@ -46,6 +46,6 @@ public class SatelliteService {
                 .orElse(null);
         if (satelliteIsExist == null) {
             return satelliteRepository.save(satellite);
-        } else throw new SatelliteAlreadyExistException("This satellite already has been exist.");
+        } throw new SatelliteAlreadyExistException("This satellite already has been exist.");
     }
 }
