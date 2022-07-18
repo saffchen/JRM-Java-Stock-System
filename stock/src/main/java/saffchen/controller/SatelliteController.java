@@ -36,6 +36,8 @@ public class SatelliteController {
 
     @PostMapping
     public ResponseEntity<SatelliteDto> saveNewSatellite(@RequestBody SatelliteDto satellite) {
-        return ResponseEntity.ok(satelliteMapper.satelliteToSatelliteDto(satelliteService.saveNewSatellite(satelliteMapper.satelliteEntityToSatelliteDtoToSatelliteEntity(satellite))));
+        return ResponseEntity.ok(satelliteMapper.satelliteToSatelliteDto(
+                satelliteService.saveNewSatellite(
+                        satelliteMapper.satelliteEntityToSatelliteDtoToSatelliteEntity(satellite))));
     }
 }
