@@ -38,6 +38,6 @@ public class SatelliteController {
     public ResponseEntity<SatelliteDto> saveNewSatellite(@RequestBody SatelliteDto satellite) {
         return ResponseEntity.ok(satelliteMapper.satelliteToSatelliteDto(
                 satelliteService.saveNewSatellite(
-                        satelliteMapper.satelliteEntityToSatelliteDtoToSatelliteEntity(satellite))));
+                        satelliteMapper.satelliteDtoToSatelliteEntity(satellite))));
     }
 }
