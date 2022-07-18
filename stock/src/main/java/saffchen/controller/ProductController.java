@@ -1,14 +1,10 @@
 package saffchen.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import saffchen.dto.ProductDto;
-import saffchen.exception.ErrorResponse;
-import saffchen.exception.GlobalExceptionHandler;
-import saffchen.exception.SatelliteAlreadyExistException;
 import saffchen.mapper.ProductMapper;
 import saffchen.exception.NoEntityException;
 import saffchen.service.ProductService;
