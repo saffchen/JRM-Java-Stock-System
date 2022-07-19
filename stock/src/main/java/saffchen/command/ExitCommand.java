@@ -8,7 +8,7 @@ public class ExitCommand implements Command {
     }
 
     @Override
-    public String getInfo(){
+    public String getInfo() {
         return "Write an \"exit\" to exit the application";
     }
 

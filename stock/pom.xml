@@ -25,6 +25,8 @@
         <org.mindrot.jbcrypt.version>0.4</org.mindrot.jbcrypt.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
         <org.postgresql.version>42.3.6</org.postgresql.version>
+        <org.projectlombok.version>1.18.20</org.projectlombok.version>
+        <org.projectlombokmapstruct.version>0.2.0</org.projectlombokmapstruct.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     </properties>
 
@@ -142,12 +144,12 @@
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>1.18.20</version>
+                            <version>${org.projectlombok.version}</version>
                         </path>
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok-mapstruct-binding</artifactId>
-                            <version>0.2.0</version>
+                            <version>${org.projectlombokmapstruct.version}</version>
                         </path>
 
                         <path>

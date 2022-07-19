@@ -15,8 +15,8 @@ services:
     depends_on:
       - zookeeper
     environment:
+      ZOOKEEPER_HOST: zookeeper
       KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
 
   akhq:
