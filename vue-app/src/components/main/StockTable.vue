@@ -2,7 +2,7 @@
     <div class="container-xl">
           <div class="d-flex align-items-center justify-content-end mt-5">
             <span class="me-3">Push to add new stock</span>
-            <button class="btn btn-primary">Add</button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-stock">Add</button>
           </div>
             <table id="datatable" class="table table-hover align-middle">
                 <thead class="bg-light">
@@ -15,14 +15,14 @@
                     <td>
                       <div class="d-flex align-items-center">
                         <div>
-                          <p class="fw-bold mb-1 text-nowrap" v-text="record.name"></p>
+                          <p class="mb-1 text-nowrap" v-text="record.name"></p>
                         </div>
                       </div>
                     </td>
                     <td>
                       <div class="d-flex align-items-center">
                         <div>
-                          <p class="fw-bold mb-1 text-nowrap" v-text="record.description"></p>
+                          <p class="mb-1 text-nowrap" v-text="record.description"></p>
                         </div>
                       </div>
                     </td>

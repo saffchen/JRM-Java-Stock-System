@@ -1,15 +1,28 @@
 <template>
     <main class="main mb-5">
-        <ProductTable/>
+      <component :is="component"/>
     </main>
 </template>
 
 <script>
-import ProductTable from './ProductTable.vue';
+import ProductTable from "@/components/main/ProductTable";
+import StockTable from "@/components/main/StockTable";
 
-    export default {
-      components: { ProductTable }
+export default {
+  components: {
+    ProductTable,
+    StockTable
+  },
+  data() {
+    return {
+      component: this.content
     }
+  },
+  props: {
+    content: String
+  },
+}
+
 </script>
 
 <style>
