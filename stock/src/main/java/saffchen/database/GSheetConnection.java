@@ -20,6 +20,7 @@ public class GSheetConnection implements Connection {
     public static String RANGE;
     private static String APPLICATION_NAME;
     public static String SPEADSHEET_ID;
+
     private static Credential authorize() throws IOException, GeneralSecurityException {
         //авторизация по токену, который нужно создать в гугл акке
         InputStream in = GSheetConnection.class.getResourceAsStream("/credentials.json");

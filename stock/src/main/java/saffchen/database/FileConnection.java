@@ -3,6 +3,7 @@ package saffchen.database;
 public class FileConnection implements Connection {
     private static FileConnection connection;
     private String filePath = null;
+
     private FileConnection(String path) {
         this.filePath = path;
     }

@@ -16,9 +16,9 @@ services:
     depends_on:
       - zookeeper
     environment:
-      KAFKA_BROKER_ID: 1
-      ZOOKEEPER_HOST: zookeeper
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_BROKER_ID: 1
+
 
   akhq:
     image: tchiotludo/akhq
