@@ -12,13 +12,15 @@
 
 <script>
 import DropdownMenu from "./DropdownMenu.vue";
-import InvisibleBtn from "./InvisibleBtn.vue";
+import InvisibleBtn from "./LoginBtn.vue";
 
 export default {
     components: {
         DropdownMenu, InvisibleBtn
     }
 }
+
+
 </script>
 
 <styles scoped>
