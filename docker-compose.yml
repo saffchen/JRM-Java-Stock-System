@@ -16,8 +16,9 @@ services:
     depends_on:
       - zookeeper
     environment:
-      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      ZOOKEEPER_HOST: zookeeper
       KAFKA_BROKER_ID: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
 
 
   akhq:
@@ -57,8 +58,8 @@ services:
       - '5432:5432'
 
   stock:
-    build: ./stock
     container_name: stock
+    build: ./stock
     healthcheck:
       test: curl --silent http://localhost:8080/actuator/health | grep {\"status\":\"UP\"} || exit 1
       timeout: 20s
