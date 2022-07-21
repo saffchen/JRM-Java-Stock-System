@@ -2,7 +2,7 @@
     <Header/>
     <Main content="StockTable"/>
     <Footer/>
-    <Modal id="add-stock" label="Add new stock" btn-value="Add" btn-event="add-stock">
+    <Modal id="add-stock" label="Adding new stock" btn-value="Save" btn-event="add-stock">
       <template #modal-body>
         <AddStockForm/>
       </template>

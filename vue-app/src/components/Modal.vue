@@ -10,7 +10,7 @@
             <slot name="modal-body"/>
           </div>
           <div class="modal-footer">
-            <button @click="$emit(btnEvent)" type="button" class="btn btn-primary">{{ btnValue }}</button>
+            <button @click="submitFromModal" type="button" class="btn btn-primary">{{ btnValue }}</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
@@ -21,6 +21,13 @@
 <script>
 export default {
   name: "Modal",
+  methods: {
+    submitFromModal: function(event) {
+      console.log(event);
+      this.$emit('submitFromModal')
+      console.log('submit from modal');
+    }
+  },
   props: {
     id: String,
     label: String,
