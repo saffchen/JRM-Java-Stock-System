@@ -12,7 +12,7 @@
 
 <script>
 import DropdownMenu from "./DropdownMenu.vue";
-import InvisibleBtn from "./LoginBtn.vue";
+import LoginBtn from "./LoginBtn.vue";
 
 export default {
     components: {
