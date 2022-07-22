@@ -21,18 +21,6 @@
       <InvisibleBtn/>
     </div>
   </div>
-  <div class="row">
-    <div class="col">
-      <DropdownMenu/>
-    </div>
-    <div class="col-md-auto">
-      <div class="navbar-brand fs-4">JRM Stock System Project</div>
-    </div>
-    <div class="col col-lg-2">
-      <LoginBtn/>
-    </div>
-  </div>
-</div>
 
 
 </template>
