@@ -18,7 +18,7 @@
       <div class="navbar-brand fs-4">JRM Stock System Project</div>
     </div>
     <div class="col col-lg-2">
-      <InvisibleBtn/>
+      <LoginBtn/>
     </div>
   </div>
 
