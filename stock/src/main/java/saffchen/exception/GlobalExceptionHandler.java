@@ -14,13 +14,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = SatelliteAlreadyExistException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-    public ResponseEntity<String> handleSatelliteAlreadyExistException(SatelliteAlreadyExistException satelliteAlreadyExistException) {
+    public ResponseEntity<Object> handleSatelliteAlreadyExistException(SatelliteAlreadyExistException satelliteAlreadyExistException) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(satelliteAlreadyExistException.getMessage());
     }
 
     @ExceptionHandler(value = NoEntityException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<String> handleNoSuchProductException(NoEntityException noEntityException) {
+    public ResponseEntity<Object> handleNoSuchProductException(NoEntityException noEntityException) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(noEntityException.getMessage());
     }
 }
