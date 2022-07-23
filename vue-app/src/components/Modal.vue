@@ -7,10 +7,10 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"/>
           </div>
           <div class="modal-body">
-            <slot name="modal-body"/>
+            <AddStockForm ref="stockForm"/>
           </div>
           <div class="modal-footer">
-            <button @click="submitFromModal" type="button" class="btn btn-primary">{{ btnValue }}</button>
+            <button @click="handleClick" type="button" class="btn btn-primary">{{ btnValue }}</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
@@ -19,13 +19,17 @@
 </template>
 
 <script>
+import AddStockForm from "@/components/AddStockForm";
+
 export default {
   name: "Modal",
+  components: {
+    AddStockForm
+  },
   methods: {
-    submitFromModal: function(event) {
-      console.log(event);
-      this.$emit('submitFromModal')
-      console.log('submit from modal');
+    handleClick: function(event) {
+      const form = this.$refs.stockForm;
+      form[this.btnEvent](event);
     }
   },
   props: {
