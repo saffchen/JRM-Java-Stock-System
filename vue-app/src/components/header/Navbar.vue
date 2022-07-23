@@ -22,10 +22,6 @@ export default {
   }
 }
 
-//https://bootstrap-4.ru/docs/4.0/layout/grid/
-//https://getbootstrap.com/docs/5.0/components/navbar/?
-
-
 </script>
 
 <styles scoped>
