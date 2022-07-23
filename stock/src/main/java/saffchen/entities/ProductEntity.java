@@ -2,6 +2,8 @@ package saffchen.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -41,6 +43,8 @@ public class ProductEntity {
     private Double price;
 
     @Column(name = "tags")
+    @JoinColumn(name = "product_entity_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @NotEmpty(message = "Тег не может быть пустым!")
     @Size(max = 20, message = "Количество тегов не может быть более 20!")
     @NonNull
@@ -61,6 +65,7 @@ public class ProductEntity {
 
     @ManyToOne
     @JoinColumn(name = "satelliteId", referencedColumnName = "id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull(message = "Название города не может быть пустым!")
     @NonNull
     @JsonBackReference
