@@ -65,7 +65,6 @@ public class ProductEntity {
 
     @ManyToOne
     @JoinColumn(name = "satelliteId", referencedColumnName = "id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull(message = "Название города не может быть пустым!")
     @NonNull
     @JsonBackReference
