@@ -4,14 +4,14 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="modalLabel">{{ label }}</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"/>
+            <button @click="closeModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"/>
           </div>
           <div class="modal-body">
             <AddStockForm ref="stockForm"/>
           </div>
           <div class="modal-footer">
             <button @click="handleClick" type="button" class="btn btn-primary">{{ btnValue }}</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button @click="closeModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
@@ -28,8 +28,10 @@ export default {
   },
   methods: {
     handleClick: function(event) {
-      const form = this.$refs.stockForm;
-      form[this.btnEvent](event);
+      this.$refs.stockForm[this.btnEvent](event);
+    },
+    closeModal: function(event) {
+      this.$refs.stockForm.refresh();
     }
   },
   props: {

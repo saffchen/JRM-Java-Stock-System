@@ -1,5 +1,5 @@
 <template>
-  <div id="status" v-if="show">
+  <div id="status" v-if="showMessage">
     <span class="message" :class="messageClass" v-text="messageText" />
   </div>
   <form @submit="addStock" name="add-stock" method="post">
@@ -22,7 +22,7 @@ export default {
       name: '',
       description: '',
       payload: {},
-      show: false,
+      showMessage: false,
       messageClass: '',
       messageText: ''
     }
@@ -35,7 +35,7 @@ export default {
       if (this.name === '' || this.description === '' ) {
         this.messageClass = 'error';
         this.messageText = 'Please fill in empty fields';
-        this.show = true;
+        this.showMessage = true;
         return;
       }
       this.$load(async () => {
@@ -43,26 +43,33 @@ export default {
         if (result.status === 200) {
           this.messageClass = 'success';
           this.messageText = 'New stock successfully saved';
-          this.show = true;
+          this.showMessage = true;
         }
       }, this.handleError);
-      this.name = '';
-      this.description = '';
+      this.refresh();
     },
     handleError: function (error) {
       this.messageClass = 'error';
       this.messageText = error.response.data;
-      this.show = true;
+      this.showMessage = true;
+    },
+    refresh: function() {
+      this.name = '';
+      this.description = '';
+      this.messageClass = '';
+      this.messageText = '';
+      this.showMessage = false;
+      document.getElementById('stock-description').removeAttribute("style");
     }
   },
   watch: {
     name() {
       this.payload['name'] = this.name;
-      this.show = false;
+      this.showMessage = false;
     },
     description() {
       this.payload['description'] = this.description;
-      this.show = false;
+      this.showMessage = false;
     }
   }
 }
