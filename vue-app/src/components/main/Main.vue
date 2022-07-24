@@ -4,8 +4,7 @@ https://medium.com/@pratikpatel_60309/dynamic-importing-component-templates-with
 
 <template>
   <main class="main mb-5">
-    <router-view></router-view>
-<!--    <component :is="componentName"></component>-->
+    <component :is="comp"></component>
   </main>
 </template>
 
@@ -17,13 +16,14 @@ export default {
   props: {
     componentName: {
       type: String,
-      /*required: true*/
-      default: 'ProductTable'
+      //required: true,
+      //default: "ProductTable"
     }
   },
   computed: {
-    componentName() {
-      let name = "StockTable"
+    comp() {
+      let name = this.componentName
+      console.log(name)
       return defineAsyncComponent(() => import(`./${name}`))
     }
   },

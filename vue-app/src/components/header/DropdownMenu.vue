@@ -32,7 +32,7 @@ export default {
           label: 'View Stocks'
         },
         {
-          id: 'GenerateReport',
+          id: 'Report',
           label: 'Generate report'
         },
         {

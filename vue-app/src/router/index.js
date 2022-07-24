@@ -6,11 +6,11 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import HomePage from "@/views/HomePage";
 import LoginPage from "@/views/LoginPage";
+import ProductPage from "@/views/ProductPage";
 import StockPage from "@/views/StockPage";
 import ReportPage from "@/views/ReportPage";
 import ImportPage from "@/views/ImportPage";
 import ExportPage from "@/views/ExportPage";
-
 
 const routes = [
     {
@@ -24,9 +24,16 @@ const routes = [
         component: LoginPage
     },
     {
-        path: '/stocks',
-        name: 'Stocks',
-        component: StockPage
+        path: '/ProductTable',
+        name: 'ProductTable',
+        component: ProductPage,
+        props: router => ({ componentName: router.name})
+    },
+    {
+        path: '/StockTable',
+        name: 'StockTable',
+        component: StockPage,
+        props: router => ({ componentName: router.name})
     },
     {
         path: '/report',

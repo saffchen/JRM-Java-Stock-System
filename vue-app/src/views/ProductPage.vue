@@ -18,7 +18,7 @@ export default {
     componentName: {
       type: String,
       require: true,
-      default: "StockTable"
+      default: "ProductTable"
     }
   },
   components: {
