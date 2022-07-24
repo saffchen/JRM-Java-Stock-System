@@ -5,7 +5,7 @@ export default {
                 await action()
             } catch (error) {
                 if (errHandler) {
-                    errHandler()
+                    errHandler(error)
                 } else {
                     console.log(error.response.data)
                 }

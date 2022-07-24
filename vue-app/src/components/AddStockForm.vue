@@ -1,4 +1,7 @@
 <template>
+  <div id="status" v-if="show">
+    <span class="message" :class="messageClass" v-text="messageText" />
+  </div>
   <form @submit="addStock" name="add-stock" method="post">
     <fieldset class="mb-3">
       <label for="stock-name" class="form-label">Name</label>
@@ -18,7 +21,10 @@ export default {
     return {
       name: '',
       description: '',
-      payload: {}
+      payload: {},
+      show: false,
+      messageClass: '',
+      messageText: ''
     }
   },
   methods: {
@@ -27,27 +33,59 @@ export default {
         event.preventDefault();
       }
       if (this.name === '' || this.description === '' ) {
-        console.log('[ERROR]: Please fill in empty fields');
+        this.messageClass = 'error';
+        this.messageText = 'Please fill in empty fields';
+        this.show = true;
         return;
       }
       this.$load(async () => {
-        await this.$api.stocks.update(this.payload);
-        console.log('[SUCCESS]: Stock saved')
-      });
+        const result = await this.$api.stocks.update(this.payload);
+        if (result.status === 200) {
+          this.messageClass = 'success';
+          this.messageText = 'New stock successfully saved';
+          this.show = true;
+        }
+      }, this.handleError);
       this.name = '';
       this.description = '';
+    },
+    handleError: function (error) {
+      this.messageClass = 'error';
+      this.messageText = error.response.data;
+      this.show = true;
     }
   },
   watch: {
     name() {
       this.payload['name'] = this.name;
+      this.show = false;
     },
     description() {
       this.payload['description'] = this.description;
+      this.show = false;
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
+  #status {
+    text-align: right;
+  }
+
+  .message {
+    padding: 5px;
+    border-radius: 10px;
+  }
+
+  .success {
+    background: #095d09;
+    color: white;
+  }
+
+  .error {
+    background: #b21111;
+    color: white;
+  }
+
 </style>
