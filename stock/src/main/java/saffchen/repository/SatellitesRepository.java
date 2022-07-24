@@ -1,5 +1,8 @@
 package saffchen.repository;
 
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import saffchen.entities.SatelliteEntity;
@@ -10,4 +13,5 @@ import java.util.Optional;
 @Repository
 public interface SatellitesRepository extends BaseRepository<SatelliteEntity> {
     Optional<SatelliteEntity> findByName(String name);
+
 }
