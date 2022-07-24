@@ -1,12 +1,13 @@
 import { createApp } from 'vue';
 
-import HomePage from './HomePage';
+import App from "@/App";
+import router from "@/router";
 
 import ApiPlugin from './plugins/api';
 import LoadPlugin from './plugins/load';
 import router from './router';
 
-createApp(HomePage)
+createApp(App)
     .use(ApiPlugin)
     .use(LoadPlugin)
     .use(router)

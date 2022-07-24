@@ -9,7 +9,7 @@ public class RawProduct {
     private String title;
     private String description;
     private String price;
-    private String tags ;
+    private String tags;
     private String category;
     private String count;
     private SatelliteEntity satellite;
@@ -97,7 +97,7 @@ public class RawProduct {
                 '}';
     }
 
-    public String toCSVString(String sep){
+    public String toCSVString(String sep) {
         return "\n" + title + sep +
                 description + sep +
                 price + sep +

@@ -3,6 +3,7 @@ version: '3.8'
 services:
   zookeeper:
     image: zookeeper:latest
+    container_name: zookeeper
     ports:
       - "2181:2181"
       # https://www.confluent.io/blog/kafka-client-cannot-connect-to-broker-on-aws-on-docker-etc/
@@ -15,12 +16,30 @@ services:
     depends_on:
       - zookeeper
     environment:
+      ZOOKEEPER_HOST: zookeeper
       KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+
+
+  akhq:
+    image: tchiotludo/akhq
+    container_name: kafka_gui
+    environment:
+      AKHQ_CONFIGURATION: |
+        akhq:
+          connections:
+            docker-kafka-server:
+              properties:
+                bootstrap.servers: "kafka:9092"
+    ports:
+      - '9090:8080'
+    depends_on:
+      - kafka
+    restart: always
 
   postgres:
     image: postgres:14.4-alpine
+    container_name: postgres
     healthcheck:
       test: ["CMD", "pg_isready", "-q", "-d", "docker", "-U", "docker"]
       timeout: 20s
@@ -39,6 +58,7 @@ services:
       - '5432:5432'
 
   stock:
+    container_name: stock
     build: ./stock
     healthcheck:
       test: curl --silent http://localhost:8080/actuator/health | grep {\"status\":\"UP\"} || exit 1
@@ -54,6 +74,7 @@ services:
       - '8080:8080'
 
   vue-app:
+    container_name: vue-app
     build: ./vue-app
     volumes:
       - npm-cache:/root/.npm

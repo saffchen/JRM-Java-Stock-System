@@ -24,7 +24,7 @@ export default {
   computed: {
     componentName() {
       let name = "StockTable"
-      return defineAsyncComponent(() => import(`./${name}`)) 
+      return defineAsyncComponent(() => import(`./${name}`))
     }
   },
 }

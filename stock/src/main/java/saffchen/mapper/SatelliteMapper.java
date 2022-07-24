@@ -14,4 +14,6 @@ public interface SatelliteMapper {
     SatelliteDto satelliteToSatelliteDto(SatelliteEntity satellite);
 
     List<SatelliteDto> toSatellitesDtoList(List<SatelliteEntity> satelliteEntities);
+
+    SatelliteEntity satelliteDtoToSatelliteEntity(SatelliteDto satellite);
 }

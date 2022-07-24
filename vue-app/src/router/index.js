@@ -2,27 +2,46 @@
 /*https://vueschool.io/articles/vuejs-tutorials/how-to-use-vue-router-a-complete-tutorial/*/
 /*https://youtu.be/rqB7jRunukw*/
 
-import { createWebHistory, createRouter } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router';
 
-import StockTable from '../components/main/StockTable'
-import ProductTable from '../components/main/ProductTable'
-import Main from '../components/main/Main'
+import HomePage from "@/views/HomePage";
+import LoginPage from "@/views/LoginPage";
+import StockPage from "@/views/StockPage";
+import ReportPage from "@/views/ReportPage";
+import ImportPage from "@/views/ImportPage";
+import ExportPage from "@/views/ExportPage";
 
-const routes =[
-    {
-        path: '/StockTable',
-        name: 'StockTable',
-        component: StockTable
-    },
-    {
-        path: '/ProductTable',
-        name: 'ProductTable',
-        component: ProductTable
-    },
+
+const routes = [
     {
         path: '/',
-        name: 'main',
-        component: Main
+        name: 'Home',
+        component: HomePage
+    },
+    {
+        path: '/login',
+        name: 'Login',
+        component: LoginPage
+    },
+    {
+        path: '/stocks',
+        name: 'Stocks',
+        component: StockPage
+    },
+    {
+        path: '/report',
+        name: 'Report',
+        component: ReportPage
+    },
+    {
+        path: '/import',
+        name: 'Import',
+        component: ImportPage
+    },
+    {
+        path: '/export',
+        name: 'Export',
+        component: ExportPage
     }
 ];
 
