@@ -12,7 +12,7 @@
   </parent>
 
   <!-- parent pom -->
-  <groupId>org.example</groupId>
+  <groupId>ru.javaroadmap</groupId>
   <artifactId>JRM-Java-Stock-System</artifactId>
   <packaging>pom</packaging>
   <version>1.0</version>

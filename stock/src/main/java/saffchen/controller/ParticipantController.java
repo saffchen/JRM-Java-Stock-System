@@ -1,6 +1,7 @@
 package saffchen.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,7 @@ public class ParticipantController {
     private final ParticipantService participantService;
 
     @GetMapping
-    public List<ParticipantDto> getParticipants() {
-        return participantService.getAll();
+    public ResponseEntity<List<ParticipantDto>> getParticipants() {
+        return ResponseEntity.ok(participantService.getAll());
     }
 }
