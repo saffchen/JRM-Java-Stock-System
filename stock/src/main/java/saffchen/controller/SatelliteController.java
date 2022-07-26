@@ -6,7 +6,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import saffchen.dto.SatelliteDto;
-import saffchen.exception.NoEntityException;
 import saffchen.mapper.SatelliteMapper;
 import saffchen.service.SatelliteService;
 
@@ -29,14 +28,14 @@ public class SatelliteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SatelliteDto> getSatelliteById(@PathVariable Long id) throws NoEntityException {
+    public ResponseEntity<SatelliteDto> getSatelliteById(@PathVariable Long id){
         SatelliteDto satelliteDto = satelliteMapper.satelliteToSatelliteDto(satelliteService.getSatelliteById(id));
         satelliteDto.setCount(satelliteService.getProductCountBySatelliteId(id));
         return ResponseEntity.ok(satelliteDto);
     }
 
     @PostMapping
-    public ResponseEntity<SatelliteDto> saveNewSatellite(@RequestBody SatelliteDto satellite) {
+    public ResponseEntity<SatelliteDto> addNewSatellite(@RequestBody SatelliteDto satellite) {
         return ResponseEntity.ok(satelliteMapper.satelliteToSatelliteDto(
                 satelliteService.saveNewSatellite(
                         satelliteMapper.satelliteDtoToSatelliteEntity(satellite))));
