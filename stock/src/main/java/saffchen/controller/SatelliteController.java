@@ -6,10 +6,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import saffchen.dto.SatelliteDto;
+import saffchen.entities.SatelliteEntity;
 import saffchen.exception.NoEntityException;
 import saffchen.mapper.SatelliteMapper;
 import saffchen.service.SatelliteService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @AllArgsConstructor
@@ -46,5 +48,13 @@ public class SatelliteController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) throws NoEntityException {
         satelliteService.delete(satelliteService.getSatelliteById(id).getId());
+    }
+
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@Valid @RequestBody SatelliteDto satelliteDto, @PathVariable long id) {
+        SatelliteEntity satellite = satelliteMapper.satelliteDtoToSatelliteEntity(satelliteDto);
+        satellite.setId(id);
+        satelliteService.update(satellite);
     }
 }

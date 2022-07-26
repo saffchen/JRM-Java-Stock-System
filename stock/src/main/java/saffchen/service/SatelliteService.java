@@ -49,6 +49,10 @@ public class SatelliteService {
         } throw new SatelliteAlreadyExistException("This satellite already has been exist.");
     }
 
+    public void update(SatelliteEntity satellite) {
+        satelliteRepository.save(satellite);
+    }
+
     public void delete(Long id) {
         satelliteRepository.delete(id);
     }
