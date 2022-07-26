@@ -33,6 +33,7 @@ public class SatelliteService {
         }
     }
 
+
     public SatelliteEntity get(Long id) throws NoEntityException {
         return satelliteRepository.findById(id).orElseThrow(() -> new NoEntityException("Object with id " + id + "is not found"));
     }
