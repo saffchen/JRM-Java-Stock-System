@@ -24,7 +24,7 @@ public class SatelliteService {
     @Autowired
     private ProductsRepository productRepository;
 
-    public List<SatelliteEntity> getAllSatellites() {
+    public List<SatelliteEntity> getAll() {
         try {
             return satelliteRepository.findAll();
         } catch (Exception e) {
@@ -33,8 +33,9 @@ public class SatelliteService {
         }
     }
 
-    public SatelliteEntity getSatelliteById(Long id) throws NoEntityException {
-        return satelliteRepository.findById(id).orElseThrow(() -> new NoEntityException("Object with id " + id + " is not found"));
+
+    public SatelliteEntity get(Long id) throws NoEntityException {
+        return satelliteRepository.findById(id).orElseThrow(() -> new NoEntityException("Object with id " + id + "is not found"));
     }
 
     public Long getProductCountBySatelliteId(Long id) {
@@ -47,6 +48,10 @@ public class SatelliteService {
         if (satelliteIsExist == null) {
             return satelliteRepository.save(satellite);
         } throw new SatelliteAlreadyExistException("This satellite already has been exist.");
+    }
+
+    public void update(SatelliteEntity satellite) {
+        satelliteRepository.save(satellite);
     }
 
     public void delete(Long id) {
