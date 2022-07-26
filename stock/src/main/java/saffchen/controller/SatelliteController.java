@@ -23,22 +23,22 @@ public class SatelliteController {
     private final SatelliteService satelliteService;
 
     @GetMapping
-    public ResponseEntity<List<SatelliteDto>> getAllSatellites() {
-        List<SatelliteDto> satelliteDtoList = satelliteMapper.toSatellitesDtoList(satelliteService.getAllSatellites());
+    public ResponseEntity<List<SatelliteDto>> getAll() {
+        List<SatelliteDto> satelliteDtoList = satelliteMapper.toSatellitesDtoList(satelliteService.getAll());
         for (SatelliteDto satelliteDto : satelliteDtoList)
             satelliteDto.setCount(satelliteService.getProductCountBySatelliteId(satelliteDto.getId()));
         return ResponseEntity.ok(satelliteDtoList);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SatelliteDto> getSatelliteById(@PathVariable Long id) throws NoEntityException {
-        SatelliteDto satelliteDto = satelliteMapper.satelliteToSatelliteDto(satelliteService.getSatelliteById(id));
+    public ResponseEntity<SatelliteDto> get(@PathVariable Long id) throws NoEntityException {
+        SatelliteDto satelliteDto = satelliteMapper.satelliteToSatelliteDto(satelliteService.get(id));
         satelliteDto.setCount(satelliteService.getProductCountBySatelliteId(id));
         return ResponseEntity.ok(satelliteDto);
     }
 
     @PostMapping
-    public ResponseEntity<SatelliteDto> saveNewSatellite(@RequestBody SatelliteDto satellite) {
+    public ResponseEntity<SatelliteDto> create(@RequestBody SatelliteDto satellite) {
         return ResponseEntity.ok(satelliteMapper.satelliteToSatelliteDto(
                 satelliteService.saveNewSatellite(
                         satelliteMapper.satelliteDtoToSatelliteEntity(satellite))));
@@ -47,7 +47,7 @@ public class SatelliteController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) throws NoEntityException {
-        satelliteService.delete(satelliteService.getSatelliteById(id).getId());
+        satelliteService.delete(satelliteService.get(id).getId());
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)

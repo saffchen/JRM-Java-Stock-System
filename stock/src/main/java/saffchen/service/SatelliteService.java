@@ -24,7 +24,7 @@ public class SatelliteService {
     @Autowired
     private ProductsRepository productRepository;
 
-    public List<SatelliteEntity> getAllSatellites() {
+    public List<SatelliteEntity> getAll() {
         try {
             return satelliteRepository.findAll();
         } catch (Exception e) {
@@ -33,7 +33,7 @@ public class SatelliteService {
         }
     }
 
-    public SatelliteEntity getSatelliteById(Long id) throws NoEntityException {
+    public SatelliteEntity get(Long id) throws NoEntityException {
         return satelliteRepository.findById(id).orElseThrow(() -> new NoEntityException("Object with id " + id + "is not found"));
     }
 
