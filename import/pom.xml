@@ -13,7 +13,20 @@
   <version>1.0-SNAPSHOT</version>
   <name>import</name>
 
-  <dependencies></dependencies>
+  <dependencies>
+    <dependency>
+      <groupId>ru.javaroadmap.report</groupId>
+      <artifactId>report</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>ru.javaroadmap.stock</groupId>
+      <artifactId>stock</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
 
   <build>
     <finalName>import</finalName>
