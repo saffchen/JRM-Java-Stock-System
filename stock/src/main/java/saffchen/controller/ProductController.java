@@ -3,13 +3,9 @@ package saffchen.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import saffchen.dto.ProductDto;
 import saffchen.mapper.ProductMapper;
-import saffchen.exception.NoEntityException;
 import saffchen.service.ProductService;
 
 import java.util.List;
@@ -33,7 +29,8 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDto> getProductById(@PathVariable Long id) throws NoEntityException {
+    public ResponseEntity<ProductDto> getProductById(@PathVariable Long id){
         return ResponseEntity.ok(productMapper.productToProductDto(productService.getProductById(id)));
     }
+
 }

@@ -2,20 +2,22 @@ package saffchen.entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Setter
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @Table(name = "Satellite")
 public class SatelliteEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "satellite_id_sequence",
+            sequenceName = "satellite_id_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "satellite_id_seq")
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -26,6 +28,7 @@ public class SatelliteEntity {
     private String description;
 
     @OneToMany(mappedBy = "satellite")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonManagedReference
     private List<ProductEntity> products;
 
