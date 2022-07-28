@@ -1,7 +1,10 @@
-package saffchen.command;
+package saffchen;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import saffchen.command.Command;
+import saffchen.command.Exit;
+import saffchen.command.ExitFromCommandMenu;
 import saffchen.database.ExcelConnection;
 import saffchen.database.FileConnection;
 import saffchen.utils.ExcelImportUtils;
