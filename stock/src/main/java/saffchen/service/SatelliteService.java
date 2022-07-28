@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import saffchen.entities.SatelliteEntity;
 import saffchen.exception.NoEntityException;
+import saffchen.exception.SatelliteAlreadyExistException;
 import saffchen.repository.ProductsRepository;
 import saffchen.repository.SatellitesRepository;
 
@@ -36,7 +37,15 @@ public class SatelliteService {
         return satelliteRepository.findById(id).orElseThrow(() -> new NoEntityException("Object with id " + id + "is not found"));
     }
 
-    public Long getProductCountBySatelliteId(Long id){
+    public Long getProductCountBySatelliteId(Long id) {
         return Long.valueOf(productRepository.productCountBySatelliteId(id).size());
+    }
+
+    public SatelliteEntity saveNewSatellite(SatelliteEntity satellite) {
+        SatelliteEntity satelliteIsExist = satelliteRepository.findByName(satellite.getName())
+                .orElse(null);
+        if (satelliteIsExist == null) {
+            return satelliteRepository.save(satellite);
+        } throw new SatelliteAlreadyExistException("This satellite already has been exist.");
     }
 }

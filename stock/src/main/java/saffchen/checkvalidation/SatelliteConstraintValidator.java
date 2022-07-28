@@ -15,6 +15,7 @@ public class SatelliteConstraintValidator implements ConstraintValidator<City, S
             if (satellite.contains(satelliteCity)) {
                 return true;
             }
-        } return false;
+        }
+        return false;
     }
 }
