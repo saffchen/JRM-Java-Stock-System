@@ -11,7 +11,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="record in satellites">
+      <tr v-for="record in satellites" v-bind:key="record.id">
         <td>
           <p v-text="record.name"></p>
         </td>
@@ -20,7 +20,11 @@
         <td>
           <div class="d-flex align-items-center justify-content-around">
             <button type="button" class="btn btn-outline-warning btn-sm me-2 border-0">Edit</button>
-            <button type="button" class="btn btn-outline-danger btn-sm border-0">Remove</button>
+            <button
+                type="button"
+                class="btn btn-outline-danger btn-sm border-0"
+                v-on:click="deleteSatellites(record.id)"
+            >Remove</button>
           </div>
         </td>
       </tr>
@@ -43,16 +47,22 @@ export default {
         this.satellites = (await this.$api.satellites.getAll()).data
       })
     },
-    applyTable: function () {
-      $("#datatable").DataTable();
+    deleteSatellites: function (id) {
+      console.log(id)
+      this.$load( async () => {
+        await this.$api.satellites.delete(id)
+      })
+    },
+  },
+  watch: {
+    satellites: function () {
+      deep: true,
+      this.getSatellites();
     }
   },
   created() {
     this.getSatellites();
   },
-  updated() {
-    this.applyTable();
-  }
 }
 </script>
 

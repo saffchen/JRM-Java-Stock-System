@@ -8,6 +8,9 @@ export default function (instance) {
         },
         update(payload) {
             return instance.post('satellites/', payload)
+        },
+        delete(id) {
+            return instance.delete(`satellites/${id}`)
         }
     }
 }
