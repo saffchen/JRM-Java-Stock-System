@@ -31,10 +31,16 @@
                 </tbody>
               </table>
         </div>
+    <Modal id="add-stock" label="Adding new stock" btn-value="Save" btn-event="addStock"/>
 </template>
 
 <script>
+import Modal from "@/components/Modal";
+
 export default {
+    components: {
+      Modal
+    },
     data() {
       return {
         headers: ['Name', 'Description', 'Count'],
