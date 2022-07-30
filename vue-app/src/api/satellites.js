@@ -7,6 +7,9 @@ export default function (instance) {
             return instance.get(`satellites/${id}`)
         },
         update(payload) {
+            return instance.put(`satellites/${id}`, payload)
+        },
+        create(payload) {
             return instance.post('satellites/', payload)
         },
         delete(id) {

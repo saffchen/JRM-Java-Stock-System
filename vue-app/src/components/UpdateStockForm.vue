@@ -1,5 +1,5 @@
 <template>
-  <form @submit="addStock" name="add-stock" method="post">
+  <form @submit="updateStock" name="update-stock" method="put">
     <fieldset class="mb-3">
       <label for="stock-name" class="form-label">Name</label>
       <input type="text" class="form-control" id="stock-name" v-model="name"/>
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: "AddStockForm",
+  name: "UpdateStockForm",
   data() {
     return {
       name: '',
@@ -22,7 +22,7 @@ export default {
     }
   },
   methods: {
-    addStock: function (event) {
+    updateStock: function (event) {
       if (event.type === 'submit') {
         event.preventDefault();
       }
@@ -31,8 +31,8 @@ export default {
         return;
       }
       this.$load(async () => {
-        await this.$api.satellites.create(this.payload);
-        console.log('[SUCCESS]: Stock saved')
+        await this.$api.satellites.update(this.payload);
+        console.log('[SUCCESS]: Stock updated')
       });
       this.name = '';
       this.description = '';

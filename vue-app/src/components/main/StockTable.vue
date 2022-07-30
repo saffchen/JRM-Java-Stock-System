@@ -2,7 +2,7 @@
   <div class="container-xl">
     <div class="d-flex align-items-center justify-content-end mt-5">
       <span class="me-3">Push to add new store</span>
-      <button class="btn btn-primary">Add</button>
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-stock">Add</button>
     </div>
     <table id="datatable" class="table table-hover align-middle">
       <thead class="bg-light">
@@ -19,7 +19,12 @@
         <td v-text="record.count"></td>
         <td>
           <div class="d-flex align-items-center justify-content-around">
-            <button type="button" class="btn btn-outline-warning btn-sm me-2 border-0">Edit</button>
+            <button
+                type="button"
+                class="btn btn-outline-warning btn-sm me-2 border-0"
+                data-bs-toggle="modal" data-bs-target="#update-stock"
+                v-on:click="passObject(record)"
+            >Edit</button>
             <button
                 type="button"
                 class="btn btn-outline-danger btn-sm border-0"
@@ -42,6 +47,9 @@ export default {
     }
   },
   methods: {
+    passObject: function (object) {
+      return object
+    },
     getSatellites: function () {
       this.$load(async () => {
         this.satellites = (await this.$api.satellites.getAll()).data

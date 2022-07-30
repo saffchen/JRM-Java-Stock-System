@@ -7,7 +7,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"/>
           </div>
           <div class="modal-body">
-            <AddStockForm ref="stockForm"/>
+            <component :is="comp" ref="stockForm"/>
           </div>
           <div class="modal-footer">
             <button @click="handleClick" type="button" class="btn btn-primary">{{ btnValue }}</button>
@@ -19,13 +19,14 @@
 </template>
 
 <script>
-import AddStockForm from "@/components/AddStockForm";
+/*import AddStockForm from "@/components/AddStockForm";*/
+import {defineAsyncComponent} from 'vue';
 
 export default {
   name: "Modal",
-  components: {
+  /*components: {
     AddStockForm
-  },
+  },*/
   methods: {
     handleClick: function(event) {
       const form = this.$refs.stockForm;
@@ -36,8 +37,26 @@ export default {
     id: String,
     label: String,
     btnValue: String,
-    btnEvent: String
-  }
+    btnEvent: String,
+    componentName: {
+      type: String,
+      required: true,
+      /*default: "AddStockForm"*/
+    },
+    stockObject: {
+      type: Object,
+      default() {
+        return {}
+      }
+    }
+  },
+  computed: {
+    comp() {
+      let name = this.componentName
+      console.log(name)
+      return defineAsyncComponent(() => import(`./${name}`))
+    }
+  },
 }
 </script>
 
