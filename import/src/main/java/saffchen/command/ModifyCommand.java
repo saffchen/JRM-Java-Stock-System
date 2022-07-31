@@ -17,10 +17,6 @@ import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static saffchen.utils.MenuUtils.*;
-import static saffchen.utils.ValidationUtil.validPositiveDouble;
-import static saffchen.utils.ValidationUtil.validPositiveInteger;
-
 public class ModifyCommand implements Command {
     private static User authUser = null;
     private static final Authorization AUTHORIZATION = new Authorization();
@@ -97,7 +93,7 @@ public class ModifyCommand implements Command {
                     System.out.print(String.format("Please, enter a new %s: ", fieldName.toUpperCase()));
                     inputString = bufferedReader.readLine()
                             .trim();
-                    if (inputString.equals("") || isExit(inputString)) {
+                    if (inputString.equals("") || MenuUtils.isExit(inputString)) {
                         // Converting the List to String with a "\\s" delimiter
                         if (fieldName.equals("tags")) {
                             inputString = ((List<String>) Optional.ofNullable(runGetter(field, product))
@@ -108,16 +104,16 @@ public class ModifyCommand implements Command {
                             inputString = String.valueOf(runGetter(field, product));
                         }
                         // Price validation
-                    } else if (fieldName.equals("price") && !validPositiveDouble(inputString)) {
+                    } else if (fieldName.equals("price") && !ValidationUtil.validPositiveDouble(inputString)) {
                         do {
                             inputString = inputCorrectValue(field, product);
                         }
-                        while (!isDoubleValidOrExit(inputString));
+                        while (!MenuUtils.isDoubleValidOrExit(inputString));
                         // Count validation
-                    } else if (fieldName.equals("count") && !validPositiveInteger(inputString)) {
+                    } else if (fieldName.equals("count") && !ValidationUtil.validPositiveInteger(inputString)) {
                         do {
                             inputString = inputCorrectValue(field, product);
-                        } while (!isIntegerValidOrExit(inputString));
+                        } while (!MenuUtils.isIntegerValidOrExit(inputString));
                     }
                     newFieldsMap.put(fieldName, inputString);
                     System.out.println();
@@ -151,7 +147,7 @@ public class ModifyCommand implements Command {
         System.out.print(String.format("Please, enter a new %s: ", fieldName));
         inputString = bufferedReader.readLine()
                 .trim();
-        if (inputString.equals("") || isExit(inputString)) {
+        if (inputString.equals("") || MenuUtils.isExit(inputString)) {
             inputString = String.valueOf(runGetter(field, product));
         }
         return inputString;

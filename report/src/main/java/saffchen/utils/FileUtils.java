@@ -15,7 +15,7 @@ public class FileUtils {
         return getInfoFromTxtFile("satellite.txt");
     }
 
-    public static List<User> getUsersFromFile(String path) {
+    public static List<saffchen.database.User> getUsersFromFile(String path) {
         List<User> users = new ArrayList<>();
         String str = null;
         if (path == null || path.isEmpty())

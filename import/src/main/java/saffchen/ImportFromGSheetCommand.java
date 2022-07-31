@@ -1,7 +1,8 @@
-package saffchen.command;
+package saffchen;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import saffchen.command.Command;
 import saffchen.database.FileConnection;
 import saffchen.database.GSheetConnection;
 import saffchen.utils.FileStorageUtils;

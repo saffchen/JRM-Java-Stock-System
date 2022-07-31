@@ -1,4 +1,4 @@
-package saffchen.command;
+package saffchen.export_excel;
 
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.model.ValueRange;
@@ -8,6 +8,9 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import saffchen.command.Command;
+import saffchen.command.Exit;
+import saffchen.command.ExitFromCommandMenu;
 
 import java.io.File;
 import java.io.FileWriter;

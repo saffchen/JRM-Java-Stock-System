@@ -1,9 +1,11 @@
-package saffchen.command;
+package saffchen.reports;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import saffchen.command.Command;
+import saffchen.command.Exit;
+import saffchen.command.ExitFromCommandMenu;
 import saffchen.database.FileConnection;
-import saffchen.reports.PDFReportFromFile;
 import saffchen.utils.FileStorageUtils;
 
 import java.util.Scanner;
