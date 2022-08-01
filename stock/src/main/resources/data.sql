@@ -136,3 +136,9 @@ values (1, 'car'),
        (48, 'car'),
        (49, 'car'),
        (50, 'car');
+
+INSERT INTO "public".person(id, description, email, "active", "name", "password", "role", "username")
+VALUES  (1, 'TEST USER DESCRIPTION', 'user@email.ru', false, 'test user', '$2a$12$EzzQg4LKNVXG5XPLCQmfresr0dGMX6Pz45/m6jAlZBv7yIfW0NKiy', 'ROLE_USER', 'user'),
+        (2, 'TEST ADMIN DESCRIPTION', 'admin@email.ru', false, 'test admin', '$2a$12$VRcWcS2Cy61zMb.YVxp5p.9PtMVY7t1jEj264G4vTk1RY.e0qNRaK', 'ROLE_ADMIN', 'admin'),
+        (3, 'TEST TEST DESCRIPTION', 'testUser@email.ru', true, 'testUser testUser', '$2a$12$7bvOE.pt1fJbEdnIuOLvDO7v2KqzdMGWZzH3KcvPbivjMheZfacUa', 'ROLE_USER', 'testuser'),
+        (4, 'TEST TEST DESCRIPTION', 'testAdmin@email.ru', true, 'testAdmin testAdmin', '$2a$12$bn9d4i7rHBC0nh5gwViCs.weW7OUdZ0kFac2PbsIZA0o.mw9wj2sW', 'ROLE_ADMIN', 'testadmin');
