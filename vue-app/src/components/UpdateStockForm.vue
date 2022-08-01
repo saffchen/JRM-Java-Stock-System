@@ -12,6 +12,15 @@
 </template>
 
 <script>
+import { useStockStore} from "@/stores/StockStore";
+import { storeToRefs } from 'pinia';
+import { ref } from 'vue';
+
+const StockStore = useStockStore();
+const { store } = storeToRefs(StockStore);
+
+let nameStore = ref(store);
+
 export default {
   name: "UpdateStockForm",
   data() {

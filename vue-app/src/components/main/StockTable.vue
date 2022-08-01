@@ -39,6 +39,9 @@
 </template>
 
 <script>
+import { useStockStore} from "@/stores/StockStore";
+const store = useStockStore();
+
 export default {
   data() {
     return {
@@ -48,7 +51,8 @@ export default {
   },
   methods: {
     passObject: function (object) {
-      return object
+      store.$patch({state: object})
+      console.log(store.$state)
     },
     getSatellites: function () {
       this.$load(async () => {
