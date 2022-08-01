@@ -22,6 +22,7 @@
     <module>stock</module>
     <module>report</module>
     <module>import</module>
+    <module>shared-dto</module>
   </modules>
 
   <properties>
