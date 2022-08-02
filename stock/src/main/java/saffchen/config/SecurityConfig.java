@@ -3,12 +3,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import saffchen.service.PersonEntityDetailsService;
 
@@ -34,16 +32,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers(HttpMethod.GET,"/api/*").hasAnyRole("ADMIN", "USER")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().disable()
+                //.formLogin().disable()
                 //Uncomment if the login page was created
-                //.formLogin().loginPage("/login")
-                //.loginProcessingUrl("/process_login")
-                //.defaultSuccessUrl("/")
-                //.failureUrl("/login")
-                //.and()
+                .formLogin().loginPage("/login")
+                .loginProcessingUrl("/")
+                .defaultSuccessUrl("/")
+                .failureUrl("/login")
+                .and()
                 .logout().logoutUrl("/logout")
                 .deleteCookies()
-                .logoutSuccessUrl("/login")
+                .logoutSuccessUrl("/")
         ;
     }    //to set the authentification
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
