@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 //.formLogin().disable()
                 //Uncomment if the login page was created
                 .formLogin().loginPage("/login")
-                .loginProcessingUrl("/")
+                .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/")
                 .failureUrl("/login")
                 .and()

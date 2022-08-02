@@ -17,7 +17,6 @@ public class PersonEntity {
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
-    //@Enumerated(value=EnumType.STRING)
     @Column(name = "role", nullable = false)
     private String role;
 
@@ -36,6 +35,6 @@ public class PersonEntity {
     @Column(name = "active", nullable = false)
     private Boolean active;
 
-    @Column(name = "description", nullable = true)
+    @Column(name = "description")
     private String description;
 }
