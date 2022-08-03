@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/","/login").permitAll()
+                .antMatchers("/login").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/*").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT,"/api/*").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE,"/api/*").hasRole("ADMIN")
@@ -35,13 +35,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 //.formLogin().disable()
                 //Uncomment if the login page was created
                 .formLogin().loginPage("/login")
-                .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/")
+                .loginProcessingUrl("/check_auth")
                 .failureUrl("/login")
                 .and()
                 .logout().logoutUrl("/logout")
                 .deleteCookies()
-                .logoutSuccessUrl("/")
+                .logoutSuccessUrl("/login")
         ;
     }    //to set the authentification
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
