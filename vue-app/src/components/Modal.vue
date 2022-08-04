@@ -7,7 +7,9 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"/>
           </div>
           <div class="modal-body">
+            <keep-alive>
             <component :is="comp" ref="stockForm"/>
+            </keep-alive>
           </div>
           <div class="modal-footer">
             <button @click="handleClick" type="button" class="btn btn-primary">{{ btnValue }}</button>
@@ -19,18 +21,18 @@
 </template>
 
 <script>
-/*import AddStockForm from "@/components/AddStockForm";*/
 import {defineAsyncComponent} from 'vue';
 
 export default {
   name: "Modal",
-  /*components: {
-    AddStockForm
-  },*/
+  activated() {
+    console.log("modal is activated")
+  },
   methods: {
     handleClick: function(event) {
       const form = this.$refs.stockForm;
       form[this.btnEvent](event);
+      //console.log("event: ", event)
     }
   },
   props: {
