@@ -2,11 +2,11 @@ import instance from "./instance";
 
 import productModule from "./products";
 import participantModule from "./participants";
-import stockModule from "./stocks";
+import satellitesModule from "./satellites";
 
 export default {
     products: productModule(instance),
     participants: participantModule(instance),
-    stocks: stockModule(instance)
+    satellites: satellitesModule(instance)
 }
 

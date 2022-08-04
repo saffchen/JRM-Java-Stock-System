@@ -1,6 +1,6 @@
 <template>
     <Header/>
-    <Main content="ProductTable"/>
+    <Main component-name="ProductTable"/>
     <Footer/>
 </template>
 

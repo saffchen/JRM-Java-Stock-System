@@ -1,12 +1,16 @@
+/*https://www.vuemastery.com/blog/vue-router-a-tutorial-for-vue-3/*/
+/*https://vueschool.io/articles/vuejs-tutorials/how-to-use-vue-router-a-complete-tutorial/*/
+/*https://youtu.be/rqB7jRunukw*/
+
 import { createRouter, createWebHistory } from 'vue-router';
 
 import HomePage from "@/views/HomePage";
 import LoginPage from "@/views/LoginPage";
+import ProductPage from "@/views/ProductPage";
 import StockPage from "@/views/StockPage";
 import ReportPage from "@/views/ReportPage";
 import ImportPage from "@/views/ImportPage";
 import ExportPage from "@/views/ExportPage";
-
 
 const routes = [
     {
@@ -20,9 +24,16 @@ const routes = [
         component: LoginPage
     },
     {
-        path: '/stocks',
-        name: 'Stocks',
-        component: StockPage
+        path: '/ProductTable',
+        name: 'ProductTable',
+        component: ProductPage,
+        props: router => ({ componentName: router.name})
+    },
+    {
+        path: '/StockTable',
+        name: 'StockTable',
+        component: StockPage,
+        props: router => ({ componentName: router.name})
     },
     {
         path: '/report',
@@ -42,8 +53,8 @@ const routes = [
 ];
 
 const router = createRouter({
-   history: createWebHistory(),
-   routes
-});
+    history: createWebHistory(process.env.BASE_URL),
+    routes,
+})
 
 export default router;
