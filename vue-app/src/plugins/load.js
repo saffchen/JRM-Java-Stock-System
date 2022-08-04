@@ -7,7 +7,7 @@ export default {
                 if (errHandler) {
                     errHandler(error)
                 } else {
-                    console.log(error.response.data)
+                    console.log(error)
                 }
             }
         }

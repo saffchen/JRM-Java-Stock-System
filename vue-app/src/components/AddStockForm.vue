@@ -24,7 +24,8 @@ export default {
       payload: {},
       showMessage: false,
       messageClass: '',
-      messageText: ''
+      messageText: '',
+      addResult: {}
     }
   },
   methods: {
@@ -41,6 +42,8 @@ export default {
       this.$load(async () => {
         const result = await this.$api.stocks.update(this.payload);
         if (result.status === 200) {
+          this.addResult = JSON.parse(result.request.response);
+          this.$emit('add', this.addResult);
           this.messageClass = 'success';
           this.messageText = 'New stock successfully saved';
           this.showMessage = true;
@@ -71,7 +74,8 @@ export default {
       this.payload['description'] = this.description;
       this.showMessage = false;
     }
-  }
+  },
+  emits: ['add']
 }
 </script>
 

@@ -7,7 +7,7 @@
             <button @click="closeModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"/>
           </div>
           <div class="modal-body">
-            <AddStockForm ref="stockForm"/>
+            <AddStockForm ref="stockForm" @add="addStock"/>
           </div>
           <div class="modal-footer">
             <button @click="handleClick" type="button" class="btn btn-primary">{{ btnValue }}</button>
@@ -26,12 +26,21 @@ export default {
   components: {
     AddStockForm
   },
+  data() {
+    return {
+      addResult: {}
+    }
+  },
   methods: {
-    handleClick: function(event) {
-      this.$refs.stockForm[this.btnEvent](event);
+    handleClick: async function(event) {
+      await this.$refs.stockForm[this.btnEvent](event);
     },
     closeModal: function(event) {
       this.$refs.stockForm.refresh();
+    },
+    addStock: function (addResult) {
+      this.addResult = addResult;
+      this.$emit('addStock', this.addResult);
     }
   },
   props: {
@@ -39,7 +48,8 @@ export default {
     label: String,
     btnValue: String,
     btnEvent: String
-  }
+  },
+  emits: ['addStock']
 }
 </script>
 

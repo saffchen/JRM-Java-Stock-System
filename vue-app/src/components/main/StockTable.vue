@@ -30,8 +30,8 @@
                   </tr>
                 </tbody>
               </table>
-        </div>
-    <Modal id="add-stock" label="Adding new stock" btn-value="Save" btn-event="addStock"/>
+    </div>
+    <Modal id="add-stock" label="Adding new stock" btn-value="Save" btn-event="addStock" @addStock="addStock"/>
 </template>
 
 <script>
@@ -43,6 +43,7 @@ export default {
     },
     data() {
       return {
+        table: null,
         headers: ['Name', 'Description', 'Count'],
         stocks: []
       }
@@ -54,7 +55,20 @@ export default {
         })
       },
       applyTable: function() {
-        $("#datatable").DataTable();
+        this.table = $("#datatable").DataTable();
+      },
+      addStock: function (stockObj) {
+        this.stocks.push(stockObj);
+      }
+    },
+    watch: {
+      stocks: {
+        handler: function () {
+          if (this.table) {
+            this.table.destroy();
+          }
+        },
+        deep: true
       }
     },
     created() {
