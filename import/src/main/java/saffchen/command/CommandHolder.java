@@ -4,6 +4,7 @@ import saffchen.ImportCSVCommand;
 import saffchen.ImportExcelCommand;
 import saffchen.ImportFromGSheetCommand;
 import saffchen.export_excel.CreateXlsFileCommand;
+import saffchen.reports.GenerateReportCommand;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
