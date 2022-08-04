@@ -32,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers(HttpMethod.GET,"/api/*").hasAnyRole("ADMIN", "USER")
                 .anyRequest().authenticated()
                 .and()
+                //uncommect for testin without frontend
                 //.formLogin().disable()
                 //Uncomment if the login page was created
                 .formLogin().loginPage("/login")
