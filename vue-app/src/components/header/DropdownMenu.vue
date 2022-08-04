@@ -1,5 +1,3 @@
-<!--https://codepen.io/wslotterback/pen/mmRrVx-->
-
 <template>
   <div class="dropdown">
     <button class="btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown" id="menu">
