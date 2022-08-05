@@ -4,12 +4,12 @@
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.example</groupId>
+    <groupId>ru.javaroadmap</groupId>
     <artifactId>JRM-Java-Stock-System</artifactId>
     <version>1.0</version>
   </parent>
 
-  <groupId>org.example.report</groupId>
+  <groupId>ru.javaroadmap.report</groupId>
   <artifactId>report</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>report</name>

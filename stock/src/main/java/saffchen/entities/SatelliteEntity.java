@@ -2,6 +2,8 @@ package saffchen.entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.List;
@@ -26,6 +28,7 @@ public class SatelliteEntity {
     private String description;
 
     @OneToMany(mappedBy = "satellite")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonManagedReference
     private List<ProductEntity> products;
 

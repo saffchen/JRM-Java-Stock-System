@@ -7,7 +7,9 @@
             <button @click="closeModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"/>
           </div>
           <div class="modal-body">
-            <AddStockForm ref="stockForm" @add="addStock"/>
+            <keep-alive>
+              <component :is="comp" ref="stockForm" @add="addStock"/>
+            </keep-alive>
           </div>
           <div class="modal-footer">
             <button @click="handleClick" type="button" class="btn btn-primary">{{ btnValue }}</button>
@@ -19,12 +21,12 @@
 </template>
 
 <script>
-import AddStockForm from "@/components/AddStockForm";
+import { defineAsyncComponent } from 'vue';
 
 export default {
   name: "Modal",
-  components: {
-    AddStockForm
+  activated() {
+    console.log("modal is activated")
   },
   data() {
     return {
@@ -32,8 +34,8 @@ export default {
     }
   },
   methods: {
-    handleClick: async function(event) {
-      await this.$refs.stockForm[this.btnEvent](event);
+    handleClick: function(event) {
+      this.$refs.stockForm[this.btnEvent](event);
     },
     closeModal: function(event) {
       this.$refs.stockForm.refresh();
@@ -47,12 +49,29 @@ export default {
     id: String,
     label: String,
     btnValue: String,
-    btnEvent: String
+    btnEvent: String,
+    componentName: {
+      type: String,
+      required: true,
+      // default: "AddStockForm"
+    },
+    stockObject: {
+      type: Object,
+      default() {
+        return {}
+      }
+    }
+  },
+  computed: {
+    comp() {
+      let name = this.componentName
+      console.log(name)
+      return defineAsyncComponent(() => import(`./${name}`))
+    }
   },
   emits: ['addStock']
 }
 </script>
 
 <style scoped>
-
 </style>

@@ -40,7 +40,7 @@ export default {
         return;
       }
       this.$load(async () => {
-        const result = await this.$api.stocks.update(this.payload);
+        const result = await this.$api.stocks.create(this.payload);
         if (result.status === 200) {
           this.addResult = JSON.parse(result.request.response);
           this.$emit('add', this.addResult);
@@ -53,7 +53,7 @@ export default {
     },
     handleError: function (error) {
       this.messageClass = 'error';
-      this.messageText = error.response.data;
+      this.messageText = error.response.data.message;
       this.showMessage = true;
     },
     refresh: function() {

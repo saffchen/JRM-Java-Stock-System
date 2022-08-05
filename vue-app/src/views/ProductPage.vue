@@ -2,15 +2,11 @@
   <Header/>
   <Main :component-name="componentName"/>
   <Footer/>
-  <Modal id="update-stock"
-         component-name="UpdateStockForm"
-         label="Updating new stock"
-         btn-value="Update"
-         btn-event="updateStock"
-  />
+  <Modal id="add-stock" label="Adding new stock" btn-value="Save" btn-event="addStock"/>
 </template>
 
 <script>
+
 import Header from "@/components/header/Header";
 import Main from "@/components/main/Main";
 import Footer from "@/components/footer/Footer";
@@ -22,7 +18,7 @@ export default {
     componentName: {
       type: String,
       require: true,
-      default: "StockTable"
+      default: "ProductTable"
     }
   },
   components: {
