@@ -4,16 +4,16 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="modalLabel">{{ label }}</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"/>
+            <button @click="closeModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"/>
           </div>
           <div class="modal-body">
             <keep-alive>
-            <component :is="comp" ref="stockForm"/>
+              <component :is="comp" ref="stockForm" @action="processStock"/>
             </keep-alive>
           </div>
           <div class="modal-footer">
             <button @click="handleClick" type="button" class="btn btn-primary">{{ btnValue }}</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button @click="closeModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
@@ -21,18 +21,32 @@
 </template>
 
 <script>
-import {defineAsyncComponent} from 'vue';
+import { defineAsyncComponent } from 'vue';
 
 export default {
   name: "Modal",
   activated() {
     console.log("modal is activated")
   },
+  data() {
+    return {
+      addResult: {}
+    }
+  },
   methods: {
     handleClick: function(event) {
-      const form = this.$refs.stockForm;
-      form[this.btnEvent](event);
-      //console.log("event: ", event)
+      this.$refs.stockForm[this.btnEvent](event);
+    },
+    closeModal: function(event) {
+      this.$refs.stockForm.refresh();
+    },
+    processStock: function (addResult) {
+      if (addResult) {
+        this.addResult = addResult;
+        this.$emit('processStock', this.addResult);
+      } else {
+        this.$emit('processStock');
+      }
     }
   },
   props: {
@@ -43,7 +57,7 @@ export default {
     componentName: {
       type: String,
       required: true,
-      /*default: "AddStockForm"*/
+      // default: "AddStockForm"
     },
     stockObject: {
       type: Object,
@@ -59,9 +73,9 @@ export default {
       return defineAsyncComponent(() => import(`./${name}`))
     }
   },
+  emits: ['processStock']
 }
 </script>
 
 <style scoped>
-
 </style>

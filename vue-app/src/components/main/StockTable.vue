@@ -11,68 +11,104 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="record in satellites" v-bind:key="record.id">
-        <td>
-          <p v-text="record.name"></p>
-        </td>
-        <td v-text="record.description"></td>
-        <td v-text="record.count"></td>
-        <td>
-          <div class="d-flex align-items-center justify-content-around">
-            <button
-                type="button"
-                class="btn btn-outline-warning btn-sm me-2 border-0"
-                data-bs-toggle="modal" data-bs-target="#update-stock"
-                v-on:click="passObject(record)"
-            >Edit</button>
-            <button
-                type="button"
-                class="btn btn-outline-danger btn-sm border-0"
-                v-on:click="deleteSatellites(record.id)"
-            >Remove</button>
-          </div>
-        </td>
-      </tr>
+        <tr v-for="record in stocks" v-bind:key="record.id">
+          <td>
+            <p v-text="record.name"></p>
+          </td>
+          <td v-text="record.description"></td>
+          <td v-text="record.count"></td>
+          <td>
+            <div class="d-flex align-items-center justify-content-around">
+              <button
+                  type="button"
+                  class="btn btn-outline-warning btn-sm me-2 border-0"
+                  data-bs-toggle="modal" data-bs-target="#update-stock"
+                  v-on:click="passObject(record)"
+              >Edit</button>
+              <button
+                  type="button"
+                  class="btn btn-outline-danger btn-sm border-0"
+                  v-on:click="deleteStock(record.id)"
+              >Remove</button>
+            </div>
+          </td>
+        </tr>
       </tbody>
     </table>
-  </div>
+    </div>
+    <Modal id="add-stock"
+           component-name="AddStockForm"
+           label="Adding new stock"
+           btn-value="Save"
+           btn-event="addStock"
+           @processStock="addStock"
+    />
+    <Modal id="update-stock"
+           component-name="UpdateStockForm"
+           label="Updating new stock"
+           btn-value="Update"
+           btn-event="updateStock"
+           @processStock="updateStock"
+    />
 </template>
 
 <script>
+import Modal from "@/components/Modal";
 
 export default {
+  components: {
+    Modal
+  },
   data() {
     return {
+      table: null,
       headers: ['Name', 'Description', 'Total Products', 'Actions'],
-      satellites: []
+      stocks: []
     }
   },
   methods: {
+    getStocks: function () {
+      this.$load(async () => {
+        this.stocks = (await this.$api.stocks.getAll()).data
+      })
+    },
+    applyTable: function () {
+      this.table = $("#datatable").DataTable();
+    },
+    addStock: function (stockObj) {
+      this.stocks.push(stockObj);
+    },
     passObject: function (object) {
       this.$store.commit('add', object)
-      console.log("Store object in StockTable",this.$store.state)
+      console.log("Store object in StockTable", this.$store.state)
     },
-    getSatellites: function () {
-      this.$load(async () => {
-        this.satellites = (await this.$api.satellites.getAll()).data
-      })
+    updateStock: function () {
+      this.getStocks();
     },
-    deleteSatellites: function (id) {
+    deleteStock: function (id) {
       console.log(id)
-      this.$load( async () => {
-        await this.$api.satellites.delete(id)
+      this.$load(async () => {
+        await this.$api.stocks.delete(id)
+        this.getStocks();
       })
-    },
+    }
   },
   watch: {
-    satellites: function () {
-      deep: true,
-      this.getSatellites();
+    stocks: {
+      handler: function () {
+        if (this.table) {
+          this.table.destroy();
+        }
+      },
+      deep: true
     }
   },
   created() {
-    this.getSatellites();
+    this.getStocks();
   },
+  updated() {
+    this.applyTable();
+  }
 }
 </script>
 

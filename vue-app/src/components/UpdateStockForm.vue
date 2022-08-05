@@ -53,9 +53,14 @@ export default {
         return;
       }
       this.$load(async () => {
-        await this.$api.satellites.update(this.payload, this.id);
-        console.log('[SUCCESS]: Stock updated')
+        await this.$api.stocks.update(this.payload, this.id);
+        this.$emit('action');
+        console.log('[SUCCESS]: Stock updated');
       });
+      this.name = '';
+      this.description = '';
+    },
+    refresh: function () {
       this.name = '';
       this.description = '';
     }
@@ -67,7 +72,8 @@ export default {
     description() {
       this.payload['description'] = this.description;
     }
-  }
+  },
+  emits: ['action']
 }
 </script>
 
