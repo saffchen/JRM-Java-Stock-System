@@ -43,7 +43,7 @@ export default {
         const result = await this.$api.stocks.create(this.payload);
         if (result.status === 200) {
           this.addResult = JSON.parse(result.request.response);
-          this.$emit('add', this.addResult);
+          this.$emit('action', this.addResult);
           this.messageClass = 'success';
           this.messageText = 'New stock successfully saved';
           this.showMessage = true;
@@ -75,7 +75,7 @@ export default {
       this.showMessage = false;
     }
   },
-  emits: ['add']
+  emits: ['action']
 }
 </script>
 

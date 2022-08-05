@@ -8,7 +8,7 @@
           </div>
           <div class="modal-body">
             <keep-alive>
-              <component :is="comp" ref="stockForm" @add="addStock"/>
+              <component :is="comp" ref="stockForm" @action="processStock"/>
             </keep-alive>
           </div>
           <div class="modal-footer">
@@ -40,9 +40,13 @@ export default {
     closeModal: function(event) {
       this.$refs.stockForm.refresh();
     },
-    addStock: function (addResult) {
-      this.addResult = addResult;
-      this.$emit('addStock', this.addResult);
+    processStock: function (addResult) {
+      if (addResult) {
+        this.addResult = addResult;
+        this.$emit('processStock', this.addResult);
+      } else {
+        this.$emit('processStock');
+      }
     }
   },
   props: {
@@ -69,7 +73,7 @@ export default {
       return defineAsyncComponent(() => import(`./${name}`))
     }
   },
-  emits: ['addStock']
+  emits: ['processStock']
 }
 </script>
 

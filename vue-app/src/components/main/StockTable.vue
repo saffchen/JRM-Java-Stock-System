@@ -36,7 +36,20 @@
       </tbody>
     </table>
     </div>
-    <Modal id="add-stock" label="Adding new stock" btn-value="Save" btn-event="addStock" @addStock="addStock" component-name="AddStockForm"/>
+    <Modal id="add-stock"
+           component-name="AddStockForm"
+           label="Adding new stock"
+           btn-value="Save"
+           btn-event="addStock"
+           @processStock="addStock"
+    />
+    <Modal id="update-stock"
+           component-name="UpdateStockForm"
+           label="Updating new stock"
+           btn-value="Update"
+           btn-event="updateStock"
+           @processStock="updateStock"
+    />
 </template>
 
 <script>
@@ -69,10 +82,14 @@ export default {
       this.$store.commit('add', object)
       console.log("Store object in StockTable", this.$store.state)
     },
+    updateStock: function () {
+      this.getStocks();
+    },
     deleteStock: function (id) {
       console.log(id)
       this.$load(async () => {
         await this.$api.stocks.delete(id)
+        this.getStocks();
       })
     }
   },
@@ -82,7 +99,6 @@ export default {
         if (this.table) {
           this.table.destroy();
         }
-        this.getStocks();
       },
       deep: true
     }
