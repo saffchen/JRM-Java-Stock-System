@@ -1,10 +1,10 @@
 package saffchen.database;
 
-public class FileConnection {
-    private static FileConnection connection;
+public class ExcelConnection {
+    private static ExcelConnection connection;
     private String filePath = null;
 
-    private FileConnection(String path) {
+    private ExcelConnection(String path) {
         this.filePath = path;
     }
 
@@ -12,10 +12,11 @@ public class FileConnection {
         return filePath;
     }
 
-    public static FileConnection getInstance(String path) {
+    public static ExcelConnection getInstance(String path) {
         if (connection == null) {
-            connection = new FileConnection(path);
+            connection = new ExcelConnection(path);
         }
         return connection;
     }
+
 }

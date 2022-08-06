@@ -32,15 +32,16 @@ public class SatelliteService {
 
     public SatelliteEntity get(Long id) throws NoEntityException {
         return satelliteRepository.findById(id)
-                                  .orElseThrow(() -> new NoEntityException("Object with id " + id + "is not found"));
+                .orElseThrow(() -> new NoEntityException("Object with id " + id + "is not found"));
     }
 
     public SatelliteEntity create(SatelliteEntity satellite) {
         SatelliteEntity satelliteIsExist = satelliteRepository.findByName(satellite.getName())
-                                                              .orElse(null);
+                .orElse(null);
         if (satelliteIsExist == null) {
             return satelliteRepository.save(satellite);
-        } throw new SatelliteAlreadyExistException("This satellite already has been exist.");
+        }
+        throw new SatelliteAlreadyExistException("This satellite already has been exist.");
     }
 
     public void update(SatelliteEntity satellite) {
