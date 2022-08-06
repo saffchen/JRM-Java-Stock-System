@@ -25,12 +25,12 @@ public class SatelliteController {
     @GetMapping
     public ResponseEntity<List<SatelliteDto>> getAll() {
         return ResponseEntity.ok(satelliteService.getAll().stream()
-                                                 .map(x -> {
-                                                     SatelliteDto satelliteDto = satelliteMapper.satelliteToSatelliteDto(x);
-                                                     satelliteDto.setCount(x.getProductsSize());
-                                                     return satelliteDto;
-                                                 })
-                                                 .toList());
+                .map(x -> {
+                    SatelliteDto satelliteDto = satelliteMapper.satelliteToSatelliteDto(x);
+                    satelliteDto.setCount(x.getProductsSize());
+                    return satelliteDto;
+                })
+                .toList());
     }
 
     @GetMapping("/{id}")
