@@ -14,7 +14,7 @@ import java.security.GeneralSecurityException;
 import java.util.List;
 import java.util.Properties;
 
-public class GSheetConnection implements Connection {
+public class GSheetConnection {
 
     private static Properties properties = new Properties();
     public static String RANGE;

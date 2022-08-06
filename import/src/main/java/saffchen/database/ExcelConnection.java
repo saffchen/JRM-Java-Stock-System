@@ -1,6 +1,6 @@
 package saffchen.database;
 
-public class ExcelConnection implements Connection {
+public class ExcelConnection {
     private static ExcelConnection connection;
     private String filePath = null;
 
