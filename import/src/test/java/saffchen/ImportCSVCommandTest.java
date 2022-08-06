@@ -16,7 +16,7 @@ class ImportCSVCommandTest {
     void doCommand() throws IOException {
         StringBuilder stringBuilder = new StringBuilder();
         ClassLoader classLoader = getClass().getClassLoader();
-        FileReader reader = new FileReader((Objects.requireNonNull(classLoader.getResource("stock_import_csv.csv.txt"))).getFile());
+        FileReader reader = new FileReader((Objects.requireNonNull(classLoader.getResource("stock_import_csv.csv"))).getFile());
         while (reader.ready()) {
             stringBuilder.append((char) reader.read());
         }
