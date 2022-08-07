@@ -13,6 +13,16 @@
   <version>1.0-SNAPSHOT</version>
   <name>import</name>
 
+  <properties>
+    <com.google.oauth-client></com.google.oauth-client>
+    <junit.version>4.0</junit.version>
+<com.google.oauth-client.version>1.23.0</com.google.oauth-client.version>
+    <com.opencsv.version>5.6</com.opencsv.version>
+    <com.itextpdf.version>5.5.13.3</com.itextpdf.version>
+    <org.apache.poi.version>3.12</org.apache.poi.version>
+    <com.google.apis.version>v4-rev493-1.23.0</com.google.apis.version>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>ru.javaroadmap</groupId>
@@ -24,7 +34,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.4</version>
+      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -36,25 +46,25 @@
     <dependency>
       <groupId>com.google.apis</groupId>
       <artifactId>google-api-services-sheets</artifactId>
-      <version>v4-rev493-1.23.0</version>
+      <version>${com.google.apis.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.poi</groupId>
       <artifactId>poi-ooxml</artifactId>
-      <version>3.12</version>
+      <version>${org.apache.poi.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.itextpdf</groupId>
       <artifactId>itextpdf</artifactId>
-      <version>5.5.13.3</version>
+      <version>${com.itextpdf.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.opencsv</groupId>
       <artifactId>opencsv</artifactId>
-      <version>5.6</version>
+      <version>${com.opencsv.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -65,13 +75,13 @@
     <dependency>
       <groupId>com.google.oauth-client</groupId>
       <artifactId>google-oauth-client-java6</artifactId>
-      <version>1.23.0</version>
+      <version>${com.google.oauth-client.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.google.oauth-client</groupId>
       <artifactId>google-oauth-client-jetty</artifactId>
-      <version>1.23.0</version>
+      <version>${com.google.oauth-client.version}</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
