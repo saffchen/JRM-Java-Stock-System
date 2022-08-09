@@ -22,6 +22,7 @@
     <module>stock</module>
     <module>report</module>
     <module>import</module>
+    <module>shared-dto</module>
   </modules>
 
   <properties>
@@ -44,6 +45,11 @@
       <artifactId>logback-classic</artifactId>
       <version>${logback.version}</version>
       <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-ui</artifactId>
+      <version>1.6.9</version>
     </dependency>
 
   </dependencies>

@@ -22,6 +22,7 @@ $ docker compose up --build -d
 ```
 
 ### 4. After that you can open <i>http://localhost:3000</i> in your browser.
+#### 4a. Accessing SwaggerUI by following <i>http://localhost:8080/swagger-ui/index.html </i>
 
 ## Stop application:
 
