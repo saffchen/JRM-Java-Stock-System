@@ -4,6 +4,7 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import saffchen.database.FileConnection;
 import saffchen.entities.ProductEntity;
+import saffchen.exception.ColorException;
 import saffchen.utils.FileStorageUtils;
 
 import java.io.FileOutputStream;
@@ -15,13 +16,15 @@ public class PDFReportFromFile implements Report {
     private FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
     private FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
 
+    private final String WHITE = "white";
+    private final String GRAY = "gray";
+
     private final Font reportHeader = FontFactory.getFont(FontFactory.COURIER, 20, Font.BOLD,
             new CMYKColor(0, 255, 0, 0));
     private final Font tableHeader = FontFactory.getFont(FontFactory.COURIER, 11, Font.BOLD,
             new CMYKColor(0, 0, 0, 255));
     private final Font cellHeader = FontFactory.getFont(FontFactory.COURIER, 11, Font.NORMAL,
             new CMYKColor(0, 0, 0, 255));
-
 
     public PDFReportFromFile(String field, String criteries) {
         this.criteries = criteries;
@@ -58,12 +61,23 @@ public class PDFReportFromFile implements Report {
 
     @Override
     public void generateReport() throws Exception {
+        report(GRAY);
+    }
+
+    private void report(String type) throws Exception {
         List<ProductEntity> tableData = fileStorageUtils.getDataForReportFromCSV(field, criteries);
 
         Document document = new Document();
+        BaseColor color = null;
         try {
-            boolean isLight = true; //if background is light
-
+            switch (type){
+                case GRAY -> color = BaseColor.GRAY;
+                case WHITE -> color = BaseColor.WHITE;
+            }
+        } catch (ColorException e){
+            throw new ColorException("This color is not supported");
+        }
+        try {
             PdfWriter writer = PdfWriter.getInstance(document,
                     new FileOutputStream("reportBy" + field + ".pdf"));
             document.open();
@@ -74,15 +88,10 @@ public class PDFReportFromFile implements Report {
             PdfPTable table = drawTable(7);
             List<String> headers = fileStorageUtils.getHeadersFromCSV();
             for (String cell : headers) {
-                table.addCell(drawCell(cell.toUpperCase(), BaseColor.LIGHT_GRAY, tableHeader));
+                table.addCell(drawCell(cell.toUpperCase(), color, tableHeader));
             }
 
-            BaseColor color;
             for (ProductEntity product : tableData) {
-                if (isLight)
-                    color = BaseColor.LIGHT_GRAY;
-                else
-                    color = BaseColor.GRAY;
 
                 table.addCell(drawCell(product.getTitle(), color, cellHeader));
                 table.addCell(drawCell(product.getDescription(), color, cellHeader));
@@ -92,7 +101,6 @@ public class PDFReportFromFile implements Report {
                 table.addCell(drawCell(product.getCount().toString(), color, cellHeader));
                 table.addCell(drawCell(product.getSatellite().getName(), color, cellHeader));
 
-                isLight = !isLight;
                 table.completeRow();
             }
             document.add(table);
@@ -102,6 +110,5 @@ public class PDFReportFromFile implements Report {
         } catch (Exception e) {
             throw new Exception(e);
         }
-
     }
 }

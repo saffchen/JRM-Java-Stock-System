@@ -105,6 +105,5 @@ public class PDFReportFromFile implements Report {
         } catch (Exception e) {
             throw new Exception(e);
         }
-
     }
 }
