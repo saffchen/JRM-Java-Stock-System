@@ -1,33 +1,44 @@
-import Vuex from 'vuex'
-import axios from 'axios'
-export default new Vuex.Store({
-    state: {
-        status: '',
-        token: localStorage.getItem('token') || '',
-        user : {}
+import {createStore} from 'vuex'
+
+const store = createStore({
+    state() {
+        return {
+            Store: {
+                type: Object,
+                default() {}
+            },
+            UserStore: {
+                status: '',
+                token: localStorage.getItem('token') || '',
+                user: {}
+            }
+        }
     },
     mutations: {
         auth_request(state){
-            state.status = 'loading'
+            state.UserStore.status = 'loading'
         },
         auth_success(state, token, user){
-            state.status = 'success'
-            state.token = token
-            state.user = user
+            state.UserStore.status = 'success'
+            state.UserStore.token = token
+            state.UserStore.user = user
         },
         auth_error(state){
-            state.status = 'error'
+            state.UserStore.status = 'error'
         },
         logout(state){
-            state.status = ''
-            state.token = ''
+            state.UserStore.status = ''
+            state.UserStore.token = ''
         },
+        add(state, newStore) {
+            state.Store = newStore;
+        }
     },
     actions: {
         login({commit}, user){
             return new Promise((resolve, reject) => {
                 commit('auth_request')
-                axios({url: 'http://localhost:3000/login', data: user, method: 'POST' })
+                axios({url: 'http://localhost:8080/login', data: user, method: 'POST' })
                     .then(resp => {
                         const token = resp.data.token
                         const user = resp.data.user
@@ -53,7 +64,10 @@ export default new Vuex.Store({
         }
     },
     getters : {
-        isLoggedIn: state => !!state.token,
-        authStatus: state => state.status,
+        isLoggedIn: state => !!state.UserStore.token,
+        authStatus: state => state.UserStore.status,
     }
 })
+
+
+export default store

@@ -2,12 +2,15 @@
   <Header/>
   <Main :component-name="componentName"/>
   <Footer/>
+  <Modal id="add-stock" label="Adding new stock" btn-value="Save" btn-event="addStock"/>
 </template>
 
 <script>
+
 import Header from "@/components/header/Header";
 import Main from "@/components/main/Main";
 import Footer from "@/components/footer/Footer";
+import Modal from "@/components/Modal";
 
 export default {
   name: 'app',
@@ -15,13 +18,14 @@ export default {
     componentName: {
       type: String,
       require: true,
-      default: "StockTable"
+      default: "ProductTable"
     }
   },
   components: {
     Header,
     Main,
-    Footer
+    Footer,
+    Modal
   }
 }
 </script>
