@@ -32,4 +32,8 @@ public class SatelliteEntity {
 
     public SatelliteEntity(String satellite) {
     }
+
+    public int getProductsSize() {
+        return products.size();
+    }
 }

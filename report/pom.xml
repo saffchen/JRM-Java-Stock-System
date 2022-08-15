@@ -59,18 +59,25 @@
       <artifactId>itextpdf</artifactId>
       <version>${itextpdf.version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>ru.javaroadmap</groupId>
+      <artifactId>shared-dto</artifactId>
+      <version>1.0</version>
+      <scope>compile</scope>
+    </dependency>
     <dependency>
       <groupId>ru.javaroadmap.stock</groupId>
       <artifactId>stock</artifactId>
       <version>1.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
-      <dependency>
-          <groupId>ru.javaroadmap.import</groupId>
-          <artifactId>import</artifactId>
-          <version>1.0-SNAPSHOT</version>
-          <scope>compile</scope>
-      </dependency>
+    <dependency>
+      <groupId>ru.javaroadmap.import</groupId>
+      <artifactId>import</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
 
   <build>

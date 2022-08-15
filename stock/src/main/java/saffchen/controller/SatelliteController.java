@@ -6,7 +6,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import saffchen.dto.SatelliteDto;
-
 import saffchen.entities.SatelliteEntity;
 import saffchen.exception.NoEntityException;
 import saffchen.mapper.SatelliteMapper;
@@ -25,23 +24,27 @@ public class SatelliteController {
 
     @GetMapping
     public ResponseEntity<List<SatelliteDto>> getAll() {
-        List<SatelliteDto> satelliteDtoList = satelliteMapper.toSatellitesDtoList(satelliteService.getAll());
-        for (SatelliteDto satelliteDto : satelliteDtoList)
-            satelliteDto.setCount(satelliteService.getProductCountBySatelliteId(satelliteDto.getId()));
-        return ResponseEntity.ok(satelliteDtoList);
+        return ResponseEntity.ok(satelliteService.getAll().stream()
+                .map(x -> {
+                    SatelliteDto satelliteDto = satelliteMapper.satelliteToSatelliteDto(x);
+                    satelliteDto.setCount(x.getProductsSize());
+                    return satelliteDto;
+                })
+                .toList());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<SatelliteDto> get(@PathVariable Long id) throws NoEntityException {
-        SatelliteDto satelliteDto = satelliteMapper.satelliteToSatelliteDto(satelliteService.get(id));
-        satelliteDto.setCount(satelliteService.getProductCountBySatelliteId(id));
+        SatelliteEntity satelliteEntity = satelliteService.get(id);
+        SatelliteDto satelliteDto = satelliteMapper.satelliteToSatelliteDto(satelliteEntity);
+        satelliteDto.setCount(satelliteEntity.getProductsSize());
         return ResponseEntity.ok(satelliteDto);
     }
 
     @PostMapping
     public ResponseEntity<SatelliteDto> create(@RequestBody SatelliteDto satellite) {
         return ResponseEntity.ok(satelliteMapper.satelliteToSatelliteDto(
-                satelliteService.saveNewSatellite(
+                satelliteService.create(
                         satelliteMapper.satelliteDtoToSatelliteEntity(satellite))));
     }
 
