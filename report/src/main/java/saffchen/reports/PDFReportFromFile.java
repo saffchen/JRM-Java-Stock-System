@@ -4,7 +4,6 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import saffchen.database.FileConnection;
 import saffchen.entities.ProductEntity;
-import saffchen.exception.ColorException;
 import saffchen.utils.FileStorageUtils;
 
 import java.io.FileOutputStream;
@@ -69,14 +68,10 @@ public class PDFReportFromFile implements Report {
 
         Document document = new Document();
         BaseColor color = null;
-        try {
-            switch (type){
+            switch (type) {
                 case GRAY -> color = BaseColor.GRAY;
                 case WHITE -> color = BaseColor.WHITE;
             }
-        } catch (ColorException e){
-            throw new ColorException("This color is not supported");
-        }
         try {
             PdfWriter writer = PdfWriter.getInstance(document,
                     new FileOutputStream("reportBy" + field + ".pdf"));
