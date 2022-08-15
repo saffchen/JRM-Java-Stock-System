@@ -50,7 +50,12 @@ public class PersonDetails implements UserDetails {
         return personEntity.getActive();
     }
 
+    public String getEmail() {
+        return personEntity.getEmail();
+    }
+
     public PersonEntity getPersonEntity(){
         return personEntity;
     }
+
 }

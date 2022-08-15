@@ -2,52 +2,58 @@ package saffchen.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import saffchen.security.JWTSecurityFilter;
 import saffchen.service.PersonEntityDetailsService;
+
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
     private final PersonEntityDetailsService personEntityDetailsService;
+    private final JWTSecurityFilter jwtSecurityFilter;
 
     @Autowired
-    public SecurityConfig(PersonEntityDetailsService personEntityDetailsService) {
+    public SecurityConfig(PersonEntityDetailsService personEntityDetailsService, JWTSecurityFilter jwtSecurityFilter) {
         this.personEntityDetailsService = personEntityDetailsService;
+        this.jwtSecurityFilter = jwtSecurityFilter;
     }
+
 
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .httpBasic()
-                .and()
                 .csrf().disable()
+
                 .authorizeRequests()
-                .antMatchers("/login").permitAll()
-                .antMatchers(HttpMethod.POST,"/api/*").hasRole("ADMIN")
-                .antMatchers(HttpMethod.PUT,"/api/*").hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE,"/api/*").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET,"/api/*").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/check_auth").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/**").hasAuthority("ROLE_ADMIN")
+                .antMatchers(HttpMethod.PUT,"/api/**").hasAuthority("ROLE_ADMIN")
+                .antMatchers(HttpMethod.DELETE,"/api/**").hasAuthority("ROLE_ADMIN")
+                .antMatchers(HttpMethod.GET,"/api/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .anyRequest().authenticated()
                 .and()
-                //uncommect for testin without frontend
-                //.formLogin().disable()
-                //Uncomment if the login page was created
-                .formLogin().loginPage("/login")
-                .loginProcessingUrl("/check_auth")
-                .failureUrl("/login")
-                .and()
-                .logout().logoutUrl("/logout")
-                .deleteCookies()
-                .logoutSuccessUrl("/login")
-        ;
-    }    //to set the authentification
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.addFilterBefore(jwtSecurityFilter, UsernamePasswordAuthenticationFilter.class);
+    }
+
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth.userDetailsService(personEntityDetailsService).
                 passwordEncoder(getPasswordEncoder());
 
+    }
+
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception{
+        return super.authenticationManagerBean();
     }
 
     @Bean

@@ -25,6 +25,7 @@
         <org.projectlombok.version>1.18.20</org.projectlombok.version>
         <org.projectlombokmapstruct.version>0.2.0</org.projectlombokmapstruct.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <com.auth0.version>4.0.0</com.auth0.version>
     </properties>
 
     <dependencies>
@@ -76,6 +77,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>${com.auth0.version}</version>
         </dependency>
 
 
