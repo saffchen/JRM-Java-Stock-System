@@ -1,9 +1,11 @@
 package saffchen.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import java.util.List;
@@ -37,5 +39,14 @@ public class SatelliteEntity {
 
     public int getProductsSize() {
         return products.size();
+    }
+
+    public boolean isNew() {
+        return id == null;
+    }
+
+    public Long id() {
+        Assert.notNull(getId(), "Entity must has id");
+        return getId();
     }
 }
