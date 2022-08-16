@@ -17,14 +17,12 @@ import java.security.GeneralSecurityException;
 import java.util.Scanner;
 
 public class ImportExcelCommand implements Command {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ImportExcelCommand.class);
     private Exit exit;
 
     public void setExit(Exit exit) {
         this.exit = exit;
     }
-
-    private static final Logger LOGGER
-            = LoggerFactory.getLogger(ImportExcelCommand.class);
 
     @Override
     public String getInfo() {
@@ -50,7 +48,7 @@ public class ImportExcelCommand implements Command {
             FileStorageUtils fileStorageUtils = new FileStorageUtils(fileCsvConnection);
             ExcelImportUtils excelImportUtils = new ExcelImportUtils(fileExcelConnection);
 
-            String result = fileStorageUtils.addRawProductsFromListToCSV(excelImportUtils.checkTheDublicates(
+            String result = fileStorageUtils.addRawProductsFromListToCSV(excelImportUtils.checkTheDuplicates(
                     excelImportUtils.getData(),
                     fileStorageUtils.getDataFromCSV())
             );

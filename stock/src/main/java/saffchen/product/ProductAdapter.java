@@ -1,6 +1,8 @@
 package saffchen.product;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import saffchen.entities.ProductEntity;
+import saffchen.service.SatelliteService;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -8,6 +10,8 @@ import java.util.stream.Collectors;
 public class ProductAdapter {
     private RawProduct rawProduct;
     private ProductEntity product;
+    @Autowired
+    private SatelliteService satelliteService;
 
     public ProductAdapter(RawProduct rawProduct) {
         this.rawProduct = rawProduct;
@@ -39,8 +43,7 @@ public class ProductAdapter {
         product.setDescription(rawProduct.getDescription());
         product.setCount(Integer.valueOf(rawProduct.getCount()));
         product.setTags(parseTags(rawProduct.getTags(), ","));
-        product.setSatellite(rawProduct.getSatellite());
-
+        product.setSatellite(satelliteService.getByName(rawProduct.getSatellite()));
         return product;
     }
 
@@ -52,8 +55,7 @@ public class ProductAdapter {
         rawProduct.setDescription(product.getDescription());
         rawProduct.setCount(product.getCount().toString());
         rawProduct.setTags(tagsToString(product.getTags()));
-        rawProduct.setSatellite(product.getSatellite());
-
+        rawProduct.setSatellite(product.getSatellite().getName());
         return rawProduct;
     }
 }
