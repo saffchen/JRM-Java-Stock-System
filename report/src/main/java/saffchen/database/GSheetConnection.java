@@ -9,7 +9,10 @@ import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.SheetsScopes;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
 import java.util.List;
 import java.util.Properties;
@@ -31,7 +34,7 @@ public class GSheetConnection {
         GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow
                 .Builder(GoogleNetHttpTransport.newTrustedTransport(), JacksonFactory
                 .getDefaultInstance(), clientSecrets, scopes)
-                .setDataStoreFactory(new FileDataStoreFactory((new java.io.File("tokens"))))
+                .setDataStoreFactory(new FileDataStoreFactory((new File("tokens"))))
                 .setAccessType("offline")
                 .build();
         return null;
