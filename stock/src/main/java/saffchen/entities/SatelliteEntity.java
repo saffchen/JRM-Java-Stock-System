@@ -15,9 +15,7 @@ import java.util.List;
 @Table(name = "Satellite")
 public class SatelliteEntity {
     @Id
-    @SequenceGenerator(name = "satellite_id_sequence",
-            sequenceName = "satellite_id_seq")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "satellite_id_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 

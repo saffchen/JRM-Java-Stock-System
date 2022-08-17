@@ -1,4 +1,4 @@
-package saffchen.kafka_entities;
+package saffchen.kafka;
 
 import lombok.Data;
 import lombok.Value;
