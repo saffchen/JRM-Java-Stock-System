@@ -23,7 +23,7 @@ public class KafkaProducerService {
     }
 
     public String createTopic(){
-        kafkaTopicConfig.createKafkaTopic(kafkaTopicConfig.getTopicName());
+        kafkaTopicConfig.createKafkaTopic();
         return "Topic created!";
     }
 }

@@ -20,10 +20,10 @@ public class KafkaTopicConfig {
     @Value(value="${kafka.topic.partitions}")
     private String topicPartitions;
 
-    //@Bean
-    public NewTopic createKafkaTopic(String topicName) {
+    @Bean
+    public NewTopic createKafkaTopic() {
         return TopicBuilder
-                .name(topicName)
+                .name("topic1")
                 .partitions(Integer.valueOf(this.topicPartitions))
                 .replicas(Integer.valueOf(this.topicReplicas))
                 .build();

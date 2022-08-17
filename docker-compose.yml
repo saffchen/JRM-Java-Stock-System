@@ -7,23 +7,39 @@ services:
       - "2181:2181"
       # https://www.confluent.io/blog/kafka-client-cannot-connect-to-broker-on-aws-on-docker-etc/
 
+  #kafka:
+  #  image: ubuntu/kafka:latest
+  #  container_name: broker
+  #  ports:
+  #    - "29092:29092"
+  #  depends_on:
+  #    - zookeeper
+
+  #  environment:
+  #    ZOOKEEPER_HOST: zookeeper
+  #    KAFKA_BROKER_ID: 1
+  #    KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+  #
+  #   KAFKA_LISTENERS: EXTERNAL_SAME_HOST://:29092,INTERNAL://:9092
+  #    KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,EXTERNAL_SAME_HOST://localhost:29092
+  #    KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL_SAME_HOST:PLAINTEXT
+  #    KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+
   kafka:
-    image: ubuntu/kafka:latest
+    image: docker.io/bitnami/kafka:3.2
     container_name: broker
     ports:
-      - "29092:29092"
+      - "9092:9092"
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - LISTENERS=PLAINTEXT://0.0.0.0:9092
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092
+      - KAFKA_BROKER_ID=1
+      - KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=1
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
     depends_on:
       - zookeeper
-    environment:
-      ZOOKEEPER_HOST: zookeeper
-      KAFKA_BROKER_ID: 1
-      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
-
-      KAFKA_LISTENERS: EXTERNAL_SAME_HOST://:29092,INTERNAL://:9092
-      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,EXTERNAL_SAME_HOST://localhost:29092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL_SAME_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
-
 
   akhq:
     image: tchiotludo/akhq
@@ -34,7 +50,7 @@ services:
           connections:
             docker-kafka-server:
               properties:
-                bootstrap.servers: "kafka:9092"
+                bootstrap.servers: "127.0.0.1:9092"
     ports:
       - '9090:8080'
     depends_on:
