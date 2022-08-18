@@ -23,13 +23,8 @@ public class SendMessageToKafkaController {
     }
 
     @PostMapping("/send")
-    public ResponseEntity<String> sendMessage(@RequestBody String message) throws JsonProcessingException {
-        return ResponseEntity.ok(kafkaProducerService.sendMessage("Test message!"));
-    }
-
-    @PostMapping("/create-topic")
-    public ResponseEntity<String> createTopic(@RequestBody String message) throws JsonProcessingException {
-        return ResponseEntity.ok(kafkaProducerService.createTopic());
+    public ResponseEntity<String> sendMessage(@RequestBody String topicName, String message) throws JsonProcessingException {
+        return ResponseEntity.ok(kafkaProducerService.sendMessage(topicName, "Test message!"));
     }
 
 }

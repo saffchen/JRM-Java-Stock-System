@@ -1,5 +1,8 @@
 package saffchen.service;
 
+import org.apache.kafka.clients.KafkaClient;
+import org.apache.kafka.clients.admin.KafkaAdminClient;
+import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import saffchen.config.KafkaProducerConfig;
@@ -17,13 +20,9 @@ public class KafkaProducerService {
         this.kafkaTopicConfig = kafkaTopicConfig;
     }
 
-    public String sendMessage(String message){
-        kafkaProducerConfig.kafkaTemplate().send(kafkaTopicConfig.getTopicName(), message);
+    public String sendMessage(String topicName, String message){
+        kafkaProducerConfig.kafkaTemplate().send(topicName, message);
         return "Message sent!";
     }
 
-    public String createTopic(){
-        kafkaTopicConfig.createKafkaTopic();
-        return "Topic created!";
-    }
 }
