@@ -10,7 +10,7 @@ import java.util.List;
 class ExcelImportUtilsTest {
     @Test
     void getNotEmptyListOfProductsFromExcel() {
-        ExcelConnection connection = ExcelConnection.getInstance("classpath:stock.xlsx");
+        ExcelConnection connection = ExcelConnection.getInstance("stock.xlsx");
         ExcelImportUtils importUtils = new ExcelImportUtils(connection);
         List<RawProduct> products = importUtils.getData();
         products.forEach(rawProduct -> System.out.println(rawProduct.showInfo()));

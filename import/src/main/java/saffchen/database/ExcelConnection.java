@@ -12,10 +12,6 @@ public class ExcelConnection {
         return filePath;
     }
 
-    public static void close() {
-        connection = null;
-    }
-
     public static ExcelConnection getInstance(String path) {
         if (connection == null) {
             connection = new ExcelConnection(path);

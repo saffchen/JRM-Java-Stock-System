@@ -11,6 +11,7 @@ import saffchen.product.ReflectProductUtils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,8 @@ public class ExcelImportUtils implements ImportUtils {
     @Override
     public List<RawProduct> getData() {
         List<RawProduct> products = new ArrayList<>();
-        try (FileInputStream fis = new FileInputStream(ResourceUtils.getFile(excelConnection.getFilePath()));
+        URL fileUrl = getClass().getClassLoader().getResource(excelConnection.getFilePath());
+        try (FileInputStream fis = new FileInputStream(fileUrl.getPath());
              XSSFWorkbook myExcelBook = new XSSFWorkbook(fis)) {
             XSSFSheet myExcelSheet = myExcelBook.getSheet("stock_import_csv");
             collectRawProductsFromExcelSheet(products, myExcelSheet);
