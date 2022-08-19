@@ -1,4 +1,5 @@
 package saffchen.config;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -30,7 +31,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-
                 .authorizeRequests()
                 .antMatchers("/check_auth").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/**").hasAuthority("ROLE_ADMIN")
@@ -58,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Bean
     public PasswordEncoder getPasswordEncoder(){
-        return new BCryptPasswordEncoder(12);
+        return new BCryptPasswordEncoder(10);
     }
 
 }

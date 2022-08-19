@@ -53,17 +53,4 @@ public class AuthController {
         return  ResponseEntity.ok(new PersonAuthResponse(jwt));
     }
 
-    /*
-    @PostMapping("/check_auth"
-    public String getUserInfo(){
-       Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-       PersonDetails personDetails = (PersonDetails)authentication.getPrincipal();
-       System.out.println(personDetails.getPersonEntity());
-       return personDetails.getPersonEntity().getUsername() + "---" +
-               personDetails.getPersonEntity().getRole();
-    }
-
-    public PersonEntity convertToPersonEntity(PersonDto personDto){
-        return this.personMapper.personDtoToPersonEntity(personDto);
-    }*/
 }
