@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import saffchen.kafka.StockMessage;
 import saffchen.service.KafkaProducerService;
 
 
@@ -23,8 +24,8 @@ public class SendMessageToKafkaController {
     }
 
     @PostMapping("/send")
-    public ResponseEntity<String> sendMessage(@RequestBody String topicName, String message) throws JsonProcessingException {
-        return ResponseEntity.ok(kafkaProducerService.sendMessage(topicName, "Test message!"));
+    public ResponseEntity<String> sendMessage(@RequestBody StockMessage message) throws JsonProcessingException {
+        return ResponseEntity.ok(kafkaProducerService.sendMessage(message));
     }
 
 }

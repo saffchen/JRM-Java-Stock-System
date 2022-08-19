@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import saffchen.config.KafkaProducerConfig;
 import saffchen.config.KafkaTopicConfig;
+import saffchen.kafka.StockMessage;
 
 @Service
 public class KafkaProducerService {
@@ -20,8 +21,12 @@ public class KafkaProducerService {
         this.kafkaTopicConfig = kafkaTopicConfig;
     }
 
-    public String sendMessage(String topicName, String message){
-        kafkaProducerConfig.kafkaTemplate().send(topicName, message);
+    public String sendMessage(StockMessage message){
+        try {
+            kafkaProducerConfig.kafkaTemplate().send(message.getTopic(), message.getMessage());
+        } catch (Exception e){
+            return "Topic not found!";
+        }
         return "Message sent!";
     }
 
