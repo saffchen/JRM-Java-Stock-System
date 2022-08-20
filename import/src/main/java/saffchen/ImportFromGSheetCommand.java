@@ -31,7 +31,7 @@ public class ImportFromGSheetCommand implements Command {
             FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
 
             GSheetImportUtils gSheetImportUtils = new GSheetImportUtils(GSheetConnection.getSheetsService());
-            fileStorageUtils.addRawProductsFromListToCSV(gSheetImportUtils.checkTheDublicates(
+            fileStorageUtils.addRawProductsFromListToCSV(gSheetImportUtils.checkTheDuplicates(
                     gSheetImportUtils.getData(),
                     fileStorageUtils.getDataFromCSV()));
         } catch (GeneralSecurityException e) {

@@ -54,7 +54,7 @@ public class GSheetImportUtils implements ImportUtils {
             System.out.println("Error: Can't get data from GSHEET");
         }
         ReflectProductUtils reflectProductUtils = new ReflectProductUtils();
-        List<String> headersFromClass = reflectProductUtils.getFieldsFromClass(new RawProduct());
+        List<String> headersFromClass = reflectProductUtils.getFieldsFromClass(RawProduct.class);
 
         for (List row : values) {
             Map<String, Object> mapping = IntStream.range(0, headersFromClass.size())
