@@ -1,7 +1,6 @@
 package saffchen.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -27,14 +26,14 @@ public class AuthController {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            personAuthRequest.getUsername(),
+                            personAuthRequest.getEmail(),
                             personAuthRequest.getPassword()));
         } catch (BadCredentialsException e) {
             throw new BadCredentialsException("Incorrect user or password!");
         }
 
         PersonDetails personDetails = (PersonDetails) personEntityDetailsService.
-                loadUserByUsername(personAuthRequest.getUsername());
+                loadUserByUsername(personAuthRequest.getEmail());
 
         String authority = personDetails.getAuthorities()
                 .stream()
