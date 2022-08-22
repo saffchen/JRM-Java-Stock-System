@@ -14,14 +14,8 @@ import saffchen.product.RawProduct;
 import saffchen.product.ReflectProductUtils;
 
 import java.beans.PropertyDescriptor;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -257,6 +251,12 @@ public class FileStorageUtils implements StorageUtils {
         List<ProductEntity> products = new ArrayList<>();
 
         try {
+          /*  List<String> records = new ArrayList<>();
+            try (Scanner scanner = new Scanner(new File("stock_import_csv.csv"));) {
+                while (scanner.hasNextLine()) {
+                    records.add(scanner.nextLine());
+                }
+            }*/
             CsvToBean<RawProduct> csvToBean = getCSVParser();
 
             List<RawProduct> rawProducts = csvToBean.parse();

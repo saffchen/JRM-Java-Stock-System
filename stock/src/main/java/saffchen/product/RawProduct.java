@@ -1,10 +1,15 @@
 package saffchen.product;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import saffchen.entities.SatelliteEntity;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class RawProduct {
+    private String id;
     private String title;
     private String description;
     private String price;
@@ -13,23 +18,9 @@ public class RawProduct {
     private String count;
     private SatelliteEntity satellite;
 
-    public RawProduct() {
-
-    }
-
-    public RawProduct(String title, String description, String price, String tags,
-                      String category, String count, SatelliteEntity satellite) {
-        this.title = title;
-        this.description = description;
-        this.price = price;
-        this.tags = tags;
-        this.category = category;
-        this.count = count;
-        this.satellite = satellite;
-    }
-
     public String toCSVString(String sep) {
-        return "\n" + title + sep +
+        return "\n" + id + sep +
+                title + sep +
                 description + sep +
                 price + sep +
                 tags + sep +
