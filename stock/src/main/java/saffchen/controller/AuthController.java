@@ -21,7 +21,7 @@ public class AuthController {
     private final PersonEntityDetailsService personEntityDetailsService;
     private final AuthenticationManager authenticationManager;
 
-    @RequestMapping(value = "/check_auth", method = RequestMethod.POST)
+    @PostMapping("/check_auth")
     public ResponseEntity<?> checkAuthAndGetToken(@RequestBody PersonAuthRequest personAuthRequest) throws Exception {
         try {
             authenticationManager.authenticate(
