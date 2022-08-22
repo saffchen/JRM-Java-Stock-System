@@ -3,12 +3,12 @@ package saffchen.mapper;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import saffchen.dto.SatelliteDto;
+import saffchen.dto.SatelliteDtoReport;
 import saffchen.entities.SatelliteEntity;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.FIELD)
-
 public interface SatelliteMapper {
 
     SatelliteDto satelliteToSatelliteDto(SatelliteEntity satellite);
@@ -16,4 +16,6 @@ public interface SatelliteMapper {
     List<SatelliteDto> toSatellitesDtoList(List<SatelliteEntity> satelliteEntities);
 
     SatelliteEntity satelliteDtoToSatelliteEntity(SatelliteDto satellite);
+
+    SatelliteDtoReport satelliteDtoReport(SatelliteEntity satellite);
 }

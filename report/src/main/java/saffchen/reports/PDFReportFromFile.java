@@ -15,15 +15,17 @@ public class PDFReportFromFile implements Report {
     private FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
     private FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
 
-    private final String WHITE = "white";
-    private final String GRAY = "gray";
-
     private final Font reportHeader = FontFactory.getFont(FontFactory.COURIER, 20, Font.BOLD,
             new CMYKColor(0, 255, 0, 0));
     private final Font tableHeader = FontFactory.getFont(FontFactory.COURIER, 11, Font.BOLD,
             new CMYKColor(0, 0, 0, 255));
     private final Font cellHeader = FontFactory.getFont(FontFactory.COURIER, 11, Font.NORMAL,
             new CMYKColor(0, 0, 0, 255));
+
+    Theme theme = new Theme();
+    CommandTheme darkThemeCommand = new DarkThemePDF(theme);
+    CommandTheme lightThemeCommand = new LightThemePDF(theme);
+    SwitchTheme switchTheme = new SwitchTheme(darkThemeCommand, lightThemeCommand);
 
     public PDFReportFromFile(String field, String criteries) {
         this.criteries = criteries;
@@ -60,18 +62,13 @@ public class PDFReportFromFile implements Report {
 
     @Override
     public void generateReport() throws Exception {
-        report(GRAY);
+        report(switchTheme.lightTheme());
     }
 
-    private void report(String type) throws Exception {
+    private void report(BaseColor color) throws Exception{
         List<ProductEntity> tableData = fileStorageUtils.getDataForReportFromCSV(field, criteries);
 
         Document document = new Document();
-        BaseColor color = null;
-            switch (type) {
-                case GRAY -> color = BaseColor.GRAY;
-                case WHITE -> color = BaseColor.WHITE;
-            }
         try {
             PdfWriter writer = PdfWriter.getInstance(document,
                     new FileOutputStream("reportBy" + field + ".pdf"));

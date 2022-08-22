@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import saffchen.command.Command;
 import saffchen.command.Exit;
 
+import saffchen.command.ExitFromCommandMenu;
 import saffchen.database.FileConnection;
 import saffchen.utils.FileStorageUtils;
 
@@ -27,7 +28,6 @@ public class GenerateReportCommand implements Command {
 
     @Override
     public void doCommand() throws Exception {
-
         LOGGER.info(" --- GENERATE_REPORT ---");
         Scanner scanner = new Scanner(System.in);
         FileStorageUtils fileStorageUtils = new FileStorageUtils(
@@ -44,12 +44,19 @@ public class GenerateReportCommand implements Command {
 
             System.out.print("\nEnter the field to search or EXIT: ");
             header = scanner.next().trim().toUpperCase();
-
+            if (header.equals("EXIT")) {
+                setExit(new ExitFromCommandMenu());
+                exit.doExit();
+            }
 
             while (true) {
                 System.out.println("*** Searching  by " + header + " ***");
+                System.out.print("Enter the KEYWORD or EXIT: ");
                 criteria = scanner.next().trim().toUpperCase();
-
+                if (criteria.equals("EXIT")) {
+                    setExit(new ExitFromCommandMenu());
+                    exit.doExit();
+                }
                 try {
                     header = header.substring(0, 1) + header.substring(1, header.length()).toLowerCase();
                     PDFReportFromFile report = new PDFReportFromFile(header, criteria);
