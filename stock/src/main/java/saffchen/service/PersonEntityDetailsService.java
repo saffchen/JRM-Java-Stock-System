@@ -11,7 +11,7 @@ import saffchen.security.PersonDetails;
 
 import java.util.Optional;
 
-@Service("personEntityDetailService")
+@Service
 public class PersonEntityDetailsService implements UserDetailsService {
 
     private final PersonsRepository personsRepository;

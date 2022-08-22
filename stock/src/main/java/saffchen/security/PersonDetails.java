@@ -54,8 +54,4 @@ public class PersonDetails implements UserDetails {
         return personEntity.getEmail();
     }
 
-    public PersonEntity getPersonEntity(){
-        return personEntity;
-    }
-
 }

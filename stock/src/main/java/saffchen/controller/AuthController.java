@@ -1,5 +1,6 @@
 package saffchen.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,21 +16,15 @@ import saffchen.service.PersonEntityDetailsService;
 import java.util.stream.Collectors;
 
 @RestController
+@RequiredArgsConstructor
 public class AuthController {
     private final JwtUtil jwtUtil;
     private final PersonEntityDetailsService personEntityDetailsService;
     private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    public AuthController(JwtUtil jwtUtil, PersonEntityDetailsService personEntityDetailsService, AuthenticationManager authenticationManager) {
-        this.jwtUtil = jwtUtil;
-        this.personEntityDetailsService = personEntityDetailsService;
-        this.authenticationManager = authenticationManager;
-    }
-
     @RequestMapping(value = "/check_auth", method = RequestMethod.POST)
-    public ResponseEntity<?> checkAuthAndGetToken(@RequestBody PersonAuthRequest personAuthRequest) throws Exception{
-        try{
+    public ResponseEntity<?> checkAuthAndGetToken(@RequestBody PersonAuthRequest personAuthRequest) throws Exception {
+        try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             personAuthRequest.getUsername(),
@@ -38,7 +33,7 @@ public class AuthController {
             throw new BadCredentialsException("Incorrect user or password!");
         }
 
-        PersonDetails personDetails = (PersonDetails)personEntityDetailsService.
+        PersonDetails personDetails = (PersonDetails) personEntityDetailsService.
                 loadUserByUsername(personAuthRequest.getUsername());
 
         String authority = personDetails.getAuthorities()
@@ -50,7 +45,7 @@ public class AuthController {
                 email,
                 authority);
 
-        return  ResponseEntity.ok(new PersonAuthResponse(jwt));
+        return ResponseEntity.ok(new PersonAuthResponse(jwt));
     }
 
 }

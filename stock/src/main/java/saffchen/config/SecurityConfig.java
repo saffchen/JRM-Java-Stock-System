@@ -1,5 +1,6 @@
 package saffchen.config;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -17,16 +18,10 @@ import saffchen.service.PersonEntityDetailsService;
 
 
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
     private final PersonEntityDetailsService personEntityDetailsService;
     private final JWTSecurityFilter jwtSecurityFilter;
-
-    @Autowired
-    public SecurityConfig(PersonEntityDetailsService personEntityDetailsService, JWTSecurityFilter jwtSecurityFilter) {
-        this.personEntityDetailsService = personEntityDetailsService;
-        this.jwtSecurityFilter = jwtSecurityFilter;
-    }
-
 
     protected void configure(HttpSecurity http) throws Exception {
         http
