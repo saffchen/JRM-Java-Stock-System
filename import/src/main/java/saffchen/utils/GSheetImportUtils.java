@@ -21,11 +21,11 @@ public class GSheetImportUtils implements ImportUtils {
 
     @Override
     public List<RawProduct> getData() {
-        List<List<String>> values = getRowsFromGSheet(service);
+        List<List<String>> values = getRowsFromGSheet();
         return getProductsFromRows(values);
     }
 
-    private static List<List<String>> getRowsFromGSheet(Sheets service) {
+    private List<List<String>> getRowsFromGSheet() {
         List<List<String>> values = new ArrayList<>();
         try {
             ValueRange result = service.spreadsheets().values()
