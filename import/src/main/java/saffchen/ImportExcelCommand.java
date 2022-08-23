@@ -54,10 +54,9 @@ public class ImportExcelCommand implements Command {
                     excelImportUtils.getData(),
                     fileStorageUtils.getDataFromCSV())
             );
-            System.out.println(result);
+            LOGGER.info(result);
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error: Can't get data for import");
+            LOGGER.error("Error: Can't get data for import");
         }
     }
 
