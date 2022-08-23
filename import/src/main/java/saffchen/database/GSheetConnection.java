@@ -11,7 +11,6 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.SheetsScopes;
-import saffchen.utils.PropertiesLoader;
 
 import java.io.*;
 import java.security.GeneralSecurityException;
@@ -20,7 +19,6 @@ import java.util.Properties;
 
 public class GSheetConnection {
 
-    private static final Properties properties = PropertiesLoader.load("gsheet.properties");
     private static final JacksonFactory JACKSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static final String CREDENTIALS_FILE = "credentials.json";
     private static final String TOKENS_DIRECTORY = "tokens";
@@ -60,6 +58,12 @@ public class GSheetConnection {
             HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         } catch (GeneralSecurityException e) {
             throw new RuntimeException(e);
+        }
+        Properties properties = new Properties();
+        try (InputStream in = GSheetConnection.class.getClassLoader().getResourceAsStream("gsheet.properties")) {
+            properties.load(in);
+        } catch (IOException e) {
+            System.out.println("Can't load properties from file gsheet.properties");
         }
         GSheetConnection.APPLICATION_NAME = properties.getProperty("APPLICATION_NAME");
         GSheetConnection.SPREADSHEET_ID = properties.getProperty("SPREADSHEET_ID");
