@@ -6,6 +6,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import saffchen.database.FileConnection;
+import saffchen.dto.ProductDtoReport;
 import saffchen.entities.ProductEntity;
 import saffchen.utils.FileStorageUtils;
 
@@ -61,7 +62,7 @@ public class PDFReportFromFile implements Report {
 
     @Override
     public void generateReport() throws Exception {
-        List<ProductEntity> tableData = fileStorageUtils.getDataForReportFromCSV(field, criteries);
+        List<ProductDtoReport> tableData = fileStorageUtils.getDataForReportFromCSV(field, criteries);
 
         Document document = new Document();
         try {
@@ -81,7 +82,7 @@ public class PDFReportFromFile implements Report {
             }
 
             BaseColor color;
-            for (ProductEntity product : tableData) {
+            for (ProductDtoReport product : tableData) {
                 if (isLight)
                     color = BaseColor.LIGHT_GRAY;
                 else
@@ -93,7 +94,7 @@ public class PDFReportFromFile implements Report {
                 table.addCell(drawCell(product.getTags().toString(), color, cellHeader));
                 table.addCell(drawCell(product.getCategory(), color, cellHeader));
                 table.addCell(drawCell(product.getCount().toString(), color, cellHeader));
-                table.addCell(drawCell(product.getSatellite().getName(), color, cellHeader));
+                table.addCell(drawCell(product.getSatelliteName(), color, cellHeader));
 
                 isLight = !isLight;
                 table.completeRow();

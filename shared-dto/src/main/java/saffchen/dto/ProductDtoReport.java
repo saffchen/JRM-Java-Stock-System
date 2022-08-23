@@ -11,10 +11,7 @@ import java.util.List;
  * @project JRM-Java-Stock-System
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class ProductDto {
-
+public class ProductDtoReport {
     private Long id;
     private String title;
     private String description;

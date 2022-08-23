@@ -1,19 +1,23 @@
 package saffchen.product;
 
+import saffchen.dto.ProductDto;
+import saffchen.dto.ProductDtoReport;
 import saffchen.entities.ProductEntity;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
-public class ProductAdapter {
+public class ProductAdapterReport {
     private RawProduct rawProduct;
-    private ProductEntity product;
+    private ProductDtoReport product;
 
-    public ProductAdapter(RawProduct rawProduct) {
+    public ProductAdapterReport(RawProduct rawProduct) {
         this.rawProduct = rawProduct;
     }
 
-    public ProductAdapter(ProductEntity product) {
+    public ProductAdapterReport(ProductDtoReport product) {
         this.product = product;
     }
 
@@ -31,8 +35,8 @@ public class ProductAdapter {
         return result.substring(0, result.length() - 1);
     }
 
-    public ProductEntity getProduct() {
-        ProductEntity product = new ProductEntity();
+    public ProductDtoReport getProduct() {
+        ProductDtoReport product = new ProductDtoReport();
         product.setId(Long.valueOf(rawProduct.getId()));
         product.setTitle(rawProduct.getTitle());
         product.setCategory(rawProduct.getCategory());
@@ -40,7 +44,7 @@ public class ProductAdapter {
         product.setDescription(rawProduct.getDescription());
         product.setCount(Integer.valueOf(rawProduct.getCount()));
         product.setTags(parseTags(rawProduct.getTags(), ","));
-        //product.setSatellite(rawProduct.);
+        product.setSatelliteName(rawProduct.getSatellite());
 
         return product;
     }
@@ -54,7 +58,7 @@ public class ProductAdapter {
         rawProduct.setDescription(product.getDescription());
         rawProduct.setCount(product.getCount().toString());
         rawProduct.setTags(tagsToString(product.getTags()));
-        //rawProduct.setSatellite(product.getSatellite());
+        rawProduct.setSatellite(product.getSatelliteName());
 
         return rawProduct;
     }

@@ -8,8 +8,10 @@ import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.bean.HeaderColumnNameTranslateMappingStrategy;
 import saffchen.database.FileConnection;
+import saffchen.dto.ProductDtoReport;
 import saffchen.entities.ProductEntity;
 import saffchen.product.ProductAdapter;
+import saffchen.product.ProductAdapterReport;
 import saffchen.product.RawProduct;
 import saffchen.product.ReflectProductUtils;
 
@@ -222,7 +224,7 @@ public class FileStorageUtils implements StorageUtils {
     }
 
     public CsvToBean<RawProduct> getCSVParser() throws FileNotFoundException {
-        List<String> headersFromClass = new ReflectProductUtils().getFieldsFromClass(new ProductEntity());
+        List<String> headersFromClass = new ReflectProductUtils().getFieldsFromClass(new ProductDtoReport());
         List<String> headersFromCSV = getHeadersFromCSV();
 
         Map mapping = IntStream.range(0, headersFromCSV.size())
@@ -247,8 +249,8 @@ public class FileStorageUtils implements StorageUtils {
         return csvToBean;
     }
 
-    public List<ProductEntity> getDataForReportFromCSV(String header, String criteries) {
-        List<ProductEntity> products = new ArrayList<>();
+    public List<ProductDtoReport> getDataForReportFromCSV(String header, String criteries) {
+        List<ProductDtoReport> products = new ArrayList<>();
 
         try {
           /*  List<String> records = new ArrayList<>();
@@ -268,7 +270,7 @@ public class FileStorageUtils implements StorageUtils {
 
                 fieldName = pd.getReadMethod().invoke(product).toString().trim().toUpperCase();
                 if (fieldName.contains(criteries)) {
-                    ProductAdapter productAdapter = new ProductAdapter(product);
+                    ProductAdapterReport productAdapter = new ProductAdapterReport(product);
                     products.add(productAdapter.getProduct());
                 }
             }

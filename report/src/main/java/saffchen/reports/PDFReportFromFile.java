@@ -3,6 +3,7 @@ package saffchen.reports;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import saffchen.database.FileConnection;
+import saffchen.dto.ProductDtoReport;
 import saffchen.entities.ProductEntity;
 import saffchen.utils.FileStorageUtils;
 
@@ -66,7 +67,7 @@ public class PDFReportFromFile implements Report {
     }
 
     private void report(BaseColor color) throws Exception{
-        List<ProductEntity> tableData = fileStorageUtils.getDataForReportFromCSV(field, criteries);
+        List<ProductDtoReport> tableData = fileStorageUtils.getDataForReportFromCSV(field, criteries);
 
         Document document = new Document();
         try {
@@ -83,7 +84,7 @@ public class PDFReportFromFile implements Report {
                 table.addCell(drawCell(cell.toUpperCase(), color, tableHeader));
             }
 
-            for (ProductEntity product : tableData) {
+            for (ProductDtoReport product : tableData) {
 
                 table.addCell(drawCell(product.getTitle(), color, cellHeader));
                 table.addCell(drawCell(product.getDescription(), color, cellHeader));
@@ -91,7 +92,7 @@ public class PDFReportFromFile implements Report {
                 table.addCell(drawCell(product.getTags().toString(), color, cellHeader));
                 table.addCell(drawCell(product.getCategory(), color, cellHeader));
                 table.addCell(drawCell(product.getCount().toString(), color, cellHeader));
-                table.addCell(drawCell(product.getSatellite().getName(), color, cellHeader));
+                table.addCell(drawCell(product.getSatelliteName(), color, cellHeader));
 
                 table.completeRow();
             }

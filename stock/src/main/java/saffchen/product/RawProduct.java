@@ -16,8 +16,8 @@ public class RawProduct {
     private String tags;
     private String category;
     private String count;
-    private SatelliteEntity satellite;
-
+    //private SatelliteEntity satellite;
+    private String satellite;
     public String toCSVString(String sep) {
         return "\n" + id + sep +
                 title + sep +
@@ -26,6 +26,6 @@ public class RawProduct {
                 tags + sep +
                 category + sep +
                 count + sep +
-                satellite.toString();
+                satellite;
     }
 }
