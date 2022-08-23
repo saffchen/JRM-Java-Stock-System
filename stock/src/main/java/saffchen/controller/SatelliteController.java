@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = SatelliteController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class SatelliteController {
-    static final String REST_URL = "/auth/api/v1/satellites";
+    static final String REST_URL = "/api/v1/satellites";
     private final SatelliteMapper satelliteMapper;
     private final SatelliteService satelliteService;
 
