@@ -1,5 +1,3 @@
-<template xmlns="http://www.w3.org/1999/html">
-
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container justify-content-between">
       <DropdownMenu/>
