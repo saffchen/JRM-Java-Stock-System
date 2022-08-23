@@ -2,6 +2,7 @@ package saffchen.utils;
 
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.model.ValueRange;
+import lombok.AllArgsConstructor;
 import saffchen.database.GSheetConnection;
 import saffchen.product.RawProduct;
 import saffchen.product.ReflectProductUtils;
@@ -11,13 +12,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-
+@AllArgsConstructor
 public class GSheetImportUtils implements ImportUtils {
     private final Sheets service;
-
-    public GSheetImportUtils(Sheets service) {
-        this.service = service;
-    }
 
     @Override
     public List<RawProduct> getData() {
