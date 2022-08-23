@@ -6,13 +6,13 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import saffchen.entities.PersonEntity;
+import saffchen.entities.UserEntity;
 import java.util.Optional;
 
 @Repository
 @Transactional
 @EnableJpaRepositories
-public interface PersonsRepository extends JpaRepository<PersonEntity, Integer> {
-    @Query(value = "select p from PersonEntity p where p.email = :email")
-    Optional<PersonEntity> findByEmail(@Param("email") String email);
+public interface PersonsRepository extends JpaRepository<UserEntity, Integer> {
+    @Query(value = "select p from UserEntity p where p.email = :email")
+    Optional<UserEntity> findByEmail(@Param("email") String email);
 }

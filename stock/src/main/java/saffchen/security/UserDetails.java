@@ -4,16 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import saffchen.entities.PersonEntity;
+import saffchen.entities.UserEntity;
 
 import java.util.Collection;
 import java.util.Collections;
 
 @Data
 @AllArgsConstructor
-public class PersonDetails implements UserDetails {
-    private final PersonEntity personEntity;
+public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
+    private final UserEntity personEntity;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -1,31 +1,30 @@
 package saffchen.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import saffchen.entities.PersonEntity;
+import saffchen.entities.UserEntity;
 import saffchen.repository.PersonsRepository;
-import saffchen.security.PersonDetails;
+import saffchen.security.UserDetails;
 
 import java.util.Optional;
 
 @Service
-public class PersonEntityDetailsService implements UserDetailsService {
+public class UserEntityDetailsService implements UserDetailsService {
 
     private final PersonsRepository personsRepository;
 
     @Autowired
-    public PersonEntityDetailsService(PersonsRepository personsRepository) {
+    public UserEntityDetailsService(PersonsRepository personsRepository) {
         this.personsRepository = personsRepository;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<PersonEntity> personEntity = personsRepository.findByEmail(username);
+    public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<UserEntity> personEntity = personsRepository.findByEmail(username);
         if (personEntity.isEmpty())
             throw new UsernameNotFoundException("User wasn't found!");
-        return new PersonDetails(personEntity.get());
+        return new UserDetails(personEntity.get());
     }
 }

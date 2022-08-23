@@ -7,7 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import saffchen.service.PersonEntityDetailsService;
+import saffchen.service.UserEntityDetailsService;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -19,7 +19,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JWTSecurityFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
-    private final PersonEntityDetailsService personEntityDetailsService;
+    private final UserEntityDetailsService userEntityDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -32,7 +32,7 @@ public class JWTSecurityFilter extends OncePerRequestFilter {
             } else {
                 try {
                     String username = jwtUtil.validateTokenAndGetClaim(onlyToken);
-                    UserDetails userDetails = personEntityDetailsService.loadUserByUsername(username);
+                    UserDetails userDetails = userEntityDetailsService.loadUserByUsername(username);
                     UsernamePasswordAuthenticationToken authToken =
                             new UsernamePasswordAuthenticationToken(userDetails,
                                     userDetails.getPassword(),

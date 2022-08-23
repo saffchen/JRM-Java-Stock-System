@@ -19,7 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = ProductController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProductController {
-    static final String REST_URL = "/api/products";
+    static final String REST_URL = "/auth/api/v1/products";
     private final ProductMapper productMapper;
     private final ProductService productService;
 

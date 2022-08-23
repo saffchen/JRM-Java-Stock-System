@@ -1,7 +1,5 @@
 package saffchen.config;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,13 +12,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import saffchen.security.JWTSecurityFilter;
-import saffchen.service.PersonEntityDetailsService;
+import saffchen.service.UserEntityDetailsService;
 
 
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
-    private final PersonEntityDetailsService personEntityDetailsService;
+    private final UserEntityDetailsService userEntityDetailsService;
     private final JWTSecurityFilter jwtSecurityFilter;
 
     protected void configure(HttpSecurity http) throws Exception {
@@ -40,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     }
 
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-        auth.userDetailsService(personEntityDetailsService).
+        auth.userDetailsService(userEntityDetailsService).
                 passwordEncoder(getPasswordEncoder());
 
     }

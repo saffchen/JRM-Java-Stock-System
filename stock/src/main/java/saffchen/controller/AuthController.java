@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import saffchen.dto.PersonAuthResponse;
 import saffchen.dto.PersonAuthRequest;
 import saffchen.security.JwtUtil;
-import saffchen.security.PersonDetails;
-import saffchen.service.PersonEntityDetailsService;
+import saffchen.security.UserDetails;
+import saffchen.service.UserEntityDetailsService;
 
 import java.util.stream.Collectors;
 
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AuthController {
     private final JwtUtil jwtUtil;
-    private final PersonEntityDetailsService personEntityDetailsService;
+    private final UserEntityDetailsService userEntityDetailsService;
     private final AuthenticationManager authenticationManager;
 
     @PostMapping("/check_auth")
@@ -32,14 +32,14 @@ public class AuthController {
             throw new BadCredentialsException("Incorrect user or password!");
         }
 
-        PersonDetails personDetails = (PersonDetails) personEntityDetailsService.
+        UserDetails userDetails = (UserDetails) userEntityDetailsService.
                 loadUserByUsername(personAuthRequest.getEmail());
 
-        String authority = personDetails.getAuthorities()
+        String authority = userDetails.getAuthorities()
                 .stream()
                 .map(n -> String.valueOf(n))
                 .collect(Collectors.joining(""));
-        String email = personDetails.getEmail();
+        String email = userDetails.getEmail();
         String jwt = jwtUtil.createToken(
                 email,
                 authority);
