@@ -29,6 +29,7 @@ public class SatelliteController {
 
     @GetMapping
     public ResponseEntity<List<SatelliteDto>> getAll() {
+        log.info("get all Satellites");
         return ResponseEntity.ok(satelliteService.getAll().stream()
                                     .map(x -> {
                                         SatelliteDto satelliteDto = satelliteMapper.satelliteToSatelliteDto(x);
@@ -40,6 +41,7 @@ public class SatelliteController {
 
     @GetMapping("/{id}")
     public ResponseEntity<SatelliteDto> get(@PathVariable Long id) throws NoEntityException {
+        log.info("get satellite by id {}", id);
         SatelliteEntity satelliteEntity = satelliteService.get(id);
         SatelliteDto satelliteDto = satelliteMapper.satelliteToSatelliteDto(satelliteEntity);
         satelliteDto.setCount(satelliteEntity.getProductsSize());
@@ -65,6 +67,7 @@ public class SatelliteController {
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@Valid @RequestBody SatelliteDto satelliteDto, @PathVariable long id) {
+        //satelliteDto.setId(id);
         SatelliteEntity satelliteEntity = satelliteMapper.satelliteDtoToSatelliteEntity(satelliteDto);
         log.info("update satellite {}", satelliteEntity);
         assureIdConsistent(satelliteEntity, id);

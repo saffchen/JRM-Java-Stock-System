@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import saffchen.entities.SatelliteEntity;
 import saffchen.exception.NoEntityException;
-import saffchen.exception.SatelliteAlreadyExistException;
 import saffchen.repository.SatellitesRepository;
 
 import java.util.List;

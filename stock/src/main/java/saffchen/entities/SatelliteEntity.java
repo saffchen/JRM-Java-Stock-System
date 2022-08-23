@@ -1,35 +1,25 @@
 package saffchen.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Satellite")
-public class SatelliteEntity {
-    @Id
-    @SequenceGenerator(name = "satellite_id_sequence",
-            sequenceName = "satellite_id_seq")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "satellite_id_seq")
-    @Column(name = "id", nullable = false)
-    private Long id;
-
-    @Column(name = "name", unique = true, nullable = false)
-    private String name;
+@Table(name = "satellite", uniqueConstraints = {@UniqueConstraint(columnNames = {"name"}, name = "uk_satellite")})
+public class SatelliteEntity extends NamedEntity {
 
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "satellite")
+    @OneToMany(mappedBy = "satellite", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonManagedReference
     private List<ProductEntity> products;
@@ -39,14 +29,5 @@ public class SatelliteEntity {
 
     public int getProductsSize() {
         return products.size();
-    }
-
-    public boolean isNew() {
-        return id == null;
-    }
-
-    public Long id() {
-        Assert.notNull(getId(), "Entity must has id");
-        return getId();
     }
 }
