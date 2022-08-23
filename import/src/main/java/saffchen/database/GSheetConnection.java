@@ -38,7 +38,7 @@ public class GSheetConnection {
                 .setDataStoreFactory(new FileDataStoreFactory((new java.io.File(TOKENS_DIRECTORY))))
                 .setAccessType("offline")
                 .build();
-        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8080).build();
+        LocalServerReceiver receiver = new LocalServerReceiver();
         return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
     }
 

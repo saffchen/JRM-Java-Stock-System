@@ -21,53 +21,46 @@ public class GSheetImportUtils implements ImportUtils {
 
     @Override
     public List<RawProduct> getData() {
-        ValueRange result;
-        List<List<String>> values = null;
-        //List<String> listOfStrProducts = new ArrayList<>();
-        List<RawProduct> products = new ArrayList<>();
+        List<List<String>> values = getRowsFromGSheet(service);
+        return getProductsFromRows(values);
+    }
+
+    private static List<List<String>> getRowsFromGSheet(Sheets service) {
+        List<List<String>> values = new ArrayList<>();
         try {
-            result = service.spreadsheets().values()
+            ValueRange result = service.spreadsheets().values()
                     .get(GSheetConnection.SPREADSHEET_ID, GSheetConnection.RANGE)
                     .execute();
             values = result.getValues().stream()
-                    .map(list -> {
-                        List<String> listOfString = list.stream()
-                                .map(m -> String.valueOf(m))
-                                .collect(Collectors.toList());
-                        return listOfString;
-                    })
+                    .map(list -> list.stream()
+                            .map(String::valueOf)
+                            .collect(Collectors.toList()))
                     .collect(Collectors.toList());
-
             //remove the headers
             values.remove(0);
-
-            if (values == null || values.isEmpty()) {
+            if (values.isEmpty()) {
                 System.out.println("No data found!");
-            } else {
-                for (List<String> row : values) {
-                    //System.out.println(row);
-                    //listOfStrProducts.add((String) row.stream().collect(Collectors.joining(";")));
-                }
             }
         } catch (IOException e) {
             System.out.println("Error: Can't get data from GSHEET");
-            e.printStackTrace();
         }
+        return values;
+    }
+
+    private static List<RawProduct> getProductsFromRows(List<List<String>> rows) {
+        List<RawProduct> products = new ArrayList<>();
         ReflectProductUtils reflectProductUtils = new ReflectProductUtils();
         List<String> headersFromClass = reflectProductUtils.getFieldsFromClass(RawProduct.class);
-
-        for (List row : values) {
+        for (List<String> row : rows) {
             Map<String, Object> mapping = IntStream.range(0, headersFromClass.size())
                     .boxed()
                     .collect(Collectors.toMap(headersFromClass::get, row::get));
             RawProduct rawProduct = new RawProduct();
             for (Map.Entry<String, Object> entry : mapping.entrySet()) {
-                reflectProductUtils.invokeSetter(rawProduct, (String) entry.getKey(), (Object) entry.getValue());
+                reflectProductUtils.invokeSetter(rawProduct, entry.getKey(), entry.getValue());
             }
             products.add(rawProduct);
         }
-
         return products;
     }
-
 }
