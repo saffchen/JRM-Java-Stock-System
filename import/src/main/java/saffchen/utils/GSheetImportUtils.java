@@ -13,8 +13,7 @@ import java.util.stream.IntStream;
 
 
 public class GSheetImportUtils implements ImportUtils {
-    private final String RANGE = GSheetConnection.RANGE;
-    private Sheets service;
+    private final Sheets service;
 
     public GSheetImportUtils(Sheets service) {
         this.service = service;
@@ -22,12 +21,14 @@ public class GSheetImportUtils implements ImportUtils {
 
     @Override
     public List<RawProduct> getData() {
-        ValueRange result = null;
+        ValueRange result;
         List<List<String>> values = null;
-        List<String> listOfStrProducts = new ArrayList<>();
+        //List<String> listOfStrProducts = new ArrayList<>();
         List<RawProduct> products = new ArrayList<>();
         try {
-            result = service.spreadsheets().values().get(GSheetConnection.SPEADSHEET_ID, RANGE).execute();
+            result = service.spreadsheets().values()
+                    .get(GSheetConnection.SPREADSHEET_ID, GSheetConnection.RANGE)
+                    .execute();
             values = result.getValues().stream()
                     .map(list -> {
                         List<String> listOfString = list.stream()
@@ -44,12 +45,13 @@ public class GSheetImportUtils implements ImportUtils {
                 System.out.println("No data found!");
             } else {
                 for (List<String> row : values) {
-                    System.out.println(row);
-                    listOfStrProducts.add((String) row.stream().collect(Collectors.joining(";")));
+                    //System.out.println(row);
+                    //listOfStrProducts.add((String) row.stream().collect(Collectors.joining(";")));
                 }
             }
         } catch (IOException e) {
             System.out.println("Error: Can't get data from GSHEET");
+            e.printStackTrace();
         }
         ReflectProductUtils reflectProductUtils = new ReflectProductUtils();
         List<String> headersFromClass = reflectProductUtils.getFieldsFromClass(RawProduct.class);

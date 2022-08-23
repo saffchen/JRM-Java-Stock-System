@@ -34,9 +34,7 @@ public class ImportFromGSheetCommand implements Command {
             fileStorageUtils.addRawProductsFromListToCSV(gSheetImportUtils.checkTheDuplicates(
                     gSheetImportUtils.getData(),
                     fileStorageUtils.getDataFromCSV()));
-        } catch (GeneralSecurityException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        }  catch (IOException e) {
             System.out.println("Error: Can't connect to GSHEET");
         }
     }
