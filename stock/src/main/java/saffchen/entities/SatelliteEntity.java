@@ -17,7 +17,7 @@ public class SatelliteEntity {
     @Id
     @SequenceGenerator(name = "satellite_id_sequence",
             sequenceName = "satellite_id_seq")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "satellite_id_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "satellite_id_seq")
     @Column(name = "id", nullable = false)
     private Long id;
 

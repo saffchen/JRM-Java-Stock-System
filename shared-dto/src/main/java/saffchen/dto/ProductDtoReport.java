@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductDtoReport {
-    private Long id;
+    private String id;
     private String title;
     private String description;
     private Double price;
@@ -21,4 +21,5 @@ public class ProductDtoReport {
     private String category;
     private Integer count;
     private String satelliteName;
+
 }

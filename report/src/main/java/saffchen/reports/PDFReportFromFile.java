@@ -15,8 +15,8 @@ import java.util.List;
 public class PDFReportFromFile implements Report {
     private String criteries;
     private String field;
-    private FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
-    private FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
+    private final FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
+    private final FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
 
     private final Font reportHeader = FontFactory.getFont(FontFactory.COURIER, 20, Font.BOLD,
             new CMYKColor(0, 255, 0, 0));
@@ -88,7 +88,7 @@ public class PDFReportFromFile implements Report {
             }
 
             for (ProductDtoReport product : tableData) {
-
+                table.addCell(drawCell(product.getId(), color, cellHeader));
                 table.addCell(drawCell(product.getTitle(), color, cellHeader));
                 table.addCell(drawCell(product.getDescription(), color, cellHeader));
                 table.addCell(drawCell(product.getPrice().toString(), color, cellHeader));

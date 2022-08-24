@@ -37,7 +37,7 @@ public class ProductAdapterReport {
 
     public ProductDtoReport getProduct() {
         ProductDtoReport product = new ProductDtoReport();
-        product.setId(Long.valueOf(rawProduct.getId()));
+        product.setId(String.valueOf(rawProduct.getId()));
         product.setTitle(rawProduct.getTitle());
         product.setCategory(rawProduct.getCategory());
         product.setPrice(Double.valueOf(rawProduct.getPrice()));
@@ -58,7 +58,7 @@ public class ProductAdapterReport {
         rawProduct.setDescription(product.getDescription());
         rawProduct.setCount(product.getCount().toString());
         rawProduct.setTags(tagsToString(product.getTags()));
-        //rawProduct.setSatellite(product.getSatelliteName());
+        rawProduct.setSatellite(product.getSatelliteName());
 
         return rawProduct;
     }
