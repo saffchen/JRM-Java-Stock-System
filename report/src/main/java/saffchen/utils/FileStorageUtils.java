@@ -253,12 +253,6 @@ public class FileStorageUtils implements StorageUtils {
         List<ProductDtoReport> products = new ArrayList<>();
 
         try {
-          /*  List<String> records = new ArrayList<>();
-            try (Scanner scanner = new Scanner(new File("stock_import_csv.csv"));) {
-                while (scanner.hasNextLine()) {
-                    records.add(scanner.nextLine());
-                }
-            }*/
             CsvToBean<RawProduct> csvToBean = getCSVParser();
 
             List<RawProduct> rawProducts = csvToBean.parse();
