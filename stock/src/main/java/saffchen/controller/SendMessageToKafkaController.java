@@ -1,7 +1,6 @@
 package saffchen.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.apache.kafka.clients.producer.KafkaProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,7 @@ import saffchen.service.KafkaProducerService;
 @RequestMapping(value = SendMessageToKafkaController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class SendMessageToKafkaController {
 
-    static final String REST_URL = "/api/message";
+    static final String REST_URL = "/api/v1/message";
 
     private final KafkaProducerService kafkaProducerService;
 
