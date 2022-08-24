@@ -33,14 +33,14 @@ public class ProductAdapter {
 
     public ProductEntity getProduct() {
         ProductEntity product = new ProductEntity();
-        product.setId(Long.valueOf(rawProduct.getId()));
+        product.setId(Long.parseLong(rawProduct.getId()));
         product.setTitle(rawProduct.getTitle());
         product.setCategory(rawProduct.getCategory());
         product.setPrice(Double.valueOf(rawProduct.getPrice()));
         product.setDescription(rawProduct.getDescription());
         product.setCount(Integer.valueOf(rawProduct.getCount()));
         product.setTags(parseTags(rawProduct.getTags(), ","));
-        //product.setSatellite(rawProduct.);
+        //product.setSatellite(rawProduct.getSatellite());
 
         return product;
     }

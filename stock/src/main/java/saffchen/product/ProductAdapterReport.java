@@ -58,7 +58,7 @@ public class ProductAdapterReport {
         rawProduct.setDescription(product.getDescription());
         rawProduct.setCount(product.getCount().toString());
         rawProduct.setTags(tagsToString(product.getTags()));
-        rawProduct.setSatellite(product.getSatelliteName());
+        //rawProduct.setSatellite(product.getSatelliteName());
 
         return rawProduct;
     }

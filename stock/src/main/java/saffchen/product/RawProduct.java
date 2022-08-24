@@ -3,7 +3,6 @@ package saffchen.product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import saffchen.entities.SatelliteEntity;
 
 @Data
 @AllArgsConstructor
@@ -16,7 +15,6 @@ public class RawProduct {
     private String tags;
     private String category;
     private String count;
-    //private SatelliteEntity satellite;
     private String satellite;
     public String toCSVString(String sep) {
         return "\n" + id + sep +

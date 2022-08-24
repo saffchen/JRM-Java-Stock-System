@@ -1,7 +1,10 @@
 package saffchen.reports;
 
 import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.*;
+import com.itextpdf.text.pdf.CMYKColor;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import saffchen.database.FileConnection;
 import saffchen.dto.ProductDtoReport;
 import saffchen.utils.FileStorageUtils;
@@ -34,7 +37,7 @@ public class PDFReportFromFile implements Report {
 
     private PdfPTable drawTable() throws DocumentException {
         int columnCount = 8;
-        PdfPTable table = new PdfPTable(columnCount);
+        PdfPTable table = new PdfPTable(columnCount); // 6 columns.
         table.setWidthPercentage(100); // Width 100%
         table.setSpacingBefore(10f); // Space before table
         table.setSpacingAfter(10f); // Space after table
