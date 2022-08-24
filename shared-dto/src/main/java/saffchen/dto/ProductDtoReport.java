@@ -1,8 +1,6 @@
 package saffchen.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -10,7 +8,10 @@ import java.util.List;
  * @author saffchen created on 09.07.2022
  * @project JRM-Java-Stock-System
  */
-@Data
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductDtoReport {
     private Long id;
     private String title;

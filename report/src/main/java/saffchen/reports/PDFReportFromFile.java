@@ -4,7 +4,6 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import saffchen.database.FileConnection;
 import saffchen.dto.ProductDtoReport;
-import saffchen.entities.ProductEntity;
 import saffchen.utils.FileStorageUtils;
 
 import java.io.FileOutputStream;
@@ -33,8 +32,9 @@ public class PDFReportFromFile implements Report {
         this.field = field;
     }
 
-    private PdfPTable drawTable(Integer columnCount) throws DocumentException {
-        PdfPTable table = new PdfPTable(columnCount); // 6 columns.
+    private PdfPTable drawTable() throws DocumentException {
+        int columnCount = 8;
+        PdfPTable table = new PdfPTable(columnCount);
         table.setWidthPercentage(100); // Width 100%
         table.setSpacingBefore(10f); // Space before table
         table.setSpacingAfter(10f); // Space after table
@@ -78,7 +78,7 @@ public class PDFReportFromFile implements Report {
                     + field + " with criteria \""
                     + criteries + "\")", reportHeader));
 
-            PdfPTable table = drawTable(7);
+            PdfPTable table = drawTable();
             List<String> headers = fileStorageUtils.getHeadersFromCSV();
             for (String cell : headers) {
                 table.addCell(drawCell(cell.toUpperCase(), color, tableHeader));

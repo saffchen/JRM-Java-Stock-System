@@ -1,6 +1,5 @@
 package saffchen;
 
-import org.springframework.boot.SpringApplication;
 import saffchen.reports.GenerateReportCommand;
 
 public class Main {
