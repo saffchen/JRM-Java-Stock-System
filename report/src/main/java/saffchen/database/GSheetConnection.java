@@ -22,7 +22,7 @@ public class GSheetConnection {
     private static Properties properties = new Properties();
     public static String RANGE;
     private static String APPLICATION_NAME;
-    public static String SPEADSHEET_ID;
+    public static String SPREADSHEET_ID;
 
     private static Credential authorize() throws IOException, GeneralSecurityException {
         //авторизация по токену, который нужно создать в гугл акке
@@ -46,7 +46,7 @@ public class GSheetConnection {
                 GSheetConnection.class.getResourceAsStream("/gsheet.properties")));
 
         GSheetConnection.APPLICATION_NAME = properties.getProperty("APPLICATION_NAME");
-        GSheetConnection.SPEADSHEET_ID = properties.getProperty("SPEADSHEET_ID");
+        GSheetConnection.SPREADSHEET_ID = properties.getProperty("SPREADSHEET_ID");
         GSheetConnection.RANGE = properties.getProperty("RANGE");
 
         Credential credential = authorize();

@@ -29,7 +29,7 @@ public class GSheetImportUtils implements ImportUtils {
         List<String> listOfStrProducts = new ArrayList<>();
         List<RawProduct> products = new ArrayList<>();
         try {
-            result = service.spreadsheets().values().get(GSheetConnection.SPEADSHEET_ID, RANGE).execute();
+            result = service.spreadsheets().values().get(GSheetConnection.SPREADSHEET_ID, RANGE).execute();
             values = result.getValues().stream()
                     .map(list -> {
                         List<String> listOfString = list.stream()
