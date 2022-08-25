@@ -15,6 +15,15 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "satellite", uniqueConstraints = {@UniqueConstraint(columnNames = {"name"}, name = "uk_satellite")})
 public class SatelliteEntity extends NamedEntity {
+    @Id
+    @SequenceGenerator(name = "satellite_id_sequence",
+            sequenceName = "satellite_id_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "satellite_id_seq")
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    @Column(name = "name", unique = true, nullable = false)
+    private String name;
 
     @Column(name = "description")
     private String description;
