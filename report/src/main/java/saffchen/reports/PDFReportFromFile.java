@@ -84,7 +84,7 @@ public class PDFReportFromFile implements Report {
                 else
                     color = BaseColor.GRAY;
 
-                table.addCell(drawCell(product.getTitle(), color, cellHeader));
+                table.addCell(drawCell(product.getName(), color, cellHeader));
                 table.addCell(drawCell(product.getDescription(), color, cellHeader));
                 table.addCell(drawCell(product.getPrice().toString(), color, cellHeader));
                 table.addCell(drawCell(product.getTags().toString(), color, cellHeader));

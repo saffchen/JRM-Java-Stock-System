@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import saffchen.entities.SatelliteEntity;
 import saffchen.exception.NoEntityException;
-import saffchen.exception.SatelliteAlreadyExistException;
 import saffchen.repository.SatellitesRepository;
 
 import java.util.List;
@@ -40,19 +39,14 @@ public class SatelliteService {
     }
 
     public SatelliteEntity create(SatelliteEntity satellite) {
-        SatelliteEntity satelliteIsExist = satelliteRepository.findByName(satellite.getName())
-                .orElse(null);
-        if (satelliteIsExist == null) {
-            return satelliteRepository.save(satellite);
-        }
-        throw new SatelliteAlreadyExistException("This satellite already has been exist.");
+        return satelliteRepository.save(satellite);
     }
 
-    public void update(SatelliteEntity satellite) {
+    public void save(SatelliteEntity satellite) {
         satelliteRepository.save(satellite);
     }
 
     public void delete(Long id) {
-        satelliteRepository.delete(id);
+        satelliteRepository.deleteExisted(id);
     }
 }

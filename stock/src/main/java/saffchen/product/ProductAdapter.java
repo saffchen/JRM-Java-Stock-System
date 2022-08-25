@@ -37,7 +37,7 @@ public class ProductAdapter {
 
     public ProductEntity getProduct() {
         ProductEntity product = new ProductEntity();
-        product.setTitle(rawProduct.getTitle());
+        product.setName(rawProduct.getTitle());
         product.setCategory(rawProduct.getCategory());
         product.setPrice(Double.valueOf(rawProduct.getPrice()));
         product.setDescription(rawProduct.getDescription());
@@ -49,7 +49,7 @@ public class ProductAdapter {
 
     public RawProduct setDataToRawProduct() {
         RawProduct rawProduct = new RawProduct();
-        rawProduct.setTitle(product.getTitle());
+        rawProduct.setTitle(product.getName());
         rawProduct.setCategory(product.getCategory());
         rawProduct.setPrice(product.getPrice().toString());
         rawProduct.setDescription(product.getDescription());
