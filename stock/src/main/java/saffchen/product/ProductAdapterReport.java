@@ -1,8 +1,6 @@
 package saffchen.product;
 
-import saffchen.dto.ProductDto;
 import saffchen.dto.ProductDtoReport;
-import saffchen.entities.ProductEntity;
 
 import java.util.ArrayList;
 import java.util.Collections;
