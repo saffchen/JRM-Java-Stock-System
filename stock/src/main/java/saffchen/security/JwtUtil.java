@@ -5,9 +5,12 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import lombok.Builder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
@@ -24,6 +27,7 @@ public class JwtUtil {
     private String issuer;
 
 
+
     public String createToken(String username, String role) {
         Date expirationDate = Date.from(ZonedDateTime.now()
                 .plusMinutes(Long.valueOf(expired))
@@ -38,12 +42,16 @@ public class JwtUtil {
                 .sign(Algorithm.HMAC512(secret));
     }
 
-    public String validateTokenAndGetClaim(String token) throws JWTVerificationException {
-        JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC512(secret))
+    @PostConstruct
+    private JWTVerifier getJWTVerifier(){
+        return JWT.require(Algorithm.HMAC512(secret))
                 .withSubject(subject)
                 .withIssuer(issuer)
                 .build();
-        DecodedJWT jwt = jwtVerifier.verify(token);
+    }
+
+    public String validateTokenAndGetClaim(String token) throws JWTVerificationException {
+        DecodedJWT jwt = getJWTVerifier().verify(token);
         return jwt.getClaim("username").asString();
     }
 }
