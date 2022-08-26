@@ -58,14 +58,12 @@ public class ReflectProductUtils {
         return fields;
     }
 
-    public List<String> getFieldsFromClass(RawProduct product) {
+    public <T> List<String> getFieldsFromClass(Class<T> _class) {
         List<String> fields = new ArrayList<>();
-
         try {
-            Field[] productFields = product.getClass().getDeclaredFields();
-            for (Field f : productFields) {
-                f.setAccessible(true);
-                fields.add(f.getName());
+            for (Field field : _class.getDeclaredFields()) {
+                field.setAccessible(true);
+                fields.add(field.getName());
             }
         } catch (Exception e) {
             e.printStackTrace();

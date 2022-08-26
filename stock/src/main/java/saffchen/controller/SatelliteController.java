@@ -23,7 +23,7 @@ import static saffchen.util.validation.ValidationUtil.checkNew;
 @RequestMapping(value = SatelliteController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
 public class SatelliteController {
-    static final String REST_URL = "/api/satellites";
+    static final String REST_URL = "/api/v1/satellites";
     private final SatelliteMapper satelliteMapper;
     private final SatelliteService satelliteService;
 

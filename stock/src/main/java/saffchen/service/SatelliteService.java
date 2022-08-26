@@ -34,6 +34,10 @@ public class SatelliteService {
                 .orElseThrow(() -> new NoEntityException("Object with id " + id + "is not found"));
     }
 
+    public SatelliteEntity getByName(String satelliteName) {
+        return satelliteRepository.findByName(satelliteName).get();
+    }
+
     public SatelliteEntity create(SatelliteEntity satellite) {
         return satelliteRepository.save(satellite);
     }
