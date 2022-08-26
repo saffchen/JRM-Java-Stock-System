@@ -1,24 +1,49 @@
 <template>
-    <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown" id="menu">
-            <span class="fs-5">Navigate</span>
-        </button>
-        <ul class="dropdown-menu dropdown-menu-start animate slidein p-0" aria-labelledby="menu">
-          <li v-for="item in menuItems">
-            <a class="dropdown-item p-2" href="#">{{ item }}</a>
-          </li>
-        </ul>
-    </div>
+  <div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown" id="menu">
+      <span class="fs-5">Navigate</span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-start animate slidein p-0" aria-labelledby="menu">
+      <li v-for="item in menuItems" @click="$router.push({name: item.id })">
+        <a class="dropdown-item p-2" href="#">{{ item.label }}</a>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
 
 export default {
-    data() {
-      return {
-        menuItems: ['Login', 'View Stocks', 'Generate report', 'Import', 'Export']
-      }
+  data() {
+    return {
+      menuItems: [
+        {
+          id: 'Login',
+          label: 'Login'
+        },
+        {
+          id: 'ProductTable',
+          label: 'View Products'
+        },
+        {
+          id: 'StockTable',
+          label: 'View Stocks'
+        },
+        {
+          id: 'Report',
+          label: 'Generate report'
+        },
+        {
+          id: 'Import',
+          label: 'Import'
+        },
+        {
+          id: 'Export',
+          label: 'Export'
+        }
+      ]
     }
+  }
 }
 </script>
 

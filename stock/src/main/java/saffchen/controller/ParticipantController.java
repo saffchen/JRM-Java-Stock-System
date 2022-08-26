@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/participants")
+@RequestMapping("/api/v1/participants")
 public class ParticipantController {
     private final ParticipantService participantService;
 
