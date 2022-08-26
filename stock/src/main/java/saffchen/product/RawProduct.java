@@ -1,8 +1,5 @@
 package saffchen.product;
 
-import saffchen.entities.SatelliteEntity;
-
-
 import java.util.Objects;
 
 public class RawProduct {
@@ -12,14 +9,12 @@ public class RawProduct {
     private String tags;
     private String category;
     private String count;
-    private SatelliteEntity satellite;
+    private String satellite;
 
-    public RawProduct() {
-
-    }
+    public RawProduct() {}
 
     public RawProduct(String title, String description, String price, String tags,
-                      String category, String count, SatelliteEntity satellite) {
+                      String category, String count, String satellite) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -41,7 +36,7 @@ public class RawProduct {
         this.category = category;
     }
 
-    public void setSatellite(SatelliteEntity satellite) {
+    public void setSatellite(String satellite) {
         this.satellite = satellite;
     }
 
@@ -81,7 +76,7 @@ public class RawProduct {
         return count;
     }
 
-    public SatelliteEntity getSatellite() {
+    public String getSatellite() {
         return satellite;
     }
 
@@ -93,7 +88,7 @@ public class RawProduct {
                 ", tags=" + tags +
                 ", category='" + category + '\'' +
                 ", count=" + count +
-                ", satellite='" + satellite.toString() + '\'' +
+                ", satellite='" + satellite + '\'' +
                 '}';
     }
 
@@ -104,7 +99,7 @@ public class RawProduct {
                 tags + sep +
                 category + sep +
                 count + sep +
-                satellite.toString();
+                satellite;
     }
 
     @Override
