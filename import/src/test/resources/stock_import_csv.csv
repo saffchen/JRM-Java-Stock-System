@@ -1,30 +1,33 @@
-Title;Description;Price ($);Tags;Category;Count;Satellite
-PlayStation 5 Console;Experience an all-new generation of incredible PlayStation games.;1200.0;Console, Gaming, Home;PlayStation;120;Moscow
-PlayStation 4 PRO Console;Digital Edition console with a vibrant array of new colour options.;950;Console, Gaming, Home;PlayStation;56;Moscow
-GoPro HERO 10 Black;A professional film studio in the palm of your hand.;550;Action, Video;Camera;15;Moscow
-GoPro MAX;A professional film studio in the palm of your hand.;550;Action, Video;Camera;95;Moscow
-Sony A7 |||;Professional SLR Camera.;2900;Photo;Camera;24;Moscow
-Apple Iphone 12 128gb;Iphone with large screen.;699;Phone, Camera;Phone;60;Moscow
-Apple Iphone 13 mini 128;New iphone mini in a new color scheme.;699;Phone, Camera;Phone;29;Moscow
-Apple iphone 13 Pro Max 128;New iphone in a new color scheme and Lidar camera.;1099;Phone, Camera;Phone;13;Moscow
-HUAWEI MateBook 14 KLVL-W56W 16+512GB Space Grey;Slim and light laptop.;1049;Laptop, Graphic;Laptop;38;Moscow
-Lenovo Legion 5 15ACH6A;Slim and powerful laptop for gaming.;1949;Laptop, Gaming, Home;Laptop;9;Saint Petersburg
-GoPro HERO 10 Black;A professional film studio in the palm of your hand.;550;Action, Video;Camera;15;Saint Petersburg
-GoPro MAX;A professional film studio in the palm of your hand.;550;Action, Video;Camera;95;Saint Petersburg
-Sony A7 |||;Professional SLR Camera.;2900;Photo;Camera;24;Saint Petersburg
-Apple Iphone 12 128gb;Iphone with large screen.;699;Phone, Camera;Phone;60;Saint Petersburg
-Apple Iphone 13 mini 128;New iphone mini in a new color scheme.;699;Phone, Camera;Phone;29;Saint Petersburg
-GoPro MAX;A professional film studio in the palm of your hand.;550.0;Action, Video;Camera;95.0;Saint Petersburg
-Sony A7 |||;Professional SLR Camera.;2900.0;Photo;Camera;24.0;Saint Petersburg
-PlayStation 4 PRO Console;Digital Edition console with a vibrant array of new colour options.;950.0;Console, Gaming, Home;PlayStation;56.0;Moscow
-GoPro HERO 10 Black;A professional film studio in the palm of your hand.;550.0;Action, Video;Camera;15.0;Moscow
-GoPro MAX;A professional film studio in the palm of your hand.;550.0;Action, Video;Camera;95.0;Moscow
-Sony A7 |||;Professional SLR Camera.;2900.0;Photo;Camera;24.0;Moscow
-Apple Iphone 12 128gb;Iphone with large screen.;699.0;Phone, Camera;Phone;60.0;Moscow
-Apple Iphone 13 mini 128;New iphone mini in a new color scheme.;699.0;Phone, Camera;Phone;29.0;Moscow
-Apple iphone 13 Pro Max 128;New iphone in a new color scheme and Lidar camera.;1099.0;Phone, Camera;Phone;13.0;Moscow
-HUAWEI MateBook 14 KLVL-W56W 16+512GB Space Grey;Slim and light laptop.;1049.0;Laptop, Graphic;Laptop;38.0;Moscow
-Lenovo Legion 5 15ACH6A;Slim and powerful laptop for gaming.;1949.0;Laptop, Gaming, Home;Laptop;9.0;Saint Petersburg
-GoPro HERO 10 Black;A professional film studio in the palm of your hand.;550.0;Action, Video;Camera;15.0;Saint Petersburg
-Apple Iphone 12 128gb;Iphone with large screen.;699.0;Phone, Camera;Phone;60.0;Saint Petersburg
-Apple Iphone 13 mini 128;New iphone mini in a new color scheme.;699.0;Phone, Camera;Phone;29.0;Saint Petersburg
+Id;Title;Description;Price ($);Tags;Category;Count;Satellite
+1;PlayStation 5 Console;Experience an all-new generation of incredible PlayStation games.;1200.0;Console, Gaming, Home;PlayStation;120;Moscow
+2;PlayStation 4 PRO Console;Digital Edition console with a vibrant array of new colour options.;950;Console, Gaming, Home;PlayStation;56;Moscow
+3;GoPro HERO 10 Black;A professional film studio in the palm of your hand.;550;Action, Video;Camera;15;Moscow
+4;GoPro MAX;A professional film studio in the palm of your hand.;550;Action, Video;Camera;95;Moscow
+5;Sony A7 |||;Professional SLR Camera.;2900;Photo;Camera;24;Moscow
+6;Apple Iphone 12 128gb;Iphone with large screen.;699;Phone, Camera;Phone;60;Moscow
+7;Apple Iphone 13 mini 128;New iphone mini in a new color scheme.;699;Phone, Camera;Phone;29;Moscow
+8;Apple iphone 13 Pro Max 128;New iphone in a new color scheme and Lidar camera.;1099;Phone, Camera;Phone;13;Moscow
+9;HUAWEI MateBook 14 KLVL-W56W 16+512GB Space Grey;Slim and light laptop.;1049;Laptop, Graphic;Laptop;38;Moscow
+10;Lenovo Legion 5 15ACH6A;Slim and powerful laptop for gaming.;1949;Laptop, Gaming, Home;Laptop;9;Saint Petersburg
+11;GoPro HERO 10 Black;A professional film studio in the palm of your hand.;550;Action, Video;Camera;15;Saint Petersburg
+12;GoPro MAX;A professional film studio in the palm of your hand.;550;Action, Video;Camera;95;Saint Petersburg
+13;Sony A7 |||;Professional SLR Camera.;2900;Photo;Camera;24;Saint Petersburg
+14;Apple Iphone 12 128gb;Iphone with large screen.;699;Phone, Camera;Phone;60;Saint Petersburg
+15;Apple Iphone 13 mini 128;New iphone mini in a new color scheme.;699;Phone, Camera;Phone;29;Saint Petersburg
+16;PlayStation 5555 Console;Experience an all-new generation of incredible PlayStation games.;1200.0;qweqwe,qweqwe;ppppppp;20;Ekaterinburg
+17;PlayStation 4 PRO Console;Digital Edition console with a vibrant array of new colour options.;950;Console, Gaming, Home;PlayStation;56;Moscow
+18;GoPro HERO 10 Black;A professional film studio in the palm of your hand.;550;Action, Video;Camera;15;Moscow
+19;GoPro MAX;A professional film studio in the palm of your hand.;550;Action, Video;Camera;95;Moscow
+20;Sony A7 |||;Professional SLR Camera.;2900;Photo;Camera;24;Moscow
+21;Apple Iphone 12 128gb;Iphone with large screen.;699;Phone, Camera;Phone;60;Moscow
+22;Apple Iphone 13 mini 128;New iphone mini in a new color scheme.;699;Phone, Camera;Phone;29;Moscow
+23;Apple iphone 13 Pro Max 128;New iphone in a new color scheme and Lidar camera.;1099;Phone, Camera;Phone;13;Moscow
+24;HUAWEI MateBook 14 KLVL-W56W 16+512GB Space Grey;Slim and light laptop.;1049;Laptop, Graphic;Laptop;38;Moscow
+25;Lenovo Legion 5 15ACH6A;Slim and powerful laptop for gaming.;1949;Laptop, Gaming, Home;Laptop;9;Saint Petersburg
+26;GoPro HERO 10 Black;A professional film studio in the palm of your hand.;550;Action, Video;Camera;15;Saint Petersburg
+27;GoPro MAX;A professional film studio in the palm of your hand.;550;Action, Video;Camera;95;Saint Petersburg
+28;Sony A7 |||;Professional SLR Camera.;2900;Photo;Camera;24;Saint Petersburg
+29;Apple Iphone 12 128gb;Iphone with large screen.;699;Phone, Camera;Phone;60;Saint Petersburg
+30;Apple Iphone 13 mini 128;New iphone mini in a new color scheme.;699;Phone, Camera;Phone;29;Saint Petersburg
+31;Car;Ford;155555.0;muscle, car;test;2;KAZAN
+32;test;test product;50.0;tetsttt,wiwi;oil;3;MOSCOW
