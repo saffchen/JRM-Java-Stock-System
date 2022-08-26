@@ -8,7 +8,7 @@
     </div>
   </nav>
 
-<template xmlns="http://www.w3.org/1999/html">
+<template>
 
 <script>
 import DropdownMenu from "./DropdownMenu.vue";
