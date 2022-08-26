@@ -5,7 +5,6 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -26,7 +25,7 @@ public class JwtUtil {
     @Value("${jwt.token.issuer}")
     private String issuer;
 
-
+    private JWTVerifier jwtVerifier;
 
     public String createToken(String username, String role) {
         Date expirationDate = Date.from(ZonedDateTime.now()
@@ -43,15 +42,17 @@ public class JwtUtil {
     }
 
     @PostConstruct
-    private JWTVerifier getJWTVerifier(){
-        return JWT.require(Algorithm.HMAC512(secret))
-                .withSubject(subject)
-                .withIssuer(issuer)
-                .build();
+    private void getJWTVerifier() {
+        this.jwtVerifier =
+                JWT.require(Algorithm.HMAC512(secret))
+                        .withSubject(subject)
+                        .withIssuer(issuer)
+                        .build();
     }
 
     public String validateTokenAndGetClaim(String token) throws JWTVerificationException {
-        DecodedJWT jwt = getJWTVerifier().verify(token);
+
+        DecodedJWT jwt = jwtVerifier.verify(token);
         return jwt.getClaim("username").asString();
     }
 }
