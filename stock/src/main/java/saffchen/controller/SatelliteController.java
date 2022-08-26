@@ -1,6 +1,7 @@
 package saffchen.controller;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +15,13 @@ import saffchen.service.SatelliteService;
 import javax.validation.Valid;
 import java.util.List;
 
+import static saffchen.util.validation.ValidationUtil.assureIdConsistent;
+import static saffchen.util.validation.ValidationUtil.checkNew;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping(value = SatelliteController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@Slf4j
 public class SatelliteController {
     static final String REST_URL = "/api/v1/satellites";
     private final SatelliteMapper satelliteMapper;
@@ -24,17 +29,19 @@ public class SatelliteController {
 
     @GetMapping
     public ResponseEntity<List<SatelliteDto>> getAll() {
+        log.info("get all Satellites");
         return ResponseEntity.ok(satelliteService.getAll().stream()
-                .map(x -> {
-                    SatelliteDto satelliteDto = satelliteMapper.satelliteToSatelliteDto(x);
-                    satelliteDto.setCount(x.getProductsSize());
-                    return satelliteDto;
-                })
-                .toList());
+                                    .map(x -> {
+                                        SatelliteDto satelliteDto = satelliteMapper.satelliteToSatelliteDto(x);
+                                        satelliteDto.setCount(x.getProductsSize());
+                                        return satelliteDto;
+                                    })
+                                    .toList());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<SatelliteDto> get(@PathVariable Long id) throws NoEntityException {
+        log.info("get satellite by id {}", id);
         SatelliteEntity satelliteEntity = satelliteService.get(id);
         SatelliteDto satelliteDto = satelliteMapper.satelliteToSatelliteDto(satelliteEntity);
         satelliteDto.setCount(satelliteEntity.getProductsSize());
@@ -43,22 +50,27 @@ public class SatelliteController {
 
     @PostMapping
     public ResponseEntity<SatelliteDto> create(@RequestBody SatelliteDto satellite) {
+        SatelliteEntity satelliteEntity = satelliteMapper.satelliteDtoToSatelliteEntity(satellite);
+        log.info("create satellite {}", satelliteEntity);
+        checkNew(satelliteEntity);
         return ResponseEntity.ok(satelliteMapper.satelliteToSatelliteDto(
-                satelliteService.create(
-                        satelliteMapper.satelliteDtoToSatelliteEntity(satellite))));
+                satelliteService.create(satelliteEntity)));
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) throws NoEntityException {
-        satelliteService.delete(satelliteService.get(id).getId());
+        log.info("delete satelliteId {}", id);
+        satelliteService.delete(id);
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@Valid @RequestBody SatelliteDto satelliteDto, @PathVariable long id) {
-        SatelliteEntity satellite = satelliteMapper.satelliteDtoToSatelliteEntity(satelliteDto);
-        satellite.setId(id);
-        satelliteService.update(satellite);
+        //satelliteDto.setId(id);
+        SatelliteEntity satelliteEntity = satelliteMapper.satelliteDtoToSatelliteEntity(satelliteDto);
+        log.info("update satellite {}", satelliteEntity);
+        assureIdConsistent(satelliteEntity, id);
+        satelliteService.save(satelliteEntity);
     }
 }

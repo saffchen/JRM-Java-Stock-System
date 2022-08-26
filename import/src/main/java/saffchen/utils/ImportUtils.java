@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface ImportUtils {
-    public default List<RawProduct> checkTheDublicates(List<RawProduct> gsheetData, List<RawProduct> csvData) {
+    public default List<RawProduct> checkTheDuplicates(List<RawProduct> gsheetData, List<RawProduct> csvData) {
         List<RawProduct> toImport = new ArrayList<>();
         try {
 

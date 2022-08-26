@@ -16,8 +16,6 @@
     <name>stock</name>
 
     <properties>
-
-
         <glassfish.version>4.0.1</glassfish.version>
         <org.mindrot.jbcrypt.version>0.4</org.mindrot.jbcrypt.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
@@ -40,7 +38,6 @@
             <artifactId>jbcrypt</artifactId>
             <version>${org.mindrot.jbcrypt.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -72,20 +69,16 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
             <version>${com.auth0.version}</version>
         </dependency>
-
-
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
@@ -97,7 +90,6 @@
             <version>1.0</version>
             <scope>compile</scope>
         </dependency>
-
     </dependencies>
 
     <build>

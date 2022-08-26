@@ -84,6 +84,10 @@
       <version>${com.google.oauth-client.version}</version>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
