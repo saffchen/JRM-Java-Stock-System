@@ -1,7 +1,9 @@
+const baseUrl = 'auth/check_auth/';
+
 export default function (instance) {
     return {
         getAll() {
-            return instance.get('check_auth/')
+            return instance.get(baseUrl)
         }
        }
       }
