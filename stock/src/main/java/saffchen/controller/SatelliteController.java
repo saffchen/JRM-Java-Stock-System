@@ -67,7 +67,6 @@ public class SatelliteController {
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@Valid @RequestBody SatelliteDto satelliteDto, @PathVariable long id) {
-        //satelliteDto.setId(id);
         SatelliteEntity satelliteEntity = satelliteMapper.satelliteDtoToSatelliteEntity(satelliteDto);
         log.info("update satellite {}", satelliteEntity);
         assureIdConsistent(satelliteEntity, id);
