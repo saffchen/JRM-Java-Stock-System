@@ -1,3 +1,4 @@
+  <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container justify-content-between">
       <DropdownMenu/>
@@ -7,8 +8,7 @@
       <LoginBtn/>
     </div>
   </nav>
-
-<template>
+</template>
 
 <script>
 import DropdownMenu from "./DropdownMenu.vue";
