@@ -42,7 +42,7 @@ public class JwtUtil {
     }
 
     @PostConstruct
-    private void getJWTVerifier() {
+    public void init() {
         this.jwtVerifier =
                 JWT.require(Algorithm.HMAC512(secret))
                         .withSubject(subject)
