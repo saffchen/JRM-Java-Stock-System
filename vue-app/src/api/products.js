@@ -1,4 +1,4 @@
-const baseUrl = '/api/v1/products/';
+const baseUrl = '/products/';
 
 
 export default function (instance) {

@@ -1,4 +1,4 @@
-const baseUrl = '/api/v1/satellites/';
+const baseUrl = '/satellites/';
 
 export default function (instance) {
     return {
