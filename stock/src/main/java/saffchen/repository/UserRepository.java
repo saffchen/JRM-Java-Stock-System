@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 @Transactional
 @EnableJpaRepositories
-public interface PersonsRepository extends JpaRepository<UserEntity, Integer> {
+public interface UserRepository extends JpaRepository<UserEntity, Integer> {
     @Query(value = "select p from UserEntity p where p.email = :email")
     Optional<UserEntity> findByEmail(@Param("email") String email);
 }

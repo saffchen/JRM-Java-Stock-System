@@ -2,6 +2,7 @@ package saffchen.security;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,7 +26,7 @@ public class JWTSecurityFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authHeader = request.getHeader("Authorization");
         String prefix = "Bearer";
-        if (authHeader != null && !authHeader.isBlank() && authHeader.startsWith(prefix)) {
+        if (!StringUtils.isEmpty(authHeader) && authHeader.startsWith(prefix)) {
             String onlyToken = authHeader.substring(prefix.length() + 1).strip();
             if (onlyToken.isBlank()) {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid JWT token in Bearer header!");

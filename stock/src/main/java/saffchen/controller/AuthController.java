@@ -6,8 +6,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
-import saffchen.dto.PersonAuthResponse;
-import saffchen.dto.PersonAuthRequest;
+import saffchen.dto.UserAuthResponse;
+import saffchen.dto.UserAuthRequest;
 import saffchen.security.JwtUtil;
 import saffchen.security.UserDetails;
 import saffchen.service.UserEntityDetailsService;
@@ -22,18 +22,18 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
 
     @PostMapping("/api/v1/auth/check_auth")
-    public ResponseEntity<?> checkAuthAndGetToken(@RequestBody PersonAuthRequest personAuthRequest) throws Exception {
+    public ResponseEntity<?> checkAuthAndGetToken(@RequestBody UserAuthRequest userAuthRequest) throws Exception {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            personAuthRequest.getEmail(),
-                            personAuthRequest.getPassword()));
+                            userAuthRequest.getEmail(),
+                            userAuthRequest.getPassword()));
         } catch (BadCredentialsException e) {
             throw new BadCredentialsException("Incorrect user or password!");
         }
 
         UserDetails userDetails = (UserDetails) userEntityDetailsService.
-                loadUserByUsername(personAuthRequest.getEmail());
+                loadUserByUsername(userAuthRequest.getEmail());
 
         String authority = userDetails.getAuthorities()
                 .stream()
@@ -44,7 +44,7 @@ public class AuthController {
                 email,
                 authority);
 
-        return ResponseEntity.ok(new PersonAuthResponse(jwt));
+        return ResponseEntity.ok(new UserAuthResponse(jwt));
     }
 
 }

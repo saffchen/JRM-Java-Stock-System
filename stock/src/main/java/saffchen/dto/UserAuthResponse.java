@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @Data
 @Getter
-public class PersonAuthResponse {
+public class UserAuthResponse {
     private final String jwt;
 }
