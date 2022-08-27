@@ -1,30 +1,4 @@
 version: '3.8'
-
-#services:
-#  zookeeper:
-#    image: zookeeper:latest
-#    ports:
-#      - "2181:2181"
-      # https://www.confluent.io/blog/kafka-client-cannot-connect-to-broker-on-aws-on-docker-etc/
-
-  #kafka:
-  #  image: ubuntu/kafka:latest
-  #  container_name: broker
-  #  ports:
-  #    - "29092:29092"
-  #  depends_on:
-  #    - zookeeper
-
-  #  environment:
-  #    ZOOKEEPER_HOST: zookeeper
-  #    KAFKA_BROKER_ID: 1
-  #    KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
-  #
-  #   KAFKA_LISTENERS: EXTERNAL_SAME_HOST://:29092,INTERNAL://:9092
-  #    KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,EXTERNAL_SAME_HOST://localhost:29092
-  #    KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL_SAME_HOST:PLAINTEXT
-  #    KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
-
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:7.0.1
@@ -36,8 +10,6 @@ services:
     image: confluentinc/cp-kafka:7.0.1
     container_name: broker
     ports:
-      # To learn about configuring Kafka for access across networks see
-      # https://www.confluent.io/blog/kafka-client-cannot-connect-to-broker-on-aws-on-docker-etc/
       - "9092:9092"
     depends_on:
       - zookeeper
