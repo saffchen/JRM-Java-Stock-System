@@ -16,8 +16,6 @@
     <name>stock</name>
 
     <properties>
-
-
         <glassfish.version>4.0.1</glassfish.version>
         <org.mindrot.jbcrypt.version>0.4</org.mindrot.jbcrypt.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
@@ -25,6 +23,7 @@
         <org.projectlombok.version>1.18.20</org.projectlombok.version>
         <org.projectlombokmapstruct.version>0.2.0</org.projectlombokmapstruct.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <com.auth0.version>4.0.0</com.auth0.version>
     </properties>
 
     <dependencies>
@@ -39,7 +38,6 @@
             <artifactId>jbcrypt</artifactId>
             <version>${org.mindrot.jbcrypt.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -71,7 +69,6 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -81,7 +78,10 @@
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
         </dependency>
-
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>${com.auth0.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
@@ -93,7 +93,6 @@
             <version>1.0</version>
             <scope>compile</scope>
         </dependency>
-
     </dependencies>
 
     <build>

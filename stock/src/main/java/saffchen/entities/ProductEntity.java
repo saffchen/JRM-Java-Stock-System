@@ -17,18 +17,8 @@ import java.util.Map;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Product")
-public class ProductEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = true)
-    private long id;
-
-    @Column(name = "title", nullable = false)
-    @NotEmpty(message = "Название не может быть пустым!")
-    @Length(max = 255, message = "Название не может быть длиннее 255 символов!")
-    @NonNull
-    private String title;
+@Table(name = "product", uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "satellite_id"}, name = "uk_product")})
+public class ProductEntity extends NamedEntity {
 
     @Column(name = "description")
     @NotEmpty(message = "Описание не может быть пустым!")
@@ -42,13 +32,16 @@ public class ProductEntity {
     @NonNull
     private Double price;
 
+    @CollectionTable(name = "product_tags",
+                    joinColumns = @JoinColumn(name = "product_id"),
+                    uniqueConstraints = @UniqueConstraint(columnNames = {"product_id", "tags"}, name = "uk_product_tags"))
     @Column(name = "tags")
-    @JoinColumn(name = "product_entity_id")
+    @JoinColumn(name = "product_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotEmpty(message = "Тег не может быть пустым!")
     @Size(max = 20, message = "Количество тегов не может быть более 20!")
     @NonNull
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> tags;
 
     @Column(name = "category", nullable = false)
@@ -63,8 +56,8 @@ public class ProductEntity {
     @NonNull
     private Integer count;
 
-    @ManyToOne
-    @JoinColumn(name = "satelliteId", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    //@JoinColumn(name = "satelliteId", referencedColumnName = "id")
     @NotNull(message = "Название города не может быть пустым!")
     @NonNull
     @JsonBackReference
@@ -72,7 +65,7 @@ public class ProductEntity {
 
     public ProductEntity(Map<String, String> fieldsMap) {
         id = Long.parseLong(fieldsMap.get("id"));
-        title = fieldsMap.get("title");
+        name = fieldsMap.get("title");
         description = fieldsMap.get("description");
         price = Double.parseDouble(fieldsMap.get("price"));
         tags = Arrays.asList(fieldsMap.get("tags").split(","));
@@ -82,13 +75,13 @@ public class ProductEntity {
 
     @Override
     public String toString() {
-        return title + ", " + description + ", " + price + ", " + tags + ", " + category + ", " + count + ", " + satellite.toString();
+        return name + ", " + description + ", " + price + ", " + tags + ", " + category + ", " + count + ", " + satellite.toString();
     }
 
     public String showInfo() {
         return "Product{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
+                ", title='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", tags=" + tags +

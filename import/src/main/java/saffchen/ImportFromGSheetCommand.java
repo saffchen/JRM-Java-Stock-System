@@ -9,14 +9,10 @@ import saffchen.utils.FileStorageUtils;
 import saffchen.utils.GSheetImportUtils;
 
 import java.io.IOException;
-import java.security.GeneralSecurityException;
-import java.util.List;
 
 public class ImportFromGSheetCommand implements Command {
     private static final Logger LOGGER
             = LoggerFactory.getLogger(ImportFromGSheetCommand.class);
-
-    private static final List<String> DEPRECATED_SYMBOLS = List.of("/", "|", "?", "*", "<", ">", "!");
 
     @Override
     public String getInfo() {
@@ -31,23 +27,12 @@ public class ImportFromGSheetCommand implements Command {
             FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
 
             GSheetImportUtils gSheetImportUtils = new GSheetImportUtils(GSheetConnection.getSheetsService());
-            fileStorageUtils.addRawProductsFromListToCSV(gSheetImportUtils.checkTheDublicates(
+            String result = fileStorageUtils.addRawProductsFromListToCSV(gSheetImportUtils.checkTheDuplicates(
                     gSheetImportUtils.getData(),
                     fileStorageUtils.getDataFromCSV()));
-        } catch (GeneralSecurityException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            System.out.println("Error: Can't connect to GSHEET");
+            LOGGER.info(result);
+        }  catch (IOException e) {
+            LOGGER.error("Error: Can't connect to GSHEET");
         }
-    }
-
-    private boolean isNameCorrect(String name) {
-        for (String deprecatedSymbol : DEPRECATED_SYMBOLS) {
-            if (name.contains(deprecatedSymbol)) {
-                System.err.println("Ошибка, введите название корректно!");
-                return false;
-            }
-        }
-        return true;
     }
 }
