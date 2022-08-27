@@ -2,8 +2,8 @@ const baseUrl = 'auth/check_auth/';
 
 export default function (instance) {
     return {
-        getAll() {
-            return instance.get(baseUrl)
+        checkAuthAndGetToken(payload) {
+            return instance.post(baseUrl, payload)
         }
        }
       }
