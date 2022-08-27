@@ -10,5 +10,5 @@ public class SatelliteDto {
     private long id;
     private String name;
     private String description;
-    private long count;
+    private int count;
 }

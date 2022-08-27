@@ -14,8 +14,6 @@ import java.util.Scanner;
 public class GenerateReportCommand implements Command {
     private Exit exit;
 
-    private FileConnection fileConnection;
-
     public void setExit(Exit exit) {
         this.exit = exit;
     }
@@ -32,7 +30,6 @@ public class GenerateReportCommand implements Command {
     public void doCommand() throws Exception {
         LOGGER.info(" --- GENERATE_REPORT ---");
         Scanner scanner = new Scanner(System.in);
-
         FileStorageUtils fileStorageUtils = new FileStorageUtils(
                 FileConnection.getInstance("stock_import_csv.csv"));
 

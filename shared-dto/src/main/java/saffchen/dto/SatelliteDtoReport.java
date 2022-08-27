@@ -14,6 +14,4 @@ import lombok.Setter;
 @NoArgsConstructor
 public class SatelliteDtoReport {
     private String name;
-    private String description;
-    private long count;
 }
