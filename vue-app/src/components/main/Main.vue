@@ -1,17 +1,34 @@
+<!--https://stackoverflow.com/questions/53406350/vue-import-vue-components-dynamically
+https://medium.com/@pratikpatel_60309/dynamic-importing-component-templates-with-vue-js-78d2167db1e7-->
+
+
 <template>
-    <main class="main mb-5">
-        <ProductTable/>
-    </main>
+  <main class="main mb-5">
+    <component :is="comp"></component>
+  </main>
 </template>
 
 <script>
-import ProductTable from './ProductTable.vue';
+import { defineAsyncComponent } from 'vue'
 
-    export default {
-      components: { ProductTable }
+export default {
+  name: "DynamicComponent",
+  props: {
+    componentName: {
+      type: String,
+      //required: true,
+      //default: "ProductTable"
     }
+  },
+  computed: {
+    comp() {
+      let name = this.componentName
+      console.log(name)
+      return defineAsyncComponent(() => import(`./${name}`))
+    }
+  },
+}
 </script>
 
 <style>
-
 </style>

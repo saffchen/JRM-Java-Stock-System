@@ -7,6 +7,8 @@ import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import static saffchen.util.validation.ValidationUtil.checkModification;
+
 /**
  * @author saffchen created on 06.07.2022
  * @project JRM-Java-Stock-System
@@ -18,4 +20,8 @@ public interface BaseRepository<T> extends JpaRepository<T, Long> {
     @Modifying
     @Query("DELETE FROM #{#entityName} u WHERE u.id=:id")
     int delete(@Param("id") Long id);
+
+    default void deleteExisted(Long id) {
+        checkModification(delete(id), id);
+    }
 }
