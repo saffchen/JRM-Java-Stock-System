@@ -1,9 +1,12 @@
 package saffchen.database;
 
 import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
+import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.sheets.v4.Sheets;
@@ -16,38 +19,57 @@ import java.util.Properties;
 
 public class GSheetConnection {
 
-    private static Properties properties = new Properties();
-    public static String RANGE;
-    private static String APPLICATION_NAME;
-    public static String SPEADSHEET_ID;
+    private static final JacksonFactory JACKSON_FACTORY = JacksonFactory.getDefaultInstance();
+    private static final String CREDENTIALS_FILE = "credentials.json";
+    private static final String TOKENS_DIRECTORY = "tokens";
 
-    private static Credential authorize() throws IOException, GeneralSecurityException {
-        //авторизация по токену, который нужно создать в гугл акке
-        InputStream in = GSheetConnection.class.getResourceAsStream("/credentials.json");
-        GoogleClientSecrets clientSecrets = GoogleClientSecrets.
-                load(JacksonFactory.getDefaultInstance(),
-                        new InputStreamReader(in));
+    public static String APPLICATION_NAME;
+    public static String SPREADSHEET_ID;
+    public static String RANGE;
+
+    private static Credential authorize(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
+        //авторизация по токену, который нужно создать в гугл аккаунте
         List<String> scopes = List.of(SheetsScopes.SPREADSHEETS);
-        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow
-                .Builder(GoogleNetHttpTransport.newTrustedTransport(), JacksonFactory
-                .getDefaultInstance(), clientSecrets, scopes)
-                .setDataStoreFactory(new FileDataStoreFactory((new java.io.File("tokens"))))
+        GoogleClientSecrets clientSecrets = getClientSecrets();
+        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
+                HTTP_TRANSPORT, JACKSON_FACTORY, clientSecrets, scopes)
+                .setDataStoreFactory(new FileDataStoreFactory((new java.io.File(TOKENS_DIRECTORY))))
                 .setAccessType("offline")
                 .build();
-        return null;
+        LocalServerReceiver receiver = new LocalServerReceiver.Builder().build();
+        return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
     }
 
-    public static Sheets getSheetsService() throws GeneralSecurityException, IOException {
-        Properties properties = new Properties();
-        properties.load(new InputStreamReader(
-                GSheetConnection.class.getResourceAsStream("/gsheet.properties")));
+    private static GoogleClientSecrets getClientSecrets() throws IOException {
+        InputStream in = GSheetConnection.class.getClassLoader().getResourceAsStream(CREDENTIALS_FILE);
+        if (in == null) {
+            throw new FileNotFoundException("Resource not found: " + CREDENTIALS_FILE);
+        }
+        InputStreamReader credentialsReader = new InputStreamReader(in);
+        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JACKSON_FACTORY, credentialsReader);
+        credentialsReader.close();
+        in.close();
+        return clientSecrets;
+    }
 
+    public static Sheets getSheetsService() throws IOException {
+        final NetHttpTransport HTTP_TRANSPORT;
+        try {
+            HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        }
+        Properties properties = new Properties();
+        try (InputStream in = GSheetConnection.class.getClassLoader().getResourceAsStream("gsheet.properties")) {
+            properties.load(in);
+        } catch (IOException e) {
+            System.out.println("Can't load properties from file gsheet.properties");
+        }
         GSheetConnection.APPLICATION_NAME = properties.getProperty("APPLICATION_NAME");
-        GSheetConnection.SPEADSHEET_ID = properties.getProperty("SPEADSHEET_ID");
+        GSheetConnection.SPREADSHEET_ID = properties.getProperty("SPREADSHEET_ID");
         GSheetConnection.RANGE = properties.getProperty("RANGE");
 
-        Credential credential = authorize();
-        return new Sheets.Builder(GoogleNetHttpTransport.newTrustedTransport(), JacksonFactory.getDefaultInstance(), credential)
+        return new Sheets.Builder(HTTP_TRANSPORT, JACKSON_FACTORY, authorize(HTTP_TRANSPORT))
                 .setApplicationName(APPLICATION_NAME)
                 .build();
     }

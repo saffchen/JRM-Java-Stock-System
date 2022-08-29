@@ -164,7 +164,7 @@ public class FileStorageUtils implements StorageUtils {
             List<RawProduct> products = csvToBean.parse();
             updatedRawProducts = products.stream().map
                     (x -> new ProductAdapter(x).getProduct())
-                    .filter(x -> !x.getTitle().equals(product.getTitle()))
+                    .filter(x -> !x.getName().equals(product.getName()))
                     .map(x -> new ProductAdapter(x).setDataToRawProduct()).collect(Collectors.toList());
         } catch (Exception e) {
             System.err.println("Error: Can't get the data! Try again!");
@@ -183,7 +183,7 @@ public class FileStorageUtils implements StorageUtils {
             List<RawProduct> products = csvToBean.parse();
 
             for (RawProduct product : products) {
-                if (product.getTitle().equals(before.getTitle()) &&
+                if (product.getTitle().equals(before.getName()) &&
                         !product.equals(after)) {
                     updatedRawProducts.add(new ProductAdapter(after).setDataToRawProduct());
                     System.out.println(String.format("You have modified an old product\n %s\n" +
@@ -217,7 +217,7 @@ public class FileStorageUtils implements StorageUtils {
             CsvToBean<RawProduct> csvToBean = getCSVParser();
             List<RawProduct> products = csvToBean.parse();
             return products.stream().map(x -> new ProductAdapter(x).getProduct())
-                    .filter(x -> x.getTitle().equals(title))
+                    .filter(x -> x.getName().equals(title))
                     .findAny()
                     .orElse(null);
 

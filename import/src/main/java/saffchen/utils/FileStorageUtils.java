@@ -18,6 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +27,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class FileStorageUtils implements StorageUtils {
-    private FileConnection fileConnection;
+    private final FileConnection fileConnection;
 
     public FileStorageUtils(FileConnection fileConnection) {
         this.fileConnection = fileConnection;
@@ -37,7 +38,8 @@ public class FileStorageUtils implements StorageUtils {
         List<String> headers = null;
         try {
             CSVParser parser = new CSVParserBuilder().withSeparator(';').build();
-            CSVReader csvReader = new CSVReaderBuilder(new FileReader(fileConnection.getFilePath()))
+            URL fileUrl = getClass().getClassLoader().getResource(fileConnection.getFilePath());
+            CSVReader csvReader = new CSVReaderBuilder(new FileReader(fileUrl.getPath()))
                     .withCSVParser(parser)
                     .build();
 
@@ -164,7 +166,7 @@ public class FileStorageUtils implements StorageUtils {
             List<RawProduct> products = csvToBean.parse();
             updatedRawProducts = products.stream().map
                     (x -> new ProductAdapter(x).getProduct())
-                    .filter(x -> !x.getTitle().equals(product.getTitle()))
+                    .filter(x -> !x.getName().equals(product.getName()))
                     .map(x -> new ProductAdapter(x).setDataToRawProduct()).collect(Collectors.toList());
         } catch (Exception e) {
             System.err.println("Error: Can't get the data! Try again!");
@@ -183,7 +185,7 @@ public class FileStorageUtils implements StorageUtils {
             List<RawProduct> products = csvToBean.parse();
 
             for (RawProduct product : products) {
-                if (product.getTitle().equals(before.getTitle()) &&
+                if (product.getTitle().equals(before.getName()) &&
                         !product.equals(after)) {
                     updatedRawProducts.add(new ProductAdapter(after).setDataToRawProduct());
                     System.out.println(String.format("You have modified an old product\n %s\n" +
@@ -217,7 +219,7 @@ public class FileStorageUtils implements StorageUtils {
             CsvToBean<RawProduct> csvToBean = getCSVParser();
             List<RawProduct> products = csvToBean.parse();
             return products.stream().map(x -> new ProductAdapter(x).getProduct())
-                    .filter(x -> x.getTitle().equals(title))
+                    .filter(x -> x.getName().equals(title))
                     .findAny()
                     .orElse(null);
 
@@ -228,7 +230,7 @@ public class FileStorageUtils implements StorageUtils {
     }
 
     public CsvToBean<RawProduct> getCSVParser() throws FileNotFoundException {
-        List<String> headersFromClass = new ReflectProductUtils().getFieldsFromClass(new ProductEntity());
+        List<String> headersFromClass = new ReflectProductUtils().getFieldsFromClass(ProductEntity.class);
         List<String> headersFromCSV = getHeadersFromCSV();
 
         Map mapping = IntStream.range(0, headersFromCSV.size())
@@ -242,8 +244,9 @@ public class FileStorageUtils implements StorageUtils {
         strategy.setColumnMapping(mapping);
         strategy.setType(RawProduct.class);
 
+        URL fileUrl = getClass().getClassLoader().getResource(fileConnection.getFilePath());
         CsvToBean<RawProduct> csvToBean = new CsvToBeanBuilder<RawProduct>(
-                new FileReader(fileConnection.getFilePath())).withType(RawProduct.class)
+                new FileReader(fileUrl.getPath())).withType(RawProduct.class)
                 .withSeparator(';')
                 .withIgnoreLeadingWhiteSpace(true)
                 .withIgnoreEmptyLine(true)
