@@ -94,6 +94,11 @@
             <version>1.0</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>ru.javaroadmap.shared-dto</groupId>
+            <artifactId>shared-dto</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
