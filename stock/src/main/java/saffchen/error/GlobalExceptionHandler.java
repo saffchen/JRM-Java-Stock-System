@@ -37,18 +37,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     private final ErrorAttributes errorAttributes;
 
-    /*@ExceptionHandler(value = SatelliteAlreadyExistException.class)
-    @ResponseStatus(HttpStatus.CONFLICT)
-    public @ResponseBody ErrorResponse handleSatelliteAlreadyExistException(SatelliteAlreadyExistException satelliteAlreadyExistException) {
-        return new ErrorResponse(HttpStatus.CONFLICT.value(), satelliteAlreadyExistException.getMessage());
-    }
-
-    @ExceptionHandler(value = NoEntityException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public @ResponseBody ErrorResponse handleNoSuchProductException(NoEntityException noEntityException) {
-        return new ErrorResponse(HttpStatus.NOT_FOUND.value(), noEntityException.getMessage());
-    }*/
-
     @NonNull
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
