@@ -7,8 +7,10 @@ package saffchen.util.validation;
 
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.NestedExceptionUtils;
+import org.springframework.lang.NonNull;
 import saffchen.entities.HasId;
-import saffchen.exception.IllegalRequestDataException;
+import saffchen.error.IllegalRequestDataException;
 
 @UtilityClass
 @Slf4j
@@ -35,5 +37,12 @@ public class ValidationUtil {
         if (count == 0) {
             throw new IllegalRequestDataException("Entity with id=" + id + " not found");
         }
+    }
+
+    //  https://stackoverflow.com/a/65442410/548473
+    @NonNull
+    public static Throwable getRootCause(@NonNull Throwable t) {
+        Throwable rootCause = NestedExceptionUtils.getRootCause(t);
+        return rootCause != null ? rootCause : t;
     }
 }
