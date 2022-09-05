@@ -28,18 +28,15 @@ import static saffchen.util.validation.ValidationUtil.checkNew;
 @Slf4j
 public class ProductController {
     static final String REST_URL = "/api/v1/products";
-    //private final ProductMapper mapper;
     private final ProductService service;
 
     @GetMapping
     public ResponseEntity<List<ProductEntity>> getAll() {
-        //return ResponseEntity.ok(mapper.toProductsDtoList(service.getAll()));
         return ResponseEntity.ok(service.getAll());
     }
 
     @GetMapping("/{id}/satellite/{satelliteId}")
     public ResponseEntity<ProductEntity> get(@PathVariable Long satelliteId, @PathVariable Long id) {
-        //return ResponseEntity.ok(mapper.productToProductDto(service.get(satelliteId, id)));
         return ResponseEntity.ok(service.get(satelliteId, id));
     }
 
@@ -53,7 +50,6 @@ public class ProductController {
     @GetMapping("/satellite/{satelliteId}")
     public ResponseEntity<List<ProductEntity>> getBySatellite(@PathVariable long satelliteId) {
         log.info("getBySatellite for satelliteId={}", satelliteId);
-        //return ResponseEntity.ok(mapper.toProductsDtoList(service.getBySatellite(satelliteId)));
         return ResponseEntity.ok(service.getBySatellite(satelliteId));
     }
 

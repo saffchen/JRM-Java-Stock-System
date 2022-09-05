@@ -58,7 +58,6 @@ public class ProductEntity extends NamedEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     //@JoinColumn(name = "satelliteId", referencedColumnName = "id")
-    //@NotNull(message = "Название города не может быть пустым!")
     @NonNull
     @JsonBackReference
     private SatelliteEntity satellite;
