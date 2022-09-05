@@ -17,7 +17,7 @@ import java.util.Map;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "product", uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "satellite_id"}, name = "uk_product")})
+@Table(name = "product", uniqueConstraints = {@UniqueConstraint(columnNames = {"satellite_id", "name"}, name = "uk_product")})
 public class ProductEntity extends NamedEntity {
 
     @Column(name = "description")
@@ -58,7 +58,7 @@ public class ProductEntity extends NamedEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     //@JoinColumn(name = "satelliteId", referencedColumnName = "id")
-    @NotNull(message = "Название города не может быть пустым!")
+    //@NotNull(message = "Название города не может быть пустым!")
     @NonNull
     @JsonBackReference
     private SatelliteEntity satellite;
