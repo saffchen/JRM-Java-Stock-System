@@ -7,7 +7,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import saffchen.dto.ProductDto;
 import saffchen.entities.ProductEntity;
+import saffchen.mapper.ProductMapper;
 import saffchen.service.ProductService;
 
 import javax.validation.Valid;
@@ -28,16 +30,18 @@ import static saffchen.util.validation.ValidationUtil.checkNew;
 @Slf4j
 public class ProductController {
     static final String REST_URL = "/api/v1/products";
+
+    private final ProductMapper mapper;
     private final ProductService service;
 
     @GetMapping
-    public ResponseEntity<List<ProductEntity>> getAll() {
-        return ResponseEntity.ok(service.getAll());
+    public ResponseEntity<List<ProductDto>> getAll() {
+        return ResponseEntity.ok(mapper.toProductsDtoList(service.getAll()));
     }
 
     @GetMapping("/{id}/satellite/{satelliteId}")
-    public ResponseEntity<ProductEntity> get(@PathVariable Long satelliteId, @PathVariable Long id) {
-        return ResponseEntity.ok(service.get(satelliteId, id));
+    public ResponseEntity<ProductDto> get(@PathVariable Long satelliteId, @PathVariable Long id) {
+        return ResponseEntity.ok(mapper.productToProductDto(service.get(satelliteId, id)));
     }
 
     @DeleteMapping("/{id}/satellite/{satelliteId}")
