@@ -36,13 +36,14 @@ public class ProductController {
 
     // Get All for particular Satellite
     @GetMapping
-    public ResponseEntity<List<ProductEntity>> getBySatellite(@PathVariable long satelliteId) {
-        log.info("getBySatellite for satelliteId={}", satelliteId);
-        return ResponseEntity.ok(service.getBySatellite(satelliteId));
+    public ResponseEntity<List<ProductDto>> getBySatellite(@PathVariable long satelliteId) {
+        log.info("get products by satellite for satelliteId={}", satelliteId);
+        return ResponseEntity.ok(mapper.productToProductDtoList(service.getBySatellite(satelliteId)));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDto> get(@PathVariable Long satelliteId, @PathVariable Long id) {
+        log.info("get product with id={} for satelliteId={}", id, satelliteId);
         return ResponseEntity.ok(mapper.productToProductDto(service.get(satelliteId, id)));
     }
 
@@ -55,7 +56,7 @@ public class ProductController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ProductEntity> createWithLocation(@PathVariable Long satelliteId, @Valid @RequestBody ProductEntity product) {
-        log.info("create {} for satelliteId={}", product, satelliteId);
+        log.info("create new product for satelliteId={}", satelliteId);
         checkNew(product);
         ProductEntity created = service.save(satelliteId, product);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
