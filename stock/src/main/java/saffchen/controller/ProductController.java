@@ -29,49 +29,45 @@ import static saffchen.util.validation.ValidationUtil.checkNew;
 @RequestMapping(value = ProductController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
 public class ProductController {
-    static final String REST_URL = "/api/v1/products";
+    static final String REST_URL = "/api/v1/satellites/{satelliteId}/products";
 
     private final ProductMapper mapper;
     private final ProductService service;
 
+    // Get All for particular Satellite
     @GetMapping
-    public ResponseEntity<List<ProductDto>> getAll() {
-        return ResponseEntity.ok(mapper.toProductsDtoList(service.getAll()));
+    public ResponseEntity<List<ProductEntity>> getBySatellite(@PathVariable long satelliteId) {
+        log.info("getBySatellite for satelliteId={}", satelliteId);
+        return ResponseEntity.ok(service.getBySatellite(satelliteId));
     }
 
-    @GetMapping("/{id}/satellite/{satelliteId}")
+    @GetMapping("/{id}")
     public ResponseEntity<ProductDto> get(@PathVariable Long satelliteId, @PathVariable Long id) {
         return ResponseEntity.ok(mapper.productToProductDto(service.get(satelliteId, id)));
     }
 
-    @DeleteMapping("/{id}/satellite/{satelliteId}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long satelliteId, @PathVariable Long id) {
         log.info("delete product id={} for satelliteId={}", id, satelliteId);
         service.delete(satelliteId, id);
     }
 
-    @GetMapping("/satellite/{satelliteId}")
-    public ResponseEntity<List<ProductEntity>> getBySatellite(@PathVariable long satelliteId) {
-        log.info("getBySatellite for satelliteId={}", satelliteId);
-        return ResponseEntity.ok(service.getBySatellite(satelliteId));
-    }
-
-    @PostMapping(value = "/satellite/{satelliteId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ProductEntity> createWithLocation(@PathVariable Long satelliteId, @Valid @RequestBody ProductEntity product) {
         log.info("create {} for satelliteId={}", product, satelliteId);
         checkNew(product);
         ProductEntity created = service.save(satelliteId, product);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                                                          .path(REST_URL + "/{id}/satellite/{satelliteId}")
+                                                          .path(REST_URL + "/{id}")
                                                           .buildAndExpand(satelliteId, created.getId()).toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
-    @PutMapping(value = "/{id}/satellite/{satelliteId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable Long satelliteId, @Valid @RequestBody ProductEntity product, @PathVariable Long id) {
-        log.info("update {} for satelliteId={}, id={}", product, satelliteId, id);
+        log.info("update product with id={} for satelliteId={}", id, satelliteId);
         assureIdConsistent(product, id);
         service.update(satelliteId, product, id);
     }
