@@ -1,12 +1,12 @@
 package saffchen.service;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import saffchen.entities.ProductEntity;
-import saffchen.exception.NoEntityException;
+import saffchen.error.DataConflictException;
 import saffchen.repository.ProductsRepository;
+import saffchen.repository.SatellitesRepository;
 
 import java.util.List;
 
@@ -14,23 +14,46 @@ import static java.util.Collections.emptyList;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class ProductService {
 
-    @Autowired
-    private ProductsRepository productRepository;
+    //@Autowired
+    private final ProductsRepository productsRepository;
 
-    public List<ProductEntity> getAllProducts() {
+    private final SatellitesRepository satellitesRepository;
+
+    public List<ProductEntity> getAll() {
         try {
-            return productRepository.findAll();
+            return productsRepository.findAll();
         } catch (Exception e) {
             log.error("Object is not found");
             return emptyList();
         }
     }
 
-    public ProductEntity getProductById(Long id) throws NoEntityException {
-        return productRepository.findById(id).orElseThrow(
-                () -> new NoEntityException("Object with id " + id + " is not found."));
+    public ProductEntity get(Long satelliteId, Long id) {
+        return productsRepository.get(satelliteId, id)
+                                 .orElseThrow(
+                                         () -> new DataConflictException("Object with id " + id + " for satellite id=" + satelliteId + " is not found.")
+                                 );
+    }
+
+    public void delete(Long satelliteId, Long id) {
+        ProductEntity product = productsRepository.checkBelong(satelliteId, id);
+        productsRepository.delete(product);
+    }
+
+    public List<ProductEntity> getBySatellite(Long satelliteId) {
+        return productsRepository.getBySatellite(satelliteId);
+    }
+
+    public ProductEntity save(Long satelliteId, ProductEntity product) {
+        product.setSatellite(satellitesRepository.getById(satelliteId));
+        return productsRepository.save(product);
+    }
+
+    public void update(Long satelliteId, ProductEntity product, Long id) {
+        productsRepository.checkBelong(satelliteId, id);
+        save(satelliteId, product);
     }
 }
