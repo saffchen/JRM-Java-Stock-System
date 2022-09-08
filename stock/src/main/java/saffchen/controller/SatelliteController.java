@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import saffchen.dto.SatelliteDto;
 import saffchen.entities.SatelliteEntity;
-import saffchen.exception.NoEntityException;
+import saffchen.error.NoEntityException;
 import saffchen.mapper.SatelliteMapper;
 import saffchen.service.SatelliteService;
 
@@ -40,7 +40,7 @@ public class SatelliteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SatelliteDto> get(@PathVariable Long id) throws NoEntityException {
+    public ResponseEntity<SatelliteDto> get(@PathVariable Long id) {
         log.info("get satellite by id {}", id);
         SatelliteEntity satelliteEntity = service.get(id);
         SatelliteDto satelliteDto = mapper.satelliteToSatelliteDto(satelliteEntity);
