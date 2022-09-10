@@ -17,5 +17,5 @@ public interface ProductMapper {
     @Mapping(source = "satellite.name", target = "satelliteName")
     ProductDto productToProductDto(ProductEntity product);
 
-    List<ProductDto> toProductsDtoList(List<ProductEntity> productEntities);
+    List<ProductDto> productToProductDtoList(List<ProductEntity> productEntities);
 }

@@ -40,8 +40,8 @@ public class AddCommand implements Command {
         while (isValidProduct) {
             System.out.println("Введите продукт или exit для того, чтобы выйти в главное меню");
             System.out.print("Укажите название продукта: ");
-            String title = new Scanner(System.in).nextLine().trim();
-            if (title.equals("exit")) {
+            String name = new Scanner(System.in).nextLine().trim();
+            if (name.equals("exit")) {
                 setExit(new ExitFromCommandMenu());
                 exit.doExit();
             }
@@ -71,7 +71,7 @@ public class AddCommand implements Command {
             System.out.print("Укажите склад на котором хранится продукт: ");
             String satellite = new Scanner(System.in).next().toUpperCase(Locale.ROOT);
 
-            product = new ProductEntity(0L, title, description, price, List.of(tags), category,
+            product = new ProductEntity(0L, name, description, price, List.of(tags), category,
                     count, new SatelliteEntity(satellite));
             LOGGER.info(" --- ADD_PRODUCT --- {{}}", product);
             isValidProduct = false;

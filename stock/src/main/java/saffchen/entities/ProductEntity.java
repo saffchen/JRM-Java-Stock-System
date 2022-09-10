@@ -72,6 +72,16 @@ public class ProductEntity extends NamedEntity {
         count = Integer.parseInt(fieldsMap.get("count"));
     }
 
+    public ProductEntity(Long id, String name, @NonNull String description, @NonNull Double price, @NonNull List<String> tags, @NonNull String category, @NonNull Integer count, @NonNull SatelliteEntity satellite) {
+        super(id, name);
+        this.description = description;
+        this.price = price;
+        this.tags = tags;
+        this.category = category;
+        this.count = count;
+        this.satellite = satellite;
+    }
+
     @Override
     public String toString() {
         return name + ", " + description + ", " + price + ", " + tags + ", " + category + ", " + count + ", " + satellite.toString();

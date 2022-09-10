@@ -58,6 +58,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return createResponseEntity(getDefaultBody(request, ex.getOptions(), null), ex.getStatus());
     }
 
+    @ExceptionHandler(NoEntityException.class)
+    public ResponseEntity<?> handleNoEntityException(WebRequest request, NoEntityException ex) {
+        log.error("NoEntityException: {}", ex.getMessage());
+        return createResponseEntity(getDefaultBody(request, ErrorAttributeOptions.of(MESSAGE), null), HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
     @ExceptionHandler(SQLException.class)
     public ResponseEntity<?> handeSQLException(WebRequest request, SQLException ex) {
         log.error("SQLException: {}", ex.getMessage());
