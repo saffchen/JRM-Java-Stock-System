@@ -24,7 +24,7 @@ public class SendMessageToKafkaController {
 
     @PostMapping("/send")
     public ResponseEntity<String> sendMessage(@RequestBody StockMessage message) throws JsonProcessingException {
-        return ResponseEntity.ok(kafkaProducerService.sendMessage(message));
+        return ResponseEntity.ok(kafkaProducerService.sendSimpleMessage(message));
     }
 
 }

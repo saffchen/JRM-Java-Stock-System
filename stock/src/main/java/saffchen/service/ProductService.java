@@ -33,4 +33,13 @@ public class ProductService {
         return productRepository.findById(id).orElseThrow(
                 () -> new NoEntityException("Object with id " + id + " is not found."));
     }
+
+    public List<ProductEntity> getProductsBySatelliteId(Long id) throws NoEntityException{
+        try {
+            return productRepository.productCountBySatelliteId(id);
+        } catch (Exception e){
+            log.error("Object is not found");
+            return emptyList();
+        }
+    }
 }
