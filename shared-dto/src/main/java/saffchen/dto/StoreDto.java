@@ -6,7 +6,7 @@ import lombok.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SatelliteDto {
+public class StoreDto {
 
     private Long id;
     private String name;

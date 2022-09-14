@@ -1,22 +1,16 @@
 package saffchen.controller.store;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import saffchen.dto.SatelliteDto;
-import saffchen.entities.SatelliteEntity;
-import saffchen.error.NoEntityException;
-import saffchen.mapper.SatelliteMapper;
-import saffchen.service.SatelliteService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import saffchen.dto.StoreDto;
+import saffchen.entities.StoreEntity;
 
-import javax.validation.Valid;
 import java.util.List;
-
-import static saffchen.util.validation.ValidationUtil.assureIdConsistent;
-import static saffchen.util.validation.ValidationUtil.checkNew;
 
 
 @RestController
@@ -24,28 +18,28 @@ import static saffchen.util.validation.ValidationUtil.checkNew;
 //@AllArgsConstructor
 @Slf4j
 public class StoreController extends AbstractStoreController {
-    static final String REST_URL = "/api/v1/satellites";
-    /*private final SatelliteMapper mapper;
-    private final SatelliteService service;*/
+    static final String REST_URL = "/api/v1/stores";
+    /*private final StoreMapper mapper;
+    private final StoreService service;*/
 
     @GetMapping
-    public ResponseEntity<List<SatelliteDto>> getAll() {
-        log.info("get all Satellites");
+    public ResponseEntity<List<StoreDto>> getAll() {
+        log.info("get all Stores");
         return ResponseEntity.ok(service.getAll().stream()
                                         .map(x -> {
-                                        SatelliteDto satelliteDto = mapper.satelliteToSatelliteDto(x);
-                                        satelliteDto.setCount(x.getProductsSize());
-                                        return satelliteDto;
-                                    })
+                                            StoreDto storeDto = mapper.storeToStoreDto(x);
+                                            storeDto.setCount(x.getProductsSize());
+                                            return storeDto;
+                                        })
                                         .toList());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SatelliteDto> get(@PathVariable Long id) {
-        log.info("get satellite by id {}", id);
-        SatelliteEntity satelliteEntity = service.get(id);
-        SatelliteDto satelliteDto = mapper.satelliteToSatelliteDto(satelliteEntity);
-        satelliteDto.setCount(satelliteEntity.getProductsSize());
-        return ResponseEntity.ok(satelliteDto);
+    public ResponseEntity<StoreDto> get(@PathVariable Long id) {
+        log.info("get store by id {}", id);
+        StoreEntity storeEntity = service.get(id);
+        StoreDto storeDto = mapper.storeToStoreDto(storeEntity);
+        storeDto.setCount(storeEntity.getProductsSize());
+        return ResponseEntity.ok(storeDto);
     }
 }

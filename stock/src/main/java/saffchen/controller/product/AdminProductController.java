@@ -26,32 +26,31 @@ import static saffchen.util.validation.ValidationUtil.checkNew;
 @Slf4j
 public class AdminProductController extends AbstractProductController {
 
-    static final String REST_URL = "/api/v1/admin/satellites/{satelliteId}/products";
+    static final String REST_URL = "/api/v1/admin/stores/{storeId}/products";
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long satelliteId, @PathVariable Long id) {
-        log.info("delete product id={} for satelliteId={}", id, satelliteId);
-        service.delete(satelliteId, id);
+    public void delete(@PathVariable Long storeId, @PathVariable Long id) {
+        log.info("delete product id={} for storeId={}", id, storeId);
+        service.delete(storeId, id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ProductEntity> createWithLocation(@PathVariable Long satelliteId, @Valid @RequestBody ProductEntity product) {
-        log.info("create new product for satelliteId={}", satelliteId);
+    public ResponseEntity<ProductEntity> createWithLocation(@PathVariable Long storeId, @Valid @RequestBody ProductEntity product) {
+        log.info("create new product for storeId={}", storeId);
         checkNew(product);
-        ProductEntity created = service.save(satelliteId, product);
+        ProductEntity created = service.save(storeId, product);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                                                           .path(REST_URL + "/{id}")
-                                                          .buildAndExpand(satelliteId, created.getId()).toUri();
+                                                          .buildAndExpand(storeId, created.getId()).toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@PathVariable Long satelliteId, @Valid @RequestBody ProductEntity product, @PathVariable Long id) {
-        log.info("update product with id={} for satelliteId={}", id, satelliteId);
+    public void update(@PathVariable Long storeId, @Valid @RequestBody ProductEntity product, @PathVariable Long id) {
+        log.info("update product with id={} for storeId={}", id, storeId);
         assureIdConsistent(product, id);
-        service.update(satelliteId, product, id);
+        service.update(storeId, product, id);
     }
-
 }

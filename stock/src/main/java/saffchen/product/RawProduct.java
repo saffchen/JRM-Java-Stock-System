@@ -9,19 +9,19 @@ public class RawProduct {
     private String tags;
     private String category;
     private String count;
-    private String satellite;
+    private String store;
 
     public RawProduct() {}
 
     public RawProduct(String title, String description, String price, String tags,
-                      String category, String count, String satellite) {
+                      String category, String count, String store) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.tags = tags;
         this.category = category;
         this.count = count;
-        this.satellite = satellite;
+        this.store = store;
     }
 
     public void setTitle(String title) {
@@ -36,8 +36,8 @@ public class RawProduct {
         this.category = category;
     }
 
-    public void setSatellite(String satellite) {
-        this.satellite = satellite;
+    public void setStore(String store) {
+        this.store = store;
     }
 
     public void setPrice(String price) {
@@ -76,8 +76,8 @@ public class RawProduct {
         return count;
     }
 
-    public String getSatellite() {
-        return satellite;
+    public String getStore() {
+        return store;
     }
 
     public String showInfo() {
@@ -88,7 +88,7 @@ public class RawProduct {
                 ", tags=" + tags +
                 ", category='" + category + '\'' +
                 ", count=" + count +
-                ", satellite='" + satellite + '\'' +
+                ", store='" + store + '\'' +
                 '}';
     }
 
@@ -99,7 +99,7 @@ public class RawProduct {
                 tags + sep +
                 category + sep +
                 count + sep +
-                satellite;
+                store;
     }
 
     @Override
@@ -113,11 +113,11 @@ public class RawProduct {
                 tags.equals(that.tags) &&
                 category.equals(that.category) &&
                 count.equals(that.count) &&
-                satellite.equals(that.satellite);
+                store.equals(that.store);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, description, price, tags, category, count, satellite);
+        return Objects.hash(title, description, price, tags, category, count, store);
     }
 }
