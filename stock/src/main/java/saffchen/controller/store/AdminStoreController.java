@@ -20,7 +20,7 @@ import static saffchen.util.validation.ValidationUtil.checkNew;
  */
 
 @RestController
-@RequestMapping(value = StoreController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = AdminStoreController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
 public class AdminStoreController extends AbstractStoreController {
 

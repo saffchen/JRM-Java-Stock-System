@@ -1,6 +1,5 @@
 package saffchen.controller.product;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,8 +20,7 @@ import static saffchen.util.validation.ValidationUtil.checkNew;
  */
 
 @RestController
-@RequestMapping(value = ProductController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-@AllArgsConstructor
+@RequestMapping(value = AdminProductController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
 public class AdminProductController extends AbstractProductController {
 

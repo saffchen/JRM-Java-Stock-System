@@ -15,12 +15,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = StoreController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-//@AllArgsConstructor
 @Slf4j
 public class StoreController extends AbstractStoreController {
     static final String REST_URL = "/api/v1/stores";
-    /*private final StoreMapper mapper;
-    private final StoreService service;*/
 
     @GetMapping
     public ResponseEntity<List<StoreDto>> getAll() {

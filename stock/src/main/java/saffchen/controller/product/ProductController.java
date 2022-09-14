@@ -19,13 +19,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = ProductController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-//@AllArgsConstructor
 @Slf4j
 public class ProductController extends AbstractProductController {
     static final String REST_URL = "/api/v1/stores/{storeId}/products";
-
-    /*private final ProductMapper mapper;
-    private final ProductService service;*/
 
     // Get All for particular Satellite
     @GetMapping
