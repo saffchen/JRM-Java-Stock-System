@@ -28,7 +28,7 @@ public interface ProductsRepository extends BaseRepository<ProductEntity> {
 
     default ProductEntity checkBelong(Long satelliteId, Long id) {
         return get(satelliteId, id).orElseThrow(
-                () -> new DataConflictException("Product id=" + id + " doesn't belong to Restaurant id=" + satelliteId)
+                () -> new DataConflictException("Product id=" + id + " doesn't belong to Store id=" + satelliteId)
         );
     }
 
