@@ -17,7 +17,6 @@ import static java.util.Collections.emptyList;
 @AllArgsConstructor
 public class ProductService {
 
-    //@Autowired
     private final ProductsRepository productsRepository;
 
     private final SatellitesRepository satellitesRepository;
