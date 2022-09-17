@@ -1,4 +1,4 @@
-package saffchen.exception;
+package saffchen.error;
 
 /**
  * @author alex_jd on 8/10/22

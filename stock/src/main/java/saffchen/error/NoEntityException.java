@@ -1,4 +1,4 @@
-package saffchen.exception;
+package saffchen.error;
 
 /**
  * @author saffchen created on 07.07.2022
