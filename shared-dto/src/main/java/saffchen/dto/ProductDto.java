@@ -22,5 +22,5 @@ public class ProductDto {
     private List<String> tags;
     private String category;
     private Integer count;
-    private String satelliteName;
+    private String storeName;
 }

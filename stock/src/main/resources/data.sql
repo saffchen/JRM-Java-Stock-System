@@ -1,4 +1,4 @@
-INSERT INTO satellite(name, description)
+INSERT INTO store(name, description)
 VALUES ('North Shore', 'test description'),
        ('Burnie', 'test description'),
        ('Lasbela', 'test description'),
@@ -33,7 +33,7 @@ VALUES ('North Shore', 'test description'),
 /*SELECT setval('satellite_id_seq', 30, true);*/
 
 
-INSERT INTO product(category, count, price, name, satellite_id, description)
+INSERT INTO product(category, count, price, name, store_id, description)
 VALUES ('Car', 51, 1546, 'Renault', 17, 'test description'),
        ('Car', 35, 1873, 'Porsche', 17, 'test description'),
        ('Car', 54, 2085, 'Volkswagen', 3, 'test description'),

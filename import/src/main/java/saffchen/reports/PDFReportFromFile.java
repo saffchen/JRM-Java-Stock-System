@@ -93,7 +93,7 @@ public class PDFReportFromFile implements Report {
                 table.addCell(drawCell(product.getTags().toString(), color, cellHeader));
                 table.addCell(drawCell(product.getCategory(), color, cellHeader));
                 table.addCell(drawCell(product.getCount().toString(), color, cellHeader));
-                table.addCell(drawCell(product.getSatellite().getName(), color, cellHeader));
+                table.addCell(drawCell(product.getStore().getName(), color, cellHeader));
 
                 isLight = !isLight;
                 table.completeRow();
