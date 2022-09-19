@@ -15,19 +15,9 @@ import java.util.List;
 @AllArgsConstructor
 public class ProductService {
 
-    //@Autowired
     private final ProductRepository productRepository;
 
     private final StoreRepository storeRepository;
-
-    /*public List<ProductEntity> getAll() {
-        try {
-            return productRepository.findAll();
-        } catch (Exception e) {
-            log.error("Object is not found");
-            return emptyList();
-        }
-    }*/
 
     public ProductEntity get(Long storeId, Long id) {
         return productRepository.get(storeId, id)
