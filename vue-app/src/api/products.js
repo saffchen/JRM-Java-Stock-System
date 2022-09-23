@@ -1,15 +1,15 @@
-const baseUrl = 'products/';
+const baseUrl = 'stores/';
 
 export default function (instance) {
     return {
-        getAll() {
-            return instance.get(baseUrl)
+        getAll(store_id) {
+            return instance.get(`${baseUrl}${store_id}/products`);
         },
         get(id) {
-            return instance.get(`${baseUrl}${id}`)
+            return instance.get(`${baseUrl}${id}`);
         },
         update(payload) {
-            return instance.post(baseUrl, payload)
+            return instance.post(baseUrl, payload);
         }
-    }
-}
+    };
+};

@@ -1,8 +1,14 @@
 <template>
-  <div class="container-xl">
-    <div class="d-flex align-items-center justify-content-end mt-5">
+  <div class="container-xl mt-5">
+    <!-- <div class="d-flex align-items-center justify-content-end mt-5">
       <span class="me-3">Push to add new product</span>
       <button class="btn btn-primary">Add</button>
+    </div> -->
+    <div class="store-chooser">
+      <label class="form-label" for="stores">Choose a store:</label>
+      <select name="stores" id="stores" @change="switchStore" class="mt-3 mb-4 form-control" value="7">
+        <option v-for="store in stores" :key="store.id" :value="store.id" v-text="store.name" :selected="store.id === store_id"></option>
+      </select>
     </div>
     <table id="datatable" class="table table-hover align-middle">
       <thead class="bg-light">
@@ -15,7 +21,7 @@
         <td>
           <div class="d-flex align-items-center">
             <div>
-              <p class="fw-bold mb-1 text-nowrap" v-text="record.title"></p>
+              <p class="fw-bold mb-1 text-nowrap" v-text="record.name"></p>
               <p class="text-muted mb-0 d-none d-lg-inline" v-text="record.description"></p>
             </div>
           </div>
@@ -28,13 +34,13 @@
         </td>
         <td v-text="record.category"></td>
         <td v-text="record.count"></td>
-        <td v-text="record.satelliteName"></td>
-        <td>
+        <!-- <td v-text="record.storeName"></td> -->
+        <!-- <td>
           <div class="d-flex align-items-center justify-content-around">
             <button type="button" class="btn btn-outline-warning btn-sm me-2 border-0">Edit</button>
             <button type="button" class="btn btn-outline-danger btn-sm border-0">Remove</button>
           </div>
-        </td>
+        </td> -->
       </tr>
       </tbody>
     </table>
@@ -46,21 +52,50 @@
 export default {
   data() {
     return {
-      headers: ['Title', 'Price $', 'Tags', 'Category', 'Count', 'Satellite', 'Actions'],
-      products: []
+      table: null,
+      headers: ['Product', 'Price $', 'Tags', 'Category', 'Quantity'],//, 'Store'],//, 'Actions'],
+      stores: [],
+      products: [],
+      store_id: 1,
     }
   },
   methods: {
     getProducts: function () {
       this.$load(async () => {
-        this.products = (await this.$api.products.getAll()).data
+        this.products = (await this.$api.products.getAll(this.store_id)).data;
       })
     },
+    getStores: function () {
+      this.$load(async () => {
+        let result = (await this.$api.stocks.getAll()).data
+            .filter((store) => store.count > 0)
+            .sort((a, b) => a.name > b.name);
+        this.stores = result;
+        this.store_id = result[0].id;
+      });
+    },
+    switchStore: function (event) {
+      this.store_id = event.target.value;
+    },
     applyTable: function () {
-      $("#datatable").DataTable();
+      this.table = $("#datatable").DataTable();
     }
   },
+  watch: {
+    products: {
+      handler: function () {
+        if (this.table) {
+          this.table.destroy();
+        }
+      },
+      deep: true
+    },
+    store_id() {
+      this.getProducts();
+    },
+  },
   created() {
+    this.getStores();
     this.getProducts();
   },
   updated() {
@@ -70,6 +105,16 @@ export default {
 </script>
 
 <style>
+
+.form-label {
+  display: inline-block;
+  margin-right: 20px
+}
+
+.form-control {
+  display: inline-block;
+  width: 200px;
+}
 
 .badge {
   margin-bottom: 2px;

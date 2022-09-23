@@ -24,13 +24,13 @@ const routes = [
         component: LoginPage
     },
     {
-        path: '/ProductTable',
+        path: '/products',
         name: 'ProductTable',
         component: ProductPage,
         props: router => ({ componentName: router.name})
     },
     {
-        path: '/StockTable',
+        path: '/stores',
         name: 'StockTable',
         component: StockPage,
         props: router => ({ componentName: router.name})
@@ -58,13 +58,13 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    const publicPages = ['/login'];
-    const authRequired = !publicPages.includes(to.path);
-    const loggedIn = localStorage.getItem('user');
+    // const publicPages = ['/login'];
+    // const authRequired = !publicPages.includes(to.path);
+    // const loggedIn = localStorage.getItem('user');
 
-    if (authRequired && !loggedIn) {
-        return next('/login');
-    }
+    // if (authRequired && !loggedIn) {
+    //     return next('/login');
+    // }
     next();
 })
 

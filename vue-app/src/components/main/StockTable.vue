@@ -1,9 +1,9 @@
 <template>
-  <div class="container-xl">
-    <div class="d-flex align-items-center justify-content-end mt-5">
+  <div class="container-xl mt-5">
+    <!-- <div class="d-flex align-items-center justify-content-end mt-5">
       <span class="me-3">Push to add new store</span>
       <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-stock">Add</button>
-    </div>
+    </div> -->
     <table id="datatable" class="table table-hover align-middle">
       <thead class="bg-light">
       <tr>
@@ -16,8 +16,8 @@
             <p v-text="record.name"></p>
           </td>
           <td v-text="record.description"></td>
-          <td v-text="record.count"></td>
-          <td>
+          <td v-text="record.count" style="width: 150px;"></td>
+          <!-- <td>
             <div class="d-flex align-items-center justify-content-around">
               <button
                   type="button"
@@ -31,7 +31,7 @@
                   v-on:click="deleteStock(record.id)"
               >Remove</button>
             </div>
-          </td>
+          </td> -->
         </tr>
       </tbody>
     </table>
@@ -62,8 +62,8 @@ export default {
   data() {
     return {
       table: null,
-      headers: ['Name', 'Description', 'Total Products', 'Actions'],
-      stocks: []
+      headers: ['Name', 'Description', 'Total Products'],//, 'Actions'],
+      stocks: [],
     }
   },
   methods: {
