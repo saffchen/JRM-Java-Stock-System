@@ -8,8 +8,7 @@ import lombok.Setter;
 import java.util.List;
 
 /**
- * @author saffchen created on 09.07.2022
- * @project JRM-Java-Stock-System
+ * @author saffchen created on 25.08.2022
  */
 @Setter
 @Getter
@@ -23,6 +22,6 @@ public class ProductDtoReport {
     private List<String> tags;
     private String category;
     private Integer count;
-    private String satelliteName;
+    private String satellite;
 
 }
