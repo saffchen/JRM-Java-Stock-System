@@ -32,7 +32,7 @@ public class ExcelImportUtils implements ImportUtils {
             XSSFRow row = null;
 
             ReflectProductUtils reflectProductUtils = new ReflectProductUtils();
-            List<String> headersFromClass = reflectProductUtils.getFieldsFromClass(new RawProduct());
+            List<String> headersFromClass = reflectProductUtils.getFieldsFromClass(RawProduct.class);
 
             for (int i = 1; i < myExcelSheet.getLastRowNum(); i++) {
                 row = myExcelSheet.getRow(i);

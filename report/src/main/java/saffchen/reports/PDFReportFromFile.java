@@ -87,15 +87,30 @@ public class PDFReportFromFile implements Report {
                 table.addCell(drawCell(cell.toUpperCase(), color, tableHeader));
             }
 
+<<<<<<< HEAD
             for (ProductDtoReport product : tableData) {
                 table.addCell(drawCell(product.getId(), color, cellHeader));
                 table.addCell(drawCell(product.getTitle(), color, cellHeader));
+=======
+            BaseColor color;
+            for (ProductEntity product : tableData) {
+                if (isLight)
+                    color = BaseColor.LIGHT_GRAY;
+                else
+                    color = BaseColor.GRAY;
+
+                table.addCell(drawCell(product.getName(), color, cellHeader));
+>>>>>>> dev
                 table.addCell(drawCell(product.getDescription(), color, cellHeader));
                 table.addCell(drawCell(product.getPrice().toString(), color, cellHeader));
                 table.addCell(drawCell(product.getTags().toString(), color, cellHeader));
                 table.addCell(drawCell(product.getCategory(), color, cellHeader));
                 table.addCell(drawCell(product.getCount().toString(), color, cellHeader));
+<<<<<<< HEAD
                 table.addCell(drawCell(product.getSatellite(), color, cellHeader));
+=======
+                table.addCell(drawCell(product.getStore().getName(), color, cellHeader));
+>>>>>>> dev
 
                 table.completeRow();
             }

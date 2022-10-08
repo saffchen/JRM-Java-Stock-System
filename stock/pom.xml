@@ -16,8 +16,6 @@
     <name>stock</name>
 
     <properties>
-
-
         <glassfish.version>4.0.1</glassfish.version>
         <org.mindrot.jbcrypt.version>0.4</org.mindrot.jbcrypt.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
@@ -25,6 +23,7 @@
         <org.projectlombok.version>1.18.20</org.projectlombok.version>
         <org.projectlombokmapstruct.version>0.2.0</org.projectlombokmapstruct.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <com.auth0.version>4.0.0</com.auth0.version>
     </properties>
 
     <dependencies>
@@ -39,7 +38,6 @@
             <artifactId>jbcrypt</artifactId>
             <version>${org.mindrot.jbcrypt.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -71,26 +69,31 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>${com.auth0.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
             <version>${org.mapstruct.version}</version>
         </dependency>
         <dependency>
-            <groupId>ru.javaroadmap</groupId>
+            <groupId>ru.javaroadmap.shared-dto</groupId>
             <artifactId>shared-dto</artifactId>
-            <version>1.0</version>
+            <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -99,6 +102,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.7.1</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

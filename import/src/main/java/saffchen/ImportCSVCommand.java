@@ -30,8 +30,7 @@ public class ImportCSVCommand implements Command {
                 fileWriter.close();
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("File is not found! Please, try again!");
+            LOGGER.error("File is not found! Please, try again!");
         }
     }
 }
