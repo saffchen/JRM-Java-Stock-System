@@ -1,5 +1,6 @@
 package saffchen.config;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         http
                 .csrf().disable()
                 .authorizeRequests()
+                .requestMatchers(EndpointRequest.to("health")).permitAll()
                 .mvcMatchers(HttpMethod.POST ,"/api/v1/auth/check_auth").anonymous()
                 .mvcMatchers(HttpMethod.GET,"/api/v1/stores/**").permitAll()
                 .mvcMatchers(HttpMethod.GET,"/api/v1/participants").permitAll()
