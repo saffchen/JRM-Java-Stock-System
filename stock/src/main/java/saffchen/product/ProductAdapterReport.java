@@ -42,7 +42,7 @@ public class ProductAdapterReport {
         product.setDescription(rawProduct.getDescription());
         product.setCount(Integer.valueOf(rawProduct.getCount()));
         product.setTags(parseTags(rawProduct.getTags(), ","));
-        product.setSatellite(rawProduct.getSatellite());
+        product.setStore(rawProduct.getStore());
 
         return product;
     }
@@ -56,7 +56,7 @@ public class ProductAdapterReport {
         rawProduct.setDescription(product.getDescription());
         rawProduct.setCount(product.getCount().toString());
         rawProduct.setTags(tagsToString(product.getTags()));
-        rawProduct.setSatellite(product.getSatellite());
+        rawProduct.setStore(product.getStore());
 
         return rawProduct;
     }

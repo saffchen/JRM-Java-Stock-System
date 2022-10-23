@@ -22,6 +22,6 @@ public class ProductDtoReport {
     private List<String> tags;
     private String category;
     private Integer count;
-    private String satellite;
+    private String store;
 
 }
