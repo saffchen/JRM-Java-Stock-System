@@ -8,11 +8,8 @@ import lombok.NoArgsConstructor;
  */
 @NoArgsConstructor
 public class Theme {
-    public BaseColor darkTheme() {
-        return BaseColor.GRAY;
-    }
 
-    public BaseColor lightTheme() {
-        return BaseColor.WHITE;
+    public BaseColor getBaseColor(BaseColor color) {
+        return color;
     }
 }

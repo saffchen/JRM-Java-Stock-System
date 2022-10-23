@@ -15,6 +15,6 @@ public class LightThemePDF implements CommandTheme {
 
     @Override
     public BaseColor execute() {
-        return theme.lightTheme();
+        return theme.getBaseColor(BaseColor.WHITE);
     }
 }
