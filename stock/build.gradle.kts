@@ -7,6 +7,7 @@ plugins {
 }
 
 dependencies {
+    implementation(project(":shared-dto"))
 }
 
 group = "ru.javaroadmap.stock"
