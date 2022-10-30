@@ -7,17 +7,7 @@ plugins {
 }
 
 dependencies {
-    implementation("com.google.apis:google-api-services-sheets:v4-rev493-1.23.0")
-    implementation("org.apache.poi:poi-ooxml:3.12")
-    implementation("com.opencsv:opencsv:5.6")
-    implementation("com.google.api-client:google-api-client:1.23.0")
-    implementation("com.google.oauth-client:google-oauth-client-jetty:1.23.0")
-    implementation("com.itextpdf:itextpdf:5.5.13.3")
-    implementation(project(":shared-dto"))
-    implementation(project(":stock"))
-    implementation(project(":import"))
-    implementation("org.springframework.boot:spring-boot-starter-test:2.6.4")
-    implementation("org.projectlombok:lombok:1.18.22")
+
 }
 
 group = "ru.javaroadmap.report"
