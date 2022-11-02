@@ -29,3 +29,7 @@ hs_err_pid*
 /buildSrc/.gradle/
 /buildSrc/build/
 /.gradle/
+/stock/build/
+/report/build/
+/shared-dto/build/
+/import/build/
