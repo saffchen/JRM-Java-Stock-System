@@ -28,3 +28,4 @@ hs_err_pid*
 /stock/test.csv
 /buildSrc/.gradle/
 /buildSrc/build/
+/.gradle/
