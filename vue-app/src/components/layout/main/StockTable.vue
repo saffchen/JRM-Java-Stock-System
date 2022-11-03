@@ -1,9 +1,9 @@
 <template>
-  <div class="container-xl mt-5">
-    <!-- <div class="d-flex align-items-center justify-content-end mt-5">
+  <div class="container-xl pt-3">
+    <div class="d-flex align-items-center justify-content-end">
       <span class="me-3">Push to add new store</span>
       <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-stock">Add</button>
-    </div> -->
+    </div>
     <table id="datatable" class="table table-hover align-middle">
       <thead class="bg-light">
       <tr>
@@ -17,7 +17,7 @@
           </td>
           <td v-text="record.description"></td>
           <td v-text="record.count" style="width: 150px;"></td>
-          <!-- <td>
+          <td>
             <div class="d-flex align-items-center justify-content-around">
               <button
                   type="button"
@@ -31,7 +31,7 @@
                   v-on:click="deleteStock(record.id)"
               >Remove</button>
             </div>
-          </td> -->
+          </td>
         </tr>
       </tbody>
     </table>
@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import Modal from "@/components/Modal";
+import Modal from "@/components/modal/Modal";
 
 export default {
   components: {
@@ -62,7 +62,7 @@ export default {
   data() {
     return {
       table: null,
-      headers: ['Name', 'Description', 'Total Products'],//, 'Actions'],
+      headers: ['Name', 'Description', 'Total Products', 'Actions'],
       stocks: [],
     }
   },

@@ -15,6 +15,8 @@
 </template>
 
 <script>
+
+
 export default {
   name: "AddStockForm",
   data() {

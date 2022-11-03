@@ -70,7 +70,7 @@ export default {
     comp() {
       let name = this.componentName
       console.log(name)
-      return defineAsyncComponent(() => import(`./${name}`))
+      return defineAsyncComponent(() => import(`../form/${name}`))
     }
   },
   emits: ['processStock']

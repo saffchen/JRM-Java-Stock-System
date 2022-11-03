@@ -1,7 +1,6 @@
 <template>
     <header>
         <Navbar/>
-        <br>
     </header>
 </template>
 

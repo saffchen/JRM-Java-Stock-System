@@ -1,13 +1,12 @@
 <template>
   <Header/>
-  <Main content="Login"/>
-  <Footer/>
+  <Main component-name="Login"/>
 </template>
 
 
 <script>
-import Header from "@/components/header/Header";
-import Main from "@/components/main/Main";
+import Header from "@/components/layout/header/Header";
+import Main from "@/components/layout/main/Main";
 
 export default {
   name: 'app',

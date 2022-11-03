@@ -6,12 +6,18 @@
 
 
 <script>
-  import Header from "@/components/header/Header";
-  import Main from "@/components/main/Main";
-  import Footer from "@/components/footer/Footer";
+  import Header from "@/components/layout/header/Header";
+  import Main from "@/components/layout/main/Main";
+  import Footer from "@/components/layout/footer/Footer";
 
   export default {
       name: 'app',
+      props: {
+        componentName: {
+          type: String,
+          require: true
+        }
+      },
       components: {
           Header,
           Main,
@@ -21,6 +27,4 @@
 </script>
 
 <style>
-@import 'bootstrap/dist/css/bootstrap.min.css';
-@import 'https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css';
 </style>

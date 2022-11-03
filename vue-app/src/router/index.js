@@ -30,7 +30,7 @@ const routes = [
         props: router => ({ componentName: router.name})
     },
     {
-        path: '/stores',
+        path: '/stocks',
         name: 'StockTable',
         component: StockPage,
         props: router => ({ componentName: router.name})
