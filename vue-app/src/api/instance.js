@@ -6,7 +6,7 @@
 
 import axios from 'axios';
 
-const instance = axios.create({
+const guestInstance = axios.create({
     baseURL: 'http://localhost:8080/api/v1/',
     withCredentials: false,
     headers: {
@@ -14,4 +14,16 @@ const instance = axios.create({
     }
 });
 
-export default instance;
+const adminInstance = axios.create({
+    baseURL: 'http://localhost:8080/api/v1/admin/',
+    withCredentials: false,
+    headers: {
+        accept: 'application/json',
+        authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyX2RldGFpbHMiLCJyb2xlIjoiUk9MRV9BRE1JTiIsImlzcyI6InN0b2NrIiwiZXhwIjoxNjY3NTg4ODA3LCJpYXQiOjE2Njc1ODUyMDcsInVzZXJuYW1lIjoidGVzdEFkbWluQGVtYWlsLnJ1In0.vdjcMT7VALWLxBml8kLYkMIzYgjHxdARdZAyqZQpVLoGkORAP-h5KCzzvM2stfVeafqSXgE_jiduj_MQ-fbHuQ'
+    }
+});
+
+export default {
+    guest: guestInstance,
+    admin: adminInstance
+};

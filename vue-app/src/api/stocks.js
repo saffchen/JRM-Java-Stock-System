@@ -1,21 +1,21 @@
 const baseUrl = 'stores/';
 
-export default function (instance) {
+export default function ({ guest, admin }) {
     return {
         getAll() {
-            return instance.get(baseUrl);
+            return guest.get(baseUrl);
         },
         get(id) {
-            return instance.get(`${baseUrl}${id}`);
+            return guest.get(`${baseUrl}${id}`);
         },
         update(payload, id) {
-            return instance.put(`${baseUrl}${id}`, payload);
+            return admin.put(`${baseUrl}${id}`, payload);
         },
         create(payload) {
-            return instance.post(baseUrl, payload);
+            return admin.post(baseUrl, payload);
         },
         delete(id) {
-            return instance.delete(`${baseUrl}${id}`);
+            return admin.delete(`${baseUrl}${id}`);
         }
     };
 }

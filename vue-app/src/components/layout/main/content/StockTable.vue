@@ -19,7 +19,7 @@
                     <th
                         v-for="header, id in headers"
                         :key="id"
-                        :class="id > 0 && 'text-center'"
+                        :class="id > 1 && 'text-center'"
                         v-text="header"
                     />
                 </tr>
@@ -31,7 +31,7 @@
                 >
                     <td v-text="record.name" />
                     <td
-                        class="text-center"
+                        class="text-left"
                         v-text="record.description"
                     />
                     <td
