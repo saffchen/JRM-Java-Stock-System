@@ -12,4 +12,4 @@ export default function (instance) {
             return instance.post(baseUrl, payload);
         }
     };
-};
+}

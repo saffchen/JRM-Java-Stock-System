@@ -2,7 +2,9 @@
 /*https://vueschool.io/articles/vuejs-tutorials/how-to-use-vue-router-a-complete-tutorial/*/
 /*https://youtu.be/rqB7jRunukw*/
 
-import { createRouter, createWebHistory } from 'vue-router';
+import {
+    createRouter, createWebHistory 
+} from 'vue-router';
 
 import HomePage from "@/views/HomePage";
 import LoginPage from "@/views/LoginPage";
@@ -27,13 +29,17 @@ const routes = [
         path: '/products',
         name: 'ProductTable',
         component: ProductPage,
-        props: router => ({ componentName: router.name})
+        props: router => ({
+            componentName: router.name 
+        })
     },
     {
         path: '/stocks',
         name: 'StockTable',
         component: StockPage,
-        props: router => ({ componentName: router.name})
+        props: router => ({
+            componentName: router.name 
+        })
     },
     {
         path: '/report',
@@ -54,8 +60,8 @@ const routes = [
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
-    routes,
-})
+    routes
+});
 
 router.beforeEach((to, from, next) => {
     // const publicPages = ['/login'];
@@ -66,6 +72,6 @@ router.beforeEach((to, from, next) => {
     //     return next('/login');
     // }
     next();
-})
+});
 
 export default router;

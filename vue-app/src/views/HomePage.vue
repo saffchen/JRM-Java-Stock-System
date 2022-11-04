@@ -1,29 +1,30 @@
 <template>
-    <Header/>
-    <Main component-name="ProductTable"/>
-    <Footer/>
+    <AppHeader />
+    <AppMain component-name="ProductTable" />
+    <AppFooter />
 </template>
 
 
 <script>
-  import Header from "@/components/layout/header/Header";
-  import Main from "@/components/layout/main/Main";
-  import Footer from "@/components/layout/footer/Footer";
+import AppHeader from "@/components/layout/header/Header";
+import AppMain from "@/components/layout/main/Main";
+import AppFooter from "@/components/layout/footer/Footer";
 
-  export default {
-      name: 'app',
-      props: {
+export default {
+    name: 'App',
+    components: {
+        AppHeader,
+        AppMain,
+        AppFooter
+    },
+    props: {
         componentName: {
-          type: String,
-          require: true
+            type: String,
+            require: true,
+            default: 'ProductTable'
         }
-      },
-      components: {
-          Header,
-          Main,
-          Footer
-      }
-  }
+    }
+};
 </script>
 
 <style>

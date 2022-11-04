@@ -1,50 +1,67 @@
 <template>
-  <div class="dropdown">
-    <button class="btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown" id="menu">
-      <span class="fs-5">Navigate</span>
-    </button>
-    <ul class="dropdown-menu dropdown-menu-start animate slidein m-0" aria-labelledby="menu">
-      <li v-for="item in menuItems" @click="$router.push({name: item.id })">
-        <a class="dropdown-item p-2" href="#">{{ item.label }}</a>
-      </li>
-    </ul>
-  </div>
+    <div class="dropdown">
+        <button
+            id="menu"
+            class="btn btn-default dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+        >
+            <span class="fs-5">Navigate</span>
+        </button>
+        <ul
+            class="dropdown-menu dropdown-menu-start animate slide-in m-0"
+            aria-labelledby="menu"
+        >
+            <li
+                v-for="item, id in menuItems"
+                :key="id"
+                @click="$router.push({
+                    name: item.id 
+                })"
+            >
+                <a
+                    class="dropdown-item p-2"
+                    href="#"
+                >{{ item.label }}</a>
+            </li>
+        </ul>
+    </div>
 </template>
 
 <script>
 
 export default {
-  data() {
-    return {
-      menuItems: [
-        {
-          id: 'Login',
-          label: 'Login'
-        },
-        {
-          id: 'ProductTable',
-          label: 'View Products'
-        },
-        {
-          id: 'StockTable',
-          label: 'View Stocks'
-        },
-        {
-          id: 'Report',
-          label: 'Generate report'
-        },
-        {
-          id: 'Import',
-          label: 'Import'
-        },
-        {
-          id: 'Export',
-          label: 'Export'
-        }
-      ]
+    data() {
+        return {
+            menuItems: [
+                {
+                    id: 'Login',
+                    label: 'Login'
+                },
+                {
+                    id: 'ProductTable',
+                    label: 'View Products'
+                },
+                {
+                    id: 'StockTable',
+                    label: 'View Stocks'
+                },
+                {
+                    id: 'Report',
+                    label: 'Generate report'
+                },
+                {
+                    id: 'Import',
+                    label: 'Import'
+                },
+                {
+                    id: 'Export',
+                    label: 'Export'
+                }
+            ]
+        };
     }
-  }
-}
+};
 </script>
 
 
@@ -90,7 +107,7 @@ export default {
     }
   }
   
-  .slidein {
+  .slide-in {
     -webkit-animation-name: slideIn;
     animation-name: slideIn;
   }

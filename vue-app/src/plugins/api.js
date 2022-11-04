@@ -8,4 +8,4 @@ export default {
         Vue.config.globalProperties.$store = store;
 
     }
-}
+};

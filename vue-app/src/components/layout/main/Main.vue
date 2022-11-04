@@ -3,31 +3,33 @@ https://medium.com/@pratikpatel_60309/dynamic-importing-component-templates-with
 
 
 <template>
-  <main class="main pb-5">
-    <component :is="comp"></component>
-  </main>
+    <main class="main pb-5">
+        <component :is="comp" />
+    </main>
 </template>
 
 <script>
-import { defineAsyncComponent } from 'vue'
+import {
+    defineAsyncComponent 
+} from 'vue';
 
 export default {
-  name: "DynamicComponent",
-  props: {
-    componentName: {
-      type: String,
-      //required: true,
-      //default: "ProductTable"
+    name: "DynamicComponent",
+    props: {
+        componentName: {
+            type: String,
+            required: true,
+            default: "ProductTable"
+        }
+    },
+    computed: {
+        comp() {
+            let name = this.componentName;
+            console.log(name);
+            return defineAsyncComponent(() => import(`./content/${name}.vue`));
+        }
     }
-  },
-  computed: {
-    comp() {
-      let name = this.componentName
-      console.log(name)
-      return defineAsyncComponent(() => import(`./content/${name}.vue`))
-    }
-  },
-}
+};
 </script>
 
 <style>

@@ -8,5 +8,5 @@ export default {
     products: productModule(instance),
     participants: participantModule(instance),
     stocks: stockModule(instance)
-}
+};
 
