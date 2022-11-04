@@ -85,6 +85,7 @@ export default {
 </script>
 
 <style scoped>
+
   #status {
     text-align: right;
   }

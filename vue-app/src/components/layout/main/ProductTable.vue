@@ -16,7 +16,7 @@
     <table id="datatable" class="table table-hover align-middle">
       <thead class="bg-light">
       <tr>
-        <th v-for="header in headers" v-text="header"></th>
+        <th :class="id > 0 && 'text-center'" v-for="header, id in headers" v-text="header"></th>
       </tr>
       </thead>
       <tbody>
@@ -29,14 +29,14 @@
             </div>
           </div>
         </td>
-        <td v-text="record.price"></td>
+        <td class="text-center" v-text="record.price"></td>
         <td>
-          <div class="d-flex flex-column align-items-start">
+          <div class="d-flex flex-column align-items-center">
             <span class="badge bg-info rounded-pill d-inline" v-for="tag in record.tags" v-text="tag"></span>
           </div>
         </td>
-        <td v-text="record.category"></td>
-        <td v-text="record.count"></td>
+        <td class="text-center" v-text="record.category"></td>
+        <td class="text-center" v-text="record.count"></td>
         <td>
           <div class="d-flex align-items-center justify-content-around">
             <button type="button" class="btn btn-outline-warning btn-sm me-2 border-0">Edit</button>
@@ -55,7 +55,7 @@ export default {
   data() {
     return {
       table: null,
-      headers: ['Product', 'Price $', 'Tags', 'Category', 'Quantity', 'Actions'],
+      headers: ['Product', 'Price $', 'Tags', 'Category', 'Quantity', ''],
       stores: [],
       products: [],
       store_id: 1,
@@ -108,20 +108,33 @@ export default {
 
 <style>
 
-.form-label {
-  display: inline-block;
-  margin: 0;
-}
-
-.form-control {
+input[type="search"] {
   display: inline-block;
   margin-left: 10px;
   width: 200px;
 }
 
+th:hover {
+  cursor: pointer;
+}
+
+tr:hover {
+  cursor: default;
+}
+
+.form-label {
+  display: inline-block;
+  min-width: 120px;
+  margin: 0;
+}
+
 .form-select {
-  width: 70px;
+  width: 80px;
   margin: 0 5px;
+}
+
+select:hover {
+  cursor: pointer;
 }
 
 .badge {

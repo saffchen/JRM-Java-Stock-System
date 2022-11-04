@@ -7,16 +7,14 @@
     <table id="datatable" class="table table-hover align-middle">
       <thead class="bg-light">
       <tr>
-        <th v-for="header in headers" v-text="header"></th>
+        <th :class="id > 0 && 'text-center'" v-for="header, id in headers" v-text="header"></th>
       </tr>
       </thead>
       <tbody>
         <tr v-for="record in stocks" v-bind:key="record.id">
-          <td>
-            <p v-text="record.name"></p>
-          </td>
-          <td v-text="record.description"></td>
-          <td v-text="record.count" style="width: 150px;"></td>
+          <td v-text="record.name"></td>
+          <td class="text-center" v-text="record.description"></td>
+          <td class="text-center" v-text="record.count" style="width: 150px;"></td>
           <td>
             <div class="d-flex align-items-center justify-content-around">
               <button
@@ -62,7 +60,7 @@ export default {
   data() {
     return {
       table: null,
-      headers: ['Name', 'Description', 'Total Products', 'Actions'],
+      headers: ['Name', 'Description', 'Total Products', ''],
       stocks: [],
     }
   },
@@ -114,6 +112,29 @@ export default {
 
 <style>
 
+input[type="search"] {
+  display: inline-block;
+  margin-left: 10px;
+  width: 200px;
+}
+
+th:hover {
+  cursor: pointer;
+}
+
+tr:hover {
+  cursor: default;
+}
+
+select:hover {
+  cursor: pointer;
+} 
+
+.form-select {
+  width: 70px;
+  margin: 0 5px;
+}
+
 .badge {
   margin-bottom: 2px;
 }
@@ -123,7 +144,23 @@ div > .badge:last-child {
 }
 
 .dataTables_wrapper .row:first-child {
+  align-items: center;
   padding: 20px 0;
+}
+
+.dataTables_length label {
+  display: flex;
+  align-items: center;
+}
+
+.dataTables_filter {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dataTables_paginate {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .page-item.active .page-link {
