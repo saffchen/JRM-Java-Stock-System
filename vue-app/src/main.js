@@ -1,5 +1,8 @@
 import { createApp } from 'vue';
 
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap";
+
 import App from "@/components/App";
 
 import ApiPlugin from '@/plugins/api';

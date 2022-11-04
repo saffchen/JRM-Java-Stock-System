@@ -1,9 +1,9 @@
 <template>
   <div class="container-xl pt-3">
-    <div class="d-flex align-items-center justify-content-between">
-      <div class="store-chooser">
+    <div class="d-flex align-items-center justify-content-between py-3">
+      <div class="d-flex align-items-center store-chooser">
         <label class="form-label" for="stores">Choose a store:</label>
-        <select name="stores" id="stores" @change="switchStore" class="mt-3 mb-4 form-control" value="7">
+        <select name="stores" id="stores" @change="switchStore" class="form-control" value="7">
           <option v-for="store in stores" :key="store.id" :value="store.id" v-text="store.name" :selected="store.id === store_id"></option>
         </select>
       </div>
@@ -37,7 +37,6 @@
         </td>
         <td v-text="record.category"></td>
         <td v-text="record.count"></td>
-        <td v-text="record.storeName"></td>
         <td>
           <div class="d-flex align-items-center justify-content-around">
             <button type="button" class="btn btn-outline-warning btn-sm me-2 border-0">Edit</button>
@@ -56,7 +55,7 @@ export default {
   data() {
     return {
       table: null,
-      headers: ['Product', 'Price $', 'Tags', 'Category', 'Quantity', 'Store', 'Actions'],
+      headers: ['Product', 'Price $', 'Tags', 'Category', 'Quantity', 'Actions'],
       stores: [],
       products: [],
       store_id: 1,
@@ -111,12 +110,18 @@ export default {
 
 .form-label {
   display: inline-block;
-  margin-right: 20px
+  margin: 0;
 }
 
 .form-control {
   display: inline-block;
+  margin-left: 10px;
   width: 200px;
+}
+
+.form-select {
+  width: 70px;
+  margin: 0 5px;
 }
 
 .badge {
@@ -128,7 +133,23 @@ div > .badge:last-child {
 }
 
 .dataTables_wrapper .row:first-child {
+  align-items: center;
   padding: 20px 0;
+}
+
+.dataTables_length label {
+  display: flex;
+  align-items: center;
+}
+
+.dataTables_filter {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dataTables_paginate {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .page-item.active .page-link {

@@ -1,8 +1,5 @@
 <template>
-  <div id="status" v-if="showMessage">
-    <span class="message" :class="messageClass" v-text="messageText" />
-  </div>
-  <form @submit="addStock" name="add-stock" method="post">
+  <form class="form" @submit="addStock" name="add-stock" method="post">
     <fieldset class="mb-3">
       <label for="stock-name" class="form-label">Name</label>
       <input type="text" class="form-control" id="stock-name" v-model="name"/>
@@ -12,6 +9,9 @@
       <textarea id="stock-description" class="form-control" v-model="description"/>
     </fieldset>
   </form>
+  <div class="mt-3" id="status" v-if="showMessage">
+    <span class="message" :class="messageClass" v-text="messageText" />
+  </div>
 </template>
 
 <script>

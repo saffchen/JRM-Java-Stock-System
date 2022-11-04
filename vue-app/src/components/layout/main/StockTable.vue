@@ -1,6 +1,6 @@
 <template>
   <div class="container-xl pt-3">
-    <div class="d-flex align-items-center justify-content-end">
+    <div class="d-flex align-items-center justify-content-end py-3">
       <span class="me-3">Push to add new store</span>
       <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-stock">Add</button>
     </div>

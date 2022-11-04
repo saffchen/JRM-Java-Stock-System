@@ -3,7 +3,7 @@
     <button class="btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown" id="menu">
       <span class="fs-5">Navigate</span>
     </button>
-    <ul class="dropdown-menu dropdown-menu-start animate slidein p-0" aria-labelledby="menu">
+    <ul class="dropdown-menu dropdown-menu-start animate slidein m-0" aria-labelledby="menu">
       <li v-for="item in menuItems" @click="$router.push({name: item.id })">
         <a class="dropdown-item p-2" href="#">{{ item.label }}</a>
       </li>

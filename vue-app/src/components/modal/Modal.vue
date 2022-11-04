@@ -22,6 +22,7 @@
 
 <script>
 import { defineAsyncComponent } from 'vue';
+//import 'bootstrap/dist/js/bootstrap.js';
 
 export default {
   name: "Modal",
@@ -78,4 +79,7 @@ export default {
 </script>
 
 <style scoped>
+  /* @import 'bootstrap/dist/css/bootstrap.min.css';
+  @import 'https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css';
+  */
 </style>
