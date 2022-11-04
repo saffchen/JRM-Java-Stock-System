@@ -3,7 +3,7 @@ import { createApp } from 'vue';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 
-import App from "@/components/App";
+import App from "@/components/App.vue";
 
 import ApiPlugin from '@/plugins/api';
 import LoadPlugin from '@/plugins/load';
