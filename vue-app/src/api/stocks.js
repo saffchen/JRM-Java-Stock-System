@@ -1,3 +1,5 @@
+import store from '@/store';
+
 const baseUrl = 'stores/';
 
 export default function ({ guest, admin }) {
@@ -9,13 +11,28 @@ export default function ({ guest, admin }) {
             return guest.get(`${baseUrl}${id}`);
         },
         update(payload, id) {
-            return admin.put(`${baseUrl}${id}`, payload);
+            return admin.put(`${baseUrl}${id}`, payload, {
+                headers: {
+                    Accept: 'application/json',
+                    Authorization: `Bearer ${store.getters.token}`
+                }
+            });
         },
         create(payload) {
-            return admin.post(baseUrl, payload);
+            return admin.post(baseUrl, payload, {
+                headers: {
+                    Accept: 'application/json',
+                    Authorization: `Bearer ${store.getters.token}`
+                }
+            });
         },
         delete(id) {
-            return admin.delete(`${baseUrl}${id}`);
+            return admin.delete(`${baseUrl}${id}`, {
+                headers: {
+                    Accept: 'application/json',
+                    Authorization: `Bearer ${store.getters.token}`
+                }
+            });
         }
     };
 }

@@ -18,7 +18,10 @@ module.exports = {
         "func-call-spacing": ["error", "never"],
         "dot-location": ["error", "property"],
         "object-curly-newline": ["error", {
-            "minProperties": 1
+            "ObjectExpression": { "minProperties": 1 },
+            "ObjectPattern": "never",
+            "ImportDeclaration": { "minProperties": 3 },
+            "ExportDeclaration": { "minProperties": 2 }
         }],
         "object-curly-spacing": ["error", "always"],
         "template-curly-spacing": ["error", "never"],
@@ -32,8 +35,12 @@ module.exports = {
         "vue/object-curly-spacing": ["error", "always"],
         "vue/template-curly-spacing": ["error", "never"],
         "vue/object-curly-newline": ["error", {
-            "minProperties": 1
+            "ObjectExpression": { "minProperties": 1 },
+            "ObjectPattern": "never",
+            "ImportDeclaration": { "minProperties": 3 },
+            "ExportDeclaration": { "minProperties": 2 }
         }],
+        "vue/singleline-html-element-content-newline": "off",
         "vue/html-indent": ["error", 4],
         "vue/script-indent": ["error", 4],
         "vue/require-default-prop": "off"

@@ -2,14 +2,11 @@ const baseUrl = 'stores/';
 
 export default function ({ guest, admin }) {
     return {
-        getAll(id) {
-            return guest.get(`${baseUrl}${id}/products`);
+        getAll(storeId) {
+            return guest.get(`${baseUrl}${storeId}/products`);
         },
-        get(id) {
-            return guest.get(`${baseUrl}${id}`);
-        },
-        update(payload) {
-            return admin.post(baseUrl, payload);
+        update(storeId, payload) {
+            return admin.post(`${baseUrl}${storeId}/products/${payload.id}`, payload);
         }
     };
 }

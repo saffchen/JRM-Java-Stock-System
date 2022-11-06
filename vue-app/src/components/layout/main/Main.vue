@@ -9,9 +9,7 @@ https://medium.com/@pratikpatel_60309/dynamic-importing-component-templates-with
 </template>
 
 <script>
-import {
-    defineAsyncComponent 
-} from 'vue';
+import { defineAsyncComponent } from 'vue';
 
 export default {
     name: "DynamicComponent",

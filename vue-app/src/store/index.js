@@ -1,30 +1,27 @@
-import {
-    createStore 
-} from 'vuex';
+import { createStore } from 'vuex';
 import axios from 'axios';
+import api from '@/api';
 
 const store = createStore({
-    state() {
-        return {
-            Store: {
-                type: Object,
-                default() {}
-            },
-            UserStore: {
-                status: '',
-                token: localStorage.getItem('token') || '',
-                user: {}
-            }
-        };
+    state: {
+        Store: {
+            type: Object,
+            default() {}
+        },
+        UserStore: {
+            status: '',
+            token: '',
+            email: 'opa'
+        }
     },
     mutations: {
         auth_request(state){
             state.UserStore.status = 'loading';
         },
-        auth_success(state, token, user){
+        auth_success(state, token, email){
             state.UserStore.status = 'success';
             state.UserStore.token = token;
-            state.UserStore.user = user;
+            state.UserStore.email = email;
         },
         auth_error(state){
             state.UserStore.status = 'error';
@@ -38,9 +35,20 @@ const store = createStore({
         }
     },
     actions: {
-        login({
-            commit 
-        }, user){
+        auth({ commit }, payload) {
+            commit('auth_request');
+            api.security.checkAuthAndGetToken(payload)
+                .then(async(response) => {
+                    const data = await response.data;
+                    console.log(data);
+                    commit('auth_success', data.jwt, 'testAdmin@email.ru');
+                })
+                .catch(error => {
+                    commit('auth_error');
+                    console.log(error);
+                });
+        },
+        login({ commit }, user) {
             return new Promise((resolve, reject) => {
                 commit('auth_request');
                 axios({
@@ -61,9 +69,7 @@ const store = createStore({
                     });
             });
         },
-        logout({
-            commit 
-        }){
+        logout({ commit }) {
             return new Promise((resolve) => {
                 commit('logout');
                 localStorage.removeItem('token');
@@ -72,9 +78,11 @@ const store = createStore({
             });
         }
     },
-    getters : {
+    getters: {
         isLoggedIn: state => !!state.UserStore.token,
-        authStatus: state => state.UserStore.status
+        authStatus: state => state.UserStore.status,
+        token: state => state.UserStore.token,
+        email: state => state.UserStore.email
     }
 });
 

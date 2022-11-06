@@ -2,13 +2,13 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container justify-content-between">
             <DropdownMenu />
-            <div
-                class="navbar-brand col-6"
-                align="center"
-            >
+            <div class="navbar-brand col-6 text-center">
                 JRM Stock System Project
             </div>
-            <LoginBtn />
+            <div v-if="this.$store.getters.isLoggedIn">
+                {{ 'admin' }}
+            </div>
+            <LoginBtn v-else />
         </div>
     </nav>
 </template>
@@ -27,5 +27,4 @@ export default {
 </script>
 
 <styles scoped>
-
 </styles>

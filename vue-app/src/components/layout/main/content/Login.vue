@@ -1,53 +1,42 @@
 <template>
     <form
-        class="login"
+        id="login"
+        class="form text-center"
         @submit.prevent="login"
     >
-        <h2 class="text-center">
-            Sign in
-        </h2>
-        <div class="container ml-auto mr-auto">
-            <div
-                class="row"
-                align="center"
-            >
-                <div class="col">
-                    Email
-                    <div class="col">
-                        <input
-                            v-model="email"
-                            required
-                            type="email"
-                            placeholder="Name"
-                        >
-                    </div>
-                </div>
-            </div>
-            <div><label /></div>
-            <div
-                class="row mb-3"
-                align="center"
-            >
-                <div class="col">
-                    Password
-                    <div class="col">
-                        <input
-                            v-model="password"
-                            required
-                            type="password"
-                            placeholder="Password"
-                        >
-                    </div>
-                </div>
-            </div>
-            <div align="center">
-                <button
-                    class="btn btn-primary text-center"
-                    type="submit"
+        <h2 class="my-4">Sign in</h2>
+        <div class="mb-3">
+            <label class="form-label">
+                E-mail
+                <input
+                    v-model="email"
+                    required
+                    type="email"
+                    placeholder="Email"
+                    class="form-control"
                 >
-                    Login
-                </button>
-            </div>
+            </label>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">
+                Password
+                <input
+                    v-model="password"
+                    required
+                    type="password"
+                    placeholder="Password"
+                    class="form-control"
+                >
+            </label>
+        </div>
+        <div>
+            <button
+                class="btn btn-primary text-center"
+                form="login"
+                type="submit"
+            >
+                Login
+            </button>
         </div>
     </form>
 </template>
@@ -62,11 +51,12 @@ export default {
         };
     },
     methods: {
-        login: function () {
-            let email = this.email;
-            let password = this.password;
-            this.$store.dispatch('login', {
-                email, password 
+        login: function() {
+            const email = 'testAdmin@email.ru';
+            const password = 'testadmin';
+            this.$store.dispatch('auth', {
+                email,
+                password
             })
                 .then(() => this.$router.push('/'))
                 .catch(err => console.log(err));

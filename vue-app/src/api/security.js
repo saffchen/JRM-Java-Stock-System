@@ -1,9 +1,9 @@
-const baseUrl = 'auth/check_auth/';
+const baseUrl = 'check_auth/';
 
-export default function (instance) {
+export default function ({ auth }) {
     return {
         checkAuthAndGetToken(payload) {
-            return instance.post(baseUrl, payload);
+            return auth.post(baseUrl, payload);
         }
     };
 }

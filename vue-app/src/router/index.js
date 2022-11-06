@@ -2,9 +2,7 @@
 /*https://vueschool.io/articles/vuejs-tutorials/how-to-use-vue-router-a-complete-tutorial/*/
 /*https://youtu.be/rqB7jRunukw*/
 
-import {
-    createRouter, createWebHistory 
-} from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 
 import HomePage from "@/views/HomePage";
 import LoginPage from "@/views/LoginPage";
