@@ -63,7 +63,7 @@ public class FileStorageUtils implements StorageUtils {
     }
 
     public void addHeadersToCSV(String headers) {
-        if (headers == null || headers.isEmpty()){
+        if (headers == null || headers.isEmpty()) {
             System.out.println("Error: There are no headers in the string!");
             return;
         }
@@ -90,7 +90,6 @@ public class FileStorageUtils implements StorageUtils {
             }
         }
     }
-
 
 
     @Override
@@ -159,7 +158,7 @@ public class FileStorageUtils implements StorageUtils {
             CsvToBean<RawProduct> csvToBean = getCSVParser();
             List<RawProduct> products = csvToBean.parse();
             updatedRawProducts = products.stream().map
-                    (x -> new ProductAdapter(x).getProduct())
+                            (x -> new ProductAdapter(x).getProduct())
                     .filter(x -> !x.getName().equals(product.getName()))
                     .map(x -> new ProductAdapter(x).setDataToRawProduct()).collect(Collectors.toList());
         } catch (Exception e) {
@@ -271,7 +270,7 @@ public class FileStorageUtils implements StorageUtils {
 
         } catch (FileNotFoundException e) {
             System.out.println("Error: Can't find the database file");
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error: Unknown error. Try to get correct information from database!");
         }

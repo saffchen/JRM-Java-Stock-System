@@ -69,7 +69,7 @@ public class PDFReportFromFile implements Report {
         report(switchTheme.lightTheme());
     }
 
-    private void report(BaseColor color) throws Exception{
+    private void report(BaseColor color) throws Exception {
         List<ProductDtoReport> tableData = fileStorageUtils.getDataForReportFromCSV(field, criteries);
 
         Document document = new Document();

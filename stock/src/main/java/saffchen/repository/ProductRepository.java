@@ -21,7 +21,7 @@ public interface ProductRepository extends BaseRepository<ProductEntity> {
     List<ProductEntity> productCountByStoreId(@Param("store") Long storeId);*/
 
     @Query("SELECT pr FROM ProductEntity pr WHERE pr.id=:id AND pr.store.id=:storeId")
-    Optional<ProductEntity> get(Long storeId,Long id);
+    Optional<ProductEntity> get(Long storeId, Long id);
 
     @Query("SELECT pr FROM ProductEntity pr WHERE pr.store.id=:storeId ORDER BY pr.name ASC")
     List<ProductEntity> getBySatellite(Long storeId);

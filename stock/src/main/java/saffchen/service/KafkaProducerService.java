@@ -18,10 +18,10 @@ public class KafkaProducerService {
         this.kafkaTopicConfig = kafkaTopicConfig;
     }
 
-    public String sendMessage(StockMessage message){
+    public String sendMessage(StockMessage message) {
         try {
             kafkaProducerConfig.kafkaTemplate().send(message.getTopic(), message.getMessage());
-        } catch (Exception e){
+        } catch (Exception e) {
             return "Topic not found!";
         }
         return "Message sent!";

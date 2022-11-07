@@ -13,10 +13,10 @@ import org.springframework.kafka.config.TopicBuilder;
 @Getter
 public class KafkaTopicConfig {
 
-    @Value(value="${kafka.topic.replicas}")
+    @Value(value = "${kafka.topic.replicas}")
     private String topicReplicas;
 
-    @Value(value="${kafka.topic.partitions}")
+    @Value(value = "${kafka.topic.partitions}")
     private String topicPartitions;
 
     @Bean
@@ -29,6 +29,7 @@ public class KafkaTopicConfig {
                 .replicas(Integer.valueOf(this.topicReplicas))
                 .build();
     }
+
     @Bean
     @Qualifier("${kafka.topic.name2}")
     public NewTopic createKafkaTopic2(@Value("${kafka.topic.name2}") String topicName) {

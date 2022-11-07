@@ -15,6 +15,6 @@ public class DarkThemePDF implements CommandTheme {
 
     @Override
     public BaseColor execute() {
-        return theme.getBaseColor(BaseColor.BLACK);
+        return theme.getBaseColor(BaseColor.GRAY);
     }
 }

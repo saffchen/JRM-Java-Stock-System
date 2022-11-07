@@ -31,7 +31,7 @@ public class ImportFromGSheetCommand implements Command {
                     gSheetImportUtils.getData(),
                     fileStorageUtils.getDataFromCSV()));
             LOGGER.info(result);
-        }  catch (IOException e) {
+        } catch (IOException e) {
             LOGGER.error("Error: Can't connect to GSHEET");
         }
     }

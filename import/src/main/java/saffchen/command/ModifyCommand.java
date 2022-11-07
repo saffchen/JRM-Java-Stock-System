@@ -26,11 +26,6 @@ public class ModifyCommand implements Command {
             = LoggerFactory.getLogger(ModifyCommand.class);
 
     private BufferedReader bufferedReader;
-    private Exit exit;
-
-    public void setExit(Exit exit) {
-        this.exit = exit;
-    }
 
     @Override
     public String getInfo() {
@@ -48,10 +43,6 @@ public class ModifyCommand implements Command {
                     System.out.println("Enter login and password (Attempt count = " + (Authorization.ATTEMPT_COUNT - i) + ")");
                     System.out.print("login: ");
                     String login = creds.nextLine().trim().toLowerCase();
-                    if (login.equals("exit")) {
-                        setExit(new ExitFromCommandMenu());
-                        exit.doExit();
-                    }
                     System.out.print("Enter the password: ");
                     String password = creds.nextLine();
 
