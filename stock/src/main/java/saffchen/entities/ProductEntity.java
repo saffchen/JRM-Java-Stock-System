@@ -57,7 +57,6 @@ public class ProductEntity extends NamedEntity {
     private Integer count;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    //@JoinColumn(name = "satelliteId", referencedColumnName = "id")
     @NonNull
     @JsonBackReference
     private StoreEntity store;
