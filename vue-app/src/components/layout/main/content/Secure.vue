@@ -7,6 +7,6 @@
 
 <script>
 export default {
-    name: "AppSecure"
+    name: 'AppSecure'
 };
 </script>

@@ -1,21 +1,18 @@
 <template>
-    <div class="d-flex align-items-center justify-content-end">
-        <span v-if="isLoggedIn"> | <button
-            class="btn btn-outline-primary"
-            @click="logout"
-        >Logout</button></span>
-    </div>
+    <button
+        class='btn btn-outline-primary'
+        @click='logout'
+    >
+        Logout
+    </button>
 </template>
 
 <script>
 
 export default {
-    computed : {
-        isLoggedIn: function() { return this.$store.getters.isLoggedIn;}
-    },
     methods: {
         logout: function() {
-            this.$store.dispatch('logout')
+            this.$store.dispatch('logout', localStorage.getItem('username'))
                 .then(() => {
                     this.$router.push('/login');
                 });

@@ -4,13 +4,13 @@
 
 import { createRouter, createWebHistory } from 'vue-router';
 
-import HomePage from "@/views/HomePage";
-import LoginPage from "@/views/LoginPage";
-import ProductPage from "@/views/ProductPage";
-import StockPage from "@/views/StockPage";
-import ReportPage from "@/views/ReportPage";
-import ImportPage from "@/views/ImportPage";
-import ExportPage from "@/views/ExportPage";
+import HomePage from '@/views/HomePage';
+import LoginPage from '@/views/LoginPage';
+import ProductPage from '@/views/ProductPage';
+import StockPage from '@/views/StockPage';
+import ReportPage from '@/views/ReportPage';
+import ImportPage from '@/views/ImportPage';
+import ExportPage from '@/views/ExportPage';
 
 const routes = [
     {
@@ -62,13 +62,25 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    // const publicPages = ['/login'];
-    // const authRequired = !publicPages.includes(to.path);
-    // const loggedIn = localStorage.getItem('user');
+    const publicPages = ['Login'];
+    const authRequired = !publicPages.includes(to.name);
+    const loggedIn = localStorage.getItem('token');
 
-    // if (authRequired && !loggedIn) {
-    //     return next('/login');
-    // }
+    if (loggedIn && to.name === 'Login') {
+        return next({
+            name: from.name
+        });
+    }
+
+    if (from.name === 'Login' && to.name === 'Home') {
+        return next();
+    }
+
+    if (authRequired && !loggedIn) {
+        return next({
+            name: 'Login'
+        });
+    }
     next();
 });
 

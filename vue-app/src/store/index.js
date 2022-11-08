@@ -1,33 +1,72 @@
 import { createStore } from 'vuex';
 import axios from 'axios';
 import api from '@/api';
+import jwt_decode from 'jwt-decode';
 
 const store = createStore({
-    state: {
-        Store: {
-            type: Object,
-            default() {}
-        },
-        UserStore: {
-            status: '',
-            token: '',
-            email: 'opa'
-        }
+    state() {
+        return {
+            Store: {
+                type: Object,
+                default() {}
+            },
+            UserStore: {
+                users: [],
+                status: '',
+                username: '',
+                role: '',
+                token: ''
+            }
+        };
     },
     mutations: {
+        ADD_USER(state, user) {
+            state = Object.assign(state, {
+                UserStore: {
+                    users: [
+                        ...state.UserStore.users,
+                        user
+                    ],
+                    status: 'success',
+                    username: user.username,
+                    role: user.role
+                }
+            });
+        },
+        REMOVE_USER(state, username) {
+            state = Object.assign(state, {
+                UserStore: {
+                    ...state.UserStore,
+                    users: [
+                        ...state.UserStore.users
+                    ].filter(user => user.username !== username)    
+                }
+            });
+        },
+        STORE_TOKEN(state, token) {
+            state = Object.assign(state, {
+                UserStore: {
+                    ...state.UserStore,
+                    token
+                }
+            });
+        },
         auth_request(state){
             state.UserStore.status = 'loading';
         },
-        auth_success(state, token, email){
-            state.UserStore.status = 'success';
-            state.UserStore.token = token;
-            state.UserStore.email = email;
+        auth_success(state){
+            state.UserStore = Object.assign(state.UserStore, {
+                ...state.UserStore,
+                status: 'success'
+            });
         },
         auth_error(state){
             state.UserStore.status = 'error';
         },
-        logout(state){
+        CLEAR_USER_DATA(state){
             state.UserStore.status = '';
+            state.UserStore.username = '';
+            state.UserStore.role = '';
             state.UserStore.token = '';
         },
         add(state, newStore) {
@@ -38,10 +77,17 @@ const store = createStore({
         auth({ commit }, payload) {
             commit('auth_request');
             api.security.checkAuthAndGetToken(payload)
-                .then(async(response) => {
-                    const data = await response.data;
-                    console.log(data);
-                    commit('auth_success', data.jwt, 'testAdmin@email.ru');
+                .then((response) => {
+                    const token = response.data.jwt;
+                    const user = jwt_decode(token);
+                    console.log(user);
+                    commit('ADD_USER', user);
+                    commit('STORE_TOKEN', token);
+                    localStorage.setItem('username', user.username);
+                    localStorage.setItem('role', user.role);
+                    localStorage.setItem('token', token);
+                    //commit('auth_success');
+                    return user;
                 })
                 .catch(error => {
                     commit('auth_error');
@@ -69,9 +115,12 @@ const store = createStore({
                     });
             });
         },
-        logout({ commit }) {
+        logout({ commit }, username) {
             return new Promise((resolve) => {
-                commit('logout');
+                commit('REMOVE_USER', username);
+                commit('CLEAR_USER_DATA');
+                localStorage.removeItem('username');
+                localStorage.removeItem('role');
                 localStorage.removeItem('token');
                 delete axios.defaults.headers.common['Authorization'];
                 resolve();
@@ -80,9 +129,10 @@ const store = createStore({
     },
     getters: {
         isLoggedIn: state => !!state.UserStore.token,
-        authStatus: state => state.UserStore.status,
+        //authStatus: state => state.UserStore.status,
         token: state => state.UserStore.token,
-        email: state => state.UserStore.email
+        //username: state => state.UserStore.username
+        userName: state => state.UserStore.users[0].username
     }
 });
 

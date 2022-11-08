@@ -1,12 +1,10 @@
 <template>
-    <div class="d-flex align-items-center justify-content-end">
-        <button
-            class="btn btn-outline-primary"
-            @click="login"
-        >
-            Login
-        </button>
-    </div>
+    <button
+        class='btn btn-outline-primary'
+        @click='login'
+    >
+        Login
+    </button>
 </template>
 
 <script>

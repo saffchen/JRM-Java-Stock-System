@@ -1,5 +1,5 @@
-import api from '../api';
-import store from '../store';
+import api from '@/api';
+import store from '@/store';
 
 // https://v3-migration.vuejs.org/breaking-changes/global-api.html#a-new-global-api-createapp
 export default {

@@ -1,9 +1,9 @@
-import instance from "./instance";
+import instance from './instance';
 
-import productModule from "./products";
-import participantModule from "./participants";
-import stockModule from "./stocks";
-import securityModule from "./security";
+import productModule from './products';
+import participantModule from './participants';
+import stockModule from './stocks';
+import securityModule from './security';
 
 export default {
     products: productModule(instance),

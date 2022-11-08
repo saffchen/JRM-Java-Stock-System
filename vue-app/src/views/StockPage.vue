@@ -1,13 +1,13 @@
 <template>
     <AppHeader />
-    <AppMain :component-name="componentName" />
+    <AppMain :component-name='componentName' />
     <AppFooter />
 </template>
 
 <script>
-import AppHeader from "@/components/layout/header/Header";
-import AppMain from "@/components/layout/main/Main";
-import AppFooter from "@/components/layout/footer/Footer";
+import AppHeader from '@/components/layout/header/Header';
+import AppMain from '@/components/layout/main/Main';
+import AppFooter from '@/components/layout/footer/Footer';
 
 export default {
     name: 'App',
@@ -20,7 +20,7 @@ export default {
         componentName: {
             type: String,
             require: true,
-            default: "StockTable"
+            default: 'StockTable'
         }
     }
 };

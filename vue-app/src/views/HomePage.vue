@@ -1,14 +1,14 @@
 <template>
     <AppHeader />
-    <AppMain component-name="ProductTable" />
+    <AppMain component-name='ProductTable' />
     <AppFooter />
 </template>
 
 
 <script>
-import AppHeader from "@/components/layout/header/Header";
-import AppMain from "@/components/layout/main/Main";
-import AppFooter from "@/components/layout/footer/Footer";
+import AppHeader from '@/components/layout/header/Header';
+import AppMain from '@/components/layout/main/Main';
+import AppFooter from '@/components/layout/footer/Footer';
 
 export default {
     name: 'App',

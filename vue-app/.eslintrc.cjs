@@ -25,6 +25,7 @@ module.exports = {
         }],
         "object-curly-spacing": ["error", "always"],
         "template-curly-spacing": ["error", "never"],
+        "quotes": ["error", "single", { "avoidEscape": true }],
         "vue/comma-dangle": ["error", "never"],
         "vue/comma-spacing": ["error", {
             "before": false,
@@ -42,6 +43,7 @@ module.exports = {
         }],
         "vue/singleline-html-element-content-newline": "off",
         "vue/html-indent": ["error", 4],
+        "vue/html-quotes": ["error", "single", { avoidEscape: true }],
         "vue/script-indent": ["error", 4],
         "vue/require-default-prop": "off"
     }

@@ -3,8 +3,8 @@ https://medium.com/@pratikpatel_60309/dynamic-importing-component-templates-with
 
 
 <template>
-    <main class="main pb-5">
-        <component :is="comp" />
+    <main class='main pb-5'>
+        <component :is='comp' />
     </main>
 </template>
 
@@ -12,12 +12,12 @@ https://medium.com/@pratikpatel_60309/dynamic-importing-component-templates-with
 import { defineAsyncComponent } from 'vue';
 
 export default {
-    name: "DynamicComponent",
+    name: 'DynamicComponent',
     props: {
         componentName: {
             type: String,
             required: true,
-            default: "ProductTable"
+            default: 'ProductTable'
         }
     },
     computed: {

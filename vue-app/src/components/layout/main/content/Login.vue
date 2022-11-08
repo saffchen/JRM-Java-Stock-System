@@ -1,39 +1,38 @@
 <template>
+    <h3 class='mt-4 text-center'>The application requires authorization</h3>
+    <p class="mb-3 text-center">Please verify your authority</p>
     <form
-        id="login"
-        class="form text-center"
-        @submit.prevent="login"
+        id='login'
+        class='form text-center'
+        @submit.prevent='login'
     >
-        <h2 class="my-4">Sign in</h2>
-        <div class="mb-3">
-            <label class="form-label">
-                E-mail
+        <div class='mb-3'>
+            <label class='form-label'>
                 <input
-                    v-model="email"
+                    v-model='email'
                     required
-                    type="email"
-                    placeholder="Email"
-                    class="form-control"
+                    type='email'
+                    placeholder='Email'
+                    class='form-control'
                 >
             </label>
         </div>
-        <div class="mb-3">
-            <label class="form-label">
-                Password
+        <div class='mb-3'>
+            <label class='form-label'>
                 <input
-                    v-model="password"
+                    v-model='password'
                     required
-                    type="password"
-                    placeholder="Password"
-                    class="form-control"
+                    type='password'
+                    placeholder='Password'
+                    class='form-control'
                 >
             </label>
         </div>
         <div>
             <button
-                class="btn btn-primary text-center"
-                form="login"
-                type="submit"
+                class='btn btn-primary text-center'
+                form='login'
+                type='submit'
             >
                 Login
             </button>
@@ -43,23 +42,25 @@
 
 <script>
 export default {
-    name: "AppLogin",
+    name: 'AppLogin',
     data() {
         return {
-            email: "",
-            password: ""
+            email: '',
+            password: ''
         };
     },
     methods: {
         login: function() {
-            const email = 'testAdmin@email.ru';
-            const password = 'testadmin';
             this.$store.dispatch('auth', {
-                email,
-                password
+                email: this.email,
+                password: this.password
             })
-                .then(() => this.$router.push('/'))
-                .catch(err => console.log(err));
+            .then(() => {
+                return this.$router.push({
+                    name: 'Home'
+                });
+            })
+            .catch(err => console.log(err));
         }
     }
 };
