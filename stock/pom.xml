@@ -12,7 +12,7 @@
 
     <groupId>ru.javaroadmap.stock</groupId>
     <artifactId>stock</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>stock</name>
 
     <properties>
@@ -96,7 +96,7 @@
         <dependency>
             <groupId>ru.javaroadmap.shared-dto</groupId>
             <artifactId>shared-dto</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
