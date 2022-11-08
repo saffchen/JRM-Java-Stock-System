@@ -26,7 +26,8 @@ public class StoreService {
     }
 
     public StoreEntity getByName(String storeName) {
-        return storeRepository.findByName(storeName).get();
+        return storeRepository.findByName(storeName)
+                .orElseThrow(() -> new NoEntityException("Object with name " + storeName + " is not found"));
     }
 
     public StoreEntity create(StoreEntity storeEntity) {
