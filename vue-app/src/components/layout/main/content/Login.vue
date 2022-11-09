@@ -1,38 +1,38 @@
 <template>
-    <h3 class='mt-4 text-center'>The application requires authorization</h3>
+    <h3 class="mt-4 text-center">The application requires authorization</h3>
     <p class="mb-3 text-center">Please verify your authority</p>
     <form
-        id='login'
-        class='form text-center'
-        @submit.prevent='login'
+        id="login"
+        class="form text-center"
+        @submit.prevent="login"
     >
-        <div class='mb-3'>
-            <label class='form-label'>
+        <div class="mb-3">
+            <label class="form-label">
                 <input
-                    v-model='email'
+                    v-model="email"
                     required
-                    type='email'
-                    placeholder='Email'
-                    class='form-control'
+                    type="email"
+                    placeholder="Email"
+                    class="form-control"
                 >
             </label>
         </div>
-        <div class='mb-3'>
-            <label class='form-label'>
+        <div class="mb-3">
+            <label class="form-label">
                 <input
-                    v-model='password'
+                    v-model="password"
                     required
-                    type='password'
-                    placeholder='Password'
-                    class='form-control'
+                    type="password"
+                    placeholder="Password"
+                    class="form-control"
                 >
             </label>
         </div>
         <div>
             <button
-                class='btn btn-primary text-center'
-                form='login'
-                type='submit'
+                class="btn btn-primary text-center"
+                form="login"
+                type="submit"
             >
                 Login
             </button>
@@ -51,16 +51,16 @@ export default {
     },
     methods: {
         login: function() {
-            this.$store.dispatch('auth', {
+            this.$store.dispatch('user/login', {
                 email: this.email,
                 password: this.password
             })
-            .then(() => {
-                return this.$router.push({
-                    name: 'Home'
-                });
-            })
-            .catch(err => console.log(err));
+                .then(() => {
+                    return this.$router.push({
+                        name: 'Home'
+                    });
+                })
+                .catch(err => console.log(err));
         }
     }
 };

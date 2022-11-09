@@ -1,7 +1,7 @@
 <template>
     <button
-        class='btn btn-outline-primary'
-        @click='logout'
+        class="btn btn-outline-primary"
+        @click="logout"
     >
         Logout
     </button>
@@ -12,9 +12,11 @@
 export default {
     methods: {
         logout: function() {
-            this.$store.dispatch('logout', localStorage.getItem('username'))
+            this.$store.dispatch('user/logout')
                 .then(() => {
-                    this.$router.push('/login');
+                    this.$router.push({
+                        name: 'Login'
+                    });
                 });
         }
     }

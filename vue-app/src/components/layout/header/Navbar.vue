@@ -1,26 +1,26 @@
 <template>
-    <nav class='navbar navbar-expand-lg navbar-light bg-light'>
-        <div class='container'>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
             <DropdownMenu />
-            <div class='navbar-brand brand text-center'>
+            <div class="navbar-brand brand text-center">
                 JRM Stock System Project
             </div>
             <div
-                v-if='$store.getters.isLoggedIn'
-                class='d-flex align-items-center justify-content-end'
+                v-if="$store.getters['user/loggedIn']"
+                class="d-flex align-items-center justify-content-end"
             >
-                <span class='me-3'>{{ $store.getters.userName }}</span>
+                <span class="me-3">{{ $store.getters['user/userName'] }}</span>
                 <LogoutBtn />
             </div>
             <div
                 v-else
-                class='d-flex align-items-center justify-content-end'
+                class="d-flex align-items-center justify-content-end"
             >
                 <LoginBtn />
             </div>
         </div>
     </nav>
-    <!-- <div>{{ $store.state.UserStore }}</div> -->
+    <div>{{ $store.state.user }}</div>
 </template>
 
 <script>

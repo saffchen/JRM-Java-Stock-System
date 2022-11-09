@@ -1,6 +1,6 @@
 <template>
     <AppHeader />
-    <AppMain :component-name='componentName' />
+    <AppMain :component-name="componentName" />
     <AppFooter />
 </template>
 

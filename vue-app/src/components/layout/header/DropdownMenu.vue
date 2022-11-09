@@ -1,27 +1,27 @@
 <template>
-    <div class='dropdown'>
+    <div class="dropdown">
         <button
-            id='menu'
-            class='btn btn-default dropdown-toggle'
-            type='button'
-            data-bs-toggle='dropdown'
+            id="menu"
+            class="btn btn-default dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
         >
-            <span class='fs-5'>Navigate</span>
+            <span class="fs-5">Navigate</span>
         </button>
         <ul
-            class='dropdown-menu dropdown-menu-start animate slide-in m-0'
-            aria-labelledby='menu'
+            class="dropdown-menu dropdown-menu-start animate slide-in m-0"
+            aria-labelledby="menu"
         >
             <li
-                v-for='item, id in menuItems'
-                :key='id'
-                @click='$router.push({
+                v-for="item, id in menuItems"
+                :key="id"
+                @click="$router.push({
                     name: item.id 
-                })'
+                })"
             >
                 <a
-                    class='dropdown-item p-2'
-                    href='#'
+                    class="dropdown-item p-2"
+                    href="#"
                 >{{ item.label }}</a>
             </li>
         </ul>

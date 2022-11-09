@@ -1,6 +1,6 @@
 <template>
     <AppHeader />
-    <AppMain component-name='Secure' />
+    <AppMain component-name="Secure" />
     <AppFooter />
 </template>
 

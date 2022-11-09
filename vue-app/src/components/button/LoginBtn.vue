@@ -1,7 +1,7 @@
 <template>
     <button
-        class='btn btn-outline-primary'
-        @click='login'
+        class="btn btn-outline-primary"
+        @click="login"
     >
         Login
     </button>
@@ -12,7 +12,9 @@
 export default {
     methods: {
         login: function () {
-            this.$router.push('/login');
+            this.$router.push({
+                name: 'Login'
+            });
         }
     }
 };

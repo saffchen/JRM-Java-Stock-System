@@ -1,6 +1,6 @@
 <template>
     <AppHeader />
-    <AppMain component-name='ProductTable' />
+    <AppMain component-name="ProductTable" />
     <AppFooter />
 </template>
 

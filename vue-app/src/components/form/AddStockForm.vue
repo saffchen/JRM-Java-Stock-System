@@ -1,43 +1,43 @@
 <template>
     <form
-        class='form'
-        name='add-stock'
-        method='post'
-        @submit='addStock'
+        class="form"
+        name="add-stock"
+        method="post"
+        @submit="addStock"
     >
-        <fieldset class='mb-3'>
+        <fieldset class="mb-3">
             <label
-                for='stock-name'
-                class='form-label'
+                for="stock-name"
+                class="form-label"
             >Name</label>
             <input
-                id='stock-name'
-                v-model='name'
-                type='text'
-                class='form-control'
+                id="stock-name"
+                v-model="name"
+                type="text"
+                class="form-control"
             >
         </fieldset>
-        <fieldset class='mb-3'>
+        <fieldset class="mb-3">
             <label
-                for='stock-description'
-                class='form-label'
+                for="stock-description"
+                class="form-label"
             >Description</label>
             <textarea
-                id='stock-description'
-                v-model='description'
-                class='form-control'
+                id="stock-description"
+                v-model="description"
+                class="form-control"
             />
         </fieldset>
     </form>
     <div
-        v-if='showMessage'
-        id='status'
-        class='mt-3'
+        v-if="showMessage"
+        id="status"
+        class="mt-3"
     >
         <span
-            class='message'
-            :class='messageClass'
-            v-text='messageText'
+            class="message"
+            :class="messageClass"
+            v-text="messageText"
         />
     </div>
 </template>

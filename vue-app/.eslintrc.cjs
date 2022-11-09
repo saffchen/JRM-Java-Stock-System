@@ -43,7 +43,7 @@ module.exports = {
         }],
         "vue/singleline-html-element-content-newline": "off",
         "vue/html-indent": ["error", 4],
-        "vue/html-quotes": ["error", "single", { avoidEscape: true }],
+        "vue/html-quotes": ["error", "double", { avoidEscape: true }],
         "vue/script-indent": ["error", 4],
         "vue/require-default-prop": "off"
     }

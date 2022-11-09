@@ -1,6 +1,6 @@
 <template>
     <AppHeader />
-    <AppMain component-name='Login' />
+    <AppMain component-name="Login" />
 </template>
 
 

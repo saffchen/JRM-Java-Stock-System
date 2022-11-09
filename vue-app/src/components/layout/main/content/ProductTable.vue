@@ -1,101 +1,101 @@
 <template>
-    <div class='container-xl pt-3'>
-        <div class='d-flex align-items-center justify-content-between py-3'>
-            <div class='d-flex align-items-center store-chooser'>
+    <div class="container-xl pt-3">
+        <div class="d-flex align-items-center justify-content-between py-3">
+            <div class="d-flex align-items-center store-chooser">
                 <label
-                    class='form-label'
-                    for='stores'
+                    class="form-label"
+                    for="stores"
                 >Choose a store:</label>
                 <select
-                    id='stores'
-                    name='stores'
-                    class='form-control'
-                    value='7'
-                    @change='switchStore'
+                    id="stores"
+                    name="stores"
+                    class="form-control"
+                    value="7"
+                    @change="switchStore"
                 >
                     <option
-                        v-for='store in stores'
-                        :key='store.id'
-                        :value='store.id'
-                        :selected='store.id === store_id'
-                        v-text='store.name'
+                        v-for="store in stores"
+                        :key="store.id"
+                        :value="store.id"
+                        :selected="store.id === store_id"
+                        v-text="store.name"
                     />
                 </select>
             </div>
             <div>
-                <span class='me-3'>Push to add new product</span>
-                <button class='btn btn-primary'>
+                <span class="me-3">Push to add new product</span>
+                <button class="btn btn-primary">
                     Add
                 </button>
             </div>
         </div>
     
         <table
-            id='datatable'
-            class='table table-hover align-middle'
+            id="datatable"
+            class="table table-hover align-middle"
         >
-            <thead class='bg-light'>
+            <thead class="bg-light">
                 <tr>
                     <th
-                        v-for='header, id in headers'
-                        :key='id'
+                        v-for="header, id in headers"
+                        :key="id"
                         :class="id > 0 && 'text-center'"
-                        v-text='header'
+                        v-text="header"
                     />
                 </tr>
             </thead>
             <tbody>
                 <tr
-                    v-for='record, id in products'
-                    :key='id'
+                    v-for="record, id in products"
+                    :key="id"
                 >
                     <td>
-                        <div class='d-flex align-items-center'>
+                        <div class="d-flex align-items-center">
                             <div>
                                 <p
-                                    class='fw-bold mb-1 text-nowrap'
-                                    v-text='record.name'
+                                    class="fw-bold mb-1 text-nowrap"
+                                    v-text="record.name"
                                 />
                                 <p
-                                    class='text-muted mb-0 d-none d-lg-inline'
-                                    v-text='record.description'
+                                    class="text-muted mb-0 d-none d-lg-inline"
+                                    v-text="record.description"
                                 />
                             </div>
                         </div>
                     </td>
                     <td
-                        class='text-center'
-                        v-text='record.price'
+                        class="text-center"
+                        v-text="record.price"
                     />
                     <td>
-                        <div class='d-flex flex-column align-items-center'>
+                        <div class="d-flex flex-column align-items-center">
                             <span
-                                v-for='tag, idx in record.tags'
-                                :key='idx'
-                                class='badge bg-info rounded-pill d-inline'
-                                v-text='tag'
+                                v-for="tag, idx in record.tags"
+                                :key="idx"
+                                class="badge bg-info rounded-pill d-inline"
+                                v-text="tag"
                             />
                         </div>
                     </td>
                     <td
-                        class='text-center'
-                        v-text='record.category'
+                        class="text-center"
+                        v-text="record.category"
                     />
                     <td
-                        class='text-center'
-                        v-text='record.count'
+                        class="text-center"
+                        v-text="record.count"
                     />
                     <td>
-                        <div class='d-flex align-items-center justify-content-around'>
+                        <div class="d-flex align-items-center justify-content-around">
                             <button
-                                type='button'
-                                class='btn btn-outline-warning btn-sm me-2 border-0'
+                                type="button"
+                                class="btn btn-outline-warning btn-sm me-2 border-0"
                             >
                                 Edit
                             </button>
                             <button
-                                type='button'
-                                class='btn btn-outline-danger btn-sm border-0'
+                                type="button"
+                                class="btn btn-outline-danger btn-sm border-0"
                             >
                                 Remove
                             </button>
