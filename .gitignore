@@ -26,3 +26,5 @@ hs_err_pid*
 **/target/
 /import/tokens/
 /stock/test.csv
+/buildSrc/
+/.gradle/
