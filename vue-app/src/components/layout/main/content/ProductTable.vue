@@ -22,7 +22,7 @@
                     />
                 </select>
             </div>
-            <div>
+            <div v-if="$store.getters['user/isAdmin']">
                 <span class="me-3">Push to add new product</span>
                 <button class="btn btn-primary">
                     Add
@@ -85,7 +85,7 @@
                         class="text-center"
                         v-text="record.count"
                     />
-                    <td>
+                    <td v-if="$store.getters['user/isAdmin']">
                         <div class="d-flex align-items-center justify-content-around">
                             <button
                                 type="button"
@@ -113,7 +113,7 @@ export default {
     data() {
         return {
             table: null,
-            headers: ['Product', 'Price $', 'Tags', 'Category', 'Quantity', ''],
+            headers: this.getHeaders(),
             stores: [],
             products: [],
             store_id: 1
@@ -140,6 +140,13 @@ export default {
         this.applyTable();
     },
     methods: {
+        getHeaders: function () {
+            const headers = ['Product', 'Price $', 'Tags', 'Category', 'Quantity'];
+            if (this.$store.getters['user/isAdmin']) {
+                headers.push('Actions');
+            }
+            return headers;
+        },
         getProducts: function () {
             this.$load(async () => {
                 this.products = (await this.$api.products.getAll(this.store_id)).data;

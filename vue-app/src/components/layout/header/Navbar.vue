@@ -5,22 +5,23 @@
             <div class="navbar-brand brand text-center">
                 JRM Stock System Project
             </div>
-            <div
-                v-if="$store.getters['user/loggedIn']"
-                class="d-flex align-items-center justify-content-end"
-            >
-                <span class="me-3">{{ $store.getters['user/userName'] }}</span>
-                <LogoutBtn />
+            <div class="d-flex align-items-center justify-content-end">
+                <span
+                    v-if="$store.getters['user/loggedIn']"
+                    class="me-3"
+                >
+                    {{ $store.getters['user/userName'] }}
+                </span>
+                <LogoutBtn v-if="$store.getters['user/loggedIn']" />
             </div>
-            <div
+            <!-- <div
                 v-else
                 class="d-flex align-items-center justify-content-end"
             >
                 <LoginBtn />
-            </div>
+            </div> -->
         </div>
     </nav>
-    <div>{{ $store.state.user }}</div>
 </template>
 
 <script>

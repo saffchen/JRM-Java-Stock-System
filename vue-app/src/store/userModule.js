@@ -57,7 +57,7 @@ const userModule = {
         token: state => state.token,
         userName: state => (state.user ? state.user.username : ''),
         loggedIn: state => state.token !== '',
-        isAdmin: state => (state.user ? state.user.role === 'ROLE_ADMIN' : false)
+        isAdmin: (state, getters) => getters.loggedIn && state.user.role === 'ROLE_ADMIN'
     }
 };
 

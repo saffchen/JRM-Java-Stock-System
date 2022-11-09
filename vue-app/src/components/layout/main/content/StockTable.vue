@@ -1,6 +1,9 @@
 <template>
     <div class="container-xl pt-3">
-        <div class="d-flex align-items-center justify-content-end py-3">
+        <div
+            v-if="$store.getters['user/isAdmin']"
+            class="d-flex align-items-center justify-content-end py-3"
+        >
             <span class="me-3">Push to add new store</span>
             <button
                 class="btn btn-primary"
@@ -39,7 +42,7 @@
                         style="width: 150px;"
                         v-text="record.count"
                     />
-                    <td>
+                    <td v-if="$store.getters['user/isAdmin']">
                         <div class="d-flex align-items-center justify-content-around">
                             <button
                                 type="button"
@@ -64,6 +67,7 @@
         </table>
     </div>
     <Modal
+        v-if="$store.getters['user/isAdmin']"
         id="add-stock"
         component-name="AddStockForm"
         label="Adding new stock"
@@ -72,6 +76,7 @@
         @process-stock="addStock"
     />
     <Modal
+        v-if="$store.getters['user/isAdmin']"
         id="update-stock"
         component-name="UpdateStockForm"
         label="Updating new stock"
@@ -91,7 +96,7 @@ export default {
     data() {
         return {
             table: null,
-            headers: ['Name', 'Description', 'Total Products', ''],
+            headers: this.getHeaders(),
             stocks: []
         };
     },
@@ -112,6 +117,13 @@ export default {
         this.applyTable();
     },
     methods: {
+        getHeaders: function () {
+            const headers = ['Name', 'Description', 'Total Products'];
+            if (this.$store.getters['user/isAdmin']) {
+                headers.push('Actions');
+            }
+            return headers;
+        },
         getStocks: function () {
             this.$load(async () => {
                 this.stocks = (await this.$api.stocks.getAll()).data;
