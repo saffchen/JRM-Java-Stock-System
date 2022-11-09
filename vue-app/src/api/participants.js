@@ -1,9 +1,9 @@
 const baseUrl = 'participants/';
 
-export default function ({ guest }) {
+export default function ({ user }) {
     return {
         getAll() {
-            return guest.get(baseUrl);
+            return user.get(baseUrl);
         }
     };
 }

@@ -14,25 +14,18 @@
                 </span>
                 <LogoutBtn v-if="$store.getters['user/loggedIn']" />
             </div>
-            <!-- <div
-                v-else
-                class="d-flex align-items-center justify-content-end"
-            >
-                <LoginBtn />
-            </div> -->
         </div>
     </nav>
 </template>
 
 <script>
 import DropdownMenu from './DropdownMenu';
-import LoginBtn from '@/components/button/LoginBtn';
 import LogoutBtn from '@/components/button/LogoutBtn';
 
 export default {
     name: 'AppNavbar',
     components: {
-        DropdownMenu, LoginBtn, LogoutBtn
+        DropdownMenu, LogoutBtn
     }
 };
 

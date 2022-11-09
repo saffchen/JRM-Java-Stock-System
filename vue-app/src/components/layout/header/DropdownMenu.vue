@@ -3,6 +3,7 @@
         <button
             id="menu"
             class="btn btn-default dropdown-toggle"
+            :class="$store.getters['user/loggedIn'] || 'disabled'"
             type="button"
             data-bs-toggle="dropdown"
         >

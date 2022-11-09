@@ -6,7 +6,7 @@
 
 import axios from 'axios';
 
-const guestInstance = axios.create({
+const userInstance = axios.create({
     baseURL: 'http://localhost:8080/api/v1/',
     withCredentials: false,
     headers: {
@@ -29,7 +29,7 @@ const authInstance = axios.create({
 });
 
 export default {
-    guest: guestInstance,
+    user: userInstance,
     admin: adminInstance,
     auth: authInstance
 };
