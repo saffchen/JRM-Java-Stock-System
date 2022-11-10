@@ -1,14 +1,4 @@
 <template>
-    <div>
-        {{ $store.getters['stock/getStatus'] }}
-    </div>
-    <div>
-        {{ $store.getters['stock/count'] }}
-    </div>
-    <div>
-        <p>editing: {{ editing }}</p>
-        <p>adding: {{ adding }}</p>
-    </div>
     <div class="container-xl pt-3">
         <div
             v-if="$store.getters['user/isAdmin']"
@@ -38,7 +28,7 @@
                     />
                 </tr>
             </thead>
-            <tbody>
+            <tbody v-if="$store.getters['stock/getStatus'] !== ''">
                 <tr
                     v-for="record in stocks"
                     :key="record.id"
@@ -50,7 +40,6 @@
                     />
                     <td
                         class="text-center"
-                        style="width: 150px;"
                         v-text="record.count"
                     />
                     <td v-if="$store.getters['user/isAdmin']">
@@ -129,8 +118,9 @@ export default {
         this.$store.dispatch('stock/fetchAll');
     },
     updated() {
-        this.getStocks();
-        this.applyTable();
+        this.stocks = this.$store.getters['stock/getAll'];
+        // eslint-disable-next-line no-undef
+        this.table = $('#datatable').DataTable();
     },
     methods: {
         getHeaders: function () {
@@ -139,13 +129,6 @@ export default {
                 headers.push('Actions');
             }
             return headers;
-        },
-        getStocks: function () {
-            this.stocks = this.$store.getters['stock/getAll'];
-        },
-        applyTable: function () {
-            // eslint-disable-next-line no-undef
-            this.table = $('#datatable').DataTable();
         },
         activateAdding: function () {
             this.adding = true;
@@ -162,7 +145,6 @@ export default {
             this.editing = false;
         },
         deleteStock: function (id) {
-            console.log(id);
             this.$load(async () => {
                 await this.$store.dispatch('stock/delete', id);
             });

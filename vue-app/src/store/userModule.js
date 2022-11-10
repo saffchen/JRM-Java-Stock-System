@@ -31,17 +31,22 @@ const userModule = {
     },
     actions: {
         login({ commit }, payload) {
-            api.security.checkAuthAndGetToken(payload)
-                .then((response) => {
-                    const token = response.data.jwt;
-                    const service = new JwtService(token);
-                    commit('SET_USER', service.getUser());
-                    commit('STORE_TOKEN', service.getToken());
-                    localStorage.setItem('token', service.getToken());
+            return api.security.checkAuthAndGetToken(payload)
+                .then(async (response) => {
+                    if (await response.status === 200) {
+                        const token = response.data.jwt;
+                        const service = new JwtService(token);
+                        commit('SET_USER', service.getUser());
+                        commit('STORE_TOKEN', service.getToken());
+                        localStorage.setItem('token', service.getToken());
+                        return 'ok';
+                    }
+                    return 'error';
                 })
                 .catch(error => {
-                    commit('RESET_STATE');
                     console.log(error);
+                    commit('RESET_STATE');
+                    return 'error';
                 });
         },
         logout({ commit }) {

@@ -53,6 +53,13 @@ const routes = [
         path: '/export',
         name: 'Export',
         component: ExportPage
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        redirect: {
+            name: 'Home',
+            params: []
+        }
     }
 ];
 
