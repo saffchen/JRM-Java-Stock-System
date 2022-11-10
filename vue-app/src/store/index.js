@@ -1,20 +1,11 @@
 import { createStore } from 'vuex';
+import stockModule from './stockModule';
 import userModule from './userModule';
 
 const store = createStore({
-    state: {
-        Store: {
-            type: Object,
-            default() {}
-        }
-    },
-    mutations: {
-        add(state, newStore) {
-            state.Store = newStore;
-        }
-    },
     modules: {
-        user: userModule
+        user: userModule,
+        stock: stockModule
     }
 });
 

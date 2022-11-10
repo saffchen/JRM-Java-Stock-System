@@ -11,9 +11,10 @@
             >Name</label>
             <input
                 id="stock-name"
-                v-model="name"
+                :value="name"
                 type="text"
                 class="form-control"
+                @input="changeName"
             >
         </fieldset>
         <fieldset class="mb-3">
@@ -23,17 +24,23 @@
             >Description</label>
             <textarea
                 id="stock-description"
-                v-model="description"
+                :value="description"
                 class="form-control"
+                @input="changeDescription"
             />
-            <button
-                type="button"
-                @click="updateData"
-            >
-                Get the current stock
-            </button>
         </fieldset>
     </form>
+    <div
+        v-if="showMessage"
+        id="status"
+        class="mt-3"
+    >
+        <span
+            class="message"
+            :class="messageClass"
+            v-text="messageText"
+        />
+    </div>
 </template>
 
 
@@ -43,61 +50,91 @@
 
 export default {
     name: 'UpdateStockForm',
-    emits: ['action'],
     data() {
         return {
-            id: undefined,
             name: '',
             description: '',
-            payload: {}
+            payload: {},
+            showMessage: false,
+            messageClass: '',
+            messageText: ''
         };
     },
-    watch: {
-        name() {
-            this.payload['name'] = this.name;
-        },
-        description() {
-            this.payload['description'] = this.description;
-        }
-    },
     activated() {
-        console.log('UpdateStockFrom has been activated');
+        const stock = this.$store.getters['stock/editObject'];
+        this.name = stock.name;
+        this.description = stock.description;
+        this.payload = {
+            id: stock.id,
+            name: stock.name,
+            description: stock.description
+        };
     },
     methods: {
-        updateData: function () {
-            const storeJSON = JSON.parse(JSON.stringify(this.$store.state.Store));
-            const storeMap = new Map(Object.entries(storeJSON));
-            console.log('store.js.name', storeMap);
-            console.log('store.js.id', storeMap.get('id'));
-            console.log('this id', this.id);
-            this.id = storeMap.get('id');
-            console.log('this id', this.id);
-            this.name = storeMap.get('name');
-            this.description = storeMap.get('description');
+        changeName: function(event) {
+            this.name = event.target.value;
+            this.payload.name = event.target.value;
+            this.showMessage = false;
+        },
+        changeDescription: function(event) {
+            this.description = event.target.value;
+            this.payload.description = event.target.value;
+            this.showMessage = false;
         },
         updateStock: function (event) {
             if (event.type === 'submit') {
                 event.preventDefault();
             }
             if (this.name === '' || this.description === '' ) {
-                console.log('[ERROR]: Please fill in empty fields');
+                this.messageClass = 'error';
+                this.messageText = 'Fields cannot be empty!';
+                this.showMessage = true;
                 return;
             }
             this.$load(async () => {
-                await this.$api.stocks.update(this.payload, this.id);
-                this.$emit('action');
-                console.log('[SUCCESS]: Stock updated');
-            });
-            this.name = '';
-            this.description = '';
+                await this.$store.dispatch('stock/update', this.payload);
+                this.messageClass = 'success';
+                this.messageText = 'The stock was successfully updated';
+                this.showMessage = true;
+            }, this.handleError);
+            this.refresh();
         },
-        refresh: function () {
+        handleError: function (error) {
+            this.messageClass = 'error';
+            this.messageText = error.response.data.message;
+            this.showMessage = true;
+        },
+        refresh: function() {
             this.name = '';
             this.description = '';
+            this.messageClass = '';
+            this.messageText = '';
+            this.showMessage = false;
+            document.getElementById('stock-description').removeAttribute('style');
         }
     }
 };
 </script>
 
-<style>
+<style scoped>
+
+#status {
+    text-align: right;
+}
+
+.message {
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.success {
+    background: #095d09;
+    color: white;
+}
+
+.error {
+    background: #b21111;
+    color: white;
+}
+
 </style>

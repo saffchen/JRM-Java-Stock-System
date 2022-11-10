@@ -10,8 +10,8 @@ export default function ({ user, admin }) {
         get(id) {
             return user.get(`${baseUrl}${id}`);
         },
-        update(payload, id) {
-            return admin.put(`${baseUrl}${id}`, payload, {
+        update(payload) {
+            return admin.put(`${baseUrl}${payload.id}`, payload, {
                 headers: {
                     Accept: 'application/json',
                     Authorization: `Bearer ${store.getters['user/token']}`

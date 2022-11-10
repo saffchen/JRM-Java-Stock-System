@@ -1,4 +1,14 @@
 <template>
+    <div>
+        {{ $store.getters['stock/getStatus'] }}
+    </div>
+    <div>
+        {{ $store.getters['stock/count'] }}
+    </div>
+    <div>
+        <p>editing: {{ editing }}</p>
+        <p>adding: {{ adding }}</p>
+    </div>
     <div class="container-xl pt-3">
         <div
             v-if="$store.getters['user/isAdmin']"
@@ -9,6 +19,7 @@
                 class="btn btn-primary"
                 data-bs-toggle="modal"
                 data-bs-target="#add-stock"
+                @click="activateAdding"
             >
                 Add
             </button>
@@ -49,7 +60,7 @@
                                 class="btn btn-outline-warning btn-sm me-2 border-0"
                                 data-bs-toggle="modal"
                                 data-bs-target="#update-stock"
-                                @click="passObject(record)"
+                                @click="activateEditing(record)"
                             >
                                 Edit
                             </button>
@@ -73,7 +84,8 @@
         label="Adding new stock"
         btn-value="Save"
         btn-event="addStock"
-        @process-stock="addStock"
+        :activated="adding"
+        @deactivate="deactivateAdding"
     />
     <Modal
         v-if="$store.getters['user/isAdmin']"
@@ -82,7 +94,8 @@
         label="Updating new stock"
         btn-value="Update"
         btn-event="updateStock"
-        @process-stock="updateStock"
+        :activated="editing"
+        @deactivate="deactivateEditing"
     />
 </template>
 
@@ -97,7 +110,9 @@ export default {
         return {
             table: null,
             headers: this.getHeaders(),
-            stocks: []
+            stocks: [],
+            adding: false,
+            editing: false
         };
     },
     watch: {
@@ -111,9 +126,10 @@ export default {
         }
     },
     created() {
-        this.getStocks();
+        this.$store.dispatch('stock/fetchAll');
     },
     updated() {
+        this.getStocks();
         this.applyTable();
     },
     methods: {
@@ -125,29 +141,30 @@ export default {
             return headers;
         },
         getStocks: function () {
-            this.$load(async () => {
-                this.stocks = (await this.$api.stocks.getAll()).data;
-            });
+            this.stocks = this.$store.getters['stock/getAll'];
         },
         applyTable: function () {
             // eslint-disable-next-line no-undef
             this.table = $('#datatable').DataTable();
         },
-        addStock: function (stockObj) {
-            this.stocks.push(stockObj);
+        activateAdding: function () {
+            this.adding = true;
+        },  
+        deactivateAdding: function () {
+            this.adding = false;
         },
-        passObject: function (object) {
-            this.$store.commit('add', object);
-            console.log('Store object in StockTable', this.$store.state);
+        activateEditing: function (object) {
+            this.$store.commit('stock/ACTIVATE_EDITING', object);
+            this.editing = true;
         },
-        updateStock: function () {
-            this.getStocks();
+        deactivateEditing: function () {
+            this.$store.commit('stock/DEACTIVATE_EDITING');
+            this.editing = false;
         },
         deleteStock: function (id) {
             console.log(id);
             this.$load(async () => {
-                await this.$api.stocks.delete(id);
-                this.getStocks();
+                await this.$store.dispatch('stock/delete', id);
             });
         }
     }

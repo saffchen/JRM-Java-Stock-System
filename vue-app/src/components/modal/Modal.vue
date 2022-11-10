@@ -2,6 +2,8 @@
     <div
         :id="id"
         class="modal fade"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
         tabindex="-1"
         aria-labelledby="modalLabel"
         aria-hidden="true"
@@ -23,12 +25,14 @@
                         @click="closeModal"
                     />
                 </div>
-                <div class="modal-body">
+                <div
+                    v-if="activated"
+                    class="modal-body"
+                >
                     <keep-alive>
                         <component
                             :is="comp"
                             ref="stockForm"
-                            @action="processStock"
                         />
                     </keep-alive>
                 </div>
@@ -68,14 +72,12 @@ export default {
             type: String,
             required: true
         },
-        stockObject: {
-            type: Object,
-            default() {
-                return {};
-            }
-        }
+        activated: Boolean
     },
-    emits: ['processStock'],
+    emits: [
+        'processStock',
+        'deactivate'
+    ],
     data() {
         return {
             addResult: {}
@@ -88,15 +90,13 @@ export default {
             return defineAsyncComponent(() => import(`../form/${name}.vue`));
         }
     },
-    activated() {
-        console.log('modal is activated');
-    },
     methods: {
         handleClick: function(event) {
             this.$refs.stockForm[this.btnEvent](event);
         },
         closeModal: function() {
             this.$refs.stockForm.refresh();
+            this.$emit('deactivate');
         },
         processStock: function (addResult) {
             if (addResult) {

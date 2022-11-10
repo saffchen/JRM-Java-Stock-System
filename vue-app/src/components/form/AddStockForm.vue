@@ -47,7 +47,6 @@
 
 export default {
     name: 'AddStockForm',
-    emits: ['action'],
     data() {
         return {
             name: '',
@@ -81,19 +80,12 @@ export default {
                 return;
             }
             this.$load(async () => {
-                const result = await this.$api.stocks.create(this.payload);
-                if (result.status === 200) {
-                    this.emitResult(result);
-                    this.messageText = 'New stock successfully saved';
-                    this.showMessage = true;
-                }
+                await this.$store.dispatch('stock/add', this.payload);
+                this.messageClass = 'success';
+                this.messageText = 'New stock successfully saved';
+                this.showMessage = true;
             }, this.handleError);
             this.refresh();
-        },
-        emitResult: function (result) {
-            this.addResult = JSON.parse(result.request.response);
-            this.$emit('action', this.addResult);
-            this.messageClass = 'success';
         },
         handleError: function (error) {
             this.messageClass = 'error';
