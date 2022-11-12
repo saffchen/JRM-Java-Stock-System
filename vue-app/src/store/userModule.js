@@ -1,7 +1,7 @@
 import api from '@/api';
-import JwtService from '@/service/JwtService';
+import UserService from '@/service/UserService';
 
-const TokenService = new JwtService(localStorage.getItem('token') || '');
+const TokenService = new UserService(localStorage.getItem('token') || '');
 
 const userModule = {
     namespaced: true,
@@ -35,7 +35,7 @@ const userModule = {
                 .then(async (response) => {
                     if (await response.status === 200) {
                         const token = response.data.jwt;
-                        const service = new JwtService(token);
+                        const service = new UserService(token);
                         commit('SET_USER', service.getUser());
                         commit('STORE_TOKEN', service.getToken());
                         localStorage.setItem('token', service.getToken());

@@ -1,6 +1,6 @@
 import jwt_decode from 'jwt-decode';
 
-export default class JwtService {
+export default class UserService {
     constructor(token) {
         this.token = token;
         if (token === '') {
@@ -16,6 +16,10 @@ export default class JwtService {
 
     getUser() {
         return this.user;
+    }
+
+    getExpired() {
+        return this.user.exp * 1000 || 0;
     }
 
     getUsername() {
