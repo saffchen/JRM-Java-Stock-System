@@ -1,5 +1,5 @@
 import api from '@/api';
-import UserService from '@/service/UserService';
+import UserService from '@/service/user.service';
 
 const TokenService = new UserService(localStorage.getItem('token') || '');
 

@@ -12,7 +12,8 @@ import ReportPage from '@/views/ReportPage';
 import ImportPage from '@/views/ImportPage';
 import ExportPage from '@/views/ExportPage';
 
-import UserService from '../service/UserService';
+import UserService from '../service/user.service';
+import store from '@/store';
 
 const routes = [
     {
@@ -75,10 +76,12 @@ router.beforeEach((to, from, next) => {
     const authRequired = !publicPages.includes(to.name);
 
     const service = new UserService(localStorage.getItem('token') || '');
-    console.log(new Date().getTime());
-    console.log(service.getExpired());
+    
+    if (!service.isLoggedIn) {
+        store.dispatch('user/logout');
+    }
 
-    const loggedIn = new Date().getTime() <= service.getExpired();
+    const loggedIn = store.getters['user/loggedIn'];
 
     if (loggedIn && to.name === 'Login') {
         return next({

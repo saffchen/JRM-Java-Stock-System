@@ -29,4 +29,8 @@ export default class UserService {
     getRole() {
         return this.user.role || '';
     }
+
+    isLoggedIn() {
+        return this.getExpired() > new Date().getTime();
+    }
 }
