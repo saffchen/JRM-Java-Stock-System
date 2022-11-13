@@ -19,6 +19,18 @@ const adminInstance = axios.create({
     withCredentials: false
 });
 
+adminInstance.interceptors.request.use(config => {
+    const token = localStorage.getItem('token');
+    if (token) {
+        config.headers['Authorization'] = `Bearer ${token}`;
+    }
+    config.headers['Accept'] = 'application/json';
+    return config;
+}, error => {
+    console.log(error);
+    Promise.reject(error);
+});
+
 const authInstance = axios.create({
     baseURL: 'http://localhost:8080/api/v1/auth/',
     withCredentials: false,
