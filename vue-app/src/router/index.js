@@ -12,7 +12,7 @@ import ReportPage from '@/views/ReportPage';
 import ImportPage from '@/views/ImportPage';
 import ExportPage from '@/views/ExportPage';
 
-import UserService from '../service/user.service';
+import UserService from '@/service/user.service';
 import store from '@/store';
 
 const routes = [
@@ -77,7 +77,7 @@ router.beforeEach((to, from, next) => {
 
     const service = new UserService(localStorage.getItem('token') || '');
     
-    if (!service.isLoggedIn) {
+    if (!service.isLoggedIn()) {
         store.dispatch('user/logout');
     }
 

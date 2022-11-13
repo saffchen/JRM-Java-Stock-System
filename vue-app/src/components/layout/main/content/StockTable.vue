@@ -56,7 +56,9 @@
                             <button
                                 type="button"
                                 class="btn btn-outline-danger btn-sm border-0"
-                                @click="deleteStock(record.id)"
+                                data-bs-toggle="modal"
+                                data-bs-target="#confirm"
+                                @mouseover="setStockToDelete(record)"
                             >
                                 Remove
                             </button>
@@ -65,6 +67,56 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div
+        v-if="deleting"
+        id="confirm"
+        class="modal fade"
+        tabindex="-1"
+        role="dialog"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        aria-labelledby="confirmLabel"
+        aria-hidden="true"
+    >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5
+                        id="confirmLabel"
+                        class="modal-title"
+                    >
+                        Please confirm removing a stock
+                    </h5>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    />
+                </div>
+                <div class="modal-body">
+                    {{ `${stockToDelete.name}, products: ${stockToDelete.count}` }}
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        data-bs-dismiss="modal"
+                        @click="deleteStock(stockToDelete.id)"
+                    >
+                        Confirm
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                    >
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
     <Modal
         v-if="$store.getters['user/isAdmin']"
@@ -100,8 +152,10 @@ export default {
             table: null,
             headers: this.getHeaders(),
             stocks: [],
+            stockToDelete: {},
             adding: false,
-            editing: false
+            editing: false,
+            deleting: false
         };
     },
     watch: {
@@ -144,9 +198,15 @@ export default {
             this.$store.commit('stock/DEACTIVATE_EDITING');
             this.editing = false;
         },
+        setStockToDelete: function(stock) {
+            this.stockToDelete = stock;
+            this.deleting = true;
+        },
         deleteStock: function (id) {
+            this.deleting = false;
             this.$load(async () => {
                 await this.$store.dispatch('stock/delete', id);
+                this.stockToDelete = {};
             });
         }
     }
