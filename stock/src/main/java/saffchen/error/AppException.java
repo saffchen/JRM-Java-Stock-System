@@ -4,6 +4,7 @@ package saffchen.error;
  * @author alex_jd on 8/10/22
  * @project JRM-Java-Stock-System
  */
+
 import lombok.Getter;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.http.HttpStatus;

@@ -22,11 +22,12 @@ public class StoreService {
 
     public StoreEntity get(Long id) {
         return storeRepository.findById(id)
-                              .orElseThrow(() -> new NoEntityException("Object with id " + id + " is not found"));
+                .orElseThrow(() -> new NoEntityException("Object with id " + id + " is not found"));
     }
 
     public StoreEntity getByName(String storeName) {
-        return storeRepository.findByName(storeName).get();
+        return storeRepository.findByName(storeName)
+                .orElseThrow(() -> new NoEntityException("Object with name " + storeName + " is not found"));
     }
 
     public StoreEntity create(StoreEntity storeEntity) {

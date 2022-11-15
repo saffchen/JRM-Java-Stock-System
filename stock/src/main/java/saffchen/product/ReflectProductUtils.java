@@ -1,5 +1,6 @@
 package saffchen.product;
 
+import saffchen.dto.ProductDtoReport;
 import saffchen.entities.ProductEntity;
 
 import java.beans.IntrospectionException;
@@ -30,7 +31,7 @@ public class ReflectProductUtils {
         }
     }
 
-    public void invokeGetter(ProductEntity product, String fieldName) {
+    public void invokeGetter(ProductDtoReport product, String fieldName) {
         PropertyDescriptor pd;
         try {
             pd = new PropertyDescriptor(fieldName, product.getClass());
@@ -42,7 +43,7 @@ public class ReflectProductUtils {
         }
     }
 
-    public List<String> getFieldsFromClass(ProductEntity product) {
+    public List<String> getFieldsFromClass(ProductDtoReport product) {
         List<String> fields = new ArrayList<>();
 
         try {

@@ -99,8 +99,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     private ResponseEntity<Object> handleBindingErrors(BindingResult result, WebRequest request) {
         String msg = result.getFieldErrors().stream()
-                           .map(fe -> String.format("[%s] %s", fe.getField(), fe.getDefaultMessage()))
-                           .collect(Collectors.joining("\n"));
+                .map(fe -> String.format("[%s] %s", fe.getField(), fe.getDefaultMessage()))
+                .collect(Collectors.joining("\n"));
         return createResponseEntity(getDefaultBody(request, ErrorAttributeOptions.defaults(), msg), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
@@ -128,6 +128,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         log.info("Exception", ex);
         super.handleExceptionInternal(ex, body, headers, status, request);
         return createResponseEntity(getDefaultBody(request, ErrorAttributeOptions.of(), ValidationUtil.getRootCause(ex)
-                                                                                                      .getMessage()), status);
+                .getMessage()), status);
     }
 }

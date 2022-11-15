@@ -17,11 +17,8 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 @Repository
 public interface ProductRepository extends BaseRepository<ProductEntity> {
-    /*@Query(value = "select p from ProductEntity p where p.store.id = :storeId")
-    List<ProductEntity> productCountByStoreId(@Param("store") Long storeId);*/
-
     @Query("SELECT pr FROM ProductEntity pr WHERE pr.id=:id AND pr.store.id=:storeId")
-    Optional<ProductEntity> get(Long storeId,Long id);
+    Optional<ProductEntity> get(Long storeId, Long id);
 
     @Query("SELECT pr FROM ProductEntity pr WHERE pr.store.id=:storeId ORDER BY pr.name ASC")
     List<ProductEntity> getBySatellite(Long storeId);

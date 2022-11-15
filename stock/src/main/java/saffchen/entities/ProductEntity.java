@@ -33,8 +33,8 @@ public class ProductEntity extends NamedEntity {
     private Double price;
 
     @CollectionTable(name = "product_tags",
-                    joinColumns = @JoinColumn(name = "product_id"),
-                    uniqueConstraints = @UniqueConstraint(columnNames = {"product_id", "tags"}, name = "uk_product_tags"))
+            joinColumns = @JoinColumn(name = "product_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"product_id", "tags"}, name = "uk_product_tags"))
     @Column(name = "tags")
     @JoinColumn(name = "product_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -57,7 +57,6 @@ public class ProductEntity extends NamedEntity {
     private Integer count;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    //@JoinColumn(name = "satelliteId", referencedColumnName = "id")
     @NonNull
     @JsonBackReference
     private StoreEntity store;

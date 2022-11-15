@@ -1,4 +1,5 @@
 package saffchen.config;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +19,7 @@ import saffchen.service.UserEntityDetailsService;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserEntityDetailsService userEntityDetailsService;
     private final JWTSecurityFilter jwtSecurityFilter;
 
@@ -29,15 +30,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .and()
                 .authorizeRequests()
                 .requestMatchers(EndpointRequest.to("health")).permitAll()
-                .mvcMatchers(HttpMethod.POST ,"/api/v1/auth/check_auth").anonymous()
-                .mvcMatchers(HttpMethod.GET,"/api/v1/stores/**").permitAll()
-                .mvcMatchers(HttpMethod.GET,"/api/v1/participants").permitAll()
+                .mvcMatchers(HttpMethod.POST, "/api/v1/auth/check_auth").anonymous()
+                .mvcMatchers(HttpMethod.GET, "/api/v1/stores/**").permitAll()
+                .mvcMatchers(HttpMethod.GET, "/api/v1/participants").permitAll()
                 .mvcMatchers("/api/v1/admin/**").hasAnyAuthority("ROLE_ADMIN")
-                .mvcMatchers(HttpMethod.POST,"/api/v1/admin/stores/**/products/**").hasAuthority("ROLE_USER")
-                //.mvcMatchers(HttpMethod.PUT,"/api/v1/admin/**").hasAuthority("ROLE_ADMIN")
-                //.mvcMatchers(HttpMethod.DELETE,"/api/v1/admin/**").hasAuthority("ROLE_ADMIN")
-                //.mvcMatchers(HttpMethod.GET,"/api/v1/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
-                //.mvcMatchers(HttpMethod.GET,"/api/v1/**").hasAnyAuthority("ROLE_USER")
+                .mvcMatchers(HttpMethod.POST, "/api/v1/admin/stores/**/products/**").hasAuthority("ROLE_USER")
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
@@ -45,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         http.addFilterBefore(jwtSecurityFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception{
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userEntityDetailsService).
                 passwordEncoder(getPasswordEncoder());
 
@@ -53,12 +50,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception{
+    public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
     @Bean
-    public PasswordEncoder getPasswordEncoder(){
+    public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder(10);
     }
 

@@ -43,9 +43,9 @@ public class AuthController {
                 loadUserByUsername(userAuthRequest.getEmail());
 
         String authority = userDetails.getAuthorities()
-                                      .stream()
-                                      .map(n -> String.valueOf(n))
-                                      .collect(Collectors.joining(""));
+                .stream()
+                .map(n -> String.valueOf(n))
+                .collect(Collectors.joining(""));
         String email = userDetails.getEmail();
         String jwt = jwtUtil.createToken(
                 email,
