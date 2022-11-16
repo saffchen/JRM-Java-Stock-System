@@ -23,5 +23,4 @@ public class ProductDtoReport {
     private String category;
     private Integer count;
     private String store;
-
 }
