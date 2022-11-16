@@ -3,7 +3,7 @@
  */
 
 rootProject.name = "JRM-Java-Stock-System"
+include(":shared-dto")
 include(":stock")
 include(":report")
-include(":shared-dto")
 include(":import")
