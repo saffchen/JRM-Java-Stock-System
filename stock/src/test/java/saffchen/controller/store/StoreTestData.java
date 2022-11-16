@@ -1,4 +1,4 @@
-package saffchen.store;
+package saffchen.controller.store;
 
 import saffchen.MatcherFactory;
 import saffchen.dto.StoreDto;
@@ -14,8 +14,8 @@ import java.util.List;
  */
 public class StoreTestData {
 
-    public static final Matcher<StoreEntity> RESTAURANT_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(StoreEntity.class, "menuItems");
-    public static final Matcher<StoreDto> RESTAURANT_MATCHER_WITH_MENU = MatcherFactory.usingIgnoringFieldsComparator(StoreDto.class, "dishRefs.restaurant");
+    public static final Matcher<StoreEntity> STORE_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(StoreEntity.class, "menuItems");
+    public static final Matcher<StoreDto> STORE_MATCHER_WITH_MENU = MatcherFactory.usingIgnoringFieldsComparator(StoreDto.class, "dishRefs.restaurant");
 
     public static final Matcher<ProductEntity> DISH_REF_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(ProductEntity.class, "restaurant");
 
