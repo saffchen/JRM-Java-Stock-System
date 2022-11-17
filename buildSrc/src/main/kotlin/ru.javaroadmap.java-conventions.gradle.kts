@@ -20,7 +20,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security:2.6.4")
     implementation("org.springframework.boot:spring-boot-starter-validation:2.6.4")
     implementation("org.springframework.boot:spring-boot-starter-actuator:2.6.4")
-    testImplementation("org.springframework.boot:spring-boot-starter-test:2.6.4")
+
     implementation("org.slf4j:slf4j-api:1.7.36")
     implementation("org.springdoc:springdoc-openapi-ui:1.6.9")
     runtimeOnly("ch.qos.logback:logback-classic:1.2.11")
@@ -44,8 +44,9 @@ dependencies {
     implementation("org.projectlombok:lombok:1.18.22")
     annotationProcessor("org.projectlombok:lombok:1.18.22")
     annotationProcessor("org.mapstruct:mapstruct-processor:1.5.3.Final")
-    testImplementation("junit:junit:4.0")
-    testImplementation("org.springframework.boot:spring-boot-starter-test:2.6.4")
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:2.7.5")
+    testImplementation("org.springframework.security:spring-security-test:5.7.5")
 }
 
 group = "ru.javaroadmap"
