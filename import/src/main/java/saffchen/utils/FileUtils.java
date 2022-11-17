@@ -1,10 +1,8 @@
 package saffchen.utils;
 
-import saffchen.database.User;
-
-import java.io.*;
-import java.lang.reflect.Field;
-import java.util.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class FileUtils {
     public static String getInfoFromTxtFile(String filePath) {
