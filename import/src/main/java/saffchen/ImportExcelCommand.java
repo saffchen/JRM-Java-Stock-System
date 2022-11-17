@@ -10,10 +10,8 @@ import saffchen.utils.ExcelImportUtils;
 import saffchen.utils.FileStorageUtils;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.security.GeneralSecurityException;
 import java.util.Scanner;
 
 public class ImportExcelCommand implements Command {
@@ -25,7 +23,7 @@ public class ImportExcelCommand implements Command {
     }
 
     @Override
-    public void doCommand() throws GeneralSecurityException, IOException {
+    public void doCommand() {
         LOGGER.info(" --- IMPORT_EXCEL ---");
         try {
             String fileName = null;

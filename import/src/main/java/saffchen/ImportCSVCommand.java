@@ -19,7 +19,7 @@ public class ImportCSVCommand implements Command {
     }
 
     @Override
-    public void doCommand() throws GeneralSecurityException, IOException {
+    public void doCommand() throws IOException {
         LOGGER.info(" --- IMPORT_CSV ---");
         try {
             List<String> listCSV = List.of(FileUtils.getInfoFromTxtFile("stock_import_csv.csv"));
