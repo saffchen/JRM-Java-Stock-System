@@ -15,11 +15,6 @@ public class GenerateReportCommand implements Command {
             = LoggerFactory.getLogger(GenerateReportCommand.class);
 
     @Override
-    public String getInfo() {
-        return "Write a \"generate_report\" if you want to save pdf file with all positions";
-    }
-
-    @Override
     public void doCommand() {
         LOGGER.info(" --- GENERATE_REPORT ---");
         Scanner scanner = new Scanner(System.in);
