@@ -39,7 +39,7 @@ public class GenerateReportCommand implements Command {
                 System.out.print("Enter the KEYWORD or EXIT: ");
                 criteria = scanner.next().trim().toUpperCase();
                 try {
-                    header = header.substring(0, 1) + header.substring(1, header.length()).toLowerCase();
+                    header = header.charAt(0) + header.substring(1, header.length()).toLowerCase();
                     PDFReportFromFile report = new PDFReportFromFile(header, criteria);
                     report.generateReport(ThemeSelectionService.THEMES.iterator().next().getName());
                 } catch (Exception e) {
