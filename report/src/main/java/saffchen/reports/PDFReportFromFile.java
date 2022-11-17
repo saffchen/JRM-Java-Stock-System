@@ -1,9 +1,14 @@
 package saffchen.reports;
 
-import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.*;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import saffchen.database.FileConnection;
-import saffchen.entities.ProductEntity;
+import saffchen.dto.ProductDtoReport;
+import saffchen.theme.Theme;
+import saffchen.theme.ThemeSelectionService;
 import saffchen.utils.FileStorageUtils;
 
 import java.io.FileOutputStream;
@@ -12,89 +17,38 @@ import java.util.List;
 public class PDFReportFromFile implements Report {
     private String criteries;
     private String field;
-    private FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
-    private FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
-
-    private final Font reportHeader = FontFactory.getFont(FontFactory.COURIER, 20, Font.BOLD,
-            new CMYKColor(0, 255, 0, 0));
-    private final Font tableHeader = FontFactory.getFont(FontFactory.COURIER, 11, Font.BOLD,
-            new CMYKColor(0, 0, 0, 255));
-    private final Font cellHeader = FontFactory.getFont(FontFactory.COURIER, 11, Font.NORMAL,
-            new CMYKColor(0, 0, 0, 255));
+    private final FileConnection fileConnection = FileConnection.getInstance("stock_import_csv.csv");
+    private final FileStorageUtils fileStorageUtils = new FileStorageUtils(fileConnection);
+    private final ThemeSelectionService themeSelectionService = new ThemeSelectionService();
 
 
     public PDFReportFromFile(String field, String criteries) {
-        this.criteries = criteries;
         this.field = field;
-    }
-
-    private PdfPTable drawTable(Integer columnCount) throws DocumentException {
-        PdfPTable table = new PdfPTable(columnCount); // 6 columns.
-        table.setWidthPercentage(100); // Width 100%
-        table.setSpacingBefore(10f); // Space before table
-        table.setSpacingAfter(10f); // Space after table
-        table.setPaddingTop(50f);
-        // Set Column widths
-        float[] columnWidths = new float[columnCount];
-        for (int i = 0; i < columnCount; i++) {
-            columnWidths[i] = 1f;
-        }
-        table.setWidths(columnWidths);
-        return table;
-    }
-
-    private PdfPCell drawCell(String text, BaseColor fontColor, Font style) {
-        PdfPCell cell = new PdfPCell(new Paragraph(text, style));
-        cell.setBorderColor(BaseColor.DARK_GRAY);
-        cell.setBackgroundColor(fontColor);
-        cell.setPaddingLeft(10);
-        cell.setPaddingTop(10);
-        cell.setPaddingBottom(10);
-        cell.setHorizontalAlignment(Element.ALIGN_LEFT);
-        cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-
-        return cell;
+        this.criteries = criteries;
     }
 
     @Override
-    public void generateReport() throws Exception {
-        List<ProductEntity> tableData = fileStorageUtils.getDataForReportFromCSV(field, criteries);
+    public void generateReport(String themeName) throws Exception {
+        Theme theme = themeSelectionService.getTheme(themeName);
+        this.report(theme);
+    }
+
+    private void report(Theme theme) throws Exception {
+        List<ProductDtoReport> tableData = fileStorageUtils.getDataForReportFromCSV(field, criteries);
 
         Document document = new Document();
         try {
-            boolean isLight = true; //if background is light
-
             PdfWriter writer = PdfWriter.getInstance(document,
                     new FileOutputStream("reportBy" + field + ".pdf"));
             document.open();
             document.add(new Paragraph("Found Products (by "
                     + field + " with criteria \""
-                    + criteries + "\")", reportHeader));
+                    + criteries + "\")", theme.getReportHeader()));
 
-            PdfPTable table = drawTable(7);
             List<String> headers = fileStorageUtils.getHeadersFromCSV();
-            for (String cell : headers) {
-                table.addCell(drawCell(cell.toUpperCase(), BaseColor.LIGHT_GRAY, tableHeader));
-            }
 
-            BaseColor color;
-            for (ProductEntity product : tableData) {
-                if (isLight)
-                    color = BaseColor.LIGHT_GRAY;
-                else
-                    color = BaseColor.GRAY;
+            PdfPTable table = buildTable(theme, tableData, headers);
 
-                table.addCell(drawCell(product.getName(), color, cellHeader));
-                table.addCell(drawCell(product.getDescription(), color, cellHeader));
-                table.addCell(drawCell(product.getPrice().toString(), color, cellHeader));
-                table.addCell(drawCell(product.getTags().toString(), color, cellHeader));
-                table.addCell(drawCell(product.getCategory(), color, cellHeader));
-                table.addCell(drawCell(product.getCount().toString(), color, cellHeader));
-                table.addCell(drawCell(product.getSatellite().getName(), color, cellHeader));
-
-                isLight = !isLight;
-                table.completeRow();
-            }
             document.add(table);
             document.close();
             writer.close();
@@ -102,6 +56,27 @@ public class PDFReportFromFile implements Report {
         } catch (Exception e) {
             throw new Exception(e);
         }
+    }
 
+    private PdfPTable buildTable(Theme theme, List<ProductDtoReport> tableData, List<String> headers) throws DocumentException {
+
+        PdfPTable table = theme.drawTable(8);
+        for (String cell : headers) {
+            table.addCell(theme.drawHeader(cell.toUpperCase()));
+        }
+
+        for (ProductDtoReport product : tableData) {
+            table.addCell(theme.drawCell(product.getId()));
+            table.addCell(theme.drawCell(product.getTitle()));
+            table.addCell(theme.drawCell(product.getDescription()));
+            table.addCell(theme.drawCell(product.getPrice().toString()));
+            table.addCell(theme.drawCell(product.getTags().toString()));
+            table.addCell(theme.drawCell(product.getCategory()));
+            table.addCell(theme.drawCell(product.getCount().toString()));
+            table.addCell(theme.drawCell(product.getStore()));
+
+            table.completeRow();
+        }
+        return table;
     }
 }

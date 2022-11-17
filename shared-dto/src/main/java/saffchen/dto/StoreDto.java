@@ -6,10 +6,10 @@ import lombok.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SatelliteDto {
+public class StoreDto {
 
     private Long id;
     private String name;
     private String description;
-    private long count;
+    private int count;
 }

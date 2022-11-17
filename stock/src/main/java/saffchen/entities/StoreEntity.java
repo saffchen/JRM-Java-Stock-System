@@ -13,18 +13,18 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "satellite", uniqueConstraints = {@UniqueConstraint(columnNames = {"name"}, name = "uk_satellite")})
-public class SatelliteEntity extends NamedEntity {
+@Table(name = "store", uniqueConstraints = {@UniqueConstraint(columnNames = {"name"}, name = "uk_satellite")})
+public class StoreEntity extends NamedEntity {
 
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "satellite", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonManagedReference
     private List<ProductEntity> products;
 
-    public SatelliteEntity(String satellite) {
+    public StoreEntity(String store) {
     }
 
     public int getProductsSize() {

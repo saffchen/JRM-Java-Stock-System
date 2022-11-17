@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import saffchen.database.FileConnection;
 import saffchen.entities.ProductEntity;
-import saffchen.entities.SatelliteEntity;
+import saffchen.entities.StoreEntity;
 import saffchen.utils.FileStorageUtils;
 import saffchen.utils.FileUtils;
 
@@ -69,10 +69,10 @@ public class AddCommand implements Command {
             }
             System.out.println("Доступные склады: \n" + FileUtils.getSatelliteString());
             System.out.print("Укажите склад на котором хранится продукт: ");
-            String satellite = new Scanner(System.in).next().toUpperCase(Locale.ROOT);
+            String store = new Scanner(System.in).next().toUpperCase(Locale.ROOT);
 
             product = new ProductEntity(0L, name, description, price, List.of(tags), category,
-                    count, new SatelliteEntity(satellite));
+                    count, new StoreEntity(store));
             LOGGER.info(" --- ADD_PRODUCT --- {{}}", product);
             isValidProduct = false;
             Set<ConstraintViolation<ProductEntity>> violations = validator.validate(product);

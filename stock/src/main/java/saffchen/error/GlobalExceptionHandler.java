@@ -1,5 +1,6 @@
 package saffchen.error;
 
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import saffchen.util.validation.ValidationUtil;
 
 import javax.persistence.EntityNotFoundException;
+import java.nio.file.AccessDeniedException;
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -65,10 +67,23 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(SQLException.class)
-    public ResponseEntity<?> handeSQLException(WebRequest request, SQLException ex) {
+    public ResponseEntity<?> handleSQLException(WebRequest request, SQLException ex) {
         log.error("SQLException: {}", ex.getMessage());
         return createResponseEntity(getDefaultBody(request, ErrorAttributeOptions.of(MESSAGE), null), HttpStatus.UNPROCESSABLE_ENTITY);
     }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<?> handleAccessDeniedException(WebRequest request, AccessDeniedException ex) {
+        log.error("AccessDeniedException: {}", ex.getMessage());
+        return createResponseEntity(getDefaultBody(request, ErrorAttributeOptions.of(MESSAGE), null), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(JWTVerificationException.class)
+    public ResponseEntity<?> handleJWTVerificationException(WebRequest request, JWTVerificationException ex) {
+        log.error("JWTVerificationException: {}", ex.getMessage());
+        return createResponseEntity(getDefaultBody(request, ErrorAttributeOptions.of(MESSAGE), null), HttpStatus.UNAUTHORIZED);
+    }
+
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<?> handleConstraintViolation(WebRequest request, EntityNotFoundException ex) {
@@ -84,8 +99,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     private ResponseEntity<Object> handleBindingErrors(BindingResult result, WebRequest request) {
         String msg = result.getFieldErrors().stream()
-                           .map(fe -> String.format("[%s] %s", fe.getField(), fe.getDefaultMessage()))
-                           .collect(Collectors.joining("\n"));
+                .map(fe -> String.format("[%s] %s", fe.getField(), fe.getDefaultMessage()))
+                .collect(Collectors.joining("\n"));
         return createResponseEntity(getDefaultBody(request, ErrorAttributeOptions.defaults(), msg), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
@@ -113,6 +128,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         log.info("Exception", ex);
         super.handleExceptionInternal(ex, body, headers, status, request);
         return createResponseEntity(getDefaultBody(request, ErrorAttributeOptions.of(), ValidationUtil.getRootCause(ex)
-                                                                                                      .getMessage()), status);
+                .getMessage()), status);
     }
 }

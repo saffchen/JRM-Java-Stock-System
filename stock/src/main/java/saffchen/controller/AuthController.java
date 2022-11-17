@@ -1,13 +1,17 @@
 package saffchen.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.*;
-import saffchen.dto.UserAuthResponse;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import saffchen.dto.UserAuthRequest;
+import saffchen.dto.UserAuthResponse;
 import saffchen.security.JwtUtil;
 import saffchen.security.UserDetails;
 import saffchen.service.UserEntityDetailsService;
@@ -16,12 +20,15 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping(value = AuthController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AuthController {
+
+    static final String REST_URL = "/api/v1/auth/check_auth";
     private final JwtUtil jwtUtil;
     private final UserEntityDetailsService userEntityDetailsService;
     private final AuthenticationManager authenticationManager;
 
-    @PostMapping("/api/v1/auth/check_auth")
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> checkAuthAndGetToken(@RequestBody UserAuthRequest userAuthRequest) throws Exception {
         try {
             authenticationManager.authenticate(
@@ -46,5 +53,4 @@ public class AuthController {
 
         return ResponseEntity.ok(new UserAuthResponse(jwt));
     }
-
 }

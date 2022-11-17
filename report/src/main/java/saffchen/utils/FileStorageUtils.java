@@ -8,20 +8,16 @@ import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.bean.HeaderColumnNameTranslateMappingStrategy;
 import saffchen.database.FileConnection;
+import saffchen.dto.ProductDtoReport;
 import saffchen.entities.ProductEntity;
 import saffchen.product.ProductAdapter;
+import saffchen.product.ProductAdapterReport;
 import saffchen.product.RawProduct;
 import saffchen.product.ReflectProductUtils;
 
 import java.beans.PropertyDescriptor;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -67,7 +63,7 @@ public class FileStorageUtils implements StorageUtils {
     }
 
     public void addHeadersToCSV(String headers) {
-        if (headers == null || headers.isEmpty()){
+        if (headers == null || headers.isEmpty()) {
             System.out.println("Error: There are no headers in the string!");
             return;
         }
@@ -94,7 +90,6 @@ public class FileStorageUtils implements StorageUtils {
             }
         }
     }
-
 
 
     @Override
@@ -163,7 +158,7 @@ public class FileStorageUtils implements StorageUtils {
             CsvToBean<RawProduct> csvToBean = getCSVParser();
             List<RawProduct> products = csvToBean.parse();
             updatedRawProducts = products.stream().map
-                    (x -> new ProductAdapter(x).getProduct())
+                            (x -> new ProductAdapter(x).getProduct())
                     .filter(x -> !x.getName().equals(product.getName()))
                     .map(x -> new ProductAdapter(x).setDataToRawProduct()).collect(Collectors.toList());
         } catch (Exception e) {
@@ -228,7 +223,7 @@ public class FileStorageUtils implements StorageUtils {
     }
 
     public CsvToBean<RawProduct> getCSVParser() throws FileNotFoundException {
-        List<String> headersFromClass = new ReflectProductUtils().getFieldsFromClass(new ProductEntity());
+        List<String> headersFromClass = new ReflectProductUtils().getFieldsFromClass(new ProductDtoReport());
         List<String> headersFromCSV = getHeadersFromCSV();
 
         Map mapping = IntStream.range(0, headersFromCSV.size())
@@ -253,8 +248,8 @@ public class FileStorageUtils implements StorageUtils {
         return csvToBean;
     }
 
-    public List<ProductEntity> getDataForReportFromCSV(String header, String criteries) {
-        List<ProductEntity> products = new ArrayList<>();
+    public List<ProductDtoReport> getDataForReportFromCSV(String header, String criteries) {
+        List<ProductDtoReport> products = new ArrayList<>();
 
         try {
             CsvToBean<RawProduct> csvToBean = getCSVParser();
@@ -268,14 +263,14 @@ public class FileStorageUtils implements StorageUtils {
 
                 fieldName = pd.getReadMethod().invoke(product).toString().trim().toUpperCase();
                 if (fieldName.contains(criteries)) {
-                    ProductAdapter productAdapter = new ProductAdapter(product);
+                    ProductAdapterReport productAdapter = new ProductAdapterReport(product);
                     products.add(productAdapter.getProduct());
                 }
             }
 
         } catch (FileNotFoundException e) {
             System.out.println("Error: Can't find the database file");
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error: Unknown error. Try to get correct information from database!");
         }

@@ -1,5 +1,5 @@
 package saffchen.reports;
 
 interface Report {
-    void generateReport() throws Exception;
+    void generateReport(String themeName) throws Exception;
 }
