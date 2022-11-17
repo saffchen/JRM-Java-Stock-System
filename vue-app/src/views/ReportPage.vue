@@ -1,23 +1,23 @@
 <template>
-  <Header/>
-  <Main content=""/>
-  <Footer/>
+    <AppHeader />
+    <AppMain component-name="Secure" />
+    <AppFooter />
 </template>
 
 
 <script>
-import Header from "@/components/header/Header";
-import Main from "@/components/main/Main";
-import Footer from "@/components/footer/Footer";
+import AppHeader from '@/components/layout/header/Header';
+import AppMain from '@/components/layout/main/Main';
+import AppFooter from '@/components/layout/footer/Footer';
 
 export default {
-  name: 'app',
-  components: {
-    Header,
-    Main,
-    Footer
-  }
-}
+    name: 'App',
+    components: {
+        AppHeader,
+        AppMain,
+        AppFooter
+    }
+};
 </script>
 
 <style>

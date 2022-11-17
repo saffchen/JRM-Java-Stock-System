@@ -1,26 +1,31 @@
 <template>
-    <Header/>
-    <Main component-name="ProductTable"/>
-    <Footer/>
+    <AppHeader />
+    <AppMain component-name="ProductTable" />
+    <AppFooter />
 </template>
 
 
 <script>
-  import Header from "@/components/header/Header";
-  import Main from "@/components/main/Main";
-  import Footer from "@/components/footer/Footer";
+import AppHeader from '@/components/layout/header/Header';
+import AppMain from '@/components/layout/main/Main';
+import AppFooter from '@/components/layout/footer/Footer';
 
-  export default {
-      name: 'app',
-      components: {
-          Header,
-          Main,
-          Footer
-      }
-  }
+export default {
+    name: 'App',
+    components: {
+        AppHeader,
+        AppMain,
+        AppFooter
+    },
+    props: {
+        componentName: {
+            type: String,
+            require: true,
+            default: 'ProductTable'
+        }
+    }
+};
 </script>
 
 <style>
-@import 'bootstrap/dist/css/bootstrap.min.css';
-@import 'https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css';
 </style>

@@ -39,8 +39,8 @@ public class AdminProductController extends AbstractProductController {
         checkNew(product);
         ProductEntity created = service.save(storeId, product);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                                                          .path(REST_URL + "/{id}")
-                                                          .buildAndExpand(storeId, created.getId()).toUri();
+                .path(REST_URL + "/{id}")
+                .buildAndExpand(storeId, created.getId()).toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 

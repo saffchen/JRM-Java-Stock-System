@@ -23,12 +23,12 @@ public class StoreController extends AbstractStoreController {
     public ResponseEntity<List<StoreDto>> getAll() {
         log.info("get all Stores");
         return ResponseEntity.ok(service.getAll().stream()
-                                        .map(x -> {
-                                            StoreDto storeDto = mapper.storeToStoreDto(x);
-                                            storeDto.setCount(x.getProductsSize());
-                                            return storeDto;
-                                        })
-                                        .toList());
+                .map(x -> {
+                    StoreDto storeDto = mapper.storeToStoreDto(x);
+                    storeDto.setCount(x.getProductsSize());
+                    return storeDto;
+                })
+                .toList());
     }
 
     @GetMapping("/{id}")

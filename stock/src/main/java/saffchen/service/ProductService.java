@@ -21,9 +21,9 @@ public class ProductService {
 
     public ProductEntity get(Long storeId, Long id) {
         return productRepository.get(storeId, id)
-                                .orElseThrow(
-                                        () -> new DataConflictException("Object with id " + id + " for store id=" + storeId + " is not found.")
-                                );
+                .orElseThrow(
+                        () -> new DataConflictException("Object with id " + id + " for store id=" + storeId + " is not found.")
+                );
     }
 
     public void delete(Long storeId, Long id) {

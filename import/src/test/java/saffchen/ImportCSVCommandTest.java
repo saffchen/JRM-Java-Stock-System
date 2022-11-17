@@ -13,7 +13,7 @@ import java.util.Objects;
 class ImportCSVCommandTest {
 
     @Test
-    void doCommand() throws IOException {
+    void doImportCSVCommandTest() throws IOException {
         StringBuilder stringBuilder = new StringBuilder();
         ClassLoader classLoader = getClass().getClassLoader();
         FileReader reader = new FileReader((Objects.requireNonNull(classLoader.getResource("stock_import_csv.csv"))).getFile());
