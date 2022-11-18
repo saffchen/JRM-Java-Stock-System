@@ -1,32 +1,29 @@
 {
-  "name": "vuejs",
+  "name": "jrm-front-app",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "serve": "vue-cli-service serve --port 3000",
-    "build": "vue-cli-service build"
+    "dev": "vite",
+    "expose": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint --ext .js,.vue src",
+    "fix": "eslint --fix --ext .js,.vue src"
   },
   "dependencies": {
     "axios": "^0.27.2",
-    "bootstrap": "^5.1.3",
-    "core-js": "^3.8.3",
-    "vue": "^3.2.13",
-    "vue-axios": "^3.4.1",
-    "vue-router": "^4.0.3",
+    "jwt-decode": "^3.1.2",
+    "vue": "^3.2.41",
+    "vue-router": "^4.1.6",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
-    "@types/bootstrap": "^5.1.12",
-    "@types/jquery": "3.5.14",
-    "@vue/cli-plugin-babel": "~5.0.0",
-    "@vue/cli-plugin-router": "~5.0.0",
-    "@vue/cli-plugin-vuex": "~5.0.0",
-    "@vue/cli-service": "~5.0.0"
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead",
-    "not ie 11"
-  ]
+    "@popperjs/core": "^2.11.6",
+    "@vitejs/plugin-vue": "^3.2.0",
+    "bootstrap": "^5.2.2",
+    "eslint": "^8.26.0",
+    "eslint-plugin-vue": "^9.7.0",
+    "vite": "^3.2.2"
+  }
 }

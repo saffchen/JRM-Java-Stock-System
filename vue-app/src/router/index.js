@@ -4,13 +4,16 @@
 
 import { createRouter, createWebHistory } from 'vue-router';
 
-import HomePage from "@/views/HomePage";
-import LoginPage from "@/views/LoginPage";
-import ProductPage from "@/views/ProductPage";
-import StockPage from "@/views/StockPage";
-import ReportPage from "@/views/ReportPage";
-import ImportPage from "@/views/ImportPage";
-import ExportPage from "@/views/ExportPage";
+import HomePage from '@/views/HomePage';
+import LoginPage from '@/views/LoginPage';
+import ProductPage from '@/views/ProductPage';
+import StockPage from '@/views/StockPage';
+import ReportPage from '@/views/ReportPage';
+import ImportPage from '@/views/ImportPage';
+import ExportPage from '@/views/ExportPage';
+
+import UserService from '@/service/user.service';
+import store from '@/store';
 
 const routes = [
     {
@@ -24,16 +27,20 @@ const routes = [
         component: LoginPage
     },
     {
-        path: '/ProductTable',
+        path: '/products',
         name: 'ProductTable',
         component: ProductPage,
-        props: router => ({ componentName: router.name})
+        props: router => ({
+            componentName: router.name 
+        })
     },
     {
-        path: '/StockTable',
+        path: '/stocks',
         name: 'StockTable',
         component: StockPage,
-        props: router => ({ componentName: router.name})
+        props: router => ({
+            componentName: router.name 
+        })
     },
     {
         path: '/report',
@@ -49,23 +56,49 @@ const routes = [
         path: '/export',
         name: 'Export',
         component: ExportPage
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        redirect: {
+            name: 'Home',
+            params: []
+        }
     }
 ];
 
 const router = createRouter({
-    history: createWebHistory(process.env.BASE_URL),
-    routes,
-})
+    history: createWebHistory(import.meta.env.BASE_URL),
+    routes
+});
 
 router.beforeEach((to, from, next) => {
-    const publicPages = ['/login'];
-    const authRequired = !publicPages.includes(to.path);
-    const loggedIn = localStorage.getItem('user');
+    const publicPages = ['Login'];
+    const authRequired = !publicPages.includes(to.name);
+
+    const service = new UserService(localStorage.getItem('token') || '');
+    
+    if (!service.isLoggedIn()) {
+        store.dispatch('user/logout');
+    }
+
+    const loggedIn = store.getters['user/loggedIn'];
+
+    if (loggedIn && to.name === 'Login') {
+        return next({
+            name: from.name
+        });
+    }
+
+    if (from.name === 'Login' && to.name === 'Home') {
+        return next();
+    }
 
     if (authRequired && !loggedIn) {
-        return next('/login');
+        return next({
+            name: 'Login'
+        });
     }
     next();
-})
+});
 
 export default router;

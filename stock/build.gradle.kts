@@ -4,6 +4,7 @@
 
 plugins {
     id("ru.javaroadmap.java-conventions")
+    id("org.springframework.boot") version "2.6.4"
 }
 
 dependencies {

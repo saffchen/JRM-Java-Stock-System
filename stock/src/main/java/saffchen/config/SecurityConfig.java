@@ -26,6 +26,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
+                .cors()
+                .and()
                 .authorizeRequests()
                 .requestMatchers(EndpointRequest.to("health")).permitAll()
                 .mvcMatchers(HttpMethod.POST, "/api/v1/auth/check_auth").anonymous()
