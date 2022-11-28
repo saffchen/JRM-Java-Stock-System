@@ -1,6 +1,7 @@
 package saffchen.controller.store;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import saffchen.AbstractControllerTest;
@@ -14,11 +15,14 @@ class StoreControllerTest extends AbstractControllerTest {
 
     private static final String REST_URL = StoreController.REST_URL + '/';
 
+    @Autowired
     private StoreRepository repository;
 
     @Test
     void getAll() throws Exception {
+        System.out.println("before rep.save");
         repository.save(store1);
+        System.out.println("after rep.save");
         perform(MockMvcRequestBuilders.get(REST_URL))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))

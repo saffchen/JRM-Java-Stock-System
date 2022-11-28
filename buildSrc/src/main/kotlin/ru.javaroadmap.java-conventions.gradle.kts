@@ -42,6 +42,7 @@ dependencies {
     implementation("com.opencsv:opencsv:5.6")
     implementation("com.google.oauth-client:google-oauth-client-jetty:1.23.0")
     implementation("org.projectlombok:lombok:1.18.22")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-hibernate5")
     annotationProcessor("org.projectlombok:lombok:1.18.22")
     annotationProcessor("org.mapstruct:mapstruct-processor:1.5.3.Final")
     testImplementation("junit:junit:4.13.2")
