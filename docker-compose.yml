@@ -57,31 +57,31 @@ services:
     ports:
       - '5432:5432'
 
-  stock:
-    build: ./stock
-    healthcheck:
-      test: curl --silent http://localhost:8080/actuator/health | grep {\"status\":\"UP\"} || exit 1
-      timeout: 20s
-      interval: 10s
-      retries: 5
-    environment:
-      - DB_HOST=postgres
-    depends_on:
-      postgres:
-        condition: service_healthy
-    ports:
-      - '8080:8080'
+  #stock:
+  #  build: ./stock
+  #  healthcheck:
+  #    test: curl --silent http://localhost:8080/actuator/health | grep {\"status\":\"UP\"} || exit 1
+  #    timeout: 20s
+  #    interval: 10s
+  #    retries: 5
+  #  environment:
+  #    - DB_HOST=postgres
+  #  depends_on:
+  #    postgres:
+  #      condition: service_healthy
+  #  ports:
+  #    - '8080:8080'
 
-  vue-app:
-    build: ./vue-app
-    volumes:
-      - npm-cache:/root/.npm
-    depends_on:
-      stock:
-        condition: service_healthy
-    ports:
-      - '3000:3000'
+  #vue-app:
+  #  build: ./vue-app
+  #  volumes:
+  #    - npm-cache:/root/.npm
+  #  depends_on:
+  #    stock:
+  #      condition: service_healthy
+  #  ports:
+  #    - '3000:3000'
 
-volumes:
-  npm-cache:
-    external: false
+#volumes:
+#  npm-cache:
+#    external: false
