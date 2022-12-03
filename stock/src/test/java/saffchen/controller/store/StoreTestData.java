@@ -14,10 +14,10 @@ import java.util.List;
  */
 public class StoreTestData {
 
-    public static final Matcher<StoreEntity> STORE_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(StoreEntity.class, "");
-    public static final Matcher<StoreDto> STORE_MATCHER_WITH_MENU = MatcherFactory.usingIgnoringFieldsComparator(StoreDto.class, "");
+    public static final Matcher<StoreEntity> STORE_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(StoreEntity.class, "products");
+    public static final Matcher<StoreDto> STORE_MATCHER_WITH_PRODUCTS = MatcherFactory.usingIgnoringFieldsComparator(StoreDto.class, "");
 
-    public static final Matcher<ProductEntity> DISH_REF_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(ProductEntity.class, "");
+    public static final Matcher<ProductEntity> PRODUCT_REF_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(ProductEntity.class, "");
 
     public static final long STORE_ID1 = 1;
     public static final long STORE_ID2 = 2;

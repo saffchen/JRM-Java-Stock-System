@@ -20,13 +20,11 @@ class StoreControllerTest extends AbstractControllerTest {
 
     @Test
     void getAll() throws Exception {
-        System.out.println("before rep.save");
         repository.save(store1);
-        System.out.println("after rep.save");
         perform(MockMvcRequestBuilders.get(REST_URL))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(STORE_MATCHER.contentJson(store2, store1));
+                .andExpect(STORE_MATCHER.contentJson(store1, store2));
     }
 
     @Test
