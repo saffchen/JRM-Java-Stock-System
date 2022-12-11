@@ -21,6 +21,7 @@ class StoreControllerTest extends AbstractControllerTest {
     @Test
     void getAll() throws Exception {
         repository.save(store1);
+        repository.save(store2);
         perform(MockMvcRequestBuilders.get(REST_URL))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))

@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class StoreTestData {
 
-    public static final Matcher<StoreEntity> STORE_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(StoreEntity.class, "products");
+    public static final Matcher<StoreEntity> STORE_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(StoreEntity.class, "products", "");
     public static final Matcher<StoreDto> STORE_MATCHER_WITH_PRODUCTS = MatcherFactory.usingIgnoringFieldsComparator(StoreDto.class, "");
 
     public static final Matcher<ProductEntity> PRODUCT_REF_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(ProductEntity.class, "");
