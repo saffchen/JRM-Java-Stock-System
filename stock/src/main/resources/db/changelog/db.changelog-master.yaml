@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Vitali
+  - changeSet:
+      id: 2
+      author: Vitali
