@@ -8,7 +8,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: product_id
-                  type: int
+                  type: bigint
                   constraints:
                     nullable: false
               - column:

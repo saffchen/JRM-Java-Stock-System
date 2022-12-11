@@ -38,6 +38,6 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: store_id
-                  type: int
+                  type: bigint
                   constraints:
                     nullable: false
