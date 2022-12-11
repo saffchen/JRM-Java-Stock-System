@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: Vitali
+      changes:
+        - createTable:
+            tableName: product_tags
+            columns:
+              - column:
+                  name: product_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tags
+                  type: varchar(255)

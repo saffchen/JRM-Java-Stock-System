@@ -1,7 +1,13 @@
 databaseChangeLog:
-  - changeSet:
-      id: 1
-      author: Vitali
-  - changeSet:
-      id: 2
-      author: Vitali
+  - include:
+      file: init/create-store-table.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: init/create-product-tags-table.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: init/create-product-table.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: init/create-person-table.yaml
+      relativeToChangelogFile: true
