@@ -26,7 +26,7 @@ dependencies {
     runtimeOnly("ch.qos.logback:logback-classic:1.2.11")
     implementation("org.glassfish:jakarta.el:4.0.1")
     implementation("org.mindrot:jbcrypt:0.4")
-    implementation("org.postgresql:postgresql:42.3.6")
+    implementation("org.postgresql:postgresql:42.3.8")
     implementation("org.springframework.kafka:spring-kafka:2.8.3")
     implementation("com.auth0:java-jwt:4.0.0")
     implementation("org.mapstruct:mapstruct:1.5.3.Final")
