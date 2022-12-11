@@ -2,6 +2,7 @@ package saffchen.mapper;
 
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import saffchen.dto.StoreDto;
 import saffchen.entities.StoreEntity;
 
