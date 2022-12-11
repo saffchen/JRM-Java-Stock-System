@@ -5,10 +5,29 @@
 plugins {
     id("ru.javaroadmap.java-conventions")
     id("org.springframework.boot") version "2.6.4"
+    id("org.liquibase.gradle") version "2.1.1"
 }
 
 dependencies {
     implementation(project(":shared-dto"))
+    liquibaseRuntime("org.liquibase:liquibase-core:4.18.0")
+    liquibaseRuntime("info.picocli:picocli:4.6.1")
+    liquibaseRuntime("org.yaml:snakeyaml:1.33")
+    liquibaseRuntime("org.postgresql:postgresql:42.3.8")
+}
+
+liquibase {
+    activities.register("main") {
+        this.arguments = mapOf(
+            "logLevel" to "info",
+            "changeLogFile" to "stock/src/main/resources/db/changelog/db.changelog-master.yaml",
+            "url" to "jdbc:postgresql://localhost:5432/stock",
+            "username" to "docker",
+            "password" to "docker",
+            "driver" to "org.postgresql.Driver"
+        )
+    }
+    runList = "main"
 }
 
 group = "ru.javaroadmap.stock"
