@@ -2,9 +2,6 @@ INSERT INTO store(name, description)
 VALUES ('North Shore', 'test description'),
        ('Burnie', 'test description');
 
-/*SELECT setval('satellite_id_seq', 30, true);*/
-
-
 INSERT INTO product(category, count, price, name, store_id, description)
 VALUES ('Car', 33, 678, 'Daihatsu', 1, 'test description'),
        ('Car', 35, 700, 'Plymouth', 1, 'test description'),
@@ -12,8 +9,6 @@ VALUES ('Car', 33, 678, 'Daihatsu', 1, 'test description'),
        ('Car', 42, 3977, 'Dodge', 2, 'test description'),
        ('Car', 21, 568, 'Lincoln', 2, 'test description'),
        ('Car', 25, 5685, 'Lancia', 2, 'test description');
-
-/*SELECT setval('product_id_seq', 50, true);*/
 
 insert into product_tags (product_id, tags)
 values (1, 'car'),

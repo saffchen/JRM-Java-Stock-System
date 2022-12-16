@@ -28,7 +28,4 @@ class StoreControllerTest extends AbstractControllerTest {
                 .andExpect(STORE_MATCHER.contentJson(store1, store2));
     }
 
-    @Test
-    void get() throws Exception {
-    }
 }
