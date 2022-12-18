@@ -11,7 +11,8 @@ import java.util.List;
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.FIELD)
 
 public interface StoreMapper {
-    
+
+    // https://www.baeldung.com/mapstruct-ignore-unmapped-properties
     @Mapping(target = "count", ignore = true)
     StoreDto storeToStoreDto(StoreEntity store);
 
