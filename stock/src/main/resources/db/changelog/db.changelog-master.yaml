@@ -1,13 +1,13 @@
 databaseChangeLog:
   - include:
-      file: init/create-store-table.yaml
+      file: init/01-create-store.yaml
       relativeToChangelogFile: true
   - include:
-      file: init/create-product-tags-table.yaml
+      file: init/02-create-product.yaml
       relativeToChangelogFile: true
   - include:
-      file: init/create-product-table.yaml
+      file: init/03-create-person.yaml
       relativeToChangelogFile: true
   - include:
-      file: init/create-person-table.yaml
+      file: init/04-add-fk-product.yaml
       relativeToChangelogFile: true
