@@ -11,3 +11,12 @@ databaseChangeLog:
   - include:
       file: init/04-add-fk-product.yaml
       relativeToChangelogFile: true
+  - include:
+      file: fill/01-fill-store.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: fill/02-fill-product.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: fill/03-fill-person.yaml
+      relativeToChangelogFile: true
