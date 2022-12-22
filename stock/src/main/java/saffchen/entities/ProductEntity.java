@@ -81,6 +81,15 @@ public class ProductEntity extends NamedEntity {
         this.store = store;
     }
 
+    public ProductEntity(Long id, String name, @NonNull String description, @NonNull Double price, @NonNull String category, @NonNull Integer count, @NonNull StoreEntity store) {
+        super(id, name);
+        this.description = description;
+        this.price = price;
+        this.category = category;
+        this.count = count;
+        this.store = store;
+    }
+
     @Override
     public String toString() {
         return name + ", " + description + ", " + price + ", " + tags + ", " + category + ", " + count + ", " + store.toString();
