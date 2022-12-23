@@ -16,6 +16,10 @@ dependencies {
     liquibaseRuntime("org.postgresql:postgresql:42.3.8")
 }
 
+tasks.build {
+    dependsOn(tasks.update)
+}
+
 liquibase {
     activities.register("main") {
         this.arguments = mapOf(
