@@ -2,7 +2,7 @@ package saffchen.database;
 
 public class FileConnection {
     private static FileConnection connection;
-    private String filePath = null;
+    private final String filePath;
 
     private FileConnection(String path) {
         this.filePath = path;

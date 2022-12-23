@@ -30,4 +30,9 @@ public class StoreEntity extends NamedEntity {
     public int getProductsSize() {
         return products.size();
     }
+
+    public StoreEntity(Long id, String name, String description) {
+        super(id, name);
+        this.description = description;
+    }
 }
