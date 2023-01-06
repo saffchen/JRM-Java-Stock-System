@@ -1,0 +1,65 @@
+databaseChangeLog:
+  - changeSet:
+      id: fill-product-table
+      author: Vitali
+      changes:
+        - loadData:
+            encoding: UTF-8
+            separator: ;
+            quotchar:  ''''
+            usePreparedStatements: true
+            tableName: product
+            file: ../../product.csv
+            relativeToChangelogFile: true
+            columns:
+              - column:
+                  header: Category
+                  name: category
+                  type: varchar(50)
+              - column:
+                  header: Count
+                  name: count
+                  type: NUMERIC
+              - column:
+                  header: Price
+                  name: price
+                  type: NUMERIC
+              - column:
+                  header: Name
+                  name: name
+                  type: varchar(100)
+              - column:
+                  header: StoreId
+                  name: store_id
+                  type: NUMERIC
+              - column:
+                  header: Description
+                  name: description
+                  type: varchar(1024)
+      rollback:
+        - sql:
+            sql: DELETE FROM product;
+  - changeSet:
+      id: fill-product_tags-table
+      author: Vitali
+      changes:
+        - loadData:
+            encoding: UTF-8
+            separator: ;
+            quotchar:  ''''
+            usePreparedStatements: true
+            tableName: product_tags
+            file: ../../product_tags.csv
+            relativeToChangelogFile: true
+            columns:
+              - column:
+                  header: ProductId
+                  name: product_id
+                  type: NUMERIC
+              - column:
+                  header: Tags
+                  name: tags
+                  type: varchar(255)
+      rollback:
+        - sql:
+            sql: DELETE FROM product_tags

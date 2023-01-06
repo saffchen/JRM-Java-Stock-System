@@ -1,0 +1,58 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-product_tags
+      author: Vitali
+      changes:
+        - createTable:
+            tableName: product_tags
+            columns:
+              - column:
+                  name: product_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tags
+                  type: varchar(255)
+  - changeSet:
+      id: create-table-product
+      author: Vitali
+      changes:
+        - createTable:
+            tableName: product
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: category
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: count
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(1024)
+              - column:
+                  name: price
+                  type: real
+                  constraints:
+                    nullable: false
+              - column:
+                  name: store_id
+                  type: bigint
+                  constraints:
+                    nullable: false

@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-fk-product
+      author: Vitali
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: product
+            baseColumnNames: store_id
+            constraintName: fk_product_store
+            referencedTableName: store
+            referencedColumnNames: id
+            onDelete: CASCADE
+            validate: true
+  - changeSet:
+      id: add-fk-product_tags
+      author: Vitali
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: product_tags
+            baseColumnNames: product_id
+            constraintName: fk_product_tags_product
+            referencedTableName: product
+            referencedColumnNames: id
+            onDelete: CASCADE
+            validate: true

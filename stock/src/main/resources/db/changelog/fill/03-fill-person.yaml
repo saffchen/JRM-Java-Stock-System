@@ -1,0 +1,49 @@
+databaseChangeLog:
+  - changeSet:
+      id: fill-person-table
+      author: Vitali
+      changes:
+        - loadData:
+            encoding: UTF-8
+            separator: ;
+            quotchar:  ''''
+            usePreparedStatements: true
+            tableName: person
+            file: ../../person.csv
+            relativeToChangelogFile: true
+            columns:
+              - column:
+                  header: Id
+                  name: id
+                  type: NUMERIC
+              - column:
+                  header: Active
+                  name: active
+                  type: BOOLEAN
+              - column:
+                  header: Description
+                  name: description
+                  type: varchar(255)
+              - column:
+                  header: Email
+                  name: email
+                  type: varchar(255)
+              - column:
+                  header: Name
+                  name: name
+                  type: varchar(255)
+              - column:
+                  header: Password
+                  name: password
+                  type: varchar(255)
+              - column:
+                  header: Role
+                  name: role
+                  type: varchar(255)
+              - column:
+                  header: Username
+                  name: username
+                  type: varchar(255)
+      rollback:
+        - sql:
+            sql: DELETE FROM person;
