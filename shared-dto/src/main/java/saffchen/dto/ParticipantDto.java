@@ -1,10 +1,13 @@
 package saffchen.dto;
 
-import lombok.Data;
+import lombok.*;
 
 import java.io.Serializable;
 
-@Data
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ParticipantDto implements Serializable {
     private String email;
     private String nickname;

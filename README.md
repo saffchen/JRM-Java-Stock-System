@@ -9,12 +9,12 @@
 ### 3. From the root directory of the project with root privileges run:
 a.
 ```bash
-$ docker compose up --build -d postgres
+$ docker compose up -d postgres
 ```
 b.
 ```bash
-$ ./mvnw clean install #linux/macOS
-$ mvnw.cmd clean install #windows 
+$ ./gradlew build #linux/macOS
+$ gradlew.bat build #windows 
 ```
 c.
 ```bash

@@ -14,8 +14,8 @@ import java.util.List;
  */
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.FIELD)
 public interface ProductMapper {
-    @Mapping(source = "satellite.name", target = "satelliteName")
+    @Mapping(source = "store.name", target = "storeName")
     ProductDto productToProductDto(ProductEntity product);
 
-    List<ProductDto> toProductsDtoList(List<ProductEntity> productEntities);
+    List<ProductDto> productToProductDtoList(List<ProductEntity> productEntities);
 }

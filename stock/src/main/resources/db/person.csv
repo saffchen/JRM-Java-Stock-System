@@ -1,0 +1,5 @@
+Id;Description;Email;Active;Name;Password;Role;Username
+1;TEST USER DESCRIPTION;user@email.ru;false;test user;$2a$10$izr6UC4bg8.Df6fuAeK.UexR0XChhEVTPuHkb0/WdE2K8Uefo5.5S;ROLE_USER;user
+2;TEST ADMIN DESCRIPTION;admin@email.ru;false;test admin;$2a$10$jGjXJj0rigt8l3maMMjQDevNFcJ/hj4WAqFJFEGNXvA3exGkXMk8e;ROLE_ADMIN;admin
+3;TEST TEST DESCRIPTION;testUser@email.ru;true;testUser testUser;$2a$10$QWBT9uHUtyysganKk1Vpku1t2zPS1py50Fhha2I/.g.QdlYLGXDAW;ROLE_USER;testuser
+4;TEST TEST DESCRIPTION;testAdmin@email.ru;true;testAdmin testAdmin;$2a$10$3qmGRufTczbq9NwCF0FOCOHFuu.ZpxVNOfm99lcp/iaauM1wnZKjW;ROLE_ADMIN;testadmin
